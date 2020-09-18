@@ -1,0 +1,646 @@
+
+
+// Utitlities
+
+@import "../../../Scss-Utilities/Utilities.scss";
+
+// -------------------- Page - Home - Layout -------------------- //
+
+.home {
+
+    // Banner Header
+
+    .banner-header {
+        @include mx-auto;
+
+        max-width           : 1366px;
+
+        padding             : 5rem 0rem 2rem 0rem;
+
+        background          : linear-gradient(90deg, rgba(229,229,242,1) 0%, rgba(229,229,242,1) 75%, rgba(255,255,255,0) 75%, rgba(255,255,255,0) 100%);
+
+        > .container {
+            max-width       : 1366px;
+
+            > .row {
+                @include align-items-center;
+
+                .col-outer {
+                    &:first-child {
+                        @include px-5;
+                        @include ml-auto;
+                        @include mr-5;
+                    }
+
+                    &:last-child {
+                        @include pr-0;
+                        @include ml-auto;
+                    }
+                }
+            }
+        }
+
+        // Element Wrapper
+
+        .element-wrapper {
+            &.for-dots {
+                z-index         : -1;
+            }
+        }
+
+        .element-dot {
+            @include position-absolute;
+
+            top         : 26.5rem;
+            left        : 7.5%;
+        }
+
+        .element-coin-primary {
+            @include position-absolute;
+
+            top         : 6.5rem;
+            left        : -13.5%;
+
+            img {
+                max-width       : 90%;
+            }
+        }
+
+        .element-coin-secondary {
+            @include position-absolute;
+
+            top         : 32rem;
+            left        : 75%;
+        }
+
+        .banner-header-text {
+            .subtitle {
+                @include mb-5;
+            }
+
+            .title {
+                @include mb-5;
+            }
+        }
+
+        .info-wrapper {
+            @include position-absolute;
+
+            top         : 53.5%;
+            left        : -12.5%;
+        }
+
+        @include media-breakpoint-down(md) {
+
+            > .container {
+                > .row {
+                    .col-outer {
+                        &:first-child {
+                            @include px-3;
+                            @include mx-auto;
+                        }
+
+                        &:last-child {
+                            @include pr-0;
+                            @include ml-auto;
+                        }
+                    }
+                }
+            }
+
+            .element-dot {
+                top         : 20rem;
+
+                img {
+                    max-width       : 75%;
+                }
+            }
+
+            .element-coin-primary {
+                top         : 5rem;
+
+                img {
+                    max-width       : 65%;
+                }
+            }
+
+            .element-coin-secondary {
+                top         : 24.5rem;
+
+                img {
+                    max-width       : 75%;
+                }
+            }
+
+            .info-wrapper {
+                top         : 50%;
+            }
+        }
+
+        @include media-breakpoint-down(sm) {
+
+            background              : linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 45%, rgba(229,229,242,1) 45%, rgba(229,229,242,1) 100%);
+
+            > .container {
+                > .row {
+                    .col-outer {
+                        &:first-child {
+                            @include mb-5;
+                        }
+
+                        &:last-child {
+                            @include px-0;
+                            @include ml-0;
+                        }
+                    }
+                }
+            }
+
+            .element-wrapper {
+                @include display-none;
+            }
+
+            .info-wrapper {
+                top         : 75%;
+                left        : 12.5%;
+            }
+        }
+    }
+
+    // Information
+
+    .information {
+        margin          : 7.5rem 0rem 7.5rem 0rem;
+
+        > .container {
+            > .row {
+                .col-outer {
+                    &:first-child {
+                        margin          : 0rem auto 7.5rem auto;
+                    }
+
+                    &:last-child {
+                        @include mx-auto;
+
+                        > .row {
+                            @include align-items-center;
+
+                            .col-inner {
+                                &:first-child {
+                                    @include pr-5;
+                                }
+
+                                &:last-child {
+                                    @include mx-auto;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Element Wrapper
+
+        .element-wrapper {
+            &.for-dots {
+                z-index         : -1;
+            }
+        }
+
+        .element-dot {
+            @include position-absolute;
+
+            top         : -8.5rem;
+            left        : -17.5%;
+        }
+
+        .element-coin-primary {
+            @include position-absolute;
+
+            top         : 6.5rem;
+            left        : 65%;
+
+            transform   : translateX(100%);
+
+            img {
+                max-width       : 90%;
+            }
+        }
+
+        .info-wrapper {
+            @include position-absolute;
+
+            top         : 55%;
+            left        : -10%;
+        }
+
+        .information-header {
+            @include text-align-center;
+        }
+
+        .information-text {
+            @include mb-5;
+
+            .subtitle {
+                @include mb-5;
+            }
+
+            .title {
+                @include mb-5;
+            }
+        }
+
+        @include media-breakpoint-down(md) {
+
+            .element-dot {
+                top         : -5rem;
+                left        : -19.5%;
+
+                img {
+                    max-width       : 75%;
+                }
+            }
+
+            .element-coin-primary {
+                left        : 50%;
+
+                img {
+                    max-width       : 65%;
+                }
+            }
+
+            .info-wrapper {
+                top         : 50%;
+            }
+        }
+
+        @include media-breakpoint-down(sm) {
+
+            margin          : 5rem 0rem 0rem 0rem;
+
+            > .container {
+                > .row {
+                    .col-outer {
+                        &:first-child {
+                            @include px-0;
+
+                            margin          : 0rem auto 5rem auto;
+                        }
+
+                        &:last-child {
+                            > .row {
+                                .col-inner {
+                                    &:first-child {
+                                        @include px-0;
+
+                                        margin              : 0rem 0rem 7.5rem 0rem;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .element-wrapper {
+                @include display-none;
+            }
+
+            .info-wrapper {
+                top         : 75%;
+                left        : 12.5%;
+            }
+        }
+    }
+
+    // Conversion
+
+    .conversion {
+
+        // Project
+
+        &.for-project {
+            max-width           : 1366px;
+
+            margin              : 10rem auto;
+            padding             : 3rem 0rem 3rem 0rem;
+
+            background          : linear-gradient(90deg, rgba(229,229,242,1) 0%, rgba(229,229,242,1) 75%, rgba(255,255,255,0) 75%, rgba(255,255,255,0) 100%);
+
+            > .container {
+                > .row {
+                    @include align-items-center;
+
+                    .col-outer {
+                        @include mx-auto;
+                    }
+                }
+            }
+
+            // Element Wrapper
+
+            .element-wrapper {
+                &.for-dots {
+                    z-index         : -1; 
+                }
+            }
+
+            .element-dot {
+                @include position-absolute;
+
+                top         : 7.5rem;
+                left        : 0%;
+
+                transform   : translateX(80%);
+
+                img {
+                    max-width       : 75%;
+                }
+            }
+
+            .element-coin-primary {
+                @include position-absolute;
+
+                top         : 5rem;
+                left        : -15%;
+            }
+
+            .element-coin-secondary {
+                @include position-absolute;
+
+                top         : 25rem;
+                left        : 45%;
+
+                transform   : translateX(45%);
+
+                img {
+                    max-width       : 90%;
+                }
+            }
+
+            .conversion-project-text {
+                @include mb-5;
+
+                .subtitle {
+                    @include mb-5;
+                }
+
+                .title {
+                    @include mb-5;
+                }
+            }
+
+            @include media-breakpoint-down(md) {
+
+                margin          : 5rem auto;
+
+                .element-dot {
+                    top         : 5.5rem;
+
+                    transform   : translateX(60%);
+                }
+
+                .element-coin-primary {
+                    img {
+                        max-width       : 65%;
+                    }
+                }
+
+                .element-coin-secondary {
+                    top         : 20rem;
+                    left        : 40%;
+
+                    transform   : translateX(40%);
+
+                    img {
+                        max-width       : 80%;
+                    }
+                }
+            }
+
+            @include media-breakpoint-down(sm) {
+
+                margin                  : 3rem auto 0rem auto;
+
+                padding                 : 2rem 0rem 0em 0rem;
+
+                background              : linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 45%, rgba(229,229,242,1) 45%, rgba(229,229,242,1) 100%);
+
+                > .container {
+                    > .row {
+                        .col-outer {
+                            &:first-child {
+                                @include mx-0;
+
+                                margin-bottom       : 5rem;
+                            }
+
+                            &:last-child {
+                                @include px-0; 
+                            }
+                        }
+                    }
+                }
+
+                .element-wrapper {
+                    @include display-none;
+                }
+            }
+        }
+
+        // Contact
+
+        &.for-contact {
+            @include mx-auto;
+
+            max-width           : 1366px;
+
+            padding             : 3rem 0rem 3rem 0rem;
+
+            background          : linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 25%, rgba(229,229,242,1) 25%, rgba(229,229,242,1) 100%);
+
+            > .container {
+                > .row {
+                    @include align-items-center;
+
+                    .col-outer {
+                        &:last-child {
+                            @include mx-auto;
+                        }
+                    }
+                }
+            }
+
+            // Element Wrapper
+
+            .element-wrapper {
+                &.for-dots {
+                    z-index         : -1; 
+                }
+            }
+
+            .element-dot {
+                @include position-absolute;
+
+                top         : 22.5rem;
+                left        : 50%;
+            }
+
+            .element-coin-primary {
+                @include position-absolute;
+
+                top         : 22.5rem;
+                left        : 75%;
+
+                transform   : translateX(75%);
+
+                img {
+                    max-width       : 90%;
+                }
+            }
+
+            .info-wrapper {
+                @include position-absolute;
+
+                top         : 20%;
+                left        : -7.5%;
+            }
+
+            .conversion-contact-text {
+                @include mb-5;
+
+                .subtitle {
+                    @include mb-5;
+                }
+
+                .title {
+                    @include mb-5;
+                }
+            }
+
+            @include media-breakpoint-down(md) {
+
+                .element-coin-primary {
+                    top         : 16.5rem;
+                    left        : 70%;
+
+                    transform   : translateX(70%);
+                }
+            }
+
+            @include media-breakpoint-down(sm) {
+
+                padding                 : 0rem 0rem 3rem 0rem;
+
+                background              : linear-gradient(0deg, rgba(229,229,242,1) 0%, rgba(229,229,242,1) 55%, rgba(255,255,255,1) 55%, rgba(255,255,255,1) 100%);
+
+                > .container {
+                    > .row {
+                        .col-outer {
+                            &:first-child {
+                                @include px-0;
+
+                                margin-bottom       : 3.5rem;
+                            }
+
+                            &:last-child {
+                                @include mx-0;
+                            }
+                        }
+                    }
+                }
+
+                .info-wrapper {
+                    @include display-none;
+                }
+
+                .element-wrapper {
+                    @include display-none;
+                }
+            }
+        }
+    }
+
+    // Partner
+
+    .partner {
+        margin              : 5rem 0rem;
+
+        > .container {
+            > .row {
+                .col-outer {
+                    &:first-child {
+                        margin              : 0rem 0rem 5.5rem 0rem;
+                    }
+
+                    &:last-child {
+                        @include mx-auto;
+
+                        .col-inner {
+                            @include px-4;
+
+                            margin          : 0rem 0rem 5rem 0rem;
+                        }
+                    }
+                }
+            }
+        }
+
+        .partner-text {
+            @include text-align-center;
+        }
+
+        @include media-breakpoint-down(md) {
+
+            margin              : 3.5rem 0rem 0rem 0rem;
+
+            > .container {
+                > .row {
+                    .col-outer {
+                        &:first-child {
+                            margin              : 0rem 0rem 5rem 0rem;
+                        }
+                    }
+                }
+            }
+        }
+
+        @include media-breakpoint-down(sm) {
+
+            margin              : 2rem 0rem 0rem 0rem;
+
+            > .container {
+                > .row {
+                    .col-outer {
+                        &:first-child {
+                            margin              : 0rem 0rem 3.5rem 0rem;
+                        }
+
+                        &:last-child {
+                            @include mx-0;
+
+                            .col-inner {
+                                @include px-3;
+
+                                margin          : 0rem;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .partner-wrapper {
+                > .row {
+                    @include display-webkit-box;
+
+                    @include overflow-y-hidden;
+                    @include overflow-x-auto;
+
+                    flex-wrap           : nowrap;
+                }
+            }
+        }
+    }
+}
+

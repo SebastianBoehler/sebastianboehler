@@ -1,0 +1,54 @@
+
+
+// Utitlities
+
+@import "../../../Scss-Utilities/Utilities.scss";
+
+// -------------------- Page - Contact - Typography -------------------- //
+
+.contact {
+
+    // Contact Greeting
+
+    .contact-greeting {
+        .greeting-text {
+            .subtitle {
+                h4 {
+                    @include font-primary-semi-bold;
+                    @include h6;
+
+                    color       : $c-primary-normal;
+                }
+            }
+
+            .title {
+                h1 {
+                    @include font-primary-extra-bold;
+                    @include display-4;
+
+                    line-height     : 1.15;
+
+                    color           : $c-primary-normal;
+                }
+            }
+
+            .desc {
+                p {
+                    @include font-primary-light;
+                    @include p;
+                }
+            }
+        }
+
+        @include media-breakpoint-down(md) {
+
+            .greeting-text {
+                .title {
+                    h1 {
+                        font-size       : 2.5rem;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,221 @@
+
+
+// Utitlities
+
+@import "../../../Scss-Utilities/Utilities.scss";
+
+// -------------------- Page - Business - Typography -------------------- //
+
+.business {
+
+    // Banner Header
+
+    .banner-header {
+        .banner-header-text {
+            .subtitle {
+                h4 {
+                    @include font-primary-semi-bold;
+                    @include h6;
+
+                    color       : $c-primary-normal;
+                }
+            }
+
+            .title {
+                h1 {
+                    @include font-primary-extra-bold;
+                    @include display-4;
+
+                    line-height     : 1.15;
+
+                    color           : $c-primary-normal;
+                }
+            }
+
+            .desc {
+                p {
+                    @include font-primary-light;
+                    @include p;
+                }
+            }
+        }
+
+        @include media-breakpoint-down(md) {
+
+            .banner-header-text {
+                .title {
+                    h1 {
+                        font-size       : 2rem;
+                    }
+                }
+            }
+        }
+
+        @include media-breakpoint-down(sm) {
+
+            .banner-header-text {
+                .title {
+                    h1 {
+                        font-size       : 2.25rem;
+                    }
+                }
+            }
+        }
+    }
+
+    // Project List
+
+    .project-list {
+        .project-list-header {
+            .header-text {
+                .title {
+                    h3 {
+                        @include position-relative;
+
+                        @include font-primary-semi-bold;
+                        @include h3;
+                    
+                        color           : $c-primary-normal;
+
+                        &:before {
+                            @include position-absolute;
+
+                            content                 : '';
+
+                            width                   : 2.5rem;
+                            height                  : 0.25rem;
+
+                            top                     : -50%;
+                            left                    : 50%;
+
+                            transform               : translate(-50%, -50%);
+
+                            background-color        : $c-primary-normal;
+                        }
+                    }
+                }
+            }
+        }
+
+        .project-list-text {
+            .subtitle {
+                h4 {
+                    @include font-primary-semi-bold;
+                    @include h6;
+
+                    color       : $c-primary-normal;
+                }
+            }
+
+            .title {
+                h1 {
+                    @include font-primary-extra-bold;
+                    @include display-4;
+
+                    line-height     : 1.15;
+
+                    color           : $c-primary-normal;
+                }
+            }
+
+            .desc {
+                p {
+                    @include font-primary-light;
+                    @include p;
+                }
+            }
+        }
+
+        @include media-breakpoint-down(md) {
+
+            .project-list-text {
+                .title {
+                    h1 {
+                        font-size       : 2rem;
+                    }
+                }
+            }
+        }
+
+        @include media-breakpoint-down(sm) {
+
+            .project-list-header {
+                .header-text {
+                    .title {
+                        h3 {
+                            @include h5;
+                        }
+                    }
+                }
+            }
+
+            .project-list-text {
+                .title {
+                    h1 {
+                        font-size       : 2.25rem;
+                    }
+                }
+            }
+        }
+    }
+
+    // Conversion
+
+    .conversion {
+
+        // Contact
+
+        &.for-contact {
+            .conversion-contact-text {
+                .subtitle {
+                    h4 {
+                        @include font-primary-semi-bold;
+                        @include h6;
+
+                        color       : $c-primary-normal;
+                    }
+                }
+
+                .title {
+                    h1 {
+                        @include font-primary-extra-bold;
+                        @include display-4;
+
+                        line-height     : 1.15;
+
+                        color           : $c-primary-normal;
+                    }
+                }
+
+                .desc {
+                    p {
+                        @include font-primary-light;
+                        @include p;
+                    }
+                }
+            }
+
+            @include media-breakpoint-down(md) {
+
+                .conversion-contact-text {
+                    .title {
+                        h1 {
+                            font-size       : 2rem;
+                        }
+                    }
+                }
+            }
+
+            @include media-breakpoint-down(sm) {
+
+                .conversion-contact-text {
+                    .title {
+                        h1 {
+                            font-size       : 2.25rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

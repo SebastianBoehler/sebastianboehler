@@ -1,0 +1,66 @@
+
+
+// Utitlities
+
+@import "../../Scss-Vendor/_font-face.scss";
+@import "../../Scss-Vendor/_fontello.scss";
+
+// -------------------- Master - Font -------------------- //
+
+// Font - Primary
+
+@font-face {
+  font-family       : 'Montserrat';
+  font-style        : normal;
+  font-weight       : 300;
+  src               : url('../../fonts/Montserrat/Montserrat-Light.otf');
+  font-display      : swap;
+}
+
+@font-face {
+  font-family       : 'Montserrat';
+  font-style        : normal;
+  font-weight       : 400;
+  src               : url('../../fonts/Montserrat/Montserrat-Regular.otf');
+  font-display      : swap;
+}
+
+@font-face {
+  font-family       : 'Montserrat';
+  font-style        : normal;
+  font-weight       : 500;
+  src               : url('../../fonts/Montserrat/Montserrat-Medium.otf');
+  font-display      : swap;
+}
+
+@font-face {
+  font-family       : 'Montserrat';
+  font-style        : normal;
+  font-weight       : 600;
+  src               : url('../../fonts/Montserrat/Montserrat-SemiBold.otf');
+  font-display      : swap;
+}
+
+@font-face {
+  font-family       : 'Montserrat';
+  font-style        : normal;
+  font-weight       : 700;
+  src               : url('/assets/fonts/Montserrat/Montserrat-Bold.otf');
+  font-display      : swap;
+}
+
+@font-face {
+  font-family       : 'Montserrat';
+  font-style        : normal;
+  font-weight       : 800;
+  src               : url('../../fonts/Montserrat/Montserrat-ExtraBold.otf');
+  font-display      : swap;
+}
+
+@font-face {
+  font-family       : 'Montserrat';
+  font-style        : normal;
+  font-weight       : 900;
+  src               : url('../../fonts/Montserrat/Montserrat-Black.otf');
+  font-display      : swap;
+}

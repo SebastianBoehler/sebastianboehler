@@ -1,0 +1,20 @@
+
+
+// Utitlities
+
+@import "../../../../Scss-Utilities/Utilities.scss";
+
+// -------------------- Navigation - Navbar - Button -------------------- //
+
+.navbar {
+    
+    // Primary
+
+    &.navbar-primary {
+        .navbar-toggler {
+            i {
+                color       : $c-primary-normal;
+            }
+        }
+    }
+}

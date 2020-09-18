@@ -1,0 +1,111 @@
+
+
+// Utitlities
+
+@import "../../../../Scss-Utilities/Utilities.scss";
+
+// -------------------- Navigation - Footbar - Layout -------------------- //
+
+.footbar {
+
+    // Primary
+
+    &.footbar-primary {
+        padding-top         : 7.5rem;
+
+        > .container {
+            @include pb-3;
+
+            > .row {
+                &:first-child {
+                    margin-bottom       : 7.5rem;
+                }
+
+                &:last-child {
+                    @include align-items-center;
+                }
+            }
+        }
+
+        // Footbar Information
+
+        .footbar-information {
+            .footbar-logo {
+                @include mb-5;
+            }
+        }
+
+        // Footbar Navigation
+
+        .footbar-navigation {
+            .navigation-link {
+                .link {
+                    @include mb-2;
+                }
+            }
+        }
+
+        // Footbar Subscription
+
+        .footbar-subscription {
+            .subscription-text {
+                @include mb-4;
+            }
+        }
+
+        // Footbar Social
+
+        .footbar-social {
+            .social-icon {
+                @include display-flex;
+
+                justify-content         : flex-end;
+
+                .icon {
+                    @include mx-3;
+
+                    &:last-child {
+                        @include mr-0;
+                    }
+                }
+            }
+        }
+
+        @include media-breakpoint-down(sm) {
+
+            > .container {
+                padding-top         : 3.5rem;
+
+                > .row {
+                    &:first-child {
+                        margin-bottom       : 5rem;
+
+                        .col-outer {
+                            @include mb-5;
+
+                            &:last-child {
+                                @include mb-0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Footbar Copyright
+
+            .footbar-copyright {
+                @include text-align-center;
+            }
+
+            // Footbar Social
+
+            .footbar-social {
+                .social-icon {
+                    @include display-flex;
+
+                    justify-content         : center;
+                }
+            }
+        }
+    }
+}

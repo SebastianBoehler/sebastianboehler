@@ -1,0 +1,136 @@
+
+
+// Utitlities
+
+@import "../../../Scss-Utilities/Utilities.scss";
+
+// -------------------- Page - Contact - Layout -------------------- //
+
+.contact {
+    @include mx-auto;
+
+    max-width           : 1366px;
+
+    padding             : 5rem 0rem 2rem 0rem;
+
+    background          : linear-gradient(90deg, rgba(229,229,242,1) 0%, rgba(229,229,242,1) 50%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 100%);
+
+    > .container {
+        > .row {
+            @include align-items-center;
+
+            .col-outer {
+                &:first-child {
+                    @include mr-auto;
+                }
+
+                &:last-child {
+                    @include ml-auto;
+                }
+            }
+        }
+    }
+
+    .element-dot {
+        @include position-absolute;
+
+        top         : 7.5rem;
+        left        : -16.5%;
+    }
+
+    @include media-breakpoint-down(md) {
+
+        > .container {
+            > .row {
+                .col-outer {
+                    &:first-child {
+                        @include pr-5;
+                        @include mr-0;
+                    }
+
+                    &:last-child {
+                        @include pl-5;
+                        @include ml-0;
+                    }
+                }
+            }
+        }
+
+        .element-dot {
+            left                : -10.5%;
+
+            img {
+                max-width       : 75%;
+            }
+        }
+    }
+
+    @include media-breakpoint-down(sm) {
+
+        background              : linear-gradient(0deg, rgba(229,229,242,1) 0%, rgba(229,229,242,1) 55%, rgba(255,255,255,1) 55%, rgba(255,255,255,1) 100%);
+
+        > .container {
+            > .row {
+                .col-outer {
+                    &:first-child {
+                        @include order-2;
+
+                        @include pr-3;
+                    }
+
+                    &:last-child {
+                        @include order-1;
+
+                        @include pl-3;
+                        
+                        margin-bottom       : 7.5rem;
+                    }
+                }
+            }
+        }
+
+        .element-dot {
+            @include display-none;
+        }
+    }
+
+    // ---------- Section ---------- //
+
+    // Contact Form
+
+    .contact-form {
+        @include position-relative;
+
+        padding                 : 3.5rem;
+
+        background-color        : $c-white;
+
+        .form-box {
+            @include mb-5;
+
+            .box {
+                @include mb-4;
+            }
+        }
+
+        @include media-breakpoint-down(md) {
+
+            padding             : 2rem;
+        }
+    }
+
+    // Contact Greeting
+
+    .contact-greeting {
+        .greeting-text {
+            .subtitle {
+                @include mb-5;
+            }
+
+            .title {
+                @include mb-5;
+            }
+        }
+    }
+}
+

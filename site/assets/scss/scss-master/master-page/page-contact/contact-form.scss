@@ -1,0 +1,66 @@
+
+
+// Utitlities
+
+@import "../../../Scss-Utilities/Utilities.scss";
+
+// -------------------- Page - Contact - Form -------------------- //
+
+.contact {
+
+    // Contact Form
+
+    .contact-form {
+        .form-box {
+            input {
+                @include height-auto;
+
+                @include py-3;
+                @include px-5;
+
+                @include font-primary-light;
+                @include p;
+
+                color               : $c-primary-normal;
+
+                outline             : none;
+
+                border              : none;
+                border-bottom       : 0.5px solid $c-primary-normal;
+                border-radius       : 0em;
+
+                box-shadow          : none;
+
+                &::placeholder {
+                  color             : $c-primary-normal;
+                }
+            }
+
+            textarea {
+                @include height-auto;
+
+                @include py-3;
+                @include px-5;
+
+                @include font-primary-light;
+                @include p;
+
+                resize              : none;
+
+                outline             : none;
+
+                color               : $c-primary-normal;
+
+                border              : none;
+                border-bottom       : 0.5px solid $c-primary-normal;
+                border-radius       : 0em;
+
+                box-shadow          : none;
+
+                &::placeholder {
+                  color             : $c-primary-normal;
+                }
+            }
+        }
+    }
+}

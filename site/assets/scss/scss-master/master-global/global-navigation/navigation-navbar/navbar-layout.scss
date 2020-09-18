@@ -1,0 +1,67 @@
+
+
+// Utitlities
+
+@import "../../../../Scss-Utilities/Utilities.scss";
+
+// -------------------- Navigation - Navbar - Layout -------------------- //
+
+.navbar {
+    
+    // Primary
+
+    &.navbar-primary {
+        @include py-4;
+
+        transition              : 0.5s ease;
+
+        &.scroll {
+            @include py-3;
+
+            background-color        : $c-white;
+
+            transition              : 0.5s ease;
+        }
+
+        > .container {
+            @include py-0;
+        }
+       
+        .navbar-nav {
+
+            // Nav Primary
+
+            &.nav-primary {
+                @include ml-auto;
+
+                .nav-item {
+                    @include mx-5;
+
+                    &:last-child {
+                        @include mr-0;
+                    }
+                }
+            }
+        }
+
+        @include media-breakpoint-down(md) {
+
+            background-color        : $c-white;
+
+            .navbar-collapse {
+                @include mt-4;
+            }
+
+            .navbar-nav {
+
+                // Nav Primary
+
+                &.nav-primary {
+                    .nav-item {
+                        @include mx-0;
+                    }
+                }
+            }
+        }
+    }
+}

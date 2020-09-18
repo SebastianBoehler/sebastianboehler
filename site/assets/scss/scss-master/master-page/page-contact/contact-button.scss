@@ -1,0 +1,38 @@
+
+
+// Utitlities
+
+@import "../../../Scss-Utilities/Utilities.scss";
+
+// -------------------- Page - Contact - Button -------------------- //
+
+.contact {
+
+    // Contact Form
+
+    .contact-form {
+        .form-button {
+            .btn-form {
+                @include font-primary-semi-bold;
+                @include small;
+
+                @include text-transform-uppercase;
+
+                padding             : 0.85rem;
+
+                color               : $c-white;
+
+                background-color    : $c-primary-normal;
+                border-radius       : 50em;      
+
+                transition          : 0.5s ease;
+                
+                &:hover, &:focus, &:active {
+                    background-color        : $c-secondary-normal;
+
+                    transition              : 0.5s ease;
+                }     
+            }
+        }
+    }
+}

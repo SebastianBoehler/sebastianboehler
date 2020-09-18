@@ -1,0 +1,354 @@
+
+
+// Utitlities
+
+@import "../../Scss-Utilities/Utilities.scss";
+
+// -------------------- Master - Card -------------------- //
+
+// Info
+
+.info-card {
+
+    // Primary
+
+    &.card-primary {
+        @include position-relative;
+
+        @include py-4;
+        @include px-5;
+
+        max-width               : 22.5rem;
+
+        background-color        : $c-white;
+
+        .info-icon {
+            @include position-absolute;
+
+            @include display-flex;
+
+            @include align-items-center;
+
+            justify-content     : center;
+
+            width               : 5rem;
+            height              : 5rem;
+
+            top                 : 0%;
+            left                : 75%;
+
+            transform           : translate(-50%, -50%);
+
+            background-color    : $c-secondary-normal;
+            border-radius       : 100%;
+        }
+
+        .info-text {
+
+            > .row {
+                @include align-items-center;
+            }
+
+            .subtitle {
+                h4 {
+                    @include font-primary-semi-bold;
+                    @include p;
+
+                    @include text-transform-uppercase;
+
+                    letter-spacing      : 0.35rem;
+
+                    color               : $c-secondary-normal;
+                }
+            }
+
+            .title {
+                @include text-align-center;
+
+                h3 {
+                    @include font-primary-extra-bold;
+                    @include display-4;
+
+                    color               : $c-primary-normal;
+                }
+            }
+
+            .desc {
+                p {
+                    @include mb-0;
+
+                    @include font-primary-light;
+                    @include p;
+
+                    @include ellipsis-double;
+                }
+            }
+        }
+
+        @include media-breakpoint-down(md) {
+
+            max-width               : 17.5rem;
+
+            .info-icon {
+                width               : 4rem;
+                height              : 4rem;
+
+                img {
+                    @include display-block;
+
+                    @include mx-auto;
+
+                    max-width       : 75%;
+                }
+            }
+
+            .info-text {
+                .title {
+                    h3 {
+                        @include h1;
+                    }
+                }
+            }
+        }
+    }
+
+    // Secondary
+
+    &.card-secondary {
+        @include position-relative;
+
+        .info-icon {
+            @include display-flex;
+
+            @include align-items-center;
+
+            justify-content     : center;
+
+            width               : 5rem;
+            height              : 5rem;
+
+            background-color    : $c-secondary-normal;
+            border-radius       : 100%;
+        }
+
+        @include media-breakpoint-down(md) {
+
+            .info-icon {
+                width               : 4rem;
+                height              : 4rem;
+
+                img {
+                    @include display-block;
+
+                    @include mx-auto;
+
+                    max-width       : 75%;
+                }
+            }
+        }
+    }
+
+    // Tertiary
+
+    &.card-tertiary {
+        @include position-relative;
+
+        @include py-4;
+        @include px-5;
+
+        max-width               : 23.5rem;
+
+        background-color        : $c-white;
+
+        .info-icon {
+            @include position-absolute;
+
+            @include display-flex;
+
+            @include align-items-center;
+
+            justify-content     : center;
+
+            width               : 5rem;
+            height              : 5rem;
+
+            top                 : 0%;
+            left                : 81.25%;
+
+            transform           : translate(-50%, -50%);
+
+            background-color    : $c-secondary-normal;
+            border-radius       : 100%;
+        }
+
+        .info-text {
+
+            > .row {
+                @include align-items-center;
+            }
+
+            .subtitle {
+                h4 {
+                    @include font-primary-semi-bold;
+                    @include p;
+
+                    @include text-transform-uppercase;
+
+                    letter-spacing      : 0.35rem;
+
+                    color               : $c-secondary-normal;
+                }
+            }
+
+            .title {
+                @include text-align-center;
+
+                h3 {
+                    @include font-primary-extra-bold;
+                    @include display-4;
+
+                    color               : $c-primary-normal;
+                }
+            }
+
+            .desc {
+                @include pr-5;
+
+                p {
+                    @include mb-0;
+
+                    @include font-primary-light;
+                    @include p;
+
+                    @include ellipsis-double;
+                }
+            }
+        }
+
+        @include media-breakpoint-down(md) {
+
+            max-width               : 17.5rem;
+
+            .info-icon {
+                width               : 4rem;
+                height              : 4rem;
+
+                img {
+                    @include display-block;
+
+                    @include mx-auto;
+
+                    max-width       : 75%;
+                }
+            }
+
+            .info-text {
+                .title {
+                    h3 {
+                        @include h1;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Partner
+
+.partner-card {
+
+    // Primary
+
+    &.card-primary {
+        filter          : grayscale(100%);
+
+        transition      : 0.5s ease;
+
+        .partner-image {
+            .image {
+                img {
+                    @include display-block;
+
+                    @include mx-auto;
+
+                    max-width       : 16rem;
+                }
+            }
+        }
+
+        &:hover, &:focus, &:active {
+            filter          : grayscale(0%);
+
+            transition      : 0.5s ease;
+        }
+
+        @include media-breakpoint-down(md) {
+
+            .partner-image {
+                .image {
+                    img {
+                        max-width       : 20rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Expertise
+
+.expertise-card {
+
+    // Primary
+
+    &.card-primary {
+        > .row {
+            .card-col {
+                &:first-child {
+                    @include px-4;
+                }
+
+                &:last-child {
+                    @include mx-auto;
+                }
+            }
+        }
+
+        .expertise-text {
+            .title {
+                h3 {
+                    @include font-primary-semi-bold;
+                    @include h5;
+
+                    color       : $c-primary-normal;
+                }
+            }
+
+            .desc {
+                p {
+                    @include font-primary-light;
+                    @include p;
+                }
+            }
+        }
+
+        @include media-breakpoint-down(md) {
+
+            > .row {
+                .card-col {
+                    &:last-child {
+                        @include pr-0;
+                    }
+                }
+            }
+
+            .expertise-text {
+                .title {
+                    h3 {
+                        @include h6;
+                    }
+                }
+            }
+        }
+    }
+}

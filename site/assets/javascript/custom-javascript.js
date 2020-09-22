@@ -4,13 +4,11 @@ var contentdelay = 2000;
 
 /* -------------------- Page Loader Setting -------------------- */
 
-
 setTimeout(function () {
     $(".loader").fadeOut("slow");
 },
 pagedelay
 );
-
 
 /* -------------------- AOS Setting -------------------- */
 
@@ -20,6 +18,11 @@ setTimeout(function () {
 contentdelay
 );
 
+/* -------------------- Butter Setting - Smooth Scroll -------------------- */
+
+butter.init({
+    wrapperId: 'butter'
+});
 
 /* -------------------- Count Up Setting -------------------- */
 

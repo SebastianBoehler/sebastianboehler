@@ -42,6 +42,26 @@ body {
 
         background-color    : $c-primary;
     }
+    
+    .page-wrapper {
+        margin-top          : -92px;
+    }
+
+    @include media-breakpoint-down(md) {
+
+        .page-wrapper {
+            padding-bottom  : 22px;
+            margin-top      : -50px;
+        }
+    }
+
+    @include media-breakpoint-down(sm) {
+
+        .page-wrapper {
+            padding-bottom  : 72px; 
+            margin-top      : 0px;
+        }
+    }
 }
 
 // Grid

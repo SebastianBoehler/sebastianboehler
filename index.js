@@ -10,7 +10,7 @@ const options = {
     cert: fs.readFileSync('cert.pem')
   }
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 80
 
 let transporter = nodemailer.createTransport({
     host: "smtp.strato.de",

@@ -1759,6 +1759,15 @@ p {
     background-color: #56cd97;
     transition: 0.5s ease; }
 
+  .success {
+    background-color: #56cd97;
+    transition: 0.5s ease; 
+  }
+  .failed {
+    background-color: #eb3b3b;
+    transition: 0.5s ease;
+  }
+
 .contact .contact-form .form-box input {
   height: auto !important;
   padding-top: 1rem !important;

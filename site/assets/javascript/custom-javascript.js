@@ -1,6 +1,6 @@
 ﻿
-var pagedelay = 1500;
-var contentdelay = 2000;
+var pagedelay = 1000;
+var contentdelay = 1500;
 
 /* -------------------- Page Loader Setting -------------------- */
 

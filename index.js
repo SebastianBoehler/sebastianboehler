@@ -5,11 +5,6 @@ const bodyParser = require('body-parser');
 const nodemailer = require("nodemailer");
 const fs = require('fs');
 
-const options = {
-    key: fs.readFileSync('key.pem'),
-    cert: fs.readFileSync('cert.pem')
-  }
-
 const port = process.env.PORT || 80
 
 let transporter = nodemailer.createTransport({

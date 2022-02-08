@@ -919,7 +919,7 @@
 
 .u-section-5 .u-form-1 {
   height: 403px;
-  margin: 24px 25px 60px 545px;
+  margin: 24px 570px 60px 0;
 }
 
 .u-section-5 .u-btn-1 {
@@ -934,9 +934,8 @@
   }
 
   .u-section-5 .u-form-1 {
-    margin-right: 0;
+    margin-right: 370px;
     margin-bottom: 46px;
-    margin-left: 370px;
   }
 }
 
@@ -946,8 +945,8 @@
   }
 
   .u-section-5 .u-form-1 {
+    margin-right: 150px;
     margin-bottom: 40px;
-    margin-left: 150px;
   }
 }
 
@@ -961,7 +960,7 @@
   }
 
   .u-section-5 .u-form-1 {
-    margin-left: 0;
+    margin-right: 0;
   }
 }
 

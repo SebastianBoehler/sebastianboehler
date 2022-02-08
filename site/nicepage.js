@@ -1803,7 +1803,7 @@
             }
             return {
                 submit: function (a) {
-                    alert('send')
+                    alert('Thanks for your submission!')
                 },
                 click: function (t) {
                     var form;

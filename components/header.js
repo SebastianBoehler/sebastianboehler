@@ -8,10 +8,18 @@ export default function Header({ }) {
                 <p>Sebastian Böhler</p>
             </Link>
             <div className={styles.btnWrapper}>
-                <p>LinkedIn</p>
-                <Link href={'/home'}>
+                <Link href={'/blog'}>
+                    <p>Blog</p>
+                </Link>
+                <Link href={'https://www.linkedin.com/in/sebastian-boehler/'} target={'_blank'} rel={'noopener noreferrer'}>
+                    <p>LinkedIn</p>
+                </Link>
+                <Link href={'/projects'}>
                     <button className={styles.btnLogin}>Projects</button>
                 </Link>
+            </div>
+            <div className={styles.mobileMenu}>
+                <button className={styles.btnMenu}>Menu</button>
             </div>
         </div>
     )

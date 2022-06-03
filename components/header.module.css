@@ -1,14 +1,12 @@
 .menu {
     width: 100%;
-    min-width: 300px;
+    min-width: 340px;
     border-radius: 0.5rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
     padding: 0.5rem 2rem;
-    margin-bottom: 3rem;
     position: sticky;
     display: flex;
-    align-items: center;
-    overflow: hidden;
+    font-size: large;
 }
 
 .menu > p:first-of-type {
@@ -19,19 +17,20 @@
     display: inline-block;
 }
 
-.menu > p:first-of-type:hover {
+.menu > p:hover {
     cursor: pointer;
 }
 
 .btnWrapper {
-    display: inline-block;
     position: absolute;
-    right: 2rem
+    align-items: center;
+    right: 2rem;
 }
 
 .btnWrapper > p {
     display: inline-block;
     cursor: pointer;
+    padding: 0 1.5rem;
 }
 
 .btnWrapper > p:hover {
@@ -44,10 +43,36 @@
     padding: 0.4rem 2rem;
     color: white;
     border-radius: 0.5rem;
-    margin: 0.5rem 0 0 2rem;
+    margin: 0.5rem 0 0 1rem;
     cursor: pointer;
 }
 
 .btnWrapper > button:hover {
     background-color: #0066ff;
+}
+
+.mobileMenu {
+    display: none;
+    position: absolute;
+    right: 2rem;
+}
+
+.mobileMenu > button {
+    all: unset;
+    background-color: blue;
+    padding: 0.4rem 1.5rem;
+    color: white;
+    border-radius: 0.5rem;
+    margin: 0.5rem 0 0 1rem;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 650px) {
+    .btnWrapper {
+        display: none;
+    }
+
+    .mobileMenu {
+        display: block;
+    }
 }

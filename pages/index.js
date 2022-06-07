@@ -4,8 +4,14 @@ import styles from '../styles/Home.module.css'
 
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <p>in progress</p>
+    <div>
+      <Head>
+        <title>Sebastian Boehler</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <div className={styles.container}>
+        <p>in progress</p>
+      </div>
     </div>
   )
 }

@@ -7,6 +7,7 @@ function MyApp({ Component, pageProps }) {
     <div>
       <script
         //eslint-disable-next-line react/no-danger
+        async={true}
         dangerouslySetInnerHTML={{
           __html: `
           (function(c,l,a,r,i,t,y){

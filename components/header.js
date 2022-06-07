@@ -1,8 +1,8 @@
 import styles from './header.module.css';
 import Link from 'next/link';
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
-export default function Header({ }) {
+export default function Header(object) {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -17,21 +17,26 @@ export default function Header({ }) {
                     <p onClick={toggleMenu}>close</p>
                 </div>
                 <div className={styles.navItemList}>
-                    <div className={styles.mobileNavItem}>
-                        <Link href="/">
+                    <Link href={'/'}>
+                        <div className={styles.mobileNavItem} onClick={toggleMenu}>
                             <p>Home</p>
-                        </Link>
-                    </div>
-                    <div className={styles.mobileNavItem}>
-                        <Link href={'https://www.linkedin.com/in/sebastian-boehler/'} target={'_blank'} rel={'noopener noreferrer'}>
+                        </div>
+                    </Link>
+                    <Link href={'/blog'}>
+                        <div className={styles.mobileNavItem} onClick={toggleMenu}>
+                            <p>Blog</p>
+                        </div>
+                    </Link>
+                    <Link href={'https://www.linkedin.com/in/sebastian-boehler/'} target={'_blank'} rel={'noopener noreferrer'}>
+                        <div className={styles.mobileNavItem} onClick={toggleMenu}>
                             <p>LinkedIn</p>
-                        </Link>
-                    </div>
-                    <div className={`${styles.mobileNavItem} ${styles.mobileNavBtn}`}>
-                        <Link href={'/projects'}>
+                        </div>
+                    </Link>
+                    <Link href={'/projects'}>
+                        <div className={`${styles.mobileNavItem} ${styles.mobileNavBtn}`} onClick={toggleMenu}>
                             <p>Projects</p>
-                        </Link>
-                    </div>
+                        </div>
+                    </Link>
                 </div>
             </div>
             <div className={styles.menu}>

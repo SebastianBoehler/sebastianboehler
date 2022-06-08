@@ -23,15 +23,16 @@ export default function Home({ articles }) {
                             <p
                                 onClick={() => setFilter(category)}
                                 className={filter === category ? styles.activeFilter : ''}
+                                key={`key_${category}`}
                             >{category}</p>
                         )
                     })}
                 </div>
                 <div className={styles.grid}>
-                    {articles.map(article => {
+                    {articles.map((article, index) => {
                         return (
-                            <Link href={`/blog/${article['title']}`}>
-                                <div className={styles.card} key={`key_${article['title']}`}>
+                            <Link href={`/blog/${article['title']}`} key={`key_${article['title']} #${index}`}>
+                                <div className={styles.card}>
                                     <div className={styles.cardHeader}>
                                         <h3>{article['title']}</h3>
                                     </div>

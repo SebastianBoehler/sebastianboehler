@@ -1,11 +1,23 @@
 .main {
-    margin-top: 2rem;
+    margin-top: 5rem;
 }
 
 .grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fill, 49%);
     grid-gap: 10px;
+}
+
+.activeFilter {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.filter > p {
+    display: inline-block;
+    margin: 1rem 0.5rem;
+    text-transform: capitalize;
+    cursor: pointer;
 }
 
 .card {

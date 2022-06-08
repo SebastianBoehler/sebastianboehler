@@ -3,8 +3,13 @@ import Image from 'next/image'
 import Header from '../../components/header'
 import styles from '../../styles/Blog.module.css'
 import Link from 'next/link'
+import { useState } from 'react'
 
 export default function Home({ articles }) {
+    const [filter, setFilter] = useState('all')
+
+    let categories = ['all', 'node', 'algorithms']
+
     return (
         <div>
             <Head>
@@ -12,11 +17,21 @@ export default function Home({ articles }) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className={styles.main}>
+                <div className={styles.filter}>
+                    {categories.map(category => {
+                        return (
+                            <p
+                                onClick={() => setFilter(category)}
+                                className={filter === category ? styles.activeFilter : ''}
+                            >{category}</p>
+                        )
+                    })}
+                </div>
                 <div className={styles.grid}>
                     {articles.map(article => {
                         return (
-                            <Link href={`/blog/${article['title']}`} key={`key_${article['title']}`}>
-                                <div className={styles.card}>
+                            <Link href={`/blog/${article['title']}`}>
+                                <div className={styles.card} key={`key_${article['title']}`}>
                                     <div className={styles.cardHeader}>
                                         <h3>{article['title']}</h3>
                                     </div>

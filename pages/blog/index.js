@@ -4,6 +4,7 @@ import Header from '../../components/header'
 import styles from '../../styles/Blog.module.css'
 import Link from 'next/link'
 import { useState } from 'react'
+import articles from './../../public/articles.json'
 
 export default function Home({ articles }) {
     const [filter, setFilter] = useState('all')
@@ -37,7 +38,7 @@ export default function Home({ articles }) {
                                         <h3>{article['title']}</h3>
                                     </div>
                                     <div className={styles.cardContent}>
-                                        <p>{article['content']}</p>
+                                        <p>{article['content'].split('.').slice(0, 3).join('.')}</p>
                                     </div>
                                 </div>
                             </Link>
@@ -51,22 +52,6 @@ export default function Home({ articles }) {
 
 //server side rendering
 export async function getServerSideProps({ req, res }) {
-
-    let articles = [
-        {
-            title: 'How to code your own Supreme bot',
-            content: 'Some random text to describe the article',
-        },
-        {
-            title: 'How to code your own Supreme bot',
-            content: 'Some random text to describe the article',
-        },
-        {
-            title: 'How to code your own Supreme bot',
-            content: 'Some random text to describe the article',
-        },
-    ]
-
 
     return {
         props: {

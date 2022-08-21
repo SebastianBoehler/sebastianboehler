@@ -1,9 +1,9 @@
 import mysql from 'mysql'
 
 const pool = mysql.createPool({
-    host: '139.59.156.50',
-    user: 'enduser',
-    password: 'mysql_password',
+    host: process.env.MYSQL_HOST,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
     database: 'ftx'
 })
 

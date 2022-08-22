@@ -2,7 +2,7 @@ import Head from 'next/head'
 import styles from '../../styles/Trading.module.css'
 import mysql from 'mysql'
 import React, { useEffect } from 'react'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine, PieChart, Pie, BarChart, Bar } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine, PieChart, Pie, BarChart, Bar, ScatterChart, Scatter } from 'recharts';
 
 const pool = mysql.createPool({
     host: process.env.MYSQL_HOST,
@@ -18,17 +18,19 @@ export default function Home({ transactions }) {
 
     const rules = [...new Set(transactions.map(item => item['rule']))]
     const symbols = [...new Set(transactions.map(item => item['symbol']))]
-    const data = transactions.filter(item => item['rule'] === 'test7' && item['symbol'] === symbol)
-    const data2 = transactions.filter(item => item['rule'] === 'test2' && item['symbol'] === symbol)
+    const exits = transactions.filter(item => item['type'].includes('Exit'))
+    console.log(exits)
 
     useEffect(() => {
+        const time = transactions[0]?.timestamp || Date.now()
+        console.log('load priceHistory', time, new Date(time).toLocaleString(), transactions.length)
         fetch('/api/trading/priceHistory', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                time: transactions[0].timestamp - (1000 * 60 * 60 * 2),
+                time: time - (1000 * 60 * 60 * 2),
                 symbol
             })
         })
@@ -38,9 +40,8 @@ export default function Home({ transactions }) {
 
     useEffect(() => {
         const granularity = +(priceHistoryEth.length / 200).toFixed(0)
-        console.log(granularity)
         const filteredHistory = priceHistoryEth.filter((item, index) => index % granularity === 0)
-        console.log(filteredHistory.length)
+        //console.log(filteredHistory.length, granularity, new Date(filteredHistory[filteredHistory.length - 1]?.time).toLocaleString())
 
         const tempArray = []
         for (const { time: timestamp, close } of filteredHistory) {
@@ -48,7 +49,7 @@ export default function Home({ transactions }) {
 
             const obj = {
                 time: new Date(timestamp).toLocaleDateString(),
-                "price %": +((close / filteredHistory[0].close - 1) * 100).toFixed(2)
+                price: +((close / filteredHistory[0].close - 1) * 100).toFixed(2)
             }
 
             for (let rule of rules) {
@@ -110,10 +111,10 @@ export default function Home({ transactions }) {
                             <YAxis hide="true" domain={["dataMin", "dataMax + 1"]} yAxisId="left" />
                             <YAxis hide="true" yAxisId="right" orientation='right' domain={["dataMin", "dataMax + 1"]} />
                             <XAxis dataKey="time" hide="true" />
-                            <Tooltip />
+                            <Tooltip formatter={(val) => val + '%'} />
                             {rules.map(rule => <Line yAxisId="left" type="monotone" dataKey={rule} stroke='blue' strokeWidth={2} dot={false} key={rule} />)}
-                            <Line type="monotone" dataKey="price %" stroke="grey" activeDot={{ r: 5 }} strokeWidth={2} yAxisId="right" dot={false} />
-                            <ReferenceLine y={500} yAxisId="left" />
+                            <Line type="monotone" dataKey="price" stroke="grey" activeDot={{ r: 5 }} strokeWidth={2} yAxisId="right" dot={false} />
+                            <ReferenceLine y={0} yAxisId="left" />
                         </LineChart>
                     </ResponsiveContainer>}
                 </div>
@@ -128,28 +129,26 @@ export default function Home({ transactions }) {
                                     top: 20, right: 30, left: 20, bottom: 20,
                                 }}
                             >
-                                <XAxis dataKey="rule" />
-                                <Tooltip />
+                                <XAxis dataKey="rule" hide="true" />
+                                <Tooltip formatter={(val) => val + '%'} />
                                 <Bar dataKey="profit" fill="blue" />
                             </BarChart>
                         </ResponsiveContainer>
                     </div>
                     <div className={styles.chartWrapper}>
                         <ResponsiveContainer width="100%" height={300}>
-                            <LineChart
+                            <ScatterChart
                                 width={500}
                                 height={300}
-                                data={data}
                                 margin={{
                                     top: 20, right: 30, left: 20, bottom: 20,
                                 }}
                             >
-                                <CartesianGrid strokeDasharray="3 3" />
-                                <YAxis hide="true" domain={["dataMin", "dataMax + 1"]} />
-                                <Tooltip />
-                                <Line type="monotone" dataKey="netInvest" stroke="#82ca9d" />
-                                <ReferenceLine y={500} />
-                            </LineChart>
+                                <XAxis dataKey="netProfit" unit="$" hide="true" />
+                                <YAxis dataKey="holdDuration" hide="true" unit="m" />
+                                <Scatter data={exits.sort((a, b) => a.netProfit - b.netProfit)} fill="blue" />
+                                <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+                            </ScatterChart>
                         </ResponsiveContainer>
                     </div>
                 </div>

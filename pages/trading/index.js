@@ -37,7 +37,7 @@ export default function Home({ transactions }) {
         }
     }
     tests.sort((a, b) => b.percent - a.percent)
-    const [activeTest, setActiveTest] = React.useState(tests[0])
+    const [activeTest, setActiveTest] = React.useState(tests[0] || {})
     const [filteredTrxs, setFilteredTrxs] = React.useState(transactions.filter(item => item['rule'] === activeTest.rule && item['symbol'] === activeTest.symbol))
     const filteredEntries = filteredTrxs.filter(item => item['type'].includes('Entry'))
     const filteredExits = filteredTrxs.filter(item => item['type'].includes('Exit'))
@@ -63,7 +63,7 @@ export default function Home({ transactions }) {
     }, [activeTest])
 
     useEffect(() => {
-        const granularity = +(priceHistory.length / 200).toFixed(0)
+        const granularity = +(priceHistory.length / 150).toFixed(0)
         const filteredHistory = priceHistory.filter((item, index) => index % granularity === 0)
 
         const tempArray = []
@@ -106,7 +106,7 @@ export default function Home({ transactions }) {
 
     //correlations
     const correlations = []
-    const indicators = Object.keys(transactions[0]['details'])
+    const indicators = Object.keys(transactions[0]?.details || [])
     for (const key of indicators) {
         const values = filteredEntries.map(item => item['details'][key])
         const profits = filteredExits.map(item => item['netProfit'])

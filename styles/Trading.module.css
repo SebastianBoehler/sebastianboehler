@@ -57,3 +57,38 @@
     font-size: 1.2rem;
     font-weight: 500;
 }
+
+.testsWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;  
+    overflow-x: scroll;
+    cursor: pointer;
+    padding: .5rem
+}
+
+.testsWrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.testItem {
+    padding: 0 1rem;
+    margin: 0 .5rem;
+    min-width: 8rem;
+    line-height: 10px;
+    background-color: rgba(240, 240, 240, 0.6);
+    border-radius: 8px;
+}
+
+.green {
+    color: #00a65a;
+}
+
+.red {
+    color: #dd4b39;
+}
+
+.active {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}

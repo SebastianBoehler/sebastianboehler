@@ -14,12 +14,35 @@ const pool = mysql.createPool({
 export default function Home({ transactions }) {
     const [priceHistoryEth, setPriceHistoryEth] = React.useState([])
     const [chartData, setChartData] = React.useState([])
-    const [symbol, setSymbol] = React.useState('ETH-PERP')
+    const [activeTest, setActiveTest] = React.useState({
+        symbol: 'ETH-PERP',
+        test: 'test'
+    })
 
     const rules = [...new Set(transactions.map(item => item['rule']))]
     const symbols = [...new Set(transactions.map(item => item['symbol']))]
     const exits = transactions.filter(item => item['type'].includes('Exit'))
     console.log(exits)
+    const tests = []
+
+    for (const rule of rules) {
+        for (const symbol of symbols) {
+            const filtered = transactions.filter(item => item['rule'] === rule && item['symbol'] === symbol)
+            if (filtered.length < 1) continue
+            const exits = filtered.filter(item => item['type'].includes('Exit'))
+            const profit = exits.reduce((acc, item) => acc + item['netProfit'], 0)
+            const percent = (filtered[filtered.length - 1]['netInvest'] - filtered[0]['netInvest']) / filtered[0]['netInvest'] * 100
+            tests.push({
+                rule,
+                symbol,
+                profit,
+                percent
+            })
+        }
+    }
+    tests.sort((a, b) => b.percent - a.percent)
+
+    console.log(tests)
 
     useEffect(() => {
         const time = transactions[0]?.timestamp || Date.now()
@@ -31,29 +54,26 @@ export default function Home({ transactions }) {
             },
             body: JSON.stringify({
                 time: time - (1000 * 60 * 60 * 2),
-                symbol
+                symbol: activeTest.symbol,
             })
         })
             .then(res => res.json())
             .then(data => setPriceHistoryEth(data))
-    }, [symbol])
+    }, [activeTest])
 
     useEffect(() => {
         const granularity = +(priceHistoryEth.length / 200).toFixed(0)
         const filteredHistory = priceHistoryEth.filter((item, index) => index % granularity === 0)
-        //console.log(filteredHistory.length, granularity, new Date(filteredHistory[filteredHistory.length - 1]?.time).toLocaleString())
 
         const tempArray = []
         for (const { time: timestamp, close } of filteredHistory) {
-            //console.log(timestamp, close)
-
             const obj = {
                 time: new Date(timestamp).toLocaleDateString(),
                 price: +((close / filteredHistory[0].close - 1) * 100).toFixed(2)
             }
 
             for (let rule of rules) {
-                const temp = transactions.filter(item => item.rule === rule && item.timestamp <= timestamp && item['symbol'] === symbol)
+                const temp = transactions.filter(item => item.rule === rule && item.timestamp <= timestamp && item['symbol'] === activeTest.symbol)
                 const currentVal = temp[temp.length - 1]?.netInvest || transactions[0].netInvest
                 obj[rule] = +((currentVal - transactions[0].netInvest) / transactions[0].netInvest * 100).toFixed(2)
             }
@@ -90,13 +110,28 @@ export default function Home({ transactions }) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className={styles.main}>
-                <div className={styles.topMenu}>
+                <div className={styles.topMenu} style={{ display: 'none' }}>
                     <p>Trading Dashboard</p>
                     <div>
                         <select onChange={(e) => setSymbol(e.target.value)}>
                             {symbols.map(item => <option key={item} value={item}>{item}</option>)}
                         </select>
                     </div>
+                </div>
+                <div className={styles.testsWrapper}>
+                    {tests.map((item, index) => {
+                        const profitColor = item.profit > 0 ? styles.green : styles.red
+                        const className = item.rule === activeTest.rule && item.symbol === activeTest.symbol ? `${styles.active} ${styles.testItem}` : styles.testItem
+
+                        return (
+                            <div key={index} className={className} onClick={() => setActiveTest(item)}>
+                                <p>{item.rule}</p>
+                                <p>{item.symbol.replace('-', '')}</p>
+                                <p className={profitColor}>{item.percent.toFixed(2)}%</p>
+                                <p>{item.profit.toFixed(2)}$</p>
+                            </div>
+                        )
+                    })}
                 </div>
                 <div className={styles.chartWrapper}>
                     {chartData.length > 0 && <ResponsiveContainer width="100%" height={300}>
@@ -112,7 +147,11 @@ export default function Home({ transactions }) {
                             <YAxis hide="true" yAxisId="right" orientation='right' domain={["dataMin", "dataMax + 1"]} />
                             <XAxis dataKey="time" hide="true" />
                             <Tooltip formatter={(val) => val + '%'} />
-                            {rules.map(rule => <Line yAxisId="left" type="monotone" dataKey={rule} stroke='blue' strokeWidth={2} dot={false} key={rule} />)}
+                            {rules.map(rule => {
+                                const width = rule === activeTest.rule ? 3 : 1
+                                const color = rule === activeTest.rule ? 'blue' : 'lightblue'
+                                return <Line yAxisId="left" type="monotone" dataKey={rule} stroke={color} strokeWidth={width} dot={false} key={rule} />
+                            })}
                             <Line type="monotone" dataKey="price" stroke="grey" activeDot={{ r: 5 }} strokeWidth={2} yAxisId="right" dot={false} />
                             <ReferenceLine y={0} yAxisId="left" />
                         </LineChart>

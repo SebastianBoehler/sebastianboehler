@@ -2,7 +2,8 @@ import Head from 'next/head'
 import styles from '../../styles/Trading.module.css'
 import mysql from 'mysql'
 import React, { useEffect } from 'react'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine, PieChart, Pie, BarChart, Bar, ScatterChart, Scatter } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, ReferenceLine, BarChart, Bar, ScatterChart, Scatter } from 'recharts';
+import { pearsonCorrelation } from '../../utils/pearson-correlation';
 
 const pool = mysql.createPool({
     host: process.env.MYSQL_HOST,
@@ -12,19 +13,14 @@ const pool = mysql.createPool({
 })
 
 export default function Home({ transactions }) {
-    const [priceHistoryEth, setPriceHistoryEth] = React.useState([])
+    const [priceHistory, setPriceHistory] = React.useState([])
     const [chartData, setChartData] = React.useState([])
-    const [activeTest, setActiveTest] = React.useState({
-        symbol: 'ETH-PERP',
-        test: 'test'
-    })
 
     const rules = [...new Set(transactions.map(item => item['rule']))]
     const symbols = [...new Set(transactions.map(item => item['symbol']))]
-    const exits = transactions.filter(item => item['type'].includes('Exit'))
-    console.log(exits)
     const tests = []
 
+    //return for all rules per symbol
     for (const rule of rules) {
         for (const symbol of symbols) {
             const filtered = transactions.filter(item => item['rule'] === rule && item['symbol'] === symbol)
@@ -36,17 +32,22 @@ export default function Home({ transactions }) {
                 rule,
                 symbol,
                 profit,
-                percent
+                percent,
             })
         }
     }
     tests.sort((a, b) => b.percent - a.percent)
-
-    console.log(tests)
+    const [activeTest, setActiveTest] = React.useState(tests[0])
+    const [filteredTrxs, setFilteredTrxs] = React.useState(transactions.filter(item => item['rule'] === activeTest.rule && item['symbol'] === activeTest.symbol))
+    const filteredEntries = filteredTrxs.filter(item => item['type'].includes('Entry'))
+    const filteredExits = filteredTrxs.filter(item => item['type'].includes('Exit'))
 
     useEffect(() => {
+        //setPriceHistory([])
+        setFilteredTrxs(transactions.filter(item => item['rule'] === activeTest.rule && item['symbol'] === activeTest.symbol))
+
         const time = transactions[0]?.timestamp || Date.now()
-        console.log('load priceHistory', time, new Date(time).toLocaleString(), transactions.length)
+        //console.log('load priceHistory', time, new Date(time).toLocaleString(), transactions.length)
         fetch('/api/trading/priceHistory', {
             method: 'POST',
             headers: {
@@ -58,12 +59,12 @@ export default function Home({ transactions }) {
             })
         })
             .then(res => res.json())
-            .then(data => setPriceHistoryEth(data))
+            .then(data => setPriceHistory(data))
     }, [activeTest])
 
     useEffect(() => {
-        const granularity = +(priceHistoryEth.length / 200).toFixed(0)
-        const filteredHistory = priceHistoryEth.filter((item, index) => index % granularity === 0)
+        const granularity = +(priceHistory.length / 200).toFixed(0)
+        const filteredHistory = priceHistory.filter((item, index) => index % granularity === 0)
 
         const tempArray = []
         for (const { time: timestamp, close } of filteredHistory) {
@@ -81,10 +82,10 @@ export default function Home({ transactions }) {
             tempArray.push(obj)
         }
         setChartData(tempArray)
-    }, [priceHistoryEth])
+    }, [priceHistory])
 
+    //avg profit per rule
     const avgProfits = []
-
     for (let rule of rules) {
         const profits = []
 
@@ -100,6 +101,19 @@ export default function Home({ transactions }) {
         avgProfits.push({
             rule,
             profit: +(profits.reduce((a, b) => a + b, 0) / profits.length).toFixed(2)
+        })
+    }
+
+    //correlations
+    const correlations = []
+    const indicators = Object.keys(transactions[0]['details'])
+    for (const key of indicators) {
+        const values = filteredEntries.map(item => item['details'][key])
+        const profits = filteredExits.map(item => item['netProfit'])
+        const correlation = pearsonCorrelation([values, profits], 0, 1)
+        correlations.push({
+            key,
+            correlation
         })
     }
 
@@ -140,7 +154,7 @@ export default function Home({ transactions }) {
                             height={300}
                             data={chartData}
                             margin={{
-                                top: 20, right: 30, left: 20, bottom: 20,
+                                top: 20, right: 5, left: 5, bottom: 20,
                             }}
                         >
                             <YAxis hide="true" domain={["dataMin", "dataMax + 1"]} yAxisId="left" />
@@ -149,8 +163,8 @@ export default function Home({ transactions }) {
                             <Tooltip formatter={(val) => val + '%'} />
                             {rules.map(rule => {
                                 const width = rule === activeTest.rule ? 3 : 1
-                                const color = rule === activeTest.rule ? 'blue' : 'lightblue'
-                                return <Line yAxisId="left" type="monotone" dataKey={rule} stroke={color} strokeWidth={width} dot={false} key={rule} />
+                                const color = rule === activeTest.rule ? 'blue' : '#0000ff57'
+                                return <Line yAxisId="left" type="monotone" dataKey={rule} stroke={color} strokeWidth={width} dot={false} key={rule} isAnimationActive={false} />
                             })}
                             <Line type="monotone" dataKey="price" stroke="grey" activeDot={{ r: 5 }} strokeWidth={2} yAxisId="right" dot={false} />
                             <ReferenceLine y={0} yAxisId="left" />
@@ -159,6 +173,7 @@ export default function Home({ transactions }) {
                 </div>
                 <div className={styles.grid}>
                     <div className={styles.chartWrapper}>
+                        <p className={styles.chartHeadline} >Average Profit per Rule</p>
                         <ResponsiveContainer width="100%" height={300}>
                             <BarChart
                                 width={500}
@@ -175,6 +190,24 @@ export default function Home({ transactions }) {
                         </ResponsiveContainer>
                     </div>
                     <div className={styles.chartWrapper}>
+                        <p className={styles.chartHeadline} >Indicator Correlation</p>
+                        <ResponsiveContainer width="100%" height={300}>
+                            <BarChart
+                                width={500}
+                                height={300}
+                                data={correlations}
+                                margin={{
+                                    top: 20, right: 30, left: 20, bottom: 20,
+                                }}
+                            >
+                                <XAxis dataKey="key" hide="true" />
+                                <Tooltip />
+                                <Bar dataKey="correlation" fill="blue" isAnimationActive={false} />
+                            </BarChart>
+                        </ResponsiveContainer>
+                    </div>
+                    <div className={styles.chartWrapper}>
+                        <p className={styles.chartHeadline} >HoldDuration x Profit</p>
                         <ResponsiveContainer width="100%" height={300}>
                             <ScatterChart
                                 width={500}
@@ -183,9 +216,10 @@ export default function Home({ transactions }) {
                                     top: 20, right: 30, left: 20, bottom: 20,
                                 }}
                             >
-                                <XAxis dataKey="netProfit" unit="$" hide="true" />
-                                <YAxis dataKey="holdDuration" hide="true" unit="m" />
-                                <Scatter data={exits.sort((a, b) => a.netProfit - b.netProfit)} fill="blue" />
+                                <XAxis dataKey="netProfit" unit="$" hide="true" type="number" />
+                                <YAxis dataKey="holdDuration" hide="true" unit="m" type="number" />
+                                <ReferenceLine x={0} strokeDasharray="5 10" />
+                                <Scatter data={filteredExits} fill="blue" />
                                 <Tooltip cursor={{ strokeDasharray: '3 3' }} />
                             </ScatterChart>
                         </ResponsiveContainer>
@@ -198,7 +232,6 @@ export default function Home({ transactions }) {
 
 //server side rendering
 export async function getServerSideProps({ req, res }) {
-
     const transactions = await new Promise((resolve, reject) => {
         pool.query('SELECT data FROM backtester', (err, results) => {
             if (err) {

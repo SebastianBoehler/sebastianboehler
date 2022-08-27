@@ -41,6 +41,22 @@
 .chartWrapper {
     background-color: rgba(240, 240, 240, 0.25);
     border-radius: 5px;
+    position: relative;
+}
+
+.chartWrapper:hover .chartHeadline {
+    display: block;
+    text-transform: capitalize;
+}
+
+.chartHeadline {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+    display: none;
 }
 
 .topMenu {

@@ -109,7 +109,9 @@ export default function Home({ transactions }) {
     const indicators = Object.keys(transactions[0]?.details || [])
     for (const key of indicators) {
         const values = filteredEntries.map(item => item['details'][key])
-        const profits = filteredExits.map(item => item['netProfit'])
+        let profits = filteredExits.map(item => item['netProfit'])
+        if (activeTest.rule === 'correlation') profits = values.map(() => 2.5)
+        //console.log(indicators, values, profits)
         const correlation = pearsonCorrelation([values, profits], 0, 1)
         correlations.push({
             key,
@@ -136,7 +138,7 @@ export default function Home({ transactions }) {
                     {tests.map((item, index) => {
                         const profitColor = item.profit > 0 ? styles.green : styles.red
                         const className = item.rule === activeTest.rule && item.symbol === activeTest.symbol ? `${styles.active} ${styles.testItem}` : styles.testItem
-
+                        if (item.rule === 'correlation') return null
                         return (
                             <div key={index} className={className} onClick={() => setActiveTest(item)}>
                                 <p>{item.rule}</p>

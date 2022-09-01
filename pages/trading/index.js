@@ -79,12 +79,14 @@ export default function Home({ transactions }) {
                 const temp = transactions.filter(item =>
                     item.rule === rule &&
                     item.timestamp <= timestamp &&
-                    item.symbol === activeTest.symbol &&
-                    item.rule !== 'correlation'
+                    item.symbol === activeTest.symbol
                 )
-                const currentVal = temp[temp.length - 1]?.netInvest || transactions[0].netInvest
-                obj[rule] = +((currentVal - transactions[0].netInvest) / transactions[0].netInvest * 100).toFixed(2)
-                if (rule === 'test7') console.log(rule, currentVal, transactions[0].netInvest, temp)
+                if (temp.length < 1) {
+                    obj[rule] = 0
+                    continue
+                }
+                const currentVal = temp[temp.length - 1]?.netInvest || temp[0].netInvest
+                obj[rule] = +((currentVal - temp[0].netInvest) / temp[0].netInvest * 100).toFixed(2)
             }
 
             tempArray.push(obj)
@@ -236,7 +238,7 @@ export default function Home({ transactions }) {
                                 <XAxis dataKey="netProfitPercentage" unit="%" hide="true" type="number" />
                                 <YAxis dataKey="holdDuration" hide="true" unit="m" type="number" />
                                 <ReferenceLine x={0} strokeDasharray="5 10" />
-                                <Scatter data={filteredExits.filter(item => item['type'].includes('Long'))} fill="blue" />
+                                <Scatter data={filteredExits} fill="blue" />
                                 <Tooltip cursor={{ strokeDasharray: '3 3' }} />
                             </ScatterChart>
                         </ResponsiveContainer>

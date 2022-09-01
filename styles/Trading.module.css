@@ -91,6 +91,7 @@
     padding: 0 1rem;
     margin: 0 .5rem;
     min-width: 8rem;
+    min-height: 7rem;
     line-height: 10px;
     background-color: rgba(240, 240, 240, 0.6);
     border-radius: 8px;

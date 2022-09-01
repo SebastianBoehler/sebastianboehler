@@ -48,6 +48,7 @@ export default function Home({ transactions }) {
 
         const time = transactions[0]?.timestamp || Date.now()
         //console.log('load priceHistory', time, new Date(time).toLocaleString(), transactions.length)
+        if (!activeTest.symbol) return
         fetch('/api/trading/priceHistory', {
             method: 'POST',
             headers: {
@@ -74,9 +75,16 @@ export default function Home({ transactions }) {
             }
 
             for (let rule of rules) {
-                const temp = transactions.filter(item => item.rule === rule && item.timestamp <= timestamp && item['symbol'] === activeTest.symbol)
+                if (rule === 'correlation') continue
+                const temp = transactions.filter(item =>
+                    item.rule === rule &&
+                    item.timestamp <= timestamp &&
+                    item.symbol === activeTest.symbol &&
+                    item.rule !== 'correlation'
+                )
                 const currentVal = temp[temp.length - 1]?.netInvest || transactions[0].netInvest
                 obj[rule] = +((currentVal - transactions[0].netInvest) / transactions[0].netInvest * 100).toFixed(2)
+                if (rule === 'test7') console.log(rule, currentVal, transactions[0].netInvest, temp)
             }
 
             tempArray.push(obj)
@@ -108,9 +116,9 @@ export default function Home({ transactions }) {
     const correlations = []
     const indicators = Object.keys(transactions[0]?.details || [])
     for (const key of indicators) {
-        const values = filteredEntries.map(item => item['details'][key])
-        let profits = filteredExits.map(item => item['netProfit'])
-        if (activeTest.rule === 'correlation') profits = values.map(() => 2.5)
+        let values = filteredEntries.map(item => item['details'][key])
+        const profits = filteredExits.map(item => item['netProfitPercentage'])
+        if (activeTest.rule === 'correlation') values = filteredExits.map(item => item['details'][key])
         //console.log(indicators, values, profits)
         const correlation = pearsonCorrelation([values, profits], 0, 1)
         correlations.push({
@@ -138,7 +146,14 @@ export default function Home({ transactions }) {
                     {tests.map((item, index) => {
                         const profitColor = item.profit > 0 ? styles.green : styles.red
                         const className = item.rule === activeTest.rule && item.symbol === activeTest.symbol ? `${styles.active} ${styles.testItem}` : styles.testItem
-                        if (item.rule === 'correlation') return null
+
+                        if (item.rule === 'correlation') return (
+                            <div key={index} className={className} onClick={() => setActiveTest(item)}>
+                                <p>{item.rule}</p>
+                                <p>{item.symbol}</p>
+                            </div>
+                        )
+
                         return (
                             <div key={index} className={className} onClick={() => setActiveTest(item)}>
                                 <p>{item.rule}</p>
@@ -218,10 +233,10 @@ export default function Home({ transactions }) {
                                     top: 20, right: 30, left: 20, bottom: 20,
                                 }}
                             >
-                                <XAxis dataKey="netProfit" unit="$" hide="true" type="number" />
+                                <XAxis dataKey="netProfitPercentage" unit="%" hide="true" type="number" />
                                 <YAxis dataKey="holdDuration" hide="true" unit="m" type="number" />
                                 <ReferenceLine x={0} strokeDasharray="5 10" />
-                                <Scatter data={filteredExits} fill="blue" />
+                                <Scatter data={filteredExits.filter(item => item['type'].includes('Long'))} fill="blue" />
                                 <Tooltip cursor={{ strokeDasharray: '3 3' }} />
                             </ScatterChart>
                         </ResponsiveContainer>

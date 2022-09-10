@@ -1,16 +1,8 @@
 import Head from 'next/head'
 import styles from '../../styles/Trading.module.css'
-import mysql from 'mysql'
 import React, { useEffect } from 'react'
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, ReferenceLine, BarChart, Bar, ScatterChart, Scatter } from 'recharts';
 import { pearsonCorrelation } from '../../utils/pearson-correlation';
-
-const pool = mysql.createPool({
-    host: process.env.MYSQL_HOST,
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWORD,
-    database: 'storage'
-})
 
 export default function Home({ transactions }) {
     const [priceHistory, setPriceHistory] = React.useState([])
@@ -49,7 +41,7 @@ export default function Home({ transactions }) {
         const time = transactions[0]?.timestamp || Date.now()
         //console.log('load priceHistory', time, new Date(time).toLocaleString(), transactions.length)
         if (!activeTest.symbol) return
-        fetch('/api/trading/priceHistory', {
+        fetch('http://139.59.156.50:8080/ftx/priceHistory', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -251,25 +243,18 @@ export default function Home({ transactions }) {
 
 //server side rendering
 export async function getServerSideProps({ req, res }) {
-    const transactions = await new Promise((resolve, reject) => {
-        pool.query('SELECT data FROM backtester', (err, results) => {
-            if (err) {
-                reject(err)
-            } else {
-                resolve(results.map(item => {
-                    const obj = JSON.parse(item['data'])
-                    return {
-                        ...obj,
-                        time: new Date(obj['timestamp']).toLocaleString()
-                    }
-                }))
-            }
-        })
+    const resp = await fetch(`http://139.59.156.50:8080/ftx/transactions`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
     })
+
+    console.log(resp.status, resp.url)
 
     return {
         props: {
-            transactions
+            transactions: await resp.json()
         }
     }
 }

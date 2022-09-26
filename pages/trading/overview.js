@@ -18,6 +18,7 @@ export default function Home({ overview }) {
             <main className={styles.main}>
                 <div className={styles.grid}>
                     {keys.map((item, index) => {
+                        if (!values[index]?.long) return
                         const long = values[index]['long']['main'].filter(item => item['val']).length === values[index]['long']['main'].length
                         const longOpt = values[index]['long']['optional'].filter(item => item['val']).length === values[index]['long']['optional'].length
                         console.log(values[index])
@@ -38,7 +39,7 @@ export default function Home({ overview }) {
 //server side rendering
 export async function getServerSideProps({ req, res }) {
     //TODO: load client side to use cache
-    const resp = await fetch(`http://localhost:3001/ftx/overview`, {
+    const resp = await fetch(`http://boehler-it.de:8080/ftx/overview`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

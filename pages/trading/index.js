@@ -7,12 +7,17 @@ import { pearsonCorrelation } from '../../utils/pearson-correlation';
 export default function Home({ transactions }) {
     const [priceHistory, setPriceHistory] = React.useState([])
     const [chartData, setChartData] = React.useState([])
+    const [options, setOptions] = React.useState({
+        maxProfit: 100,
+        minProfit: -100,
+        maxHoldDuration: Math.max(
+            ...transactions.filter(t => t.holdDuration).map(t => t.holdDuration)
+        )
+    })
 
     const rules = [...new Set(transactions.map(item => item['rule']))]
     const symbols = [...new Set(transactions.map(item => item['symbol']))]
     const tests = []
-
-    console.log(transactions)
 
     //return for all rules per symbol
     for (const rule of rules) {
@@ -21,25 +26,56 @@ export default function Home({ transactions }) {
             if (filtered.length < 1) continue
             const exits = filtered.filter(item => item['type'].includes('Exit'))
             const profit = exits.reduce((acc, item) => acc + item['netProfit'], 0)
+
+            const maxInvest = Math.max(...filtered.map(item => item['netInvest']))
+            const minInvest = Math.min(...filtered.map(item => item['netInvest']))
+            const startInvest = filtered[0]['netInvest']
+
+            const maxProfit = +((maxInvest - startInvest) / startInvest * 100).toFixed(2)
+            const minProfit = +((minInvest - startInvest) / startInvest * 100).toFixed(2)
+
+            const maxTrxProfit = +Math.max(...exits.map(item => item['netProfitPercentage'])).toFixed(2)
+            const minTrxProfit = +Math.min(...exits.map(item => item['netProfitPercentage'])).toFixed(2)
+
             const percent = (filtered[filtered.length - 1]['netInvest'] - filtered[0]['netInvest']) / filtered[0]['netInvest'] * 100
             tests.push({
                 rule,
                 symbol,
                 profit,
                 percent,
+                maxProfit,
+                minProfit,
+                maxTrxProfit,
+                minTrxProfit,
             })
         }
     }
     tests.sort((a, b) => b.percent - a.percent)
     const [activeTest, setActiveTest] = React.useState(tests[0] || {})
-    const [filteredTrxs, setFilteredTrxs] = React.useState(transactions.filter(item => item['rule'] === activeTest.rule && item['symbol'] === activeTest.symbol))
-    const filteredEntries = filteredTrxs.filter(item => item['type'].includes('Entry'))
-    const filteredExits = filteredTrxs.filter(item => item['type'].includes('Exit'))
+    const [filteredTrxs, setFilteredTrxs] = React.useState(transactions.filter(item =>
+        item['rule'] === activeTest.rule &&
+        item['symbol'] === activeTest.symbol
+    ))
+    const [filteredEntries, setFilteredEntries] = React.useState(filteredTrxs.filter(item => item['type'].includes('Entry')))
+    const [filteredExits, setFilteredExits] = React.useState(filteredTrxs.filter(item =>
+        item['type'].includes('Exit') &&
+        item['netProfitPercentage'] <= options['maxProfit'] &&
+        item['netProfitPercentage'] >= options['minProfit'] &&
+        item['holdDuration'] <= options['maxHoldDuration']
+    ))
     const entryDetails = filteredExits.length > 0 ? Object.keys(filteredExits[0]['entryDetails']) : ['']
     const [detailsKey, setDetailsKey] = React.useState(entryDetails[0])
 
     useEffect(() => {
         //setPriceHistory([])
+        console.log(activeTest)
+
+        setOptions({
+            ...options,
+            maxProfit: activeTest.maxTrxProfit,
+            minProfit: activeTest.minTrxProfit,
+        })
+
         setFilteredTrxs(transactions.filter(item => item['rule'] === activeTest.rule && item['symbol'] === activeTest.symbol))
 
         const time = transactions[0]?.timestamp || Date.now()
@@ -90,6 +126,22 @@ export default function Home({ transactions }) {
         setChartData(tempArray)
     }, [priceHistory])
 
+    useEffect(() => {
+        setFilteredTrxs(transactions.filter(item =>
+            item['rule'] === activeTest.rule &&
+            item['symbol'] === activeTest.symbol &&
+            item['netProfitPercentage'] <= options['maxProfit'] &&
+            item['netProfitPercentage'] >= options['minProfit']
+        ))
+
+        setFilteredExits(filteredTrxs.filter(item =>
+            item['type'].includes('Exit') &&
+            item['netProfitPercentage'] <= options['maxProfit'] &&
+            item['netProfitPercentage'] >= options['minProfit'] &&
+            item['holdDuration'] <= options['maxHoldDuration']
+        ))
+    }, [options])
+
     //avg profit per rule
     const avgProfits = []
     for (let rule of rules) {
@@ -111,13 +163,14 @@ export default function Home({ transactions }) {
     }
 
     //correlations
+    console.log('filteredTrxs', filteredTrxs)
     const correlations = []
     const indicators = Object.keys(transactions[0]?.details || [])
     for (const key of indicators) {
         let values = filteredEntries.map(item => item['details'][key])
         const profits = filteredExits.map(item => item['netProfitPercentage'])
         if (activeTest.rule === 'correlation') values = filteredExits.map(item => item['details'][key])
-        //console.log(indicators, values, profits)
+        console.log('correl test', filteredEntries, filteredTrxs)
         const correlation = pearsonCorrelation([values, profits], 0, 1)
         correlations.push({
             key,
@@ -135,6 +188,43 @@ export default function Home({ transactions }) {
 
     return (
         <div>
+            <div className={styles.sidebar}>
+                <div>
+                    <p>Max Profit: {options['maxProfit']}</p>
+                    <input
+                        type={'range'}
+                        min={activeTest['minTrxProfit']}
+                        max={activeTest['maxTrxProfit']}
+                        className={styles.slider}
+                        value={options['maxProfit']}
+                        onChange={e => setOptions({ ...options, maxProfit: +e.target.value })}
+                    />
+                </div>
+                <div>
+                    <p>Min Profit: {options['minProfit']}</p>
+                    <input
+                        type={'range'}
+                        min={activeTest['minTrxProfit']}
+                        max={activeTest['maxTrxProfit']}
+                        className={styles.slider}
+                        value={options['minProfit']}
+                        onChange={e => setOptions({ ...options, minProfit: +e.target.value })}
+                    />
+                </div>
+                <div>
+                    <p>Hold Duration: {options['maxHoldDuration']}</p>
+                    <input
+                        type={'range'}
+                        min={0}
+                        max={Math.max(
+                            ...transactions.filter(t => t.holdDuration).map(t => t.holdDuration)
+                        )}
+                        className={styles.slider}
+                        value={options['maxHoldDuration']}
+                        onChange={e => setOptions({ ...options, maxHoldDuration: +e.target.value })}
+                    />
+                </div>
+            </div>
             <Head>
                 <title>Sebastian Boehler | Trading Dashboard</title>
                 <link rel="icon" href="/favicon.ico" />
@@ -195,7 +285,7 @@ export default function Home({ transactions }) {
                     </ResponsiveContainer>}
                 </div>
                 <div className={styles.grid}>
-                    <div className={styles.chartWrapper}>
+                    <div className={styles.chartWrapper} >
                         <p className={styles.chartHeadline} >Average Profit per Rule</p>
                         <ResponsiveContainer width="100%" height={300}>
                             <BarChart
@@ -212,7 +302,7 @@ export default function Home({ transactions }) {
                             </BarChart>
                         </ResponsiveContainer>
                     </div>
-                    <div className={styles.chartWrapper}>
+                    <div className={styles.chartWrapper} >
                         <p className={styles.chartHeadline} >Indicator Correlation</p>
                         <ResponsiveContainer width="100%" height={300}>
                             <BarChart
@@ -260,7 +350,6 @@ export default function Home({ transactions }) {
                                 <XAxis dataKey="netProfitPercentage" unit="%" hide="true" type="number" />
                                 <YAxis dataKey={`entryDetails.${detailsKey}`} hide="true" type="number" domain={["dataMin", "dataMax"]} />
                                 <ReferenceLine x={0} strokeDasharray="5 10" />
-                                <ReferenceLine y={0} strokeDasharray="5 10" />
                                 <Scatter data={filteredExits} fill="blue" />
                                 <Tooltip cursor={{ strokeDasharray: '3 3' }} />
                             </ScatterChart>

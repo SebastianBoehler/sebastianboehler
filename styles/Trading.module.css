@@ -9,6 +9,15 @@
     grid-gap: 10px;
 }
 
+.sidebar {
+    position: absolute;
+    right: 0;
+    bottom: 10%;
+    background-color: rgba(240, 240, 240, 0.6);
+    border-radius: 8px;
+    padding: 10px;
+}
+
 .activeFilter {
     text-decoration: underline;
     font-weight: bold;
@@ -35,6 +44,12 @@
 @media screen and (max-width: 500px) {
     .grid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 1150px) {
+    .sidebar {
+        display: none
     }
 }
 

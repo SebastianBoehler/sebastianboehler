@@ -14,7 +14,7 @@
     font-weight: bold;
 }
 
-.filter > p {
+.filter>p {
     display: inline-block;
     margin: 1rem 0.5rem;
     text-transform: capitalize;
@@ -50,26 +50,32 @@
 }
 
 .chartHeadline {
+    padding: 0 8px;
     text-align: center;
     font-size: 1rem;
     font-weight: bold;
     position: absolute;
-    width: 100%;
     bottom: 0px;
     display: none;
+    z-index: 1000000;
+    background-color: lightgray;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+    width: auto;
 }
 
 .topMenu {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;  
+    margin-bottom: 1rem;
     background-color: rgba(240, 240, 240, 0.6);
-    padding: 0.5rem 2rem;  
+    padding: 0.5rem 2rem;
     border-radius: 5px;
 }
 
-.topMenu > p {
+.topMenu>p {
     font-size: 1.2rem;
     font-weight: 500;
 }
@@ -77,14 +83,14 @@
 .testsWrapper {
     display: flex;
     align-items: center;
-    margin-bottom: 1rem;  
+    margin-bottom: 1rem;
     overflow-x: scroll;
     cursor: pointer;
     padding: .5rem
 }
 
 .testsWrapper::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
 .testItem {

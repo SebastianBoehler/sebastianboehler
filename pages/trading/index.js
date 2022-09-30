@@ -12,6 +12,8 @@ export default function Home({ transactions }) {
     const symbols = [...new Set(transactions.map(item => item['symbol']))]
     const tests = []
 
+    console.log(transactions)
+
     //return for all rules per symbol
     for (const rule of rules) {
         for (const symbol of symbols) {
@@ -33,6 +35,8 @@ export default function Home({ transactions }) {
     const [filteredTrxs, setFilteredTrxs] = React.useState(transactions.filter(item => item['rule'] === activeTest.rule && item['symbol'] === activeTest.symbol))
     const filteredEntries = filteredTrxs.filter(item => item['type'].includes('Entry'))
     const filteredExits = filteredTrxs.filter(item => item['type'].includes('Exit'))
+    const entryDetails = filteredExits.length > 0 ? Object.keys(filteredExits[0]['entryDetails']) : ['']
+    const [detailsKey, setDetailsKey] = React.useState(entryDetails[0])
 
     useEffect(() => {
         //setPriceHistory([])
@@ -41,7 +45,7 @@ export default function Home({ transactions }) {
         const time = transactions[0]?.timestamp || Date.now()
         //console.log('load priceHistory', time, new Date(time).toLocaleString(), transactions.length)
         if (!activeTest.symbol) return
-        fetch('http://139.59.156.50:8080/ftx/priceHistory', {
+        fetch('http://139.59.156.50/ftx/priceHistory', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -120,6 +124,14 @@ export default function Home({ transactions }) {
             correlation
         })
     }
+
+    useEffect(() => {
+        setTimeout(() => {
+            const index = entryDetails.findIndex(item => item === detailsKey)
+            if (index === entryDetails.length - 1) setDetailsKey(entryDetails[0])
+            else setDetailsKey(entryDetails[index + 1])
+        }, 1000 * 15);
+    }, [detailsKey])
 
     return (
         <div>
@@ -235,6 +247,25 @@ export default function Home({ transactions }) {
                             </ScatterChart>
                         </ResponsiveContainer>
                     </div>
+                    <div className={styles.chartWrapper}>
+                        <p className={styles.chartHeadline} >{detailsKey} x Profit</p>
+                        <ResponsiveContainer width="100%" height={300}>
+                            <ScatterChart
+                                width={500}
+                                height={300}
+                                margin={{
+                                    top: 20, right: 30, left: 20, bottom: 20,
+                                }}
+                            >
+                                <XAxis dataKey="netProfitPercentage" unit="%" hide="true" type="number" />
+                                <YAxis dataKey={`entryDetails.${detailsKey}`} hide="true" type="number" domain={["dataMin", "dataMax"]} />
+                                <ReferenceLine x={0} strokeDasharray="5 10" />
+                                <ReferenceLine y={0} strokeDasharray="5 10" />
+                                <Scatter data={filteredExits} fill="blue" />
+                                <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+                            </ScatterChart>
+                        </ResponsiveContainer>
+                    </div>
                 </div>
             </main>
         </div>
@@ -243,14 +274,12 @@ export default function Home({ transactions }) {
 
 //server side rendering
 export async function getServerSideProps({ req, res }) {
-    const resp = await fetch(`http://139.59.156.50:8080/ftx/transactions`, {
+    const resp = await fetch(`http://139.59.156.50/ftx/transactions`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
         }
     })
-
-    console.log(resp.status, resp.url)
 
     return {
         props: {

@@ -4,8 +4,10 @@ import React, { useEffect } from 'react'
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, ReferenceLine, BarChart, Bar, ScatterChart, Scatter } from 'recharts';
 import { pearsonCorrelation } from '../../utils/pearson-correlation';
 
+const fetchLimit = 5000
+
 async function loadTransactions(id) {
-    const resp = await fetch(`http://139.59.156.50/ftx/transactions?limit=20000&id=${id}`, {
+    const resp = await fetch(`http://139.59.156.50/ftx/transactions?limit=${fetchLimit}&id=${id}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -33,14 +35,20 @@ export default function Home({ transactionsSSR }) {
 
     useEffect(() => {
         if (transactions.length < 1) return
-        console.info(`Check if loading more trxs, ${transactions.length} so far`)
-        if (transactions.length % 20000 === 0) {
-            const offset = transactions[transactions.length - 1]['id']
 
-            loadTransactions(offset)
-                .then(data => {
-                    setTransactions([...transactions, ...data])
-                })
+        loadMore()
+
+        function loadMore() {
+            console.info(`Check if loading more trxs, ${transactions.length} so far. ID: ${transactions[transactions.length - 1].id}`)
+            loadTransactions(transactions[transactions.length - 1].id).then(newTransactions => {
+                if (newTransactions.length > 0) {
+                    setTransactions([...transactions, ...newTransactions])
+                }
+
+                if (newTransactions.length === fetchLimit) {
+                    loadMore()
+                }
+            })
         }
     }, [transactions])
 
@@ -394,7 +402,7 @@ export default function Home({ transactionsSSR }) {
 
 //server side rendering
 export async function getServerSideProps({ req, res }) {
-    const resp = await fetch(`http://139.59.156.50/ftx/transactions?limit=20000&id=0`, {
+    const resp = await fetch(`http://139.59.156.50/ftx/transactions?limit=${fetchLimit}&id=0`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

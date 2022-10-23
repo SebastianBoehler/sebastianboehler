@@ -4,7 +4,19 @@ import React, { useEffect } from 'react'
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, ReferenceLine, BarChart, Bar, ScatterChart, Scatter } from 'recharts';
 import { pearsonCorrelation } from '../../utils/pearson-correlation';
 
-export default function Home({ transactions }) {
+async function loadTransactions(id) {
+    const resp = await fetch(`http://139.59.156.50/ftx/transactions?limit=20000&id=${id}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+    const data = await resp.json();
+    return data;
+}
+
+export default function Home({ transactionsSSR }) {
+    const [transactions, setTransactions] = React.useState(transactionsSSR);
     const [priceHistory, setPriceHistory] = React.useState([])
     const [chartData, setChartData] = React.useState([])
     const [options, setOptions] = React.useState({
@@ -18,6 +30,19 @@ export default function Home({ transactions }) {
     const rules = [...new Set(transactions.map(item => item['rule']))]
     const symbols = [...new Set(transactions.map(item => item['symbol']))]
     const tests = []
+
+    useEffect(() => {
+        if (transactions.length < 1) return
+        console.info(`Check if loading more trxs, ${transactions.length} so far`)
+        if (transactions.length % 20000 === 0) {
+            const offset = transactions[transactions.length - 1]['id']
+
+            loadTransactions(offset)
+                .then(data => {
+                    setTransactions([...transactions, ...data])
+                })
+        }
+    }, [transactions])
 
     //return for all rules per symbol
     for (const rule of rules) {
@@ -117,6 +142,12 @@ export default function Home({ transactions }) {
                     obj[rule] = 0
                     continue
                 }
+
+                if (timestamp > Math.max(...transactions.map(item => item.timestamp))) {
+                    obj[rule] = null
+                    continue
+                }
+
                 const currentVal = temp[temp.length - 1]?.netInvest || temp[0].netInvest
                 obj[rule] = +((currentVal - temp[0].netInvest) / temp[0].netInvest * 100).toFixed(2)
             }
@@ -163,14 +194,14 @@ export default function Home({ transactions }) {
     }
 
     //correlations
-    console.log('filteredTrxs', filteredTrxs)
+    //console.log('filteredTrxs', filteredTrxs)
     const correlations = []
     const indicators = Object.keys(transactions[0]?.details || [])
     for (const key of indicators) {
         let values = filteredEntries.map(item => item['details'][key])
         const profits = filteredExits.map(item => item['netProfitPercentage'])
         if (activeTest.rule === 'correlation') values = filteredExits.map(item => item['details'][key])
-        console.log('correl test', filteredEntries, filteredTrxs)
+        //console.log('correl test', filteredEntries, filteredTrxs)
         const correlation = pearsonCorrelation([values, profits], 0, 1)
         correlations.push({
             key,
@@ -363,16 +394,19 @@ export default function Home({ transactions }) {
 
 //server side rendering
 export async function getServerSideProps({ req, res }) {
-    const resp = await fetch(`http://139.59.156.50/ftx/transactions`, {
+    const resp = await fetch(`http://139.59.156.50/ftx/transactions?limit=20000&id=0`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
         }
     })
 
+    const data = await resp.json()
+    console.log(data.length)
+
     return {
         props: {
-            transactions: await resp.json()
+            transactionsSSR: data
         }
     }
 }

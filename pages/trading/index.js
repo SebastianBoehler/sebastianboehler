@@ -13,6 +13,7 @@ async function loadTransactions(id) {
             'Content-Type': 'application/json',
         }
     })
+    if (resp.status !== 200) return null
     const data = await resp.json();
     return data;
 }
@@ -36,20 +37,25 @@ export default function Home({ transactionsSSR }) {
     useEffect(() => {
         if (transactions.length < 1) return
 
-        loadMore()
-
-        function loadMore() {
-            console.info(`Check if loading more trxs, ${transactions.length} so far. ID: ${transactions[transactions.length - 1].id}`)
-            loadTransactions(transactions[transactions.length - 1].id).then(newTransactions => {
+        console.info(`Check if loading more trxs, ${transactions.length} so far. ID: ${transactions[transactions.length - 1].db_id}`)
+        loadTransactions(transactions[transactions.length - 1].db_id)
+            .then(newTransactions => {
+                if (!newTransactions) {
+                    //loadMore()
+                    return
+                }
+                console.log(newTransactions)
                 if (newTransactions.length > 0) {
-                    setTransactions([...transactions, ...newTransactions])
+                    setTransactions(
+                        [...transactions, ...newTransactions]
+                            .sort((a, b) => a.db_id - b.db_id)
+                    )
                 }
 
-                if (newTransactions.length === fetchLimit) {
-                    loadMore()
+                if (newTransactions.length < fetchLimit) {
+                    setTimeout(() => setActiveTest(tests[0]), 1000)
                 }
             })
-        }
     }, [transactions])
 
     //return for all rules per symbol
@@ -126,6 +132,7 @@ export default function Home({ transactionsSSR }) {
         })
             .then(res => res.json())
             .then(data => setPriceHistory(data))
+            .catch(e => console.error(e))
     }, [activeTest])
 
     useEffect(() => {
@@ -294,6 +301,7 @@ export default function Home({ transactionsSSR }) {
                                 <p>{item.rule}</p>
                                 <p>{item.symbol.replace('-', '')}</p>
                                 <p className={profitColor}>{item.percent.toFixed(2)}%</p>
+                                <p style={{ opacity: 0.3 }} >{item.maxProfit.toFixed(2)}%</p>
                                 <p>{item.profit.toFixed(2)}$</p>
                             </div>
                         )
@@ -410,11 +418,10 @@ export async function getServerSideProps({ req, res }) {
     })
 
     const data = await resp.json()
-    console.log(data.length)
 
     return {
         props: {
-            transactionsSSR: data
+            transactionsSSR: data.sort((a, b) => a.db_id - b.db_id)
         }
     }
 }

@@ -77,6 +77,8 @@ export default function Home({ transactionsSSR }) {
             const minTrxProfit = +Math.min(...exits.map(item => item['netProfitPercentage'])).toFixed(2)
 
             const percent = (filtered[filtered.length - 1]['netInvest'] - filtered[0]['netInvest']) / filtered[0]['netInvest'] * 100
+
+            const avgAmount = filtered.reduce((acc, item) => acc + (item['details']['1m volume'] / 20), 0) / filtered.length
             tests.push({
                 rule,
                 symbol,
@@ -86,6 +88,7 @@ export default function Home({ transactionsSSR }) {
                 minProfit,
                 maxTrxProfit,
                 minTrxProfit,
+                avgAmount
             })
         }
     }
@@ -302,6 +305,7 @@ export default function Home({ transactionsSSR }) {
                                 <p>{item.symbol.replace('-', '')}</p>
                                 <p className={profitColor}>{item.percent.toFixed(2)}%</p>
                                 <p style={{ opacity: 0.3 }} >{item.maxProfit.toFixed(2)}%</p>
+                                <p>{item.avgAmount.toFixed(2)}$</p>
                                 <p>{item.profit.toFixed(2)}$</p>
                             </div>
                         )

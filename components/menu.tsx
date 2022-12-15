@@ -32,7 +32,11 @@ const items: MenuProps['items'] = [
     }
 ];
 
-const MenuComponent: React.FC = () => {
+type props = {
+    type?: 'horizontal' | 'vertical'
+}
+
+const MenuComponent: React.FC<props> = ({ type }: props) => {
     //load padding inline px style from header
 
     const [current, setCurrent] = useState('mail');
@@ -45,7 +49,7 @@ const MenuComponent: React.FC = () => {
     return <Menu
         onClick={onClick}
         selectedKeys={[current]}
-        mode="horizontal"
+        mode={type}
         style={{ paddingInline: '30px 0' }}
         items={items} />;
 };

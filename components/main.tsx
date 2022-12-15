@@ -21,6 +21,10 @@ const data = [
         title: 'Articles',
         description: 'A list of all my articles. I write about a variety of topics, including tech trends, scientific research and more.',
         rank: 5
+    },
+    {
+        title: 'Algorithmic Trading',
+        description: 'Simple overview aboutmy algorithmic trading strategies and infrastructur',
     }
 ];
 
@@ -30,7 +34,7 @@ const component: React.FC = () => {
             itemLayout="vertical"
             dataSource={data.sort((a, b) => b.rank - a.rank)}
             renderItem={(item) => (
-                <List.Item>
+                <List.Item style={{ maxWidth: '600px' }} >
                     <List.Item.Meta
                         title={<a href={item.link || "/"}>{item.title}</a>}
                         description={item.description}

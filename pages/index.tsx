@@ -4,22 +4,12 @@ import Header from '../components/header'
 import Main from '../components/main'
 import Footer from '../components/footer'
 import { useEffect } from 'react'
+import useWindowDimensions from '../hooks/windowDimensions'
 
-const { Content } = Layout
+const { Content, Sider } = Layout
 
 export default function Home() {
-  const [api, contextHolder] = notification.useNotification();
-
-  useEffect(() => {
-    setTimeout(() => {
-      api.info({
-        message: `Info`,
-        description:
-          'This site is still in build :)',
-        placement: 'topRight'
-      });
-    }, 1000);
-  })
+  const { height, width } = useWindowDimensions();
 
   return (
     <ConfigProvider
@@ -27,13 +17,29 @@ export default function Home() {
         algorithm: theme.defaultAlgorithm,
       }}
     >
-      {contextHolder}
       <Layout style={{ height: '100%' }}>
         <Header />
-        <Menu />
-        <Content style={{ padding: '30px' }}>
-          <Main />
-        </Content>
+        <Layout>
+          {width > 768 ? <Sider
+            breakpoint="md"
+            collapsedWidth="0"
+            onBreakpoint={(broken) => {
+              console.log(broken);
+            }}
+            onCollapse={(collapsed, type) => {
+              console.log(collapsed, type);
+            }}
+            style={{ backgroundColor: 'white' }}
+          >
+            <Menu type='vertical' />
+          </Sider>
+            :
+            <Menu type='horizontal' />
+          }
+          <Content style={{ padding: '30px' }}>
+            <Main />
+          </Content>
+        </Layout>
         <Footer />
       </Layout>
     </ConfigProvider>

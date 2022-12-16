@@ -50,7 +50,7 @@ const MenuComponent: React.FC<props> = ({ type }: props) => {
         onClick={onClick}
         selectedKeys={[current]}
         mode={type}
-        style={{ paddingInline: '30px 0' }}
+        //style={{ paddingInline: '30px 0' }}
         items={items} />;
 };
 

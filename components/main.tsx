@@ -1,4 +1,4 @@
-import { Avatar, Button, List } from "antd"
+import { Button, List } from "antd"
 import { ArrowRightOutlined } from '@ant-design/icons';
 import Style from './main.module.css'
 
@@ -43,7 +43,7 @@ const component: React.FC = () => {
             itemLayout="vertical"
             dataSource={data.sort((a, b) => b.rank - a.rank)}
             renderItem={(item) => (
-                <List.Item style={{ maxWidth: '600px' }} className={Style.listItem} >
+                <List.Item style={{ maxWidth: '600px' }} className={Style.listItem}>
                     <List.Item.Meta
                         title={<a href={item.link || "/"}>{item.title}</a>}
                         description={item.description}

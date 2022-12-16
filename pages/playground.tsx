@@ -18,8 +18,9 @@ const types = [
 
 export default function Playground({ models }: any) {
   const [model, setModel] = useState('davinci')
-  const [textType, setTextType] = useState('Article')
+  const [textType, setTextType] = useState('')
   const [text, setText] = useState('')
+  const [apiKey, setApiKey] = useState('')
 
   const items: MenuProps['items'] = models.map(
     (model: any) => {
@@ -53,8 +54,22 @@ export default function Playground({ models }: any) {
           menu={{
             items: types,
             selectable: true,
-            defaultSelectedKeys: ['Article'],
-            onSelect: ({ key }) => { setTextType(key) },
+            //defaultSelectedKeys: ['Article'],
+            onSelect: ({ key }) => {
+              setTextType(key)
+              fetch('http://localhost:3000/api/openai/prompt', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ textType: key })
+              })
+                .then(res => res.text())
+                .then(raw => {
+                  //TODO: remove old prompt
+                  setText(raw + '\n' + text)
+                })
+            },
           }}
           trigger={['click']}
         >
@@ -66,6 +81,14 @@ export default function Playground({ models }: any) {
           </Typography.Link>
         </Dropdown>
       </Space>
+      <br />
+      <br />
+      <Input
+        placeholder='OPENAI_API_KEY'
+        value={apiKey}
+        type='password'
+        onChange={(e) => { setApiKey(e.target.value) }}
+      ></Input>
       <br />
       <br />
       <TextArea
@@ -82,7 +105,7 @@ export default function Playground({ models }: any) {
           console.log(model, textType, text)
         }}
       >Write</Button>
-    </div>
+    </div >
   )
 }
 

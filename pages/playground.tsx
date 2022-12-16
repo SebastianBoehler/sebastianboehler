@@ -87,10 +87,8 @@ export default function Playground({ models }: any) {
 }
 
 export async function getServerSideProps() {
-  const models = await fetch('http://localhost:3000/api/openai/models')
+  const models = await fetch('https://sebastian-boehler.com/api/openai/models')
   const modelsJson = await models.json()
-
-  console.log(modelsJson)
 
   return {
     props: {

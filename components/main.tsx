@@ -19,14 +19,21 @@ const data = [
         rank: 0
     },
     {
-        title: 'Articles',
+        title: 'Medium Articles',
         description: 'A list of all my articles. I write about a variety of topics, including tech trends, scientific research and more.',
-        rank: 5
+        link: 'https://medium.com/@sebastianboehler',
+        rank: 1
     },
     {
         title: 'Algorithmic Trading',
         description: 'Simple overview aboutmy algorithmic trading strategies and infrastructur',
         rank: 0
+    },
+    {
+        title: 'OpenAI Playground',
+        link: '/playground',
+        description: 'My own playground to write sales text, ads, emails or articles with the help of GPT models',
+        rank: 2
     }
 ];
 

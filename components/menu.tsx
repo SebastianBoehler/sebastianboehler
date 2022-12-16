@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AppstoreOutlined, GithubOutlined, LinkedinOutlined, InfoCircleOutlined } from '@ant-design/icons';
+import { MediumOutlined, GithubOutlined, LinkedinOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import { MenuProps, theme } from 'antd';
 import { Menu } from 'antd';
 
@@ -20,7 +20,7 @@ const items: MenuProps['items'] = [
     {
         label: 'Articles',
         key: 'app',
-        icon: <AppstoreOutlined />,
+        icon: <MediumOutlined />,
         disabled: true,
     },
     {
@@ -29,7 +29,7 @@ const items: MenuProps['items'] = [
         </a>,
         key: 'github',
         icon: <GithubOutlined />
-    }
+    },
 ];
 
 type props = {

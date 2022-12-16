@@ -25,6 +25,7 @@ const data = [
     {
         title: 'Algorithmic Trading',
         description: 'Simple overview aboutmy algorithmic trading strategies and infrastructur',
+        rank: 0
     }
 ];
 

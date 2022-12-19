@@ -1,8 +1,9 @@
 import { DownOutlined } from '@ant-design/icons';
-import { Button, MenuProps } from 'antd';
+import { Button, Select } from 'antd';
 import { Dropdown, Space, Typography, Input } from 'antd';
 const { TextArea } = Input;
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import OpenAI from '../hooks/openai'
 
 const types = [
   {
@@ -15,63 +16,60 @@ const types = [
   }
 ]
 
+const tones = [
+  { key: 'funny', label: 'funny' },
+  { key: 'serious', label: 'serious' },
+  { key: 'informative', label: 'informative' },
+  { key: 'persuasive', label: 'persuasive' },
+  { key: 'unbiased', label: 'unbiased' },
+  { key: 'emotional', label: 'emotional' },
+  { key: '5 year old', label: '5 year old' },
+]
 
 export default function Playground({ models }: any) {
-  const [model, setModel] = useState('davinci')
+  const [model, setModel] = useState('text-davinci-002')
   const [textType, setTextType] = useState('')
   const [text, setText] = useState('')
+  const [prevText, setPrevText] = useState('')
   const [apiKey, setApiKey] = useState('')
+  const [myOpenAI, setMyOpenAI] = useState(new OpenAI(apiKey, model))
+  const [tone, setTone] = useState(tones[1])
+  const [loading, setLoading] = useState(false)
 
-  const items: MenuProps['items'] = models.map(
-    (model: any) => {
+  useEffect(() => {
+    setMyOpenAI(new OpenAI(apiKey, model));
+  }, [apiKey, model])
+
+  const items: { value: string; label: string }[] = models.map(
+    (model: Record<string, any>) => {
       return {
-        key: model.id,
+        value: model.id,
         label: model.id,
       }
     }
   )
 
   return (
-    <div>
+    <div style={{ maxWidth: '1000px', margin: 'auto' }}>
       <Space size={'large'} >
-        <Dropdown
-          menu={{
-            items,
-            selectable: true,
-            defaultSelectedKeys: ['davinci'],
-            onSelect: ({ key }) => { setModel(key) },
-          }}
-          trigger={['click']}
-        >
-          <Typography.Link>
-            <Space>
-              {model || 'Select Model'}
-              <DownOutlined />
-            </Space>
-          </Typography.Link>
-        </Dropdown>
+        <Select
+          defaultValue='text-davinci-003'
+          onChange={setModel}
+          options={items}
+          disabled
+        />
         <Dropdown
           menu={{
             items: types,
             selectable: true,
             //defaultSelectedKeys: ['Article'],
-            onSelect: ({ key }) => {
+            onSelect: async ({ key }) => {
               setTextType(key)
-              fetch('http://localhost:3000/api/openai/prompt', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ textType: key })
-              })
-                .then(res => res.text())
-                .then(raw => {
-                  //TODO: remove old prompt
-                  setText(raw + '\n' + text)
-                })
+              //TODO: get prompt and append to text
             },
           }}
           trigger={['click']}
+          disabled
         >
           <Typography.Link>
             <Space>
@@ -96,26 +94,68 @@ export default function Playground({ models }: any) {
         autoSize
         value={text}
         onChange={(e) => { setText(e.target.value) }}
+        style={{ minHeight: '250px' }}
       />
       <br />
       <br />
-      <Button
-        type="primary"
-        onClick={() => {
-          console.log(model, textType, text)
-        }}
-      >Write</Button>
+      <Space>
+        <Button
+          type="primary"
+          onClick={async () => {
+            setLoading(true)
+
+            const resp = await myOpenAI.runPrompt(text)
+            setPrevText(text)
+            setText(text + resp)
+
+            setLoading(false)
+          }}
+          loading={loading}
+        >Write</Button>
+        <Button
+          onClick={async () => {
+            setText(prevText)
+            setLoading(true)
+            const resp = await myOpenAI.runPrompt(text)
+            setPrevText(text)
+            setText(text + resp)
+
+            setLoading(false)
+          }}
+          loading={loading}
+        >Retry</Button>
+        <Dropdown.Button
+          menu={{
+            items: tones,
+            onClick: ({ key }) => {
+              console.log(key)
+              const tone = tones.find(item => item.key === key)
+              if (tone) setTone(tone)
+            }
+          }}
+          loading={loading}
+          onClick={async () => {
+            setLoading(true)
+            setPrevText(text)
+            const resp = await myOpenAI.fixTone(text, tone.key)
+            if (resp) setText(resp)
+
+            setLoading(false)
+          }}
+        >Change tone</Dropdown.Button>
+      </Space>
     </div >
   )
 }
 
 export async function getServerSideProps() {
-  const models = await fetch('https://sebastian-boehler.com/api/openai/models')
-  const modelsJson = await models.json()
+  const models = [{
+    id: 'text-davinci-003',
+  }]
 
   return {
     props: {
-      models: modelsJson
+      models
     }
   }
 }

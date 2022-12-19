@@ -28,7 +28,8 @@ export default function App({ Component, pageProps }: AppProps) {
           onCollapse={(collapsed, type) => {
             console.log(collapsed, type);
           }}
-          style={{ backgroundColor: 'white', padding: '0 20px' }}
+          style={{ backgroundColor: 'white', padding: '0 20px', }}
+          width={250}
         >
           <Menu type='vertical' />
         </Sider>

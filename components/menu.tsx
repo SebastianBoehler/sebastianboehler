@@ -3,8 +3,9 @@ import { MediumOutlined, GithubOutlined, LinkedinOutlined, InfoCircleOutlined } 
 import { MenuProps, theme } from 'antd';
 import { Menu } from 'antd';
 import config from '../hooks/config';
+import { ItemType } from 'rc-menu/lib/interface';
 
-const items: MenuProps['items'] = [
+const items = [
     {
         label: <a href="https://www.linkedin.com/in/sebastian-boehler/" target="_blank" rel="noopener noreferrer">
             LinkedIn
@@ -65,7 +66,7 @@ const MenuComponent: React.FC<props> = ({ type, width }: props) => {
         style={{ margin: 'auto', width: '100%' }}
         items={items
             .filter((item) => !isMobile || item.showOnMobile)
-            .sort((a, b) => b.rank - a.rank || +a.disabled - +b.disabled)
+            .sort((a, b) => b.rank - a.rank || +a.disabled - +b.disabled) as ItemType[]
         } />;
 };
 

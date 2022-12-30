@@ -5,11 +5,12 @@ import Menu from '../components/menu'
 import Header from '../components/header'
 import Footer from '../components/footer'
 import useWindowDimensions from '../hooks/windowDimensions'
+import config from '../hooks/config'
 
 const { Content, Sider } = Layout
 
 export default function App({ Component, pageProps }: AppProps) {
-  const { height, width } = useWindowDimensions();
+  const { width } = useWindowDimensions();
 
   return <ConfigProvider
     theme={{
@@ -19,7 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <Layout style={{ height: '100%' }}>
       <Header />
       <Layout>
-        {width > 768 ? <Sider
+        {width > config.widthBrakePoint ? <Sider
           breakpoint="md"
           collapsedWidth="0"
           onBreakpoint={(broken) => {
@@ -31,13 +32,13 @@ export default function App({ Component, pageProps }: AppProps) {
           style={{ backgroundColor: 'white', padding: '0 20px', }}
           width={250}
         >
-          <Menu type='vertical' />
+          <Menu type='vertical' width={width} />
         </Sider>
           :
-          <Menu type='horizontal' />
+          <Menu type='horizontal' width={width} />
         }
         <Content style={{ padding: '30px' }}>
-          <Component {...pageProps} />
+          <Component {...pageProps} props={{ width }} />
         </Content>
       </Layout>
       <Footer />

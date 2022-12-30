@@ -1,8 +1,7 @@
 import Main from '../components/main'
 
-export default function Home() {
-
+export default function Home({ props }: Record<string, any>) {
   return (
-    <Main />
+    <Main props={props} />
   )
 }

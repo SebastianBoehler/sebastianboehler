@@ -1,3 +1,39 @@
 .listItem:hover {
     background-color: #fff;
 }
+
+.listItem>.ant-list-item-meta-title {
+    text-transform: capitalize;
+}
+
+.list {
+    width: 50%;
+    overflow-y: scroll;
+    max-height: 700px;
+}
+
+@media screen and (max-width: 768px) {
+    .list {
+        width: 100%;
+    }
+}
+
+.mainWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.featured {
+    width: 50%;
+    margin-left: 20px;
+    padding: 20px;
+    border-radius: 0px;
+}
+
+.card {
+    width: 100%;
+    max-height: 40%;
+    border-radius: 0px;
+}

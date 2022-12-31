@@ -2,6 +2,7 @@ import { Button, Card, List, Space } from "antd"
 import { ArrowRightOutlined } from '@ant-design/icons';
 import styles from './main.module.css'
 import config from "../hooks/config";
+import Link from "next/link";
 
 const btn = (link: string) => {
     return <Button
@@ -41,6 +42,12 @@ const data: field[] = [
         rank: -Infinity
     },
     {
+        title: 'About Me',
+        description: 'A short overview about my background, education and work experience.',
+        link: '/about',
+        rank: 0
+    },
+    {
         title: 'Algorithmic Trading',
         description: 'Simple overview aboutmy algorithmic trading strategies and infrastructur',
         rank: 0
@@ -63,14 +70,16 @@ const component: React.FC<{ props: props }> = ({ props }: props) => {
             dataSource={data.sort((a: field, b: field) => b.rank - a.rank)}
             className={styles.list}
             renderItem={(item: field) => (
-                <List.Item style={{ maxWidth: '600px' }} className={styles.listItem}>
-                    <List.Item.Meta
-                        title={<a href={item.link || "/"}>{item.title}</a>}
-                        description={item.description}
-                    />
-                    <div style={{ margin: 'auto' }}>
-                        {item.link ? btn(item.link) : null}
-                    </div>
+                <List.Item className={styles.listItem}>
+                    <Link href={item.link || '/'} target={item.link?.startsWith('/') ? '' : '_blank'}>
+                        <List.Item.Meta
+                            title={item.title}
+                            description={item.description}
+                        />
+                        <div style={{ margin: 'auto', display: 'none' }}>
+                            {item.link ? btn(item.link) : null}
+                        </div>
+                    </Link>
                 </List.Item>
             )}
         />

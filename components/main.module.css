@@ -6,15 +6,29 @@
     text-transform: capitalize;
 }
 
+.listItem {
+    margin-right: 25px
+}
+
 .list {
     width: 50%;
-    overflow-y: scroll;
+    overflow-y: auto;
     max-height: 700px;
+}
+
+.list::-webkit-scrollbar {
+    width: 5px;
+    background-color: lightgrey;
+}
+
+.list::-webkit-scrollbar-thumb {
+    background: #888;
 }
 
 @media screen and (max-width: 768px) {
     .list {
         width: 100%;
+        max-height: none;
     }
 }
 

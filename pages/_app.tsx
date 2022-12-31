@@ -11,16 +11,23 @@ const { Content, Sider } = Layout
 
 export default function App({ Component, pageProps }: AppProps) {
   const { width } = useWindowDimensions();
+  const isMobile = width < config.widthBrakePoint;
+  console.log('isMobile', isMobile)
 
   return <ConfigProvider
     theme={{
       algorithm: theme.defaultAlgorithm,
+      components: {
+        Menu: {
+          radiusItem: 0,
+        }
+      }
     }}
   >
     <Layout style={{ height: '100%' }}>
-      <Header />
+      <Header isMobile={isMobile} />
       <Layout>
-        {width > config.widthBrakePoint ? <Sider
+        {!isMobile ? <Sider
           breakpoint="md"
           collapsedWidth="0"
           onBreakpoint={(broken) => {
@@ -32,10 +39,10 @@ export default function App({ Component, pageProps }: AppProps) {
           style={{ backgroundColor: 'white', padding: '0 20px', }}
           width={250}
         >
-          <Menu type='vertical' width={width} />
+          <Menu type='vertical' isMobile={isMobile} />
         </Sider>
           :
-          <Menu type='horizontal' width={width} />
+          <Menu type='horizontal' isMobile={isMobile} />
         }
         <Content style={{ padding: '30px' }}>
           <Component {...pageProps} props={{ width }} />

@@ -23,7 +23,7 @@ const items = [
         </Link>,
         key: 'about',
         icon: <InfoCircleOutlined />,
-        disabled: false,
+        disabled: true,
         rank: 0,
         showOnMobile: true,
     },

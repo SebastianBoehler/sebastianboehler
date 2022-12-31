@@ -41,18 +41,18 @@ const data: field[] = [
         title: 'Medium Articles',
         description: 'A list of all my articles. I write about a variety of topics, including tech trends, scientific research and more.',
         link: 'https://medium.com/@sebastianboehler',
-        rank: -Infinity
+        rank: 1
     },
     {
         title: 'About Me',
         description: 'A short overview about my background, education and work experience.',
         link: '/about',
-        rank: 0
+        rank: -Infinity
     },
     {
         title: 'Algorithmic Trading',
         description: 'Simple overview aboutmy algorithmic trading strategies and infrastructur',
-        rank: 0
+        rank: -1
     },
     {
         title: 'OpenAI Playground',
@@ -69,15 +69,13 @@ const component: React.FC<{ props: props }> = ({ props }: props) => {
 
     return <div className={styles.mainWrapper}>
         {isMobile ?
-            <div>
-                <Space direction="vertical" size="middle">
-                    <Link href='/research/airquality'>
-                        <Card title="Featured" bordered={false} loading={false}>
-                            <ReactMarkdown children={markdown} className={styles.markdown} />
-                        </Card>
-                    </Link>
-                </Space>
-            </div>
+            <Space direction="vertical" size="middle">
+                <Link href='/research/airquality'>
+                    <Card title="Featured" bordered={false} loading={false}>
+                        <ReactMarkdown children={markdown} className={styles.markdown} />
+                    </Card>
+                </Link>
+            </Space>
             : null
         }
         <List

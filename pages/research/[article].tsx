@@ -11,22 +11,20 @@ export default function Research({ markdown, props }: Record<string, any>) {
     const shouldFormat = props.width < 1000
 
     return (
-        <div className={styles.wrapper}>
-            <Row className={styles.row}>
-                <Col span={shouldFormat ? 28 : 17} className={styles.mdWrapper}>
-                    <ReactMarkdown
-                        children={markdown}
-                        rehypePlugins={[rehypeRaw]}
-                    />
-                </Col>
-                <Col span={shouldFormat ? 24 : 7}>
-                    <div className={styles.notice}>
-                        <InfoCircleOutlined />
-                        <p>If you&apos;re reading this article in any other language than english it may have been translated using <Link href='https://deepl.com/translate' target='_blank'>deepl</Link></p>
-                    </div>
-                </Col>
-            </Row>
-        </div>
+        <Row className={styles.row}>
+            <Col span={shouldFormat ? 28 : 17} className={styles.mdWrapper}>
+                <ReactMarkdown
+                    children={markdown}
+                    rehypePlugins={[rehypeRaw]}
+                />
+            </Col>
+            <Col span={shouldFormat ? 24 : 7}>
+                <div className={styles.notice}>
+                    <InfoCircleOutlined />
+                    <p>If you&apos;re reading this article in any other language than english it may have been translated using <Link href='https://deepl.com/translate' target='_blank'>deepl</Link></p>
+                </div>
+            </Col>
+        </Row>
     )
 }
 

@@ -1,9 +1,9 @@
-.wrapper {
-    margin: 30px 100px 30px 30px;
-}
-
 .mdWrapper {
     padding: 0 25px 0 0;
+}
+
+.row {
+    padding: 5px;
 }
 
 @media screen and (max-width: 1200) {

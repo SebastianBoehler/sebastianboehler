@@ -1,8 +1,10 @@
+/* eslint-disable react/no-children-prop */
 import { Button, Card, List, Space } from "antd"
 import { ArrowRightOutlined } from '@ant-design/icons';
 import styles from './main.module.css'
 import config from "../hooks/config";
 import Link from "next/link";
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 
 const btn = (link: string) => {
     return <Button
@@ -63,6 +65,7 @@ const data: field[] = [
 const component: React.FC<{ props: props }> = ({ props }: props) => {
     const width = props.width
     const isMobile = width < config.widthBrakePoint
+    const markdown: string = props.markdown
 
     return <div className={styles.mainWrapper}>
         <List
@@ -87,9 +90,11 @@ const component: React.FC<{ props: props }> = ({ props }: props) => {
             ?
             <div className={styles.featured}>
                 <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
-                    <Card title="Featured (coming soon)" bordered={false} loading={true} className={styles.card}>
-                        Card content
-                    </Card>
+                    <Link href='/research/airquality'>
+                        <Card title="Featured" bordered={false} loading={false} className={styles.card}>
+                            <ReactMarkdown children={markdown} className={styles.markdown} />
+                        </Card>
+                    </Link>
                 </Space>
             </div>
             : null

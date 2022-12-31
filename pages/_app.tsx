@@ -12,7 +12,6 @@ const { Content, Sider } = Layout
 export default function App({ Component, pageProps }: AppProps) {
   const { width } = useWindowDimensions();
   const isMobile = width < config.widthBrakePoint;
-  console.log('isMobile', isMobile)
 
   return <ConfigProvider
     theme={{
@@ -45,7 +44,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <Menu type='horizontal' isMobile={isMobile} />
         }
         <Content style={{ padding: '30px' }}>
-          <Component {...pageProps} props={{ width }} />
+          <Component {...pageProps} props={{ width, isMobile, ...pageProps }} />
         </Content>
       </Layout>
       <Footer />

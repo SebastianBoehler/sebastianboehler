@@ -1,0 +1,30 @@
+.wrapper {
+    margin: 30px 100px 30px 30px;
+}
+
+.mdWrapper {
+    padding: 0 25px 0 0;
+}
+
+@media screen and (max-width: 1200) {
+    .wrapper {
+        margin: 30px 30px 30px 30px;
+    }
+
+    .mdWrapper {
+        padding: 0;
+    }
+}
+
+.notice {
+    background-color: rgba(214, 243, 253, 0.5);
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 0 20px
+}
+
+@media screen and (max-width: 768px) {
+    .notice {
+        margin-top: 25px
+    }
+}

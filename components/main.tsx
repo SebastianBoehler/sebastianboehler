@@ -1,7 +1,10 @@
+/* eslint-disable react/no-children-prop */
 import { Button, Card, List, Space } from "antd"
 import { ArrowRightOutlined } from '@ant-design/icons';
 import styles from './main.module.css'
 import config from "../hooks/config";
+import Link from "next/link";
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 
 const btn = (link: string) => {
     return <Button
@@ -41,6 +44,12 @@ const data: field[] = [
         rank: -Infinity
     },
     {
+        title: 'About Me',
+        description: 'A short overview about my background, education and work experience.',
+        link: '/about',
+        rank: 0
+    },
+    {
         title: 'Algorithmic Trading',
         description: 'Simple overview aboutmy algorithmic trading strategies and infrastructur',
         rank: 0
@@ -56,21 +65,36 @@ const data: field[] = [
 const component: React.FC<{ props: props }> = ({ props }: props) => {
     const width = props.width
     const isMobile = width < config.widthBrakePoint
+    const markdown: string = props.markdown
 
     return <div className={styles.mainWrapper}>
+        {isMobile ?
+            <div>
+                <Space direction="vertical" size="middle">
+                    <Link href='/research/airquality'>
+                        <Card title="Featured" bordered={false} loading={false}>
+                            <ReactMarkdown children={markdown} className={styles.markdown} />
+                        </Card>
+                    </Link>
+                </Space>
+            </div>
+            : null
+        }
         <List
             itemLayout="vertical"
             dataSource={data.sort((a: field, b: field) => b.rank - a.rank)}
             className={styles.list}
             renderItem={(item: field) => (
-                <List.Item style={{ maxWidth: '600px' }} className={styles.listItem}>
-                    <List.Item.Meta
-                        title={<a href={item.link || "/"}>{item.title}</a>}
-                        description={item.description}
-                    />
-                    <div style={{ margin: 'auto' }}>
-                        {item.link ? btn(item.link) : null}
-                    </div>
+                <List.Item className={styles.listItem}>
+                    <Link href={item.link || '/'} target={item.link?.startsWith('/') ? '' : '_blank'}>
+                        <List.Item.Meta
+                            title={item.title}
+                            description={item.description}
+                        />
+                        <div style={{ margin: 'auto', display: 'none' }}>
+                            {item.link ? btn(item.link) : null}
+                        </div>
+                    </Link>
                 </List.Item>
             )}
         />
@@ -78,9 +102,11 @@ const component: React.FC<{ props: props }> = ({ props }: props) => {
             ?
             <div className={styles.featured}>
                 <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
-                    <Card title="Featured (coming soon)" bordered={false} loading={true} className={styles.card}>
-                        Card content
-                    </Card>
+                    <Link href='/research/airquality'>
+                        <Card title="Featured" bordered={false} loading={false} className={styles.card}>
+                            <ReactMarkdown children={markdown} className={styles.markdown} />
+                        </Card>
+                    </Link>
                 </Space>
             </div>
             : null

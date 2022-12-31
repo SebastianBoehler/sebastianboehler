@@ -6,12 +6,18 @@ import Header from '../components/header'
 import Footer from '../components/footer'
 import useWindowDimensions from '../hooks/windowDimensions'
 import config from '../hooks/config'
+import { useEffect, useState } from 'react'
 
 const { Content, Sider } = Layout
 
 export default function App({ Component, pageProps }: AppProps) {
   const { width } = useWindowDimensions();
   const isMobile = width < config.widthBrakePoint;
+
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    setShow(true);
+  }, []);
 
   return <ConfigProvider
     theme={{
@@ -23,7 +29,7 @@ export default function App({ Component, pageProps }: AppProps) {
       }
     }}
   >
-    <Layout style={{ height: '100%' }}>
+    {show && <Layout style={{ height: '100%' }}>
       <Header isMobile={isMobile} />
       <Layout>
         {!isMobile ? <Sider
@@ -48,6 +54,6 @@ export default function App({ Component, pageProps }: AppProps) {
         </Content>
       </Layout>
       <Footer />
-    </Layout>
+    </Layout>}
   </ConfigProvider>
 }

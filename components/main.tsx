@@ -68,6 +68,18 @@ const component: React.FC<{ props: props }> = ({ props }: props) => {
     const markdown: string = props.markdown
 
     return <div className={styles.mainWrapper}>
+        {isMobile ?
+            <div>
+                <Space direction="vertical" size="middle">
+                    <Link href='/research/airquality'>
+                        <Card title="Featured" bordered={false} loading={false}>
+                            <ReactMarkdown children={markdown} className={styles.markdown} />
+                        </Card>
+                    </Link>
+                </Space>
+            </div>
+            : null
+        }
         <List
             itemLayout="vertical"
             dataSource={data.sort((a: field, b: field) => b.rank - a.rank)}

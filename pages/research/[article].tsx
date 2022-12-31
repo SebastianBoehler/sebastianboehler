@@ -5,14 +5,19 @@ import fs from 'fs'
 import { Col, Row } from 'antd'
 import { InfoCircleOutlined } from '@ant-design/icons'
 import Link from 'next/link'
+import rehypeRaw from 'rehype-raw'
 
 export default function Research({ markdown, props }: Record<string, any>) {
     const shouldFormat = props.width < 1000
+
     return (
         <div className={styles.wrapper}>
             <Row className={styles.row}>
-                <Col span={shouldFormat ? 24 : 17} className={styles.mdWrapper}>
-                    <ReactMarkdown children={markdown} />
+                <Col span={shouldFormat ? 28 : 17} className={styles.mdWrapper}>
+                    <ReactMarkdown
+                        children={markdown}
+                        rehypePlugins={[rehypeRaw]}
+                    />
                 </Col>
                 <Col span={shouldFormat ? 24 : 7}>
                     <div className={styles.notice}>

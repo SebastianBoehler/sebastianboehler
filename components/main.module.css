@@ -25,18 +25,31 @@
     background: #888;
 }
 
-@media screen and (max-width: 768px) {
-    .list {
-        width: 100%;
-        max-height: none;
-    }
-}
-
 .mainWrapper {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
+}
+
+.markdown {
+    max-height: 200px;
+    overflow-y: clip;
+}
+
+@media screen and (max-width: 768px) {
+    .list {
+        width: 100%;
+        max-height: none;
+    }
+
+    .mainWrapper {
+        flex-direction: column;
+    }
+
+    .markdown {
+        max-height: 250px;
+    }
 }
 
 .featured {
@@ -49,9 +62,4 @@
 .card {
     width: 100%;
     border-radius: 0px;
-}
-
-.markdown {
-    max-height: 200px;
-    overflow-y: clip;
 }

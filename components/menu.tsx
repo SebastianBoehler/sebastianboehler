@@ -28,10 +28,12 @@ const items = [
         showOnMobile: true,
     },
     {
-        label: 'Articles',
+        label: <Link href="https://medium.com/@sebastianboehler" target="_blank" rel="noopener noreferrer">
+            Medium
+        </Link>,
         key: 'articles',
         icon: <MediumOutlined />,
-        disabled: true,
+        disabled: false,
         rank: 0,
         showOnMobile: true,
     },

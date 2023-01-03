@@ -1,7 +1,5 @@
 ## The Negative Effects of High Carbon Dioxide Levels on Cognitive Function in the Home Environment
 
-# Introduction
-
 As a 21-year-old, I often found myself feeling tired and struggling to concentrate as the day went on. In an effort to improve my ability to focus, I began taking midday naps. While this helped somewhat, I still had difficulty completing challenging tasks in the afternoon. This led me to research potential causes for my difficulties with focus. One possibility I discovered was the level of carbon dioxide in the air. Upon implementing frequent room ventilation when I began to feel sluggish, I noticed an improvement in my ability to focus and complete more complex tasks.
 
 Carbon dioxide (CO2) is a colorless, odorless gas that is essential for the survival of plants and animals. However, while small amounts of CO2 are necessary for life, **high levels of CO2 can negatively affect human health and cognitive function.** In particular, high levels of CO2 in indoor environments such as offices, bedrooms, and classrooms can significantly reduce our ability to think, make decisions, and perform at our best.
@@ -15,6 +13,12 @@ One of the main ways in which high CO2 levels affect our cognitive function is b
 *Source https://www.pranaair.com/blog/harmful-effects-of-carbon-dioxide-co2-on-human-cognitive-function/* 
 
 High CO2 levels can also cause other physical symptoms that can negatively impact cognitive function. These symptoms can include headache, fatigue, and dizziness, all of which can make it difficult to concentrate and perform at our best.
+
+On nine scales of decision-making performance, test subjects showed significant reductions on six of the scales at CO2 levels of 1,000 parts per million (ppm) and large reductions on seven of the scales at 2,500 ppm. The most dramatic declines in performance, in which subjects were rated as “dysfunctional,” were for taking initiative and thinking strategically.
+
+<br>
+<img src="https://newscenter.lbl.gov/wp-content/uploads/2012/10/CO2-Figure2-624x455.png" width="100%" >
+<br>
 
 In addition to the physical effects of high CO2 levels on the body, there is also evidence to suggest that high levels of CO2 can have negative effects on our mood and emotions. For example, research has shown that high levels of CO2 can increase feelings of anxiety and stress, which can make it more difficult to focus and perform tasks.
 
@@ -31,5 +35,7 @@ To reduce the negative effects of high CO2 levels on cognitive function in the h
 In conclusion, high CO2 levels in indoor environments such as offices, bedrooms, and classrooms can have significant negative effects on cognitive function, including our ability to think, make decisions, and perform at our best. To protect our cognitive function and overall health, it is important to ensure that the air we breathe is properly ventilated and free of excess CO2.
 
 # Sources
+- https://ehp.niehs.nih.gov/doi/10.1289/ehp.1104789
 - https://medium.com/@joeljean/im-living-in-a-carbon-bubble-literally-b7c391e8ab6
 - https://www.pranaair.com/blog/harmful-effects-of-carbon-dioxide-co2-on-human-cognitive-function/
+- https://newscenter.lbl.gov/2012/10/17/elevated-indoor-carbon-dioxide-impairs-decision-making-performance/

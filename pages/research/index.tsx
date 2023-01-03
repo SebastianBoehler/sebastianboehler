@@ -17,13 +17,13 @@ export default function Research({ props }: Record<string, any>) {
         <Row gutter={[16, 16]} className={styles.row} >
             {content.map((article: article, index: number) => {
                 return (
-                    <Link href={`/research/${article.article}`} key={index} >
-                        <Col span={shouldFormat ? 24 : 11} className={styles.column} >
-                            <h1>/research/{encodeURIComponent(article.article)}</h1>
+                    <Col span={shouldFormat ? 24 : 11} className={styles.column} key={index}>
+                        <Link href={`/research/${article.article}`}>
+                            <h1 style={{ display: 'none' }} >/research/{encodeURIComponent(article.article)}</h1>
                             <ReactMarkdown children={article.markdown} className={styles.markdown} />
                             <div className={styles.gradient} />
-                        </Col>
-                    </Link>
+                        </Link>
+                    </Col>
                 )
             })}
         </Row>

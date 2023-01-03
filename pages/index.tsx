@@ -8,7 +8,7 @@ export default function Home({ props }: Record<string, any>) {
 }
 
 export async function getServerSideProps(context: any) {
-  const markdown = fs.readFileSync(`public/articles/airquality.md`, 'utf8')
+  const markdown = fs.readFileSync(`public/articles/negative-effects-co2.md`, 'utf8')
 
   return {
     props: {

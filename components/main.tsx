@@ -100,7 +100,7 @@ const component: React.FC<{ props: props }> = ({ props }: props) => {
             ?
             <div className={styles.featured}>
                 <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
-                    <Link href='/research/airquality'>
+                    <Link href='/research/negative-effects-co2'>
                         <Card title="Featured" bordered={false} loading={false} className={styles.card}>
                             <ReactMarkdown children={markdown} className={styles.markdown} />
                         </Card>

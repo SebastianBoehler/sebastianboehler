@@ -67,10 +67,12 @@ const component: React.FC<{ props: props }> = ({ props }: props) => {
     const isMobile = width < config.widthBrakePoint
     const markdown: string = props.markdown
 
+    const featured = '/research/negative-effects-co2'
+
     return <div className={styles.mainWrapper}>
         {isMobile ?
             <Space direction="vertical" size="middle">
-                <Link href='/research/airquality'>
+                <Link href={featured}>
                     <Card title="Featured" bordered={false} loading={false}>
                         <ReactMarkdown children={markdown} className={styles.markdown} />
                     </Card>
@@ -100,7 +102,7 @@ const component: React.FC<{ props: props }> = ({ props }: props) => {
             ?
             <div className={styles.featured}>
                 <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
-                    <Link href='/research/negative-effects-co2'>
+                    <Link href={featured}>
                         <Card title="Featured" bordered={false} loading={false} className={styles.card}>
                             <ReactMarkdown children={markdown} className={styles.markdown} />
                         </Card>

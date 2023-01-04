@@ -17,7 +17,7 @@ High CO2 levels can also cause other physical symptoms that can negatively impac
 On nine scales of decision-making performance, test subjects showed significant reductions on six of the scales at CO2 levels of 1,000 parts per million (ppm) and large reductions on seven of the scales at 2,500 ppm. The most dramatic declines in performance, in which subjects were rated as “dysfunctional,” were for taking initiative and thinking strategically.
 
 <br>
-<img src="https://newscenter.lbl.gov/wp-content/uploads/2012/10/CO2-Figure2-624x455.png" width="100%" >
+<img src="https://newscenter.lbl.gov/wp-content/uploads/2012/10/CO2-Figure2-624x455.png" width="100%" style="max-width:500px">
 <br>
 
 In addition to the physical effects of high CO2 levels on the body, there is also evidence to suggest that high levels of CO2 can have negative effects on our mood and emotions. For example, research has shown that high levels of CO2 can increase feelings of anxiety and stress, which can make it more difficult to focus and perform tasks.
@@ -27,7 +27,7 @@ There are several factors that can contribute to high CO2 levels in indoor envir
 To reduce the negative effects of high CO2 levels on cognitive function in the home environment, it is important to ensure that the air we breathe is properly ventilated. This can be achieved through the use of windows, fans, and air purifiers. It is also important to regularly clean and maintain appliances and equipment, as these can also contribute to high CO2 levels. Additionally, it is a good idea to avoid overcrowding rooms and to use furniture and building materials that do not contribute to high CO2 levels.
 
 <br>
-<img src="/images/indoor_airquality.PNG" width="100%">
+<img src="/images/indoor_airquality.PNG" width="100%" style="max-width:500px">
 <br>
 
 *The graph illustrates the effect of room ventilation on carbon dioxide (CO2) levels. At approximately 11 am, the CO2 level significantly decreased following ventilation and open windows, reaching a minimum of 400ppm. Subsequently, the CO2 level gradually increased throughout the day until the windows were opened again at 3 pm following my midday nap.*

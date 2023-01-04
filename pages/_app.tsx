@@ -29,7 +29,7 @@ export default function App({ Component, pageProps }: AppProps) {
       }
     }}
   >
-    {show && <Layout style={{ height: '100%' }}>
+    {show && <Layout style={{ height: '100%', minHeight: '100vh' }}>
       <Header isMobile={isMobile} />
       <Layout>
         {!isMobile ? <Sider

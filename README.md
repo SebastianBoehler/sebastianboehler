@@ -3,7 +3,7 @@
 ## Fullstack and DevOps Developer
 
 - 🌍  I'm based in Stuttgart, Baden-Württemberg, Germany
-- 🖥️  See my portfolio at [boehler-cloud.com](https://boehler-cloud.com)
+- 🖥️  See my portfolio at [boehler-cloud.de](https://boehler-cloud.de)
 - Mainly working on backend stuff right now
 
 ### Skills

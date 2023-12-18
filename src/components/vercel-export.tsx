@@ -10,6 +10,8 @@ import { Badge } from "@/components/ui/badge"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { Projects } from "./projects"
+import { Hero } from "./hero"
 
 export function VercelExport() {
   return (
@@ -23,7 +25,8 @@ export function VercelExport() {
         </nav>
       </header>
       <main className="flex-1">
-        <section className="py-12 px-4 text-center">
+        <Hero />
+        <section className="py-12 px-4 text-center" style={{ display: 'none' }}>
           <Avatar className="mx-auto w-24 h-24">
             <AvatarImage alt="Sebastian Boehler" src="/placeholder-avatar.jpg" />
             <AvatarFallback>SB</AvatarFallback>
@@ -33,6 +36,7 @@ export function VercelExport() {
             A 22-year-old self-taught coder currently building DeFi projects on the blockchain.
           </p>
           <Button className="mt-4">Download CV</Button>
+          <Button className="mt-4" variant={'secondary'}>Contact me</Button>
         </section>
         <div style={{ display: 'none' }}>
           <section className="py-12 px-4" id="portfolio">
@@ -104,6 +108,7 @@ export function VercelExport() {
             </div>
           </section>
         </div>
+        <Projects />
         <section className="py-12 px-4">
           <h2 className="text-3xl font-bold text-center">Contact</h2>
           <Card className="mx-auto mt-6 w-3/4 lg:w-1/2">

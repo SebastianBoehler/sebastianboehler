@@ -139,7 +139,7 @@ export function VercelExport() {
 }
 
 
-function YoutubeIcon(props) {
+function YoutubeIcon(props: {}) {
   return (
     <svg
       {...props}
@@ -160,7 +160,7 @@ function YoutubeIcon(props) {
 }
 
 
-function GithubIcon(props) {
+function GithubIcon(props: {}) {
   return (
     <svg
       {...props}
@@ -181,7 +181,7 @@ function GithubIcon(props) {
 }
 
 
-function TwitterIcon(props) {
+function TwitterIcon(props: {}) {
   return (
     <svg
       {...props}
@@ -201,7 +201,7 @@ function TwitterIcon(props) {
 }
 
 
-function FacebookIcon(props) {
+function FacebookIcon(props: {}) {
   return (
     <svg
       {...props}
@@ -221,7 +221,7 @@ function FacebookIcon(props) {
 }
 
 
-function InstagramIcon(props) {
+function InstagramIcon(props: {}) {
   return (
     <svg
       {...props}

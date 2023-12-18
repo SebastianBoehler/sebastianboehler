@@ -4,11 +4,10 @@
  */
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import Link from "next/link"
 
 export function Hero() {
   return (
-    <section className="w-full py-12 px-12 md:py-24 lg:py-32 xl:py-48">
+    <section className="w-full py-28 px-12 md:py-24 lg:py-32 xl:py-48">
       <div className="flex justify-center">
         <div className="flex flex-col justify-center space-y-4 mx-auto">
           <div className="space-y-2">

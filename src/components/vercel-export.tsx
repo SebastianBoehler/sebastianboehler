@@ -28,7 +28,7 @@ export function VercelExport() {
             <AvatarImage alt="Sebastian Boehler" src="/placeholder-avatar.jpg" />
             <AvatarFallback>SB</AvatarFallback>
           </Avatar>
-          <h1 className="text-3xl font-bold mt-4">Hi, I'm Sebastian Boehler</h1>
+          <h1 className="text-3xl font-bold mt-4">Hi, I&apos;m Sebastian Boehler</h1>
           <p className="text-gray-600 mt-2">
             A 22-year-old self-taught coder currently building DeFi projects on the blockchain.
           </p>
@@ -108,7 +108,7 @@ export function VercelExport() {
           <h2 className="text-3xl font-bold text-center">Contact</h2>
           <Card className="mx-auto mt-6 w-3/4 lg:w-1/2">
             <CardHeader>
-              <CardTitle>Let's Chat</CardTitle>
+              <CardTitle>Let&apos;s Chat</CardTitle>
               <CardDescription>Interested in working together? Fill out the form below.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -139,7 +139,7 @@ export function VercelExport() {
 }
 
 
-function YoutubeIcon(props: {}) {
+function YoutubeIcon(props: Record<string, unknown>) {
   return (
     <svg
       {...props}
@@ -160,7 +160,7 @@ function YoutubeIcon(props: {}) {
 }
 
 
-function GithubIcon(props: {}) {
+function GithubIcon(props: Record<string, unknown>) {
   return (
     <svg
       {...props}
@@ -181,7 +181,7 @@ function GithubIcon(props: {}) {
 }
 
 
-function TwitterIcon(props: {}) {
+function TwitterIcon(props: Record<string, unknown>) {
   return (
     <svg
       {...props}
@@ -201,7 +201,7 @@ function TwitterIcon(props: {}) {
 }
 
 
-function FacebookIcon(props: {}) {
+function FacebookIcon(props: Record<string, unknown>) {
   return (
     <svg
       {...props}
@@ -221,7 +221,7 @@ function FacebookIcon(props: {}) {
 }
 
 
-function InstagramIcon(props: {}) {
+function InstagramIcon(props: Record<string, unknown>) {
   return (
     <svg
       {...props}

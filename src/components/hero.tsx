@@ -3,6 +3,7 @@
  * @see https://v0.dev/t/2LQjThRcvrp
  */
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 export function Hero() {
   return (
@@ -19,7 +20,9 @@ export function Hero() {
           <div className="w-full max-w-sm space-y-2" style={{ marginTop: '25px' }}>
             <div className="flex space-x-2">
               <Button>Download CV</Button>
-              <Button variant="outline">Contact Me</Button>
+              <Link href={'#contact'}>
+                <Button variant="outline">Contact Me</Button>
+              </Link>
             </div>
           </div>
         </div>

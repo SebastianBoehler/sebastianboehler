@@ -1,6 +1,12 @@
 const sendEmail = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    //freeze form while sending
+    const form = event.target as HTMLFormElement;
+    const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    submitButton.disabled = true;
+    submitButton.classList.add('cursor-not-allowed');
+
     //get form data desctructed from the event
     const target = event.target as typeof event.target & {
         name: { value: string };
@@ -28,6 +34,19 @@ const sendEmail = async (event: React.FormEvent<HTMLFormElement>) => {
 
     const result = await res.json();
     console.log(result);
+
+    if (result.message === 'Message sent') {
+        alert('Message sent');
+        //clear form again
+        target.name.value = '';
+        target.email.value = '';
+        target.message.value = '';
+    } else {
+        alert('Message failed to send');
+    }
+
+    //unfreeze form
+    submitButton.disabled = false;
 }
 
 export default sendEmail;

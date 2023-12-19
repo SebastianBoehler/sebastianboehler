@@ -10,7 +10,7 @@ import sendEmail from './sendEmail';
 
 const Contact: React.FC = () => {
     return (
-        <section className="py-12 px-4">
+        <section className="py-12 px-4" id="contact">
             <h2 className="text-3xl font-bold text-center">Contact</h2>
             <Card className="mx-auto mt-6 w-3/4 lg:w-1/2">
                 <CardHeader>

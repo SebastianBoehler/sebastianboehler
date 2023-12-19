@@ -22,20 +22,25 @@ export default async function handler(
 ) {
     const { name, email, message } = req.body;
 
-    const resp = await transporter.sendMail({
-        from: process.env.G_USER,
-        to: process.env.G_USER,
-        subject: 'New message from portfolio website',
-        html: `
+    try {
+        const resp = await transporter.sendMail({
+            from: process.env.G_USER,
+            to: process.env.G_USER,
+            subject: 'Contact form',
+            html: `
             <div style="padding=25px"> 
                 <p>Name: ${name}</p>
                 <p>Email: ${email}</p>
                 <p>Message: ${message}</p>
             </div>
         `,
-    })
+        })
 
-    console.log('Message sent: %s', resp.messageId);
+        console.log('Message sent: %s', resp.messageId);
 
-    res.status(200).json({ message: 'Message sent' })
+        res.status(200).json({ message: 'Message sent' })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Message failed to send' })
+    }
 }

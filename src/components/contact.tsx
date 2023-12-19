@@ -1,9 +1,12 @@
+'use client';
+
 import React from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { Label } from './ui/label';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Button } from './ui/button';
+import sendEmail from './sendEmail';
 
 const Contact: React.FC = () => {
     return (
@@ -14,23 +17,25 @@ const Contact: React.FC = () => {
                     <CardTitle>Let&apos;s Chat</CardTitle>
                     <CardDescription>Interested in working together? Fill out the form below.</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                    <div className="space-y-2">
-                        <Label htmlFor="name">Name</Label>
-                        <Input id="name" placeholder="Enter your name" />
-                    </div>
-                    <div className="space-y-2">
-                        <Label htmlFor="email">Email</Label>
-                        <Input id="email" placeholder="Enter your email" type="email" />
-                    </div>
-                    <div className="space-y-2">
-                        <Label htmlFor="message">Message</Label>
-                        <Textarea className="min-h-[100px]" id="message" placeholder="Enter your message" minLength={10} maxLength={25_000} />
-                    </div>
-                </CardContent>
-                <CardFooter>
-                    <Button>*not integrated yet*</Button>
-                </CardFooter>
+                <form onSubmit={sendEmail}>
+                    <CardContent className="space-y-4">
+                        <div className="space-y-2">
+                            <Label htmlFor="name">Name</Label>
+                            <Input id="name" placeholder="Enter your name" required />
+                        </div>
+                        <div className="space-y-2">
+                            <Label htmlFor="email">Email</Label>
+                            <Input id="email" placeholder="Enter your email" type="email" required />
+                        </div>
+                        <div className="space-y-2">
+                            <Label htmlFor="message">Message</Label>
+                            <Textarea className="min-h-[100px]" id="message" placeholder="Enter your message" minLength={10} maxLength={25_000} required />
+                        </div>
+                    </CardContent>
+                    <CardFooter>
+                        <Button type='submit'>Submit</Button>
+                    </CardFooter>
+                </form>
             </Card>
         </section>
     );

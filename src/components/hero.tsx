@@ -12,7 +12,7 @@ export function Hero() {
         <div className="flex flex-col justify-center space-y-4 mx-auto">
           <div className="space-y-2">
             <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">Hello, I&apos;m Sebastian</h1>
-            <p className="max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400">
+            <p className="max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400 py-2">
               I&apos;m a Web Developer with experience in building high-quality web applications. Here, you can download my
               CV, contact me or scroll down to see more about my projects.
             </p>
@@ -22,9 +22,6 @@ export function Hero() {
               <Button>Download CV</Button>
               <Button variant="outline">Contact Me</Button>
             </div>
-            <p className="text-xs text-gray-500 dark:text-gray-400">
-              Scroll down to see my projects.
-            </p>
           </div>
         </div>
       </div>

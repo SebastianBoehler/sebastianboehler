@@ -127,11 +127,11 @@ export function VercelExport() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="message">Message</Label>
-                <Textarea className="min-h-[100px]" id="message" placeholder="Enter your message" />
+                <Textarea className="min-h-[100px]" id="message" placeholder="Enter your message" minLength={10} maxLength={25_000} />
               </div>
             </CardContent>
             <CardFooter>
-              <Button>Send Message</Button>
+              <Button>*not integrated yet*</Button>
             </CardFooter>
           </Card>
         </section>

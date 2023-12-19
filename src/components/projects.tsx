@@ -21,34 +21,29 @@ export function Projects() {
           <Card>
             <CardHeader className="flex flex-row items-start justify-between">
               <div className="grid gap-1">
-                <CardTitle>Project 1</CardTitle>
+                <CardTitle>Supreme Cop Bot</CardTitle>
               </div>
-              <Badge className="bg-gray-100 text-black">My Favourite</Badge>
+              <Badge className="bg-gray-100 text-black">Favourite</Badge>
             </CardHeader>
             <CardContent className="grid gap-2">
-              <CardDescription className="text-sm md:text-base lg:text-lg">
-                This is a much more detailed and longer description of Project 1. Here, you can elaborate on the scope,
-                goals, and outcome of the project.
+              <CardDescription className="text-sm md:text-base lg:text-lg text-left">
+                Supreme Bot is a web scraper for online shops. It bypasses bot protections, monitors restocks, and can auto-purchase items for users.
               </CardDescription>
-              <Button variant="link">
-                <Link href="#">View on GitHub</Link>
-              </Button>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-start justify-between">
               <div className="grid gap-1">
-                <CardTitle>Project 2</CardTitle>
+                <CardTitle>Solana dApp</CardTitle>
               </div>
               <Badge className="bg-gray-100 text-black">Currently in Progress</Badge>
             </CardHeader>
             <CardContent className="grid gap-2">
-              <CardDescription className="text-sm md:text-base lg:text-lg">
-                This is a much more detailed and longer description of Project 2. Here, you can elaborate on the scope,
-                goals, and outcome of the project.
+              <CardDescription className="text-sm md:text-base lg:text-lg text-left">
+                This project is about learning Solana smart contract development and creating a dApp on the Solana blockchain.
               </CardDescription>
               <Button variant="link">
-                <Link href="#">View on GitHub</Link>
+                <Link href="https://github.com/SebastianBoehler/solana-dapp-learning">View on GitHub</Link>
               </Button>
             </CardContent>
           </Card>

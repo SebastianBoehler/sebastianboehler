@@ -14,7 +14,7 @@ export function Projects() {
         <div className="space-y-3">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">My Projects</h2>
           <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-            Here are some of the projects that I&apos;ve been working on.
+            Here is a selection of the projects that I&apos;ve been working on.
           </p>
         </div>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl w-full mx-auto">

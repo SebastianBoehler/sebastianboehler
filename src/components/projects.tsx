@@ -34,6 +34,12 @@ export function Projects() {
             title="Algo Trading"
             description="I've worked for years on algorithmic trading systems. Utilizing APIs of crypto exchanges and techincal analysis."
           />
+          <ProjectsCard
+            title="Smarthome Automation"
+            description="Turn your philips hue lights red once air quality is bad."
+            link="https://github.com/SebastianBoehler/smarthome-template"
+            linkText="View on Github"
+          />
         </div>
       </div>
     </section>

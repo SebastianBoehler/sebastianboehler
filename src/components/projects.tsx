@@ -30,6 +30,10 @@ export function Projects() {
             linkText="View on Youtube"
             badge="New"
           />
+          <ProjectsCard
+            title="Algo Trading"
+            description="I've worked for years on algorithmic trading systems. Utilizing APIs of crypto exchanges and techincal analysis."
+          />
         </div>
       </div>
     </section>

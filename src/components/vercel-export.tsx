@@ -7,6 +7,7 @@ import { Hero } from "./hero"
 import Footer from "./footer"
 import Contact from "./contact"
 import Header from "./header"
+import { Skills } from "./skills"
 
 export function VercelExport() {
   return (
@@ -15,6 +16,7 @@ export function VercelExport() {
       <main className="flex-1">
         <Hero />
         <Projects />
+        <Skills />
         <Contact />
       </main>
       <Footer />

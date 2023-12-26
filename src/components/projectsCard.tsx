@@ -7,7 +7,7 @@ import { FC } from "react";
 interface props {
     title: string,
     description: string,
-    link?: string,
+    link?: string | { href: string, as: string }[],
     badge?: string
     linkText?: string
 }
@@ -25,9 +25,14 @@ const ProjectsCard: FC<props> = ({ title, badge, link, description, linkText }) 
                 <CardDescription className="text-sm md:text-base lg:text-lg text-left">
                     {description}
                 </CardDescription>
-                {link && <Button variant="link">
-                    <Link href={link} target="_blank" >{linkText}</Link>
-                </Button>}
+                <div>
+                    {link && !Array.isArray(link) && <Button variant="link">
+                        <Link href={link} target="_blank" >{linkText}</Link>
+                    </Button>}
+                    {Array.isArray(link) && link.map((l, i) => <Button variant="link" key={i}>
+                        <Link href={l.href} target="_blank" >{l.as}</Link>
+                    </Button>)}
+                </div>
             </CardContent>
         </Card>
     )

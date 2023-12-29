@@ -18,8 +18,8 @@ export function Projects() {
           />
           <ProjectsCard
             title="Solana dApp"
-            description="This project is about learning Solana smart contract development and creating a dApp on the Solana blockchain."
-            link={[{ href: 'https://github.com/SebastianBoehler/solana-dapp-learning', as: 'View on Github' }, { href: 'https://dapp-showcase-sand.vercel.app/', as: 'Open app' }]}
+            description="This project is about learning Solana smart contract development and creating a variety of dApps."
+            link={[{ href: 'https://github.com/SebastianBoehler/solana-dapp-learning', as: 'View on Github' }, { href: 'https://dapp-showcase-sand.vercel.app/', as: 'Open apps' }]}
             badge="Currently in Progress"
           />
           <ProjectsCard

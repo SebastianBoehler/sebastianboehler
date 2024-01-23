@@ -79,16 +79,6 @@ export function timeline() {
     <main className="flex flex-col items-center justify-center p-8">
       <h1 className="text-4xl font-bold mb-8">My Portfolio Timeline</h1>
       <div className="w-full max-w-3xl divide-y divide-gray-200">
-        <div className="py-8 flex space-x-4">
-          <span className="flex-shrink-0 text-gray-400 text-sm">Jan 2020</span>
-          <div className="space-y-2">
-            <h2 className="text-xl font-semibold">First App Development</h2>
-            <p className="text-gray-500">
-              Developed my first app using React Native. The app was a simple weather app that uses the OpenWeatherMap
-              API.
-            </p>
-          </div>
-        </div>
         {timelineData.map(((props: TimeLineCardProps, idx: number) => (
           <TimeLineCard key={idx} {...props} />
         ))

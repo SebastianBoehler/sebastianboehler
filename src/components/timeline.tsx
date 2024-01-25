@@ -13,14 +13,20 @@ const timelineData: TimeLineCardProps[] = [
     //tags
   },
   {
+    title: 'Discord bots',
+    description: 'I started learning how to code discord bots in JavaScript. I created a few bots for my friends and me. I also created a ("restock bot") bot that automatically posts new items from the Supreme website in a discord channel.',
+    date: 'Jan 2018',
+  },
+  {
     title: 'Supreme Cop Bot cross-desktop application',
     description: 'Together with an experienced coding partner, we upgraded the Chrome extension to a cross-desktop application. I mainly handled marketing and customer relations, and we actively marketed this software. We were known for our good support and sold this software to resellers who used it to buy items and resell them for a profit. I designed all the graphics for social media using adobe products',
     date: 'Aug 2018',
   },
-  // {
-  //   title: 'JGR Filderstadt'
-  //   date: 'Jun 2019',
-  // },
+  {
+    title: 'JGR Filderstadt',
+    description: 'I was elected as a youth representative for the city of Filderstadt. I was responsible for the youth of my city and organized events for them. I also represented the youth in the city council.',
+    date: 'Jun 2019',
+  },
   {
     title: 'Paper rounds',
     description: 'Doing paper rounds for a local newspaper company. I did this for a few months to earn some extra money.',
@@ -70,6 +76,11 @@ const timelineData: TimeLineCardProps[] = [
     title: 'Cloud algo trading system',
     description: 'I brought all my trading scripts, like backtester, live trading bot and data collector together in a cloud system.',
     date: 'Sep 2022'
+  },
+  {
+    title: 'HB Capital',
+    description: 'Together with my best friend we founded a crypto algo trading company. The goal is to obtain a BaFin license in the futures and offer investment strategies on tokenized assets like real estate and crypto trading products.',
+    date: 'Feb 2023'
   }
 ]
 
@@ -77,7 +88,7 @@ const timelineData: TimeLineCardProps[] = [
 export function timeline() {
   return (
     <main className="flex flex-col items-center justify-center p-8">
-      <h1 className="text-4xl font-bold mb-8">My Portfolio Timeline</h1>
+      <h1 className="text-4xl font-bold mb-8">My Personal Timeline</h1>
       <div className="w-full max-w-3xl divide-y divide-gray-200">
         {timelineData.map(((props: TimeLineCardProps, idx: number) => (
           <TimeLineCard key={idx} {...props} />

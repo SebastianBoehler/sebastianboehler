@@ -39,6 +39,12 @@ export function Projects() {
             link="https://github.com/SebastianBoehler/smarthome-template"
             linkText="View on Github"
           />
+          <ProjectsCard
+            title="Focus Feed"
+            description="A chrome extension that helps you to stay productive by blocking distracting features on youtube & instagram"
+            link="https://chromewebstore.google.com/detail/focusfeed-streamlined-soc/edhmlglfakobicbpgjfnobclbhpcbeai"
+            linkText="Preview"
+          />
         </div>
       </div>
     </section>

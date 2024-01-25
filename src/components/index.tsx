@@ -9,7 +9,7 @@ import Contact from "./contact"
 import Header from "./header"
 import { Skills } from "./skills"
 
-export function VercelExport() {
+export function Index() {
   return (
     <div key="1" className="flex flex-col min-h-screen bg-gradient-to-r from-gray-100 to-gray-250">
       <Header />

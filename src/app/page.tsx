@@ -1,10 +1,10 @@
-import { VercelExport } from "@/components/vercel-export";
+import { Index } from "@/components";
 import '@/app/globals.css'
 
 export default function Home() {
   return (
     <main>
-      <VercelExport />
+      <Index />
     </main>
   )
 }

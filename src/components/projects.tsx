@@ -32,6 +32,8 @@ export function Projects() {
           <ProjectsCard
             title="Algo Trading"
             description="I've worked for years on algorithmic trading systems. Utilizing APIs of crypto exchanges and techincal analysis."
+            linkText="First Bot"
+            link="https://github.com/SebastianBoehler/cryptobot"
           />
           <ProjectsCard
             title="Smarthome Automation"

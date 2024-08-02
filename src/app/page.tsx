@@ -192,7 +192,7 @@ const Home = () => {
         <ul className="flex items-center gap-4">
           <li>
             <a
-              href="https://www.linkedin.com/in/sebastian-boehler-452b09183/"
+              href="https://www.linkedin.com/in/sebastian-boehler/"
               target="_blank"
               className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
             >

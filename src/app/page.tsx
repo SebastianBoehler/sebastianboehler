@@ -1,8 +1,7 @@
+"use client"; // Added "use client"
+import React, { useState } from 'react';
 
-"use client"
-import { useState } from "react";
-
-const Component = () => {
+const Home = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -57,8 +56,8 @@ const Component = () => {
         </nav>
       </header>
       <main className="flex flex-col items-center justify-start w-full px-4 py-12 sm:px-6 md:py-16 md:px-8">
-        <section id="hero" className="flex flex-col items-center justify-center w-full max-w-4xl mb-24"> {/* Added mb-24 */}
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        <section id="hero" className="flex flex-col items-center justify-center w-full bg-gray-100 p-12 rounded-md mb-24"> {/* Added bg-gray-100 and p-12 */}
+          <h1 className="text-5xl font-bold text-gray-900 dark:text-white mb-4"> {/* Increased font size */}
             Hello, I&apos;m Sebastian.
           </h1>
           <p className="text-gray-500 text-lg max-w-3xl text-center mb-8">
@@ -95,37 +94,37 @@ const Component = () => {
             My Projects
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
-            <a href="https://focusfeed.netlify.app/" target="_blank" className="group rounded-md overflow-hidden shadow-md">
+            <a href="https://focusfeed.netlify.app/" target="_blank" className="group rounded-md overflow-hidden"> {/* Removed shadow-md */}
               <div className="flex flex-col h-full"> {/* Added flex-col and h-full */}
                 <div className="p-4 bg-gray-100 dark:bg-gray-800 flex-1"> {/* Added flex-1 */}
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-white group-hover:text-primary">
+                  <h3 className="text-xl font-medium text-gray-900 dark:text-white group-hover:text-primary"> {/* Increased font size */}
                     Focus Feed
                   </h3>
-                  <p className="text-gray-500 text-sm">
+                  <p className="text-gray-500 text-base mt-2"> {/* Increased font size and added mt-2 */}
                     A Chrome extension that helps you stay productive by blocking distracting features on YouTube and Instagram.
                   </p>
                 </div>
               </div>
             </a>
-            <a href="https://github.com/SebastianBoehler/smarthome-template" target="_blank" className="group rounded-md overflow-hidden shadow-md">
+            <a href="https://github.com/SebastianBoehler/smarthome-template" target="_blank" className="group rounded-md overflow-hidden"> {/* Removed shadow-md */}
               <div className="flex flex-col h-full"> {/* Added flex-col and h-full */}
                 <div className="p-4 bg-gray-100 dark:bg-gray-800 flex-1"> {/* Added flex-1 */}
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-white group-hover:text-primary">
+                  <h3 className="text-xl font-medium text-gray-900 dark:text-white group-hover:text-primary"> {/* Increased font size */}
                     Smarthome Automation
                   </h3>
-                  <p className="text-gray-500 text-sm">
+                  <p className="text-gray-500 text-base mt-2"> {/* Increased font size and added mt-2 */}
                     A template for automating your Philips Hue lights based on air quality data.
                   </p>
                 </div>
               </div>
             </a>
-            <a href="https://github.com/SebastianBoehler/solana-dapp-learning" target="_blank" className="group rounded-md overflow-hidden shadow-md">
+            <a href="https://github.com/SebastianBoehler/solana-dapp-learning" target="_blank" className="group rounded-md overflow-hidden"> {/* Removed shadow-md */}
               <div className="flex flex-col h-full"> {/* Added flex-col and h-full */}
                 <div className="p-4 bg-gray-100 dark:bg-gray-800 flex-1"> {/* Added flex-1 */}
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-white group-hover:text-primary">
-                    Solana Smart Contract Development
+                  <h3 className="text-xl font-medium text-gray-900 dark:text-white group-hover:text-primary"> {/* Increased font size */}
+                    Smart Contracts
                   </h3>
-                  <p className="text-gray-500 text-sm">
+                  <p className="text-gray-500 text-base mt-2"> {/* Increased font size and added mt-2 */}
                     A repository showcasing my learning journey with Rust and Anchor to build Solana smart contracts.
                   </p>
                 </div>
@@ -138,8 +137,8 @@ const Component = () => {
             HB Capital - My Firm
           </h2>
           <p className="text-gray-500 text-lg max-w-3xl text-center mb-8">
-            HB Capital is a crypto algo trading company founded with my best friend. We are driven by the vision of navigating the market through cutting-edge technology.
-            We leverage algorithms and machine learning to create profitable trading strategies, focusing on tokenized assets and real estate investments. Our goal is to obtain a BaFin license and offer investment strategies on these assets.
+            HB Capital is a crypto algo trading company that I co-founded. We are driven by the vision of navigating the market through cutting-edge technology.
+            Our team leverages deep learning with Python for strategy optimization, and I&apos;ve built our own backtesting and trading framework.  We also have a dedicated dashboard and chat bot integration for enhanced trading operations.
           </p>
           <a href="https://hb-capital.app/" target="_blank" className="bg-primary text-black font-medium rounded-md px-4 py-2 hover:bg-primary-focus border border-gray-300">
             Visit HB Capital
@@ -215,4 +214,4 @@ const Component = () => {
   );
 };
 
-export default Component;
+export default Home;

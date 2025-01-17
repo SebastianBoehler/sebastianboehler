@@ -10,19 +10,25 @@ interface Project {
 const projects: Project[] = [
   {
     title: "Focus Feed",
-    description: "A Chrome extension that enhances productivity by blocking distracting features on YouTube and Instagram. Built with React and Chrome Extensions API.",
-    link: "https://focusfeed.netlify.app/",
+    description: "A Chrome extension that removes the addictive parts of YouTube and Instagram. No more endless scrolling or distracting recommendations - just the content you actually want to see.",
+    link: "https://chromewebstore.google.com/detail/focusfeed-streamlined-soc/edhmlglfakobicbpgjfnobclbhpcbeai",
     technologies: ["React", "Chrome API", "JavaScript", "CSS"]
   },
   {
+    title: "Sony Camera AI",
+    description: "Ever wished your camera could think? This tool connects to Sony cameras and uses AI to analyze scenes, suggesting the perfect settings for your next shot.",
+    link: "https://github.com/SebastianBoehler/sony-cam-ai",
+    technologies: ["Python", "OpenAI API", "Sony Camera API", "Computer Vision"]
+  },
+  {
     title: "Smarthome Automation",
-    description: "An innovative template for automating Philips Hue lights based on real-time air quality data. Integrates IoT devices with environmental monitoring.",
+    description: "My Philips Hue lights change color based on indoor air quality readings from a Netatmo sensor. CO2 levels getting too high? The lights remind me to open a window.",
     link: "https://github.com/SebastianBoehler/smarthome-template",
-    technologies: ["Python", "IoT", "Philips Hue API", "Air Quality API"]
+    technologies: ["Python", "IoT", "Philips Hue API", "Netatmo API"]
   },
   {
     title: "Smart Contracts",
-    description: "A comprehensive repository showcasing Solana smart contract development using Rust and Anchor framework. Includes examples of DeFi primitives.",
+    description: "A collection of Solana smart contracts built with Rust. Perfect starting point if you want to get into DeFi development on Solana.",
     link: "https://github.com/SebastianBoehler/solana-dapp-learning",
     technologies: ["Rust", "Anchor", "Solana", "Web3"]
   }
@@ -40,20 +46,20 @@ export default function ProjectsSection() {
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="group block"
+              className="group block h-full"
             >
-              <div className="h-full p-6 bg-white dark:bg-gray-900 rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-200 dark:border-gray-700">
+              <div className="h-full p-6 bg-white dark:bg-gray-900 rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-200 dark:border-gray-700 flex flex-col">
                 <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-4">
+                <p className="text-gray-600 dark:text-gray-300 mb-4 flex-grow">
                   {project.description}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full"
+                      className="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-md"
                     >
                       {tech}
                     </span>

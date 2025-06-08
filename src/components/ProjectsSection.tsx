@@ -9,29 +9,61 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: "Smart Contracts",
+    description:
+      "A curated set of Solana programs built with Rust and Anchor. Ideal for showcasing my blockchain development expertise.",
+    link: "https://github.com/SebastianBoehler/solana-dapp-learning",
+    technologies: ["Rust", "Anchor", "Solana", "Web3"],
+  },
+  {
+    title: "Orca CLMM Agent",
+    description:
+      "Automated market maker for Orca's concentrated liquidity pools. Dashboard available at crypto.sunderlabs.com.",
+    link: "https://crypto.sunderlabs.com",
+    technologies: ["TypeScript", "Solana", "Orca", "CLMM"],
+  },
+  {
+    title: "HB Capital Platform",
+    description:
+      "Trading interface and smart contract suite powering hb-capital.app.",
+    link: "https://hb-capital.app",
+    technologies: ["Next.js", "TypeScript", "Solana"],
+  },
+  {
+    title: "Cryptobot Framework",
+    description:
+      "Modular trading bot with backtesting and multi-exchange support.",
+    link: "https://github.com/SebastianBoehler/cryptobot_legacy",
+    technologies: ["Node.js", "TypeScript", "Trading"],
+  },
+  {
+    title: "Python Livestream Toolkit",
+    description:
+      "Automate livestreams with text-to-speech overlays and background music.",
+    link: "https://github.com/SebastianBoehler/python_livestream",
+    technologies: ["Python", "FFmpeg", "TTS"],
+  },
+  {
     title: "Focus Feed",
-    description: "A Chrome extension that removes the addictive parts of YouTube and Instagram. No more endless scrolling or distracting recommendations - just the content you actually want to see.",
+    description:
+      "A Chrome extension that removes the addictive parts of YouTube and Instagram. No more endless scrolling or distracting recommendations - just the content you actually want to see.",
     link: "https://chromewebstore.google.com/detail/focusfeed-streamlined-soc/edhmlglfakobicbpgjfnobclbhpcbeai",
-    technologies: ["React", "Chrome API", "JavaScript", "CSS"]
+    technologies: ["React", "Chrome API", "JavaScript", "CSS"],
   },
   {
     title: "Sony Camera AI",
-    description: "Ever wished your camera could think? This tool connects to Sony cameras and uses AI to analyze scenes, suggesting the perfect settings for your next shot.",
+    description:
+      "Ever wished your camera could think? This tool connects to Sony cameras and uses AI to analyze scenes, suggesting the perfect settings for your next shot.",
     link: "https://github.com/SebastianBoehler/sony-cam-ai",
-    technologies: ["Python", "OpenAI API", "Sony Camera API", "Computer Vision"]
+    technologies: ["Python", "OpenAI API", "Sony Camera API", "Computer Vision"],
   },
   {
     title: "Smarthome Automation",
-    description: "My Philips Hue lights change color based on indoor air quality readings from a Netatmo sensor. CO2 levels getting too high? The lights remind me to open a window.",
+    description:
+      "My Philips Hue lights change color based on indoor air quality readings from a Netatmo sensor. CO2 levels getting too high? The lights remind me to open a window.",
     link: "https://github.com/SebastianBoehler/smarthome-template",
-    technologies: ["Python", "IoT", "Philips Hue API", "Netatmo API"]
+    technologies: ["Python", "IoT", "Philips Hue API", "Netatmo API"],
   },
-  {
-    title: "Smart Contracts",
-    description: "A collection of Solana smart contracts built with Rust. Perfect starting point if you want to get into DeFi development on Solana.",
-    link: "https://github.com/SebastianBoehler/solana-dapp-learning",
-    technologies: ["Rust", "Anchor", "Solana", "Web3"]
-  }
 ];
 
 export default function ProjectsSection() {

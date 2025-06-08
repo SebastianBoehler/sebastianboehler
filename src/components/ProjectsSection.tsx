@@ -9,6 +9,12 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: "Smart Contracts",
+    description: "A curated set of Solana programs built with Rust and Anchor. Ideal for showcasing my blockchain development expertise.",
+    link: "https://github.com/SebastianBoehler/solana-dapp-learning",
+    technologies: ["Rust", "Anchor", "Solana", "Web3"]
+  },
+  {
     title: "Focus Feed",
     description: "A Chrome extension that removes the addictive parts of YouTube and Instagram. No more endless scrolling or distracting recommendations - just the content you actually want to see.",
     link: "https://chromewebstore.google.com/detail/focusfeed-streamlined-soc/edhmlglfakobicbpgjfnobclbhpcbeai",
@@ -25,12 +31,6 @@ const projects: Project[] = [
     description: "My Philips Hue lights change color based on indoor air quality readings from a Netatmo sensor. CO2 levels getting too high? The lights remind me to open a window.",
     link: "https://github.com/SebastianBoehler/smarthome-template",
     technologies: ["Python", "IoT", "Philips Hue API", "Netatmo API"]
-  },
-  {
-    title: "Smart Contracts",
-    description: "A collection of Solana smart contracts built with Rust. Perfect starting point if you want to get into DeFi development on Solana.",
-    link: "https://github.com/SebastianBoehler/solana-dapp-learning",
-    technologies: ["Rust", "Anchor", "Solana", "Web3"]
   }
 ];
 

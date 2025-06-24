@@ -17,18 +17,19 @@ export const manualMilestones = [
   },
   {
     date: "2016-09-01",
-    title: "First motion-graphic experiment",
-    description: "Edited flames and explosions into a school video using Adobe After Effects during 9th grade.",
+    title: "Minecraft Intro Rendering",
+    // my youtube channel video of banner template https://youtu.be/c30UW9nE2IM
+    description: "Using Cinema4D and photoshop to create banner and do speedarts on youtube ",
   },
   {
     date: "2017-04-01",
     title: "Deeper motion design & title sequences",
-    description: "Created advanced motion graphics and lower-thirds for school projects using After Effects.",
+    description: "Created advanced motion graphics using After Effects.",
   },
   {
     date: "2018-07-01",
     title: "Early backend experience",
-    description: "Started writing REST APIs and Discord bots in JavaScript and TypeScript for hobby projects.",
+    description: "Started writing REST APIs and Discord support ticketing bots in JavaScript for hobby projects.",
   },
   {
     date: "2019-10-01",
@@ -42,16 +43,16 @@ export const manualMilestones = [
   },
   {
     date: "2020-09-01",
-    title: "Started work at Remoty GmbH",
+    title: "Started work at Remotly GmbH",
     description: "Joined as a backend developer during or shortly after school. Gained early professional experience.",
   },
   {
     date: "2021-03-01",
     title: "Began work at LIFI",
-    description: "Worked on backend systems for a crypto/DeFi-related product. Deepened experience with APIs, cloud, and blockchain.",
+    description: "Worked on backend systems for a crypto/DeFi-related product. Deepened experience with APIs, databases, and blockchain.",
   },
   {
-    date: "2022-01-01",
+    date: "2022-02-01",
     title: "Founded HB Capital",
     description: "Started trading-focused company with Justus. Built algorithmic crypto trading systems, handled all tech development.",
   },
@@ -73,6 +74,7 @@ export const manualMilestones = [
   {
     date: "2025-06-01",
     title: "Sunderlabs UG founded",
+    // https://www.sunderlabs.com/
     description: "Formally registered new company for AI experiments and products such as personal agents and learning tools.",
   },
 ] as const;

@@ -17,7 +17,7 @@ async function mapRepos(): Promise<TimelineEntryData[]> {
     date: r.created_at,
     title: r.name,
     description: r.description || "",
-    link: r.html_url,
+    link: r.homepage || r.html_url,
   }))
 }
 

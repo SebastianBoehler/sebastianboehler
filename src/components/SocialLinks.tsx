@@ -2,7 +2,7 @@ import { Linkedin, Twitter } from 'lucide-react'
 
 export default function SocialLinks() {
   return (
-    <section className="snap-start min-h-screen flex flex-col items-center justify-center px-4 py-20">
+    <section className="snap-start min-h-[50vh] flex flex-col items-center justify-center px-4 py-20">
       <h1 className="heading-1 mb-6">Connect with me</h1>
       <div className="flex space-x-6">
         <a

@@ -1,4 +1,5 @@
 import TimelineEntry, { TimelineEntryData } from "./TimelineEntry"
+import SocialLinks from "./SocialLinks"
 
 export default function Timeline({ entries }: { entries: TimelineEntryData[] }) {
   const groups = entries.reduce<Record<string, TimelineEntryData[]>>((acc, entry) => {
@@ -11,6 +12,7 @@ export default function Timeline({ entries }: { entries: TimelineEntryData[] }) 
 
   return (
     <div className="h-screen overflow-y-scroll snap-y snap-mandatory">
+      <SocialLinks />
       {years.map(year => (
         <section key={year} className="snap-start min-h-screen flex flex-col items-center justify-center px-4 py-20">
           <h2 className="heading-2 mb-12">{year}</h2>

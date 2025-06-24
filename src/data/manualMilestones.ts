@@ -69,13 +69,13 @@ export const manualMilestones = [
   {
     date: "2025-04-01",
     title: "Started AI voice assistant prototype",
-    description: "Began prototyping speech-to-speech agent with LLM backend and modular function-calling, aimed at iOS integration.",
+    description: "Began prototyping speech-to-speech agent with LLM backend and function calling on the reverse engineered API of my university.",
   },
   {
     date: "2025-06-01",
     title: "Sunderlabs UG founded",
-    // https://www.sunderlabs.com/
-    description: "Formally registered new company for AI experiments and products such as personal agents and learning tools.",
+    link: "https://www.sunderlabs.com/",
+    description: "Formally registered new company for AI experiments and products such as agents for managing defi clmm positions on orca.",
   },
 ] as const;
 export type ManualMilestone = (typeof manualMilestones)[number];

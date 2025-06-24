@@ -1,17 +1,30 @@
-"use client";
+import { manualMilestones } from "@/data/manualMilestones"
+import Timeline from "@/components/Timeline"
+import { TimelineEntryData } from "@/components/TimelineEntry"
+import { fetchRepos } from "@/lib/github"
 
-import HeroSection from '@/components/HeroSection';
-import FeaturesSection from '@/components/FeaturesSection';
-import ProjectsSection from '@/components/ProjectsSection';
-import ContactSection from '@/components/ContactSection';
+function mapMilestones(): TimelineEntryData[] {
+  return manualMilestones.map(m => ({
+    date: `${m.date}-01`,
+    title: m.title,
+    description: m.description,
+  }))
+}
 
-export default function Home() {
-  return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
-      <HeroSection />
-      <FeaturesSection />
-      <ProjectsSection />
-      <ContactSection />
-    </div>
-  );
+async function mapRepos(): Promise<TimelineEntryData[]> {
+  const repos = await fetchRepos("SebastianBoehler")
+  return repos.map(r => ({
+    date: r.created_at,
+    title: r.name,
+    description: r.description || "",
+    link: r.html_url,
+  }))
+}
+
+export default async function Home() {
+  const [milestones, repos] = await Promise.all([mapMilestones(), mapRepos()])
+  const entries = [...milestones, ...repos].sort((a, b) =>
+    b.date.localeCompare(a.date)
+  )
+  return <Timeline entries={entries} />
 }

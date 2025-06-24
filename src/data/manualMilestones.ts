@@ -13,12 +13,12 @@ export const manualMilestones = [
   {
     date: "2015-09-01",
     title: "Hosted Minecraft server",
-    description: "Wrote Bukkit/Spigot plugins in Java, hosted own server with custom features and admin tools for classmates.",
+    description: "Wrote Bukkit plugins in Java, hosted own server with custom features and admin tools for classmates.",
   },
   {
     date: "2016-09-01",
     title: "Minecraft Intro Rendering",
-    // my youtube channel video of banner template https://youtu.be/c30UW9nE2IM
+    link: "https://youtu.be/c30UW9nE2IM",
     description: "Using Cinema4D and photoshop to create banner and do speedarts on youtube ",
   },
   {
@@ -54,6 +54,7 @@ export const manualMilestones = [
   {
     date: "2022-02-01",
     title: "Founded HB Capital",
+    link: "https://hb-capital.app",
     description: "Started trading-focused company with Justus. Built algorithmic crypto trading systems, handled all tech development.",
   },
   {

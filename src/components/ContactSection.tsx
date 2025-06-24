@@ -77,7 +77,7 @@ export default function ContactSection() {
         </p>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium mb-2">
+            <label htmlFor="name" className="block text-sm font-medium mb-2 dark:text-gray-300">
               Name
             </label>
             <input
@@ -93,7 +93,7 @@ export default function ContactSection() {
             )}
           </div>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium mb-2">
+            <label htmlFor="email" className="block text-sm font-medium mb-2 dark:text-gray-300">
               Email
             </label>
             <input
@@ -109,7 +109,7 @@ export default function ContactSection() {
             )}
           </div>
           <div>
-            <label htmlFor="message" className="block text-sm font-medium mb-2">
+            <label htmlFor="message" className="block text-sm font-medium mb-2 dark:text-gray-300">
               Message
             </label>
             <textarea

@@ -3,6 +3,7 @@
 import { useInView } from "@/hooks/useInView"
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion"
 import { cn } from "@/lib/utils"
+import { ExternalLink } from "lucide-react"
 
 export interface TimelineEntryData {
   date: string
@@ -36,8 +37,14 @@ export default function TimelineEntry({ entry }: { entry: TimelineEntryData }) {
       </time>
       <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
         {entry.link ? (
-          <a href={entry.link} target="_blank" rel="noopener noreferrer" className="hover:underline">
+          <a
+            href={entry.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-blue-600 dark:text-blue-400 hover:underline"
+          >
             {entry.title}
+            <ExternalLink className="h-4 w-4" />
           </a>
         ) : (
           entry.title

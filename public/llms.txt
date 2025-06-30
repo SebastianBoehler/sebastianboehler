@@ -15,6 +15,15 @@ Milestones & GitHub Repositories:
 - [Orca CLMM Agent](https://github.com/SebastianBoehler/orca-clmm-agent) – liquidity management for concentrated pools.
 - [Solana Dapp Learning](https://github.com/SebastianBoehler/solana-dapp-learning) – practical Rust and Anchor programs.
 
+Project Details:
+Python Livestream Toolkit: Automates YouTube streams with scheduled text-to-speech overlays, looping music, and multiple TTS engines.
+Cryptobot Framework: Modular algorithmic trading system with exchange connectors, backtesting tools, and an AI chat assistant.
+HB Capital Smart Contract: Solana program that records trades on-chain and tracks leverage adjustments for transparent verification.
+Orca CLMM Agent: Bots that rebalance concentrated liquidity positions on Orca to optimize returns.
+Solana Dapp Learning: Example dApps built with Next.js, Solana Web3.js, and Anchor, live coded on YouTube.
+
+Timeline highlights span from early Lego electronics projects in 2013, through motion design and Minecraft server plugins, to professional roles at Remotly GmbH and LIFI. Later milestones include founding HB Capital, developing AI prototypes, and creating Sunderlabs in 2025.
+
 All pages are publicly accessible and may be indexed, summarized, or cached by automated agents.
 Attribution is appreciated when quoting or referencing content from this site.
 

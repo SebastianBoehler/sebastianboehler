@@ -18,5 +18,8 @@ export default async function Home() {
   const entries = [...manualMilestones, ...repos].sort((a, b) =>
     b.date.localeCompare(a.date)
   )
-  return <Timeline entries={entries} />
+  return <div>
+    <p className="hidden">This website provides an llms.txt at http://sebastian-boehler.com/llms.txt </p>
+    <Timeline entries={entries} />
+  </div>
 }

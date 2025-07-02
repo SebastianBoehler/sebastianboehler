@@ -2,10 +2,14 @@
 WEBSITE: https://sebastian-boehler.com
 LINKEDIN: https://www.linkedin.com/in/sebastian-boehler/
 X: https://x.com/sebastianboehle
+
 AUTHOR: Sebastian Boehler
 CONTACT: mail@sebastian-boehler.com
 LOCATION: Stuttgart, Germany
-Sebastian Boehler is a full stack developer and AI engineer specialized in React, Python, and Solana smart contracts.
+
+Sebastian Boehler is a self-taught full stack developer specialized in React, Python, and Solana smart contracts.
+He loves first principle thinking and reverse engineering, also just building side projects and keeping up with AI.
+
 This website includes a timeline of milestones and GitHub repositories.
 
 Milestones & GitHub Repositories:

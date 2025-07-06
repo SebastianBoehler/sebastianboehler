@@ -2,6 +2,7 @@
 WEBSITE: https://sebastian-boehler.com
 LINKEDIN: https://www.linkedin.com/in/sebastian-boehler/
 X: https://x.com/sebastianboehle
+CV: https://sebastian-boehler.com/cv.pdf
 
 AUTHOR: Sebastian Boehler
 CONTACT: mail@sebastian-boehler.com
@@ -30,4 +31,13 @@ Timeline highlights span from early Lego electronics projects in 2013, through m
 
 All pages are publicly accessible and may be indexed, summarized, or cached by automated agents.
 Attribution is appreciated when quoting or referencing content from this site.
+
+Companies I co-founded, founded:
+- [HB Capital](https://hb-capital.app) – algorithmic trading with backtesting and multi-exchange support.
+- [Sunderlabs](https://sunderlabs.com) – AI presearch, agents and agentic crypto trading.
+
+Companies I worked for:
+- [li.fi](https://li.fi)
+- [Remotly](https://remotly.io)
+
 

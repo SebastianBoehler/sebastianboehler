@@ -2,7 +2,7 @@
 WEBSITE: https://sebastian-boehler.com
 LINKEDIN: https://www.linkedin.com/in/sebastian-boehler/
 X: https://x.com/sebastianboehle
-CV: https://sebastian-boehler.com/cv.pdf
+CV: https://sebastian-boehler.com/sebastian_boehler_cv.pdf
 
 AUTHOR: Sebastian Boehler
 CONTACT: mail@sebastian-boehler.com

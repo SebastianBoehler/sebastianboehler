@@ -3,15 +3,14 @@ import fs from "fs";
 import path from "path";
 
 export async function GET(request: NextRequest) {
-  const filePath = path.join(process.cwd(), "public", "cv.pdf");
+  const filePath = path.join(process.cwd(), "public", "sebastian_boehler_cv.pdf");
 
   try {
     const data = await fs.promises.readFile(filePath);
     return new NextResponse(data, {
       headers: {
         "Content-Type": "application/pdf",
-        "Content-Disposition":
-          'attachment; filename="Sebastian Boehler CV.pdf"',
+        "Content-Disposition": 'attachment; filename="Sebastian Boehler CV.pdf"',
       },
     });
   } catch (error) {

@@ -8,8 +8,8 @@ export default function Header() {
   const { theme, toggleTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const menuItems = [
-    { label: 'Contact', href: '/contact' },
+  const menuItems: { label: string; href: string }[] = [
+    //{ label: 'Contact', href: '/contact' },
   ];
 
   return (

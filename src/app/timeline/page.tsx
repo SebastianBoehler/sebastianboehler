@@ -22,6 +22,8 @@ export default async function TimelinePage() {
   const repos = await mapRepos()
   const entries = [...manualMilestones, ...repos].sort((a, b) => b.date.localeCompare(a.date))
   const contributions = await fetchContributions("SebastianBoehler")
+  console.log('[TimelinePage] repos:', repos.length, 'manualMilestones:', manualMilestones.length, 'entries total:', entries.length)
+  console.log('[TimelinePage] contributions years:', contributions.map(c => c.year), 'sum total:', contributions.reduce((a, c) => a + c.total, 0))
   return (
     <main>
       <Timeline entries={entries} contributions={contributions} />

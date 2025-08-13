@@ -19,6 +19,9 @@ export default function Timeline({ entries, contributions }: Props) {
   }, {})
   const years = Object.keys(groups).sort((a, b) => Number(b) - Number(a))
 
+  console.log('[Timeline] groups', groups)
+  console.log('[Timeline] years', years)
+
   const [activeYear, setActiveYear] = useState(years[0])
   const yearRefs = useRef<Record<string, HTMLElement | null>>({})
 
@@ -28,7 +31,10 @@ export default function Timeline({ entries, contributions }: Props) {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const y = entry.target.getAttribute('data-year')
-            if (y) setActiveYear(y)
+            if (y) {
+              console.log('[Timeline] Intersection observed, setting activeYear', y)
+              setActiveYear(y)
+            }
           }
         })
       },
@@ -41,11 +47,19 @@ export default function Timeline({ entries, contributions }: Props) {
     return () => observer.disconnect()
   }, [years])
 
+  useEffect(() => {
+    console.log('[Timeline] activeYear changed', activeYear)
+  }, [activeYear])
+
+  console.log('[Timeline] contributions input', contributions)
   const chartData = contributions.filter(c => years.includes(c.year))
+  console.log('[Timeline] chartData (filtered to years)', chartData)
 
   return (
     <div>
-      <CommitActivityChart data={chartData} activeYear={activeYear} />
+      <div className="sticky top-16 z-40 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm">
+        <CommitActivityChart data={chartData} activeYear={activeYear} />
+      </div>
       <div className="snap-y snap-mandatory">
         {years.map(year => (
           <section

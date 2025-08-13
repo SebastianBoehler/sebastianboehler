@@ -50,7 +50,9 @@ export default function Timeline({ entries, contributions }: Props) {
         {years.map(year => (
           <section
             key={year}
-            ref={el => (yearRefs.current[year] = el)}
+            ref={el => {
+              yearRefs.current[year] = el
+            }}
             data-year={year}
             className="snap-start min-h-screen flex flex-col items-center justify-center px-4 py-20"
           >

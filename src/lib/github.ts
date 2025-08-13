@@ -25,3 +25,19 @@ export async function fetchRepos(username: string): Promise<Repo[]> {
   const data = (await res.json()) as Repo[];
   return data.filter((repo) => !repo.fork);
 }
+
+export interface ContributionYear {
+  year: string;
+  total: number;
+}
+
+export async function fetchContributions(username: string): Promise<ContributionYear[]> {
+  const res = await fetch(`https://github-contributions-api.jogruber.de/v4/${username}`, {
+    next: { revalidate: 60 * 60 },
+  });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch contributions: ${res.status}`);
+  }
+  const json = (await res.json()) as { total: Record<string, number> };
+  return Object.entries(json.total).map(([year, total]) => ({ year, total }));
+}

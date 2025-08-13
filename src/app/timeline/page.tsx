@@ -1,7 +1,7 @@
 import { manualMilestones } from "@/data/manualMilestones"
 import Timeline from "@/components/Timeline"
 import { TimelineEntryData } from "@/components/TimelineEntry"
-import { fetchRepos } from "@/lib/github"
+import { fetchRepos, fetchContributions } from "@/lib/github"
 
 async function mapRepos(): Promise<TimelineEntryData[]> {
   const repos = await fetchRepos("SebastianBoehler")
@@ -21,9 +21,10 @@ export const metadata = {
 export default async function TimelinePage() {
   const repos = await mapRepos()
   const entries = [...manualMilestones, ...repos].sort((a, b) => b.date.localeCompare(a.date))
+  const contributions = await fetchContributions("SebastianBoehler")
   return (
     <main>
-      <Timeline entries={entries} />
+      <Timeline entries={entries} contributions={contributions} />
     </main>
   )
 }

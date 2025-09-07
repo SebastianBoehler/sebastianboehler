@@ -12,14 +12,7 @@ import { useEffect, useRef } from 'react'
 
 export default function CommitActivityChart({ data, activeYear }: Props) {
   console.log('[CommitActivityChart] props', { data, activeYear })
-  if (data.length === 0) {
-    console.log('[CommitActivityChart] No data provided')
-    return null
-  }
-  let activeIndex = data.findIndex((d) => d.year === activeYear)
-  if (activeIndex < 0) activeIndex = 0
-  const maxDist = Math.max(activeIndex, data.length - 1 - activeIndex, 1)
-
+  // Hooks must be called unconditionally at the top level
   const scrollRef = useRef<HTMLDivElement | null>(null)
   const barRefs = useRef<Record<string, HTMLDivElement | null>>({})
 
@@ -36,10 +29,18 @@ export default function CommitActivityChart({ data, activeYear }: Props) {
     container.scrollTo({ left: target, behavior: 'smooth' })
   }, [activeYear, data])
 
+  if (data.length === 0) {
+    console.log('[CommitActivityChart] No data provided')
+    return null
+  }
+  let activeIndex = data.findIndex((d) => d.year === activeYear)
+  if (activeIndex < 0) activeIndex = 0
+  const maxDist = Math.max(activeIndex, data.length - 1 - activeIndex, 1)
+
   return (
     <div
       ref={scrollRef}
-      className="w-full overflow-x-auto md:overflow-visible mb-8 pb-2"
+      className="w-full overflow-x-auto md:overflow-visible mb-8 pb-2 no-scrollbar"
       aria-label="Commit activity timeline"
       style={{ touchAction: 'pan-x' }}
     >

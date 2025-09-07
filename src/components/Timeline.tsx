@@ -24,40 +24,62 @@ export default function Timeline({ entries, contributions }: Props) {
 
   const [activeYear, setActiveYear] = useState(years[0])
   const yearRefs = useRef<Record<string, HTMLElement | null>>({})
+  const ratiosRef = useRef<Record<string, number>>({})
 
   useEffect(() => {
+    const thresholds = Array.from({ length: 101 }, (_, i) => i / 100)
     const observer = new IntersectionObserver(
       entries => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const y = entry.target.getAttribute('data-year')
-            if (y) {
-              console.log('[Timeline] Intersection observed, setting activeYear', y)
-              setActiveYear(y)
-            }
+          const y = entry.target.getAttribute('data-year')
+          if (!y) return
+          ratiosRef.current[y] = entry.intersectionRatio
+        })
+
+        // Choose the year with the highest intersection ratio.
+        let bestYear = activeYear
+        let bestRatio = -1
+        years.forEach(y => {
+          const r = ratiosRef.current[y] ?? 0
+          if (r > bestRatio) {
+            bestRatio = r
+            bestYear = y
           }
         })
+        if (bestYear !== activeYear) {
+          console.log('[Timeline] Active year resolved by ratio:', bestYear, 'ratio:', bestRatio)
+          setActiveYear(bestYear)
+        }
       },
-      { threshold: 0.6 }
+      {
+        threshold: thresholds,
+        // Account for sticky header height so the top section is favored correctly.
+        rootMargin: '-72px 0px -72px 0px',
+      }
     )
     years.forEach(year => {
       const el = yearRefs.current[year]
       if (el) observer.observe(el)
     })
     return () => observer.disconnect()
-  }, [years])
+  }, [years, activeYear])
 
   useEffect(() => {
     console.log('[Timeline] activeYear changed', activeYear)
   }, [activeYear])
 
   console.log('[Timeline] contributions input', contributions)
-  const chartData = contributions.filter(c => years.includes(c.year))
-  console.log('[Timeline] chartData (filtered to years)', chartData)
+  // Ensure we render a bar for every timeline year, even if contributions
+  // data does not include that year (e.g., before GitHub activity started).
+  const chartData = years.map((year) => {
+    const match = contributions.find((c) => c.year === year)
+    return match ?? { year, total: 0 }
+  })
+  console.log('[Timeline] chartData (aligned to years with fallbacks)', chartData)
 
   return (
     <div>
-      <div className="sticky top-16 z-40 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm">
+      <div className="sticky top-16 z-40 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm pt-3">
         <CommitActivityChart data={chartData} activeYear={activeYear} />
       </div>
       <div className="snap-y snap-mandatory">

@@ -1,0 +1,6 @@
+# Allow all crawlers to access and parse the site
+User-agent: *
+Allow: /
+
+# Add your sitemap when available, e.g.:
+# Sitemap: https://your-domain.example/sitemap.xml

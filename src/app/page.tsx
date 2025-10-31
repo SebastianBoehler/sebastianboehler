@@ -197,16 +197,23 @@ export default function Home() {
         <h2 className="text-3xl font-bold text-gray-900 dark:text-white text-center">
           Education
         </h2>
-        <div className="text-center space-y-2">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-            B.Sc. Computer Science
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400">
-            IU Internationale Hochschule • 2024 - Present
-          </p>
-          <p className="text-gray-500 dark:text-gray-500 text-sm">
-            Full-time studies, fast-tracking degree completion
-          </p>
+        <div className="text-center space-y-4">
+          <div className="space-y-2">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+              Master of Computer Science
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400">
+              Eberhard Karls University of Tübingen • October 2025 - Present
+            </p>
+          </div>
+          <div className="space-y-2">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+              Bachelor
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400">
+              [University/Institution Name] • November 2024 - November 2025
+            </p>
+          </div>
         </div>
       </section>
 

@@ -50,11 +50,11 @@ const experience = [
 
 const skills = {
   "Languages": ["TypeScript", "JavaScript", "Python", "Rust", "Solidity"],
-  "Frontend": ["React", "Next.js", "TailwindCSS", "HTML5", "CSS3"],
+  "Frontend": ["React", "Next.js", "TailwindCSS"],
   "Backend": ["Node.js", "FastAPI", "PostgreSQL", "MongoDB", "Redis"],
-  "Blockchain": ["Solana", "Ethereum", "Anchor", "Web3.js", "Anchor"],
-  "AI/ML": ["TensorFlow", "PyTorch", "LangChain", "OpenAI APIs", "YOLO"],
-  "Tools": ["Git", "Docker", "AWS", "Vercel", "Linux"]
+  "Blockchain": ["Solana", "Anchor", "Web3.js"],
+  "AI/ML": ["TensorFlow", "PyTorch", "LangChain", "YOLO"],
+  "Tools": ["Git", "Docker", "GCloud", "Vercel", "HuggingFace"]
 } as const
 
 export default function Home() {

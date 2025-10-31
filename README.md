@@ -8,7 +8,7 @@ Visit my portfolio at [sebastian-boehler.com](https://sebastian-boehler.com).
 
 ### Highlighted Projects
 
-- Orca CLMM Agent\*\* – Automated liquidity manager for Orca's concentrated pools. Live at [crypto.sunderlabs.com](https://crypto.sunderlabs.com).
+- **Orca CLMM Agent** – Automated liquidity manager for Orca's concentrated pools. Live at [crypto.sunderlabs.com](https://crypto.sunderlabs.com).
 - **[HB Capital Smartcontract](https://github.com/SebastianBoehler/hb-capital-smartcontract)** – Smart contract infrastructure powering [hb-capital.app](https://hb-capital.app), verifying trades on-chain.
 - **[Cryptobot Framework](https://github.com/SebastianBoehler/cryptobot_legacy)** – Algorithmic trading framework with backtesting and multi-exchange support.
 - **[Python Livestream Toolkit](https://github.com/SebastianBoehler/python_livestream)** – Automate livestreams with text-to-speech overlays and music loops.
@@ -16,17 +16,7 @@ Visit my portfolio at [sebastian-boehler.com](https://sebastian-boehler.com).
 
 ### Socials
 
-<p align="left">
-  <a href="https://discord.com/users/Sebastian#6722" target="_blank" rel="noreferrer">
-    <img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/discord.svg" width="32" height="32" />
-  </a>
-  <a href="https://www.github.com/SebastianBoehler" target="_blank" rel="noreferrer">
-    <img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/github.svg" width="32" height="32" />
-  </a>
-  <a href="https://www.linkedin.com/in/sebastian-boehler/" target="_blank" rel="noreferrer">
-    <img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/linkedin.svg" width="32" height="32" />
-  </a>
-  <a href="http://www.medium.com/@sebastianboehler" target="_blank" rel="noreferrer">
-    <img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/medium.svg" width="32" height="32" />
-  </a>
-</p>
+- [Discord](https://discord.com/users/Sebastian#6722)
+- [GitHub](https://www.github.com/SebastianBoehler)
+- [LinkedIn](https://www.linkedin.com/in/sebastian-boehler/)
+- [Medium](http://www.medium.com/@sebastianboehler)

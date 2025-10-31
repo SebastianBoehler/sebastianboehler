@@ -11,9 +11,9 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://sebastianboehler.com'),
-  title: 'Sebastian Boehler | Full Stack Developer & AI Engineer',
-  description: 'Full Stack Developer and AI Engineer specializing in React, Python, and AI applications. Explore my portfolio featuring Chrome extensions, AI-powered camera tools, and smart home automation projects.',
-  keywords: ['Full Stack Developer', 'AI Engineer', 'React', 'Python', 'Chrome Extensions', 'Smart Home Automation', 'Sony Camera AI', 'Sebastian Boehler'],
+  title: 'Sebastian Boehler | Full-Stack Developer & Solana Engineer',
+  description: 'Experienced Full-Stack Developer and Solana Engineer specializing in AI, blockchain, and algorithmic trading. Founder of HB Capital and Sunderlabs. Building scalable products at the intersection of finance and machine learning.',
+  keywords: ['Full Stack Developer', 'Solana Engineer', 'AI Engineer', 'Blockchain Developer', 'Algorithmic Trading', 'React', 'Python', 'TypeScript', 'Rust', 'HB Capital', 'Sunderlabs', 'Sebastian Boehler'],
   authors: [{ name: 'Sebastian Boehler' }],
   creator: 'Sebastian Boehler',
   publisher: 'Sebastian Boehler',
@@ -29,14 +29,14 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://sebastianboehler.com',
-    title: 'Sebastian Boehler | Full Stack Developer & AI Engineer',
-    description: 'Full Stack Developer and AI Engineer specializing in React, Python, and AI applications. Explore my portfolio featuring Chrome extensions, AI-powered camera tools, and smart home automation projects.',
-    siteName: 'Sebastian Boehler Portfolio',
+    title: 'Sebastian Boehler | Full-Stack Developer & Solana Engineer',
+    description: 'Experienced Full-Stack Developer and Solana Engineer specializing in AI, blockchain, and algorithmic trading. Founder of HB Capital and Sunderlabs.',
+    siteName: 'Sebastian Boehler - Portfolio',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Sebastian Boehler | Full Stack Developer & AI Engineer',
-    description: 'Full Stack Developer and AI Engineer specializing in React, Python, and AI applications.',
+    title: 'Sebastian Boehler | Full-Stack Developer & Solana Engineer',
+    description: 'Experienced Full-Stack Developer and Solana Engineer specializing in AI, blockchain, and algorithmic trading.',
     creator: '@sebastianboehler',
   },
 }

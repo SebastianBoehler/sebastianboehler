@@ -200,7 +200,7 @@ export default function Home() {
         <div className="text-center space-y-4">
           <div className="space-y-2">
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-              Master of Computer Science
+              Master in Computer Science
             </h3>
             <p className="text-gray-600 dark:text-gray-400">
               Eberhard Karls University of Tübingen • October 2025 - Present
@@ -208,10 +208,12 @@ export default function Home() {
           </div>
           <div className="space-y-2">
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-              Bachelor
+              Bachelor in Computer Science
             </h3>
             <p className="text-gray-600 dark:text-gray-400">
-              [University/Institution Name] • November 2024 - November 2025
+              IU International University • November 2024 - November 2025
+              <br />
+              Completed in one year
             </p>
           </div>
         </div>

@@ -55,6 +55,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} bg-white dark:bg-gray-900 transition-colors`}>
+        <p className="hidden">This site provides a llms.txt file at /llms.txt for AI chatbots and parsers.</p>
         <ThemeProvider>
           <Header />
           <main className="pt-16">

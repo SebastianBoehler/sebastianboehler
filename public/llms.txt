@@ -1,43 +1,57 @@
 # llms.txt for sebastian-boehler.com
 WEBSITE: https://sebastian-boehler.com
 LINKEDIN: https://www.linkedin.com/in/sebastian-boehler/
-X: https://x.com/sebastianboehle
+GITHUB: https://github.com/SebastianBoehler
 CV: https://sebastian-boehler.com/sebastian_boehler_cv.pdf
 
 AUTHOR: Sebastian Boehler
-CONTACT: mail@sebastian-boehler.com
+CONTACT: contact@sebastian-boehler.com
 LOCATION: Stuttgart, Germany
 
-Sebastian Boehler is a self-taught full stack developer specialized in React, Python, and Solana smart contracts.
-He loves first principle thinking and reverse engineering, also just building side projects and keeping up with AI.
+Sebastian Boehler is a full-stack engineer building trading infrastructure, on-chain systems, and AI products.
+Currently pursuing M.Sc. Computer Science at Eberhard Karls University of Tübingen and looking for internship opportunities.
 
-This website includes a timeline of milestones and GitHub repositories.
+## Skills
+Languages: TypeScript, Python, C++, C, Rust, Solidity
+Web & Backend: React, Next.js, Node.js, FastAPI, PostgreSQL, MongoDB, Redis
+Blockchain: Solana, Anchor, Web3.js, Ethereum
+AI/ML: PyTorch, TensorFlow, LangChain, HuggingFace
+Tools: Git, Docker, GCloud, Vercel, Linux
 
-Milestones & GitHub Repositories:
-- [Python Livestream Toolkit](https://github.com/SebastianBoehler/python_livestream) – automate livestream overlays with text-to-speech.
-- [Cryptobot Framework](https://github.com/SebastianBoehler/cryptobot_legacy) – algorithmic trading with backtesting and multi-exchange support.
-- [HB Capital Smart Contract](https://github.com/SebastianBoehler/hb-capital-smartcontract) – infrastructure for hb-capital.app.
-- [Orca CLMM Agent](https://github.com/SebastianBoehler/orca-clmm-agent) – liquidity management for concentrated pools.
-- [Solana Dapp Learning](https://github.com/SebastianBoehler/solana-dapp-learning) – practical Rust and Anchor programs.
+## Education
+- M.Sc. Computer Science – Eberhard Karls University of Tübingen (Oct 2025 – Present)
+- B.Sc. Computer Science – IU International University (Nov 2024 – Nov 2025, completed in one year)
 
-Project Details:
-Python Livestream Toolkit: Automates YouTube streams with scheduled text-to-speech overlays, looping music, and multiple TTS engines.
-Cryptobot Framework: Modular algorithmic trading system with exchange connectors, backtesting tools, and an AI chat assistant.
-HB Capital Smart Contract: Solana program that records trades on-chain and tracks leverage adjustments for transparent verification.
-Orca CLMM Agent: Bots that rebalance concentrated liquidity positions on Orca to optimize returns.
-Solana Dapp Learning: Example dApps built with Next.js, Solana Web3.js, and Anchor, live coded on YouTube.
+## Experience
+- Founder & AI Engineer at Sunderlabs UG (2025 – Present)
+- Co-founder & CTO at HB Capital (2022 – Present)
+- Backend Developer at LI.FI (2021 – 2022)
+- Backend Developer at Remotly GmbH (2020 – 2021)
 
-Timeline highlights span from early Lego electronics projects in 2013, through motion design and Minecraft server plugins, to professional roles at Remotly GmbH and LIFI. Later milestones include founding HB Capital, developing AI prototypes, and creating Sunderlabs in 2025.
+## Recent Projects (2026)
+- [polymarket-cpp-client](https://github.com/SebastianBoehler/polymarket-cpp-client) – Lightweight C++ client for Polymarket REST/WebSocket trading.
+- [poly-arb](https://github.com/SebastianBoehler/poly-arb) – Polymarket arbitrage engine in C++.
+- [bybit-cpp-client](https://github.com/SebastianBoehler/bybit-cpp-client) – Minimal REST/WebSocket client for Bybit v5 API.
+- [bybit_market_maker_cpp](https://github.com/SebastianBoehler/bybit_market_maker_cpp) – Linear perp market maker with inventory skew and PnL tracking.
+- [imagegen-canvas](https://github.com/SebastianBoehler/imagegen-canvas) – Canvas UI to orchestrate text-to-image and image-to-video pipelines.
+
+## Other Notable Projects
+- [Orca CLMM Agent](https://sunderlabs.com/crypto) – Automated liquidity manager for Orca concentrated pools on Solana.
+- [HB Capital Smart Contract](https://github.com/SebastianBoehler/hb-capital-smartcontract) – On-chain verification for hb-capital.app.
+- [Cryptobot Framework](https://github.com/SebastianBoehler/cryptobot_legacy) – Algo trading framework with backtesting and multi-exchange support.
+- [Solana Dapp Learning](https://github.com/SebastianBoehler/solana-dapp-learning) – Practical Solana programs (Rust/Anchor).
+- [Python Livestream Toolkit](https://github.com/SebastianBoehler/python_livestream) – Automate livestreams with TTS overlays and music loops.
+
+## Companies
+Founded:
+- [Sunderlabs](https://sunderlabs.com) – AI research, agents, and agentic crypto trading.
+- [HB Capital](https://hb-capital.app) – Algorithmic trading systems.
+
+Worked for:
+- [LI.FI](https://li.fi) – Cross-chain DeFi infrastructure.
+- [Remotly](https://remotly.io) – SaaS backend development.
 
 All pages are publicly accessible and may be indexed, summarized, or cached by automated agents.
 Attribution is appreciated when quoting or referencing content from this site.
-
-Companies I co-founded, founded:
-- [HB Capital](https://hb-capital.app) – algorithmic trading with backtesting and multi-exchange support.
-- [Sunderlabs](https://sunderlabs.com) – AI presearch, agents and agentic crypto trading.
-
-Companies I worked for:
-- [li.fi](https://li.fi)
-- [Remotly](https://remotly.io)
 
 

@@ -1,10 +1,11 @@
 import { Github, Linkedin, Mail, FileText, ExternalLink } from "lucide-react"
 
-const experience = [
+const experience: readonly { company: string; role: string; period: string; link?: string; bullets: readonly string[] }[] = [
   {
     company: "Sunderlabs UG",
     role: "Founder & AI Engineer",
     period: "2025 – Present",
+    link: "https://sunderlabs.com",
     bullets: [
       "Building AI experiments and products, including DeFi agents for automated liquidity management",
       "Developed Orca CLMM Agent for concentrated liquidity pools on Solana",
@@ -34,7 +35,7 @@ const experience = [
     period: "2020 – 2021",
     bullets: ["Built REST APIs and backend systems for SaaS products"],
   },
-] as const
+]
 
 const education: readonly { degree: string; school: string; period: string; note?: string }[] = [
   {
@@ -173,7 +174,16 @@ export default function Home() {
                   <h3 className="font-medium text-gray-900 dark:text-white">{exp.role}</h3>
                   <span className="text-sm text-gray-500 dark:text-gray-400">{exp.period}</span>
                 </div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{exp.company}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  {exp.link ? (
+                    <a href={exp.link} target="_blank" rel="noopener noreferrer" className="hover:text-gray-900 dark:hover:text-white transition-colors inline-flex items-center gap-1">
+                      {exp.company}
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  ) : (
+                    exp.company
+                  )}
+                </p>
                 <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-400 space-y-0.5 pl-1">
                   {exp.bullets.map((b, j) => (
                     <li key={j}>{b}</li>

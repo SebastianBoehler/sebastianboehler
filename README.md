@@ -32,3 +32,4 @@ Full‑stack engineer building trading infra, on-chain systems, and AI products.
 - [LinkedIn](https://www.linkedin.com/in/sebastian-boehler/)
 - [Discord](https://discord.com/users/Sebastian#6722)
 - [Medium](http://www.medium.com/@sebastianboehler)
+## Sebastian Boehler - Personal Portfolio\n\nAI-native systems for content creation, music production, publishing, and Solana-native liquidity analysis.

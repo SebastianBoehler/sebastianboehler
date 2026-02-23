@@ -1,4 +1,4 @@
-# Sebastian Boehler
+# Sebastian Boehler.
 
 Full‑stack engineer building trading infra, on-chain systems, and AI products. Stuttgart, Germany. Portfolio: [sebastian-boehler.com](https://sebastian-boehler.com).
 

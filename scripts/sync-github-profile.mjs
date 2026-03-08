@@ -257,7 +257,7 @@ function renderContributionSvg(years) {
   const descendingYears = [...years].sort((a, b) => b.year - a.year)
   const width = 760
   const paddingX = 24
-  const paddingTop = 24
+  const paddingTop = 36
   const labelWidth = 136
   const cell = 8
   const gap = 2

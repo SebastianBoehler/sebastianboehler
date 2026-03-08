@@ -1,4 +1,6 @@
-import { Github, Linkedin, Mail, FileText, ExternalLink } from "lucide-react"
+import { Github, Linkedin, Mail, FileText, ExternalLink, Star } from "lucide-react"
+import ContributionCalendar from "@/components/ContributionCalendar"
+import { getGitHubSnapshot } from "@/lib/github"
 
 const experience: readonly { company: string; role: string; period: string; link?: string; bullets: readonly string[] }[] = [
   {
@@ -59,46 +61,18 @@ const skills = {
   Tools: ["Git", "Docker", "GCloud", "Vercel", "Linux"],
 } as const
 
-const projects = [
-  {
-    title: "polymarket-cpp-client",
-    description: "Lightweight C++ client for Polymarket REST/WebSocket trading",
-    href: "https://github.com/SebastianBoehler/polymarket-cpp-client",
-    tags: ["C++", "Trading"],
-  },
-  {
-    title: "bybit-cpp-client",
-    description: "Minimal REST/WebSocket client for Bybit v5 API",
-    href: "https://github.com/SebastianBoehler/bybit-cpp-client",
-    tags: ["C++", "Trading"],
-  },
-  {
-    title: "bybit_market_maker_cpp",
-    description: "Linear perp market maker with inventory skew and PnL tracking",
-    href: "https://github.com/SebastianBoehler/bybit_market_maker_cpp",
-    tags: ["C++", "Market Making"],
-  },
-  {
-    title: "imagegen-canvas",
-    description: "Canvas UI to orchestrate text-to-image and image-to-video pipelines",
-    href: "https://github.com/SebastianBoehler/imagegen-canvas",
-    tags: ["TypeScript", "AI"],
-  },
-  {
-    title: "Orca CLMM Agent",
-    description: "Automated liquidity manager for Orca concentrated pools",
-    href: "https://sunderlabs.com/crypto",
-    tags: ["Solana", "DeFi"],
-  },
-  {
-    title: "Cryptobot Framework",
-    description: "Algo trading framework with backtesting and multi-exchange support",
-    href: "https://github.com/SebastianBoehler/cryptobot_legacy",
-    tags: ["TypeScript", "Trading"],
-  },
-] as const
+const dateFormatter = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+  timeZone: "UTC",
+})
 
-export default function Home() {
+export const revalidate = 60 * 60 * 24
+
+export default async function Home() {
+  const github = await getGitHubSnapshot()
+
   return (
     <main className="max-w-5xl mx-auto px-6 py-16 space-y-16">
       {/* Header / Hero */}
@@ -110,7 +84,7 @@ export default function Home() {
           <p className="text-lg text-gray-600 dark:text-gray-300">
             Full-stack engineer building trading infrastructure, on-chain systems, and AI products.
             Based in Stuttgart, Germany. Currently pursuing M.Sc. Computer Science at Tübingen and
-            looking for internship opportunities.
+            shipping public work through GitHub and Sunderlabs.
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
             <a
@@ -127,6 +101,40 @@ export default function Home() {
             >
               <Mail size={16} /> Email
             </a>
+          </div>
+          <div className="grid grid-cols-2 gap-3 pt-2 sm:grid-cols-4">
+            <div className="rounded-xl border border-gray-200 dark:border-gray-800 px-4 py-3">
+              <div className="text-2xl font-semibold text-gray-900 dark:text-white">
+                {github.profile.public_repos}
+              </div>
+              <div className="text-xs uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400">
+                Public Repos
+              </div>
+            </div>
+            <div className="rounded-xl border border-gray-200 dark:border-gray-800 px-4 py-3">
+              <div className="text-2xl font-semibold text-gray-900 dark:text-white">
+                {github.profile.followers}
+              </div>
+              <div className="text-xs uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400">
+                Followers
+              </div>
+            </div>
+            <div className="rounded-xl border border-gray-200 dark:border-gray-800 px-4 py-3">
+              <div className="text-2xl font-semibold text-gray-900 dark:text-white">
+                {github.contributionYears[0]?.total.toLocaleString("en-US") ?? "0"}
+              </div>
+              <div className="text-xs uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400">
+                2026 Contributions
+              </div>
+            </div>
+            <div className="rounded-xl border border-gray-200 dark:border-gray-800 px-4 py-3">
+              <div className="text-2xl font-semibold text-gray-900 dark:text-white">
+                {new Date(github.profile.created_at).getUTCFullYear()}
+              </div>
+              <div className="text-xs uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400">
+                GitHub Since
+              </div>
+            </div>
           </div>
         </div>
         <aside className="space-y-3 text-sm text-gray-600 dark:text-gray-400">
@@ -159,6 +167,8 @@ export default function Home() {
           <div className="text-gray-500 dark:text-gray-500">Stuttgart, Germany</div>
         </aside>
       </header>
+
+      <ContributionCalendar years={github.contributionYears} />
 
       {/* Experience & Education - 2 column */}
       <section className="grid md:grid-cols-3 gap-12">
@@ -243,33 +253,35 @@ export default function Home() {
       {/* Projects */}
       <section className="space-y-4">
         <h2 className="text-xl font-semibold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">
-          Selected Projects
+          Current GitHub Work
         </h2>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {projects.map((project) => (
+          {github.recentRepos.map((project) => (
             <a
-              key={project.title}
-              href={project.href}
+              key={project.name}
+              href={project.url}
               target="_blank"
               rel="noopener noreferrer"
               className="group block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-gray-400 dark:hover:border-gray-500 transition-colors"
             >
               <div className="flex items-start justify-between gap-2">
                 <h3 className="font-medium text-gray-900 dark:text-white group-hover:underline">
-                  {project.title}
+                  {project.name}
                 </h3>
                 <ExternalLink size={14} className="text-gray-400 flex-shrink-0 mt-1" />
               </div>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{project.description}</p>
-              <div className="flex flex-wrap gap-1.5 mt-2">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-1.5 py-0.5 text-xs bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded"
-                  >
-                    {tag}
-                  </span>
-                ))}
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{project.summary}</p>
+              <div className="mt-3 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+                <span className="rounded bg-gray-100 px-2 py-1 text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+                  {project.language}
+                </span>
+                <span className="inline-flex items-center gap-1">
+                  <Star size={12} />
+                  {project.stars}
+                </span>
+              </div>
+              <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                Updated {dateFormatter.format(new Date(project.updatedAt))}
               </div>
             </a>
           ))}

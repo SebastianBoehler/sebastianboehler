@@ -263,7 +263,7 @@ function renderContributionSvg(years) {
   const gap = 2
   const cellPitch = cell + gap
   const rowHeight = 72
-  const headerHeight = 84
+  const headerHeight = 104
   const footerHeight = 28
   const gridWidth = cell * 53 + gap * 52
   const chartWidth = labelWidth + gridWidth
@@ -271,6 +271,8 @@ function renderContributionSvg(years) {
   const height = headerHeight + descendingYears.length * rowHeight + footerHeight
   const xOffset = Math.floor((width - panelWidth) / 2)
   const colors = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"]
+  const fontFamily =
+    '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif'
 
   const legend = colors.map((color, index) => {
     const x = xOffset + paddingX + chartWidth - 118 + index * 18
@@ -296,12 +298,17 @@ function renderContributionSvg(years) {
 <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">All GitHub contribution years for ${USERNAME}</title>
   <desc id="desc">Stacked yearly GitHub contribution heatmaps from ${descendingYears.at(-1)?.year ?? ""} to ${descendingYears[0]?.year ?? ""}, newest year first.</desc>
+  <style>
+    text {
+      font-family: ${fontFamily};
+    }
+  </style>
   <rect x="${xOffset}" y="12" width="${panelWidth}" height="${height - 24}" rx="18" fill="#0d1117" stroke="#30363d"/>
   <text x="${xOffset + paddingX}" y="${paddingTop + 6}" fill="#f0f6fc" font-size="20" font-weight="700">GitHub contribution history</text>
   <text x="${xOffset + paddingX}" y="${paddingTop + 28}" fill="#8b949e" font-size="12">All public contribution years stacked in one view. Darker green means heavier activity on GitHub&apos;s own scale for that year.</text>
-  <text x="${xOffset + paddingX}" y="59" fill="#8b949e" font-size="11">Less</text>
+  <text x="${xOffset + paddingX}" y="68" fill="#8b949e" font-size="11">Less</text>
   ${legend.join("\n  ")}
-  <text x="${xOffset + paddingX + chartWidth - 18}" y="59" fill="#8b949e" font-size="11">More</text>
+  <text x="${xOffset + paddingX + chartWidth - 18}" y="68" fill="#8b949e" font-size="11">More</text>
   ${rows.join("\n  ")}
 </svg>
 `

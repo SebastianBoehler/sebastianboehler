@@ -1,34 +1,34 @@
 # Sebastian Boehler
 
-Full‑stack engineer building trading infra, on-chain systems, and AI products. Stuttgart, Germany. Portfolio: [sebastian-boehler.com](https://sebastian-boehler.com).
+Full-stack engineer focused on C++ trading infrastructure, DeFi systems, AI tooling, and product builds. Based in Germany. Building through [Sunderlabs](https://sunderlabs.com) and shipping projects at [sebastian-boehler.com](https://sebastian-boehler.com).
 
-## What I'm building now (2026)
+Public GitHub snapshot as of Mar 8, 2026: 70 public repos, 21 followers, active on GitHub since Apr 19, 2017.
 
-- **[polymarket-cpp-client](https://github.com/SebastianBoehler/polymarket-cpp-client)** – Lightweight C++ client for Polymarket REST/WebSocket trading.
-- **[poly-arb](https://github.com/SebastianBoehler/poly-arb)** – Polymarket arbitrage engine in C++ with shared infra for execution.
-- **[bybit-cpp-client](https://github.com/SebastianBoehler/bybit-cpp-client)** / **[bybit-c-client](https://github.com/SebastianBoehler/bybit-c-client)** – Minimal REST/WebSocket clients for Bybit v5 (C++ and C).
-- **[bybit_market_maker_cpp](https://github.com/SebastianBoehler/bybit_market_maker_cpp)** – Example linear perp market maker with inventory skew and PnL tracking.
+## Contribution history
 
-## AI & product builds
+![Stacked GitHub contribution history](./assets/github-contributions-all-years.svg)
 
-- **[imagegen-canvas](https://github.com/SebastianBoehler/imagegen-canvas)** – Canvas UI to orchestrate text-to-image and image-to-video pipelines.
-- **[inline-options](https://github.com/SebastianBoehler/inline-options)** – Web app to analyze inline options and correlations.
+All years from 2017-2026 are shown in one stacked calendar so the full activity arc is visible at a glance.
 
-## On-chain & DeFi
+## Recent public work
 
-- **Orca CLMM Agent** – Automated liquidity manager for Orca concentrated pools ([sunderlabs.com/crypto](https://sunderlabs.com/crypto)).
-- **[HB Capital Smartcontract](https://github.com/SebastianBoehler/hb-capital-smartcontract)** – On-chain verification for [hb-capital.app](https://hb-capital.app).
-- **[Solana Dapp Learning](https://github.com/SebastianBoehler/solana-dapp-learning)** – Practical Solana programs (Rust/Anchor).
+- **[stuttgart-pulse](https://github.com/SebastianBoehler/stuttgart-pulse)** (TypeScript, updated Mar 8, 2026) - Stuttgart Pulse is a map-first open-source explorer for Stuttgart mobility and air-quality data.
+- **[polymarket-cpp-client](https://github.com/SebastianBoehler/polymarket-cpp-client)** (C++, updated Mar 8, 2026) - Lightweight C++ client for Polymarket APIs with REST and WebSocket support, designed for trading and market data access.
+- **[tue-cli](https://github.com/SebastianBoehler/tue-cli)** (TypeScript, updated Mar 3, 2026) - Interactive CLI for WSI/CG remote workflows with a single entry point
+- **[poly-arb](https://github.com/SebastianBoehler/poly-arb)** (TypeScript, updated Jan 31, 2026) - High-performance Polymarket arbitrage bot written in C++ for low-latency trading.
+- **[bybit-cpp-client](https://github.com/SebastianBoehler/bybit-cpp-client)** (C++, updated Jan 3, 2026) - Lightweight C++ client for Bybit REST v5 with shared signing/HTTP helpers, public/private client split, and examples for linear and spot trading.
+- **[bybit_market_maker_cpp](https://github.com/SebastianBoehler/bybit_market_maker_cpp)** (C++, updated Jan 6, 2026) - C++ market-making example for Bybit linear perpetuals: laddered quotes with inventory skew, TP/optional SL, exposure guard, and fee/funding-aware PnL via private websockets.
 
-## Trading frameworks & tooling
+## Also worth a look
 
-- **[Cryptobot Framework](https://github.com/SebastianBoehler/cryptobot_legacy)** – Algo trading framework with backtesting and multi-exchange support.
-- **[cryptobot-types](https://github.com/SebastianBoehler/cryptobot-types)** – Shared TS types for the trading stack.
-- **[Python Livestream Toolkit](https://github.com/SebastianBoehler/python_livestream)** – Automate livestreams with TTS overlays and music loops.
+- **[imagegen-canvas](https://github.com/SebastianBoehler/imagegen-canvas)** (1 star) - Canvas based interface for using and orchestrating text-to-image, image-text-to-image and image-to-video
+- **[orpheus-podcast](https://github.com/SebastianBoehler/orpheus-podcast)** (4 stars) - Framework for podcast creation with search grounded llms for script generation and open source tts libraries
+- **[domain-check-mcp](https://github.com/SebastianBoehler/domain-check-mcp)** (2 stars) - A Model Context Protocol (MCP) server for checking domain availability using IONOS endpoints
+- **[solana-dapp-learning](https://github.com/SebastianBoehler/solana-dapp-learning)** (5 stars) - Creating my first DAPP on solana with Next.JS
 
-## Socials
+## Links
 
-- [GitHub](https://www.github.com/SebastianBoehler)
+- [Portfolio](https://sebastian-boehler.com)
+- [GitHub](https://github.com/SebastianBoehler)
 - [LinkedIn](https://www.linkedin.com/in/sebastian-boehler/)
-- [Discord](https://discord.com/users/Sebastian#6722)
-- [Medium](http://www.medium.com/@sebastianboehler)
+- [X](https://x.com/sebastianboehle)

@@ -52,8 +52,8 @@ export default function ContributionCalendar({
               </div>
             </div>
 
-            <div className="overflow-x-auto">
-              <div className="inline-grid grid-rows-7 gap-[3px] pb-1" style={{ gridTemplateColumns: "repeat(53, minmax(0, 1fr))" }}>
+            <div className="overflow-x-auto pb-1">
+              <div className="grid w-[528px] min-w-[528px] [grid-template-columns:repeat(53,8px)] [grid-template-rows:repeat(7,8px)] gap-[2px] sm:w-[686px] sm:min-w-[686px] sm:[grid-template-columns:repeat(53,10px)] sm:[grid-template-rows:repeat(7,10px)] sm:gap-[3px]">
                 {Array.from({ length: 53 * 7 }, (_, index) => {
                   const week = Math.floor(index / 7)
                   const day = index % 7
@@ -63,7 +63,7 @@ export default function ContributionCalendar({
                   return (
                     <div
                       key={`${year.year}-${week}-${day}`}
-                      className={`h-2.5 w-2.5 rounded-[2px] ${levelClass}`}
+                      className={`h-2 w-2 rounded-[2px] sm:h-2.5 sm:w-2.5 ${levelClass}`}
                       title={
                         cell
                           ? `${cell.date} · level ${cell.level}`

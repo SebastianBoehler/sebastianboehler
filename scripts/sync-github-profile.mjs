@@ -3,26 +3,16 @@ import path from "node:path"
 
 const USERNAME = "SebastianBoehler"
 const PROFILE_REPO = "sebastianboehler"
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN || process.env.GH_TOKEN
 const API_HEADERS = {
   Accept: "application/vnd.github+json",
   "User-Agent": `${PROFILE_REPO}-profile-sync`,
+  ...(GITHUB_TOKEN ? { Authorization: `Bearer ${GITHUB_TOKEN}` } : {}),
 }
 
 const EXCLUDED_REPO_PATTERNS = [/^sebastianboehler$/i, /^technical-assessment/i]
-const FEATURED_RECENT = [
-  "stuttgart-pulse",
-  "polymarket-cpp-client",
-  "tue-cli",
-  "poly-arb",
-  "bybit-cpp-client",
-  "bybit_market_maker_cpp",
-]
-const FEATURED_HIGHLIGHTS = [
-  "imagegen-canvas",
-  "orpheus-podcast",
-  "domain-check-mcp",
-  "solana-dapp-learning",
-]
+const RECENT_REPO_LIMIT = 6
+const RECENT_COMMIT_LIMIT = 6
 const DATE_FORMATTER = new Intl.DateTimeFormat("en-US", {
   month: "short",
   day: "numeric",
@@ -79,7 +69,11 @@ function isExcludedRepo(repo) {
     return true
   }
 
-  return EXCLUDED_REPO_PATTERNS.some((pattern) => pattern.test(repo.name))
+  return isExcludedRepoName(repo.name)
+}
+
+function isExcludedRepoName(name) {
+  return EXCLUDED_REPO_PATTERNS.some((pattern) => pattern.test(name))
 }
 
 function isUsefulSummary(summary) {
@@ -156,6 +150,10 @@ function extractSummaryFromReadme(readme) {
   }
 
   for (const paragraph of paragraphs) {
+    if (/[:;]\s*$/.test(paragraph)) {
+      continue
+    }
+
     const summary = stripMarkdown(paragraph)
     if (isUsefulSummary(summary)) {
       return summary
@@ -186,42 +184,18 @@ async function buildRepoCards(repos) {
       summary,
       language: repo.language ?? "Code",
       stars: repo.stargazers_count,
-      updatedAt: repo.updated_at,
       createdAt: repo.created_at,
-      topics: repo.topics ?? [],
+      updatedAt: repo.updated_at,
     })
   }
 
   return cards
 }
 
-function pickFeatured(cards, preferredNames, fallbackSorter, limit, excludedNames = new Set()) {
-  const cardMap = new Map(cards.map((card) => [card.name, card]))
-  const selected = []
-  const seen = new Set(excludedNames)
-
-  for (const name of preferredNames) {
-    const card = cardMap.get(name)
-    if (card && !seen.has(card.name)) {
-      selected.push(card)
-      seen.add(card.name)
-    }
-  }
-
-  const fallback = [...cards]
-    .filter((card) => !seen.has(card.name))
-    .sort(fallbackSorter)
-
-  for (const card of fallback) {
-    if (selected.length >= limit) {
-      break
-    }
-
-    selected.push(card)
-    seen.add(card.name)
-  }
-
-  return selected
+function pickRecentRepos(cards, limit) {
+  return [...cards]
+    .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
+    .slice(0, limit)
 }
 
 function getYearBounds(year) {
@@ -253,7 +227,50 @@ async function fetchContributionYear(year) {
   return { year, total, cells }
 }
 
-function renderContributionSvg(years) {
+async function fetchRecentCommits() {
+  const events = await fetchJson(`https://api.github.com/users/${USERNAME}/events/public?per_page=20`)
+  const pushEvents = events
+    .filter((event) => event.type === "PushEvent" && event.payload?.head)
+    .filter((event) => {
+      const [, repoName = ""] = event.repo.name.split("/")
+      return !isExcludedRepoName(repoName)
+    })
+
+  const seen = new Set()
+  const uniquePushes = pushEvents.filter((event) => {
+    const key = `${event.repo.name}:${event.payload.head}`
+    if (seen.has(key)) {
+      return false
+    }
+
+    seen.add(key)
+    return true
+  })
+
+  const commits = await Promise.allSettled(
+    uniquePushes.slice(0, RECENT_COMMIT_LIMIT).map(async (event) => {
+      const [owner, repoName] = event.repo.name.split("/")
+      const sha = event.payload.head
+      const commit = await fetchJson(`https://api.github.com/repos/${owner}/${repoName}/commits/${sha}`)
+
+      return {
+        branch: event.payload.ref?.replace("refs/heads/", "") ?? "main",
+        committedAt: commit.commit?.author?.date ?? event.created_at,
+        message: commit.commit.message.split("\n")[0].trim(),
+        repoName,
+        repoUrl: `https://github.com/${owner}/${repoName}`,
+        sha: commit.sha,
+        url: commit.html_url,
+      }
+    })
+  )
+
+  return commits
+    .flatMap((result) => (result.status === "fulfilled" ? [result.value] : []))
+    .sort((a, b) => new Date(b.committedAt) - new Date(a.committedAt))
+}
+
+function renderContributionSvg(years, theme = "dark") {
   const descendingYears = [...years].sort((a, b) => b.year - a.year)
   const width = 760
   const paddingX = 24
@@ -270,11 +287,26 @@ function renderContributionSvg(years) {
   const panelWidth = chartWidth + paddingX * 2
   const height = headerHeight + descendingYears.length * rowHeight + footerHeight
   const xOffset = Math.floor((width - panelWidth) / 2)
-  const colors = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"]
+  const palette =
+    theme === "light"
+      ? {
+          background: "#f6f8fa",
+          panelStroke: "#d0d7de",
+          bodyText: "#1f2328",
+          mutedText: "#57606a",
+          colors: ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"],
+        }
+      : {
+          background: "#0d1117",
+          panelStroke: "#30363d",
+          bodyText: "#f0f6fc",
+          mutedText: "#8b949e",
+          colors: ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"],
+        }
   const fontFamily =
     '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif'
 
-  const legend = colors.map((color, index) => {
+  const legend = palette.colors.map((color, index) => {
     const x = xOffset + paddingX + chartWidth - 118 + index * 18
     return `<rect x="${x}" y="50" width="10" height="10" rx="2" fill="${color}" />`
   })
@@ -284,12 +316,12 @@ function renderContributionSvg(years) {
     const cells = yearData.cells.map((entry) => {
       const x = xOffset + paddingX + labelWidth + entry.week * cellPitch
       const y = rowY + 8 + entry.day * cellPitch
-      return `<rect x="${x}" y="${y}" width="${cell}" height="${cell}" rx="2" fill="${colors[entry.level]}" />`
+      return `<rect x="${x}" y="${y}" width="${cell}" height="${cell}" rx="2" fill="${palette.colors[entry.level]}" />`
     })
 
     return [
-      `<text x="${xOffset + paddingX}" y="${rowY + 22}" fill="#f0f6fc" font-size="15" font-weight="700">${yearData.year}</text>`,
-      `<text x="${xOffset + paddingX}" y="${rowY + 40}" fill="#8b949e" font-size="11">${yearData.total.toLocaleString("en-US")} contributions</text>`,
+      `<text x="${xOffset + paddingX}" y="${rowY + 22}" fill="${palette.bodyText}" font-size="15" font-weight="700">${yearData.year}</text>`,
+      `<text x="${xOffset + paddingX}" y="${rowY + 40}" fill="${palette.mutedText}" font-size="11">${yearData.total.toLocaleString("en-US")} contributions</text>`,
       ...cells,
     ]
   })
@@ -303,18 +335,18 @@ function renderContributionSvg(years) {
       font-family: ${fontFamily};
     }
   </style>
-  <rect x="${xOffset}" y="12" width="${panelWidth}" height="${height - 24}" rx="18" fill="#0d1117" stroke="#30363d"/>
-  <text x="${xOffset + paddingX}" y="${paddingTop + 6}" fill="#f0f6fc" font-size="20" font-weight="700">GitHub contribution history</text>
-  <text x="${xOffset + paddingX}" y="${paddingTop + 28}" fill="#8b949e" font-size="12">All public contribution years stacked in one view. Darker green means heavier activity on GitHub&apos;s own scale for that year.</text>
-  <text x="${xOffset + paddingX}" y="68" fill="#8b949e" font-size="11">Less</text>
+  <rect x="${xOffset}" y="12" width="${panelWidth}" height="${height - 24}" rx="18" fill="${palette.background}" stroke="${palette.panelStroke}"/>
+  <text x="${xOffset + paddingX}" y="${paddingTop + 6}" fill="${palette.bodyText}" font-size="20" font-weight="700">GitHub contribution history</text>
+  <text x="${xOffset + paddingX}" y="${paddingTop + 28}" fill="${palette.mutedText}" font-size="12">All public contribution years stacked in one view. Darker green means heavier activity on GitHub&apos;s own scale for that year.</text>
+  <text x="${xOffset + paddingX}" y="68" fill="${palette.mutedText}" font-size="11">Less</text>
   ${legend.join("\n  ")}
-  <text x="${xOffset + paddingX + chartWidth - 18}" y="68" fill="#8b949e" font-size="11">More</text>
+  <text x="${xOffset + paddingX + chartWidth - 18}" y="68" fill="${palette.mutedText}" font-size="11">More</text>
   ${rows.join("\n  ")}
 </svg>
 `
 }
 
-function buildReadme({ profile, recent, highlights, contributions }) {
+function buildReadme({ profile, recent, recentCommits, contributions }) {
   const generatedOn = DATE_FORMATTER.format(new Date())
   const contributionRange = `${contributions[0].year}-${contributions.at(-1).year}`
   const recentSection = recent
@@ -324,10 +356,10 @@ function buildReadme({ profile, recent, highlights, contributions }) {
     )
     .join("\n")
 
-  const highlightSection = highlights
+  const commitSection = recentCommits
     .map(
-      (repo) =>
-        `- **[${repo.name}](${repo.url})** (${repo.stars} ${repo.stars === 1 ? "star" : "stars"}) - ${repo.summary}`
+      (commit) =>
+        `- **[${commit.repoName}](${commit.repoUrl})** \`${commit.sha.slice(0, 7)}\` on \`${commit.branch}\` (${formatDate(commit.committedAt)}) - [${commit.message}](${commit.url})`
     )
     .join("\n")
 
@@ -339,7 +371,11 @@ Public GitHub snapshot as of ${generatedOn}: ${profile.public_repos} public repo
 
 ## Contribution history
 
-![Stacked GitHub contribution history](./assets/github-contributions-all-years.svg)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/github-contributions-all-years-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/github-contributions-all-years-light.svg">
+  <img alt="Stacked GitHub contribution history" src="./assets/github-contributions-all-years-light.svg">
+</picture>
 
 All years from ${contributionRange} are shown in one stacked calendar so the full activity arc is visible at a glance.
 
@@ -347,9 +383,9 @@ All years from ${contributionRange} are shown in one stacked calendar so the ful
 
 ${recentSection}
 
-## Also worth a look
+## Latest public commits
 
-${highlightSection}
+${commitSection}
 
 ## Links
 
@@ -361,63 +397,38 @@ ${highlightSection}
 }
 
 async function main() {
-  const [profile, repos] = await Promise.all([
+  const [profile, repos, recentCommits] = await Promise.all([
     fetchJson(`https://api.github.com/users/${USERNAME}`),
     fetchJson(`https://api.github.com/users/${USERNAME}/repos?per_page=100&sort=updated`),
+    fetchRecentCommits(),
   ])
 
   const filteredRepos = repos.filter((repo) => !isExcludedRepo(repo))
-  const featuredNames = new Set([...FEATURED_RECENT, ...FEATURED_HIGHLIGHTS])
-  const candidateRepos = [
-    ...filteredRepos.filter((repo) => featuredNames.has(repo.name)),
-    ...filteredRepos
-      .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
-      .slice(0, 18),
-    ...filteredRepos
-      .sort((a, b) => {
-        if (b.stargazers_count !== a.stargazers_count) {
-          return b.stargazers_count - a.stargazers_count
-        }
-        return new Date(b.updated_at) - new Date(a.updated_at)
-      })
-      .slice(0, 16),
-  ].filter((repo, index, list) => list.findIndex((entry) => entry.name === repo.name) === index)
+  const candidateRepos = [...filteredRepos]
+    .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
+    .slice(0, 24)
 
   const repoCards = await buildRepoCards(candidateRepos)
-  const recent = pickFeatured(
-    repoCards,
-    FEATURED_RECENT,
-    (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt),
-    6
-  )
-  const highlights = pickFeatured(
-    repoCards,
-    FEATURED_HIGHLIGHTS,
-    (a, b) => {
-      if (b.stars !== a.stars) {
-        return b.stars - a.stars
-      }
-      return new Date(b.updatedAt) - new Date(a.updatedAt)
-    },
-    4,
-    new Set(recent.map((repo) => repo.name))
-  )
+  const recent = pickRecentRepos(repoCards, RECENT_REPO_LIMIT)
   const startYear = new Date(profile.created_at).getUTCFullYear()
   const endYear = new Date().getUTCFullYear()
   const contributionYears = await Promise.all(
     Array.from({ length: endYear - startYear + 1 }, (_, offset) => fetchContributionYear(startYear + offset))
   )
 
-  const svg = renderContributionSvg(contributionYears)
+  const darkSvg = renderContributionSvg(contributionYears, "dark")
+  const lightSvg = renderContributionSvg(contributionYears, "light")
   const readme = buildReadme({
     profile,
     recent,
-    highlights,
+    recentCommits,
     contributions: contributionYears,
   })
 
   await mkdir(path.resolve("assets"), { recursive: true })
-  await writeFile(path.resolve("assets/github-contributions-all-years.svg"), svg)
+  await writeFile(path.resolve("assets/github-contributions-all-years.svg"), darkSvg)
+  await writeFile(path.resolve("assets/github-contributions-all-years-dark.svg"), darkSvg)
+  await writeFile(path.resolve("assets/github-contributions-all-years-light.svg"), lightSvg)
   await writeFile(path.resolve("README.md"), readme)
 }
 

@@ -1,19 +1,16 @@
 const USERNAME = "SebastianBoehler"
+const FETCH_REVALIDATE_SECONDS = 60 * 60
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN || process.env.GH_TOKEN
 
 const API_HEADERS = {
   Accept: "application/vnd.github+json",
   "User-Agent": "sebastianboehler-portfolio",
+  ...(GITHUB_TOKEN ? { Authorization: `Bearer ${GITHUB_TOKEN}` } : {}),
 }
 
 const EXCLUDED_REPO_PATTERNS = [/^sebastianboehler$/i, /^technical-assessment/i]
-const FEATURED_RECENT = [
-  "stuttgart-pulse",
-  "polymarket-cpp-client",
-  "tue-cli",
-  "poly-arb",
-  "bybit-cpp-client",
-  "bybit_market_maker_cpp",
-]
+const RECENT_REPO_LIMIT = 6
+const RECENT_COMMIT_LIMIT = 6
 
 export type GitHubProfile = {
   name: string
@@ -34,6 +31,7 @@ export type RepoCard = {
   summary: string
   language: string
   stars: number
+  createdAt: string
   updatedAt: string
 }
 
@@ -51,9 +49,21 @@ export type ContributionYear = {
 }
 
 export type GitHubSnapshot = {
+  currentYear: number
   profile: GitHubProfile
   recentRepos: RepoCard[]
+  recentCommits: RecentCommit[]
   contributionYears: ContributionYear[]
+}
+
+export type RecentCommit = {
+  branch: string
+  committedAt: string
+  message: string
+  repoName: string
+  repoUrl: string
+  sha: string
+  url: string
 }
 
 type GitHubRepo = {
@@ -69,10 +79,33 @@ type GitHubRepo = {
   archived: boolean
 }
 
+type GitHubEvent = {
+  type: string
+  created_at: string
+  repo: {
+    name: string
+  }
+  payload: {
+    head?: string
+    ref?: string
+  }
+}
+
+type GitHubCommit = {
+  html_url: string
+  sha: string
+  commit: {
+    author?: {
+      date?: string
+    }
+    message: string
+  }
+}
+
 async function fetchJson<T>(url: string): Promise<T> {
   const response = await fetch(url, {
     headers: API_HEADERS,
-    next: { revalidate: 60 * 60 * 24 },
+    next: { revalidate: FETCH_REVALIDATE_SECONDS },
   })
 
   if (!response.ok) {
@@ -85,7 +118,7 @@ async function fetchJson<T>(url: string): Promise<T> {
 async function fetchText(url: string): Promise<string> {
   const response = await fetch(url, {
     headers: API_HEADERS,
-    next: { revalidate: 60 * 60 * 24 },
+    next: { revalidate: FETCH_REVALIDATE_SECONDS },
   })
 
   if (!response.ok) {
@@ -117,7 +150,11 @@ function isExcludedRepo(repo: GitHubRepo) {
     return true
   }
 
-  return EXCLUDED_REPO_PATTERNS.some((pattern) => pattern.test(repo.name))
+  return isExcludedRepoName(repo.name)
+}
+
+function isExcludedRepoName(name: string) {
+  return EXCLUDED_REPO_PATTERNS.some((pattern) => pattern.test(name))
 }
 
 function extractSummaryFromReadme(readme: string) {
@@ -168,6 +205,10 @@ function extractSummaryFromReadme(readme: string) {
   }
 
   for (const paragraph of paragraphs) {
+    if (/[:;]\s*$/.test(paragraph)) {
+      continue
+    }
+
     const summary = stripMarkdown(paragraph)
     if (isUsefulSummary(summary)) {
       return summary
@@ -221,6 +262,7 @@ async function buildRepoCards(repos: GitHubRepo[]) {
       summary: finalSummary,
       language: repo.language ?? "Code",
       stars: repo.stargazers_count,
+      createdAt: repo.created_at,
       updatedAt: repo.updated_at,
     })
   }
@@ -228,31 +270,10 @@ async function buildRepoCards(repos: GitHubRepo[]) {
   return cards
 }
 
-function pickFeatured(cards: RepoCard[], featuredNames: string[], limit: number) {
-  const cardMap = new Map(cards.map((card) => [card.name, card]))
-  const selected: RepoCard[] = []
-  const seen = new Set<string>()
-
-  for (const name of featuredNames) {
-    const card = cardMap.get(name)
-    if (card && !seen.has(card.name)) {
-      selected.push(card)
-      seen.add(card.name)
-    }
-  }
-
-  for (const card of cards.sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt))) {
-    if (selected.length >= limit) {
-      break
-    }
-
-    if (!seen.has(card.name)) {
-      selected.push(card)
-      seen.add(card.name)
-    }
-  }
-
-  return selected
+function pickRecentRepos(cards: RepoCard[], limit: number) {
+  return [...cards]
+    .sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt))
+    .slice(0, limit)
 }
 
 function getYearBounds(year: number) {
@@ -289,28 +310,79 @@ async function fetchContributionYear(year: number): Promise<ContributionYear> {
   return { year, total, cells }
 }
 
+async function fetchRecentCommits(): Promise<RecentCommit[]> {
+  const events = await fetchJson<GitHubEvent[]>(
+    `https://api.github.com/users/${USERNAME}/events/public?per_page=20`
+  )
+
+  const pushEvents = events
+    .filter((event) => event.type === "PushEvent" && event.payload.head)
+    .filter((event) => {
+      const [, repoName = ""] = event.repo.name.split("/")
+      return !isExcludedRepoName(repoName)
+    })
+
+  const seen = new Set<string>()
+  const uniquePushes = pushEvents.filter((event) => {
+    const key = `${event.repo.name}:${event.payload.head}`
+    if (seen.has(key)) {
+      return false
+    }
+
+    seen.add(key)
+    return true
+  })
+
+  const commits = await Promise.allSettled(
+    uniquePushes.slice(0, RECENT_COMMIT_LIMIT).map(async (event) => {
+      const [owner, repoName] = event.repo.name.split("/")
+      const sha = event.payload.head!
+      const branch = event.payload.ref?.replace("refs/heads/", "") ?? "main"
+      const commit = await fetchJson<GitHubCommit>(
+        `https://api.github.com/repos/${owner}/${repoName}/commits/${sha}`
+      )
+
+      return {
+        branch,
+        committedAt: commit.commit.author?.date ?? event.created_at,
+        message: commit.commit.message.split("\n")[0].trim(),
+        repoName,
+        repoUrl: `https://github.com/${owner}/${repoName}`,
+        sha: commit.sha,
+        url: commit.html_url,
+      } satisfies RecentCommit
+    })
+  )
+
+  return commits
+    .flatMap((result) => (result.status === "fulfilled" ? [result.value] : []))
+    .sort((a, b) => Date.parse(b.committedAt) - Date.parse(a.committedAt))
+}
+
 export async function getGitHubSnapshot(): Promise<GitHubSnapshot> {
-  const [profile, repos] = await Promise.all([
+  const [profile, repos, recentCommits] = await Promise.all([
     fetchJson<GitHubProfile>(`https://api.github.com/users/${USERNAME}`),
     fetchJson<GitHubRepo[]>(`https://api.github.com/users/${USERNAME}/repos?per_page=100&sort=updated`),
+    fetchRecentCommits(),
   ])
 
   const filteredRepos = repos.filter((repo) => !isExcludedRepo(repo))
-  const candidateRepos = [
-    ...filteredRepos.filter((repo) => FEATURED_RECENT.includes(repo.name)),
-    ...filteredRepos.sort((a, b) => Date.parse(b.updated_at) - Date.parse(a.updated_at)).slice(0, 16),
-  ].filter((repo, index, list) => list.findIndex((entry) => entry.name === repo.name) === index)
+  const candidateRepos = [...filteredRepos]
+    .sort((a, b) => Date.parse(b.updated_at) - Date.parse(a.updated_at))
+    .slice(0, 24)
 
   const repoCards = await buildRepoCards(candidateRepos)
-  const recentRepos = pickFeatured(repoCards, FEATURED_RECENT, 6)
+  const recentRepos = pickRecentRepos(repoCards, RECENT_REPO_LIMIT)
 
   const startYear = new Date(profile.created_at).getUTCFullYear()
-  const endYear = new Date().getUTCFullYear()
+  const currentYear = new Date().getUTCFullYear()
   const contributionYears = await Promise.all(
-    Array.from({ length: endYear - startYear + 1 }, (_, offset) => fetchContributionYear(startYear + offset))
+    Array.from({ length: currentYear - startYear + 1 }, (_, offset) =>
+      fetchContributionYear(startYear + offset)
+    )
   )
 
   contributionYears.sort((a, b) => b.year - a.year)
 
-  return { profile, recentRepos, contributionYears }
+  return { currentYear, profile, recentRepos, recentCommits, contributionYears }
 }

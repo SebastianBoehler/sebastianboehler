@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, FileText, ExternalLink, Star } from "lucide-react"
+import { Github, Linkedin, Mail, FileText, ExternalLink, Star, GitCommitHorizontal } from "lucide-react"
 import ContributionCalendar from "@/components/ContributionCalendar"
 import { getGitHubSnapshot } from "@/lib/github"
 
@@ -68,10 +68,14 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
   timeZone: "UTC",
 })
 
-export const revalidate = 60 * 60 * 24
+export const revalidate = 60 * 60
 
 export default async function Home() {
   const github = await getGitHubSnapshot()
+  const currentYearContributions =
+    github.contributionYears.find((year) => year.year === github.currentYear)?.total ?? 0
+  const isNewRepo = (createdAt: string) =>
+    Date.now() - new Date(createdAt).getTime() <= 1000 * 60 * 60 * 24 * 14
 
   return (
     <main className="max-w-5xl mx-auto px-6 py-16 space-y-16">
@@ -121,10 +125,10 @@ export default async function Home() {
             </div>
             <div className="rounded-xl border border-gray-200 dark:border-gray-800 px-4 py-3">
               <div className="text-2xl font-semibold text-gray-900 dark:text-white">
-                {github.contributionYears[0]?.total.toLocaleString("en-US") ?? "0"}
+                {currentYearContributions.toLocaleString("en-US")}
               </div>
               <div className="text-xs uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400">
-                2026 Contributions
+                {github.currentYear} Contributions
               </div>
             </div>
             <div className="rounded-xl border border-gray-200 dark:border-gray-800 px-4 py-3">
@@ -253,7 +257,7 @@ export default async function Home() {
       {/* Projects */}
       <section className="space-y-4">
         <h2 className="text-xl font-semibold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">
-          Current GitHub Work
+          Latest GitHub Repositories
         </h2>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
           {github.recentRepos.map((project) => (
@@ -265,9 +269,16 @@ export default async function Home() {
               className="group block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-gray-400 dark:hover:border-gray-500 transition-colors"
             >
               <div className="flex items-start justify-between gap-2">
-                <h3 className="font-medium text-gray-900 dark:text-white group-hover:underline">
-                  {project.name}
-                </h3>
+                <div className="space-y-2">
+                  <h3 className="font-medium text-gray-900 dark:text-white group-hover:underline">
+                    {project.name}
+                  </h3>
+                  {isNewRepo(project.createdAt) && (
+                    <span className="inline-flex items-center rounded-full bg-emerald-100 px-2 py-0.5 text-[11px] font-medium text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300">
+                      New
+                    </span>
+                  )}
+                </div>
                 <ExternalLink size={14} className="text-gray-400 flex-shrink-0 mt-1" />
               </div>
               <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{project.summary}</p>
@@ -296,6 +307,43 @@ export default async function Home() {
             View all projects on GitHub →
           </a>
         </p>
+      </section>
+
+      <section className="space-y-4">
+        <div className="border-b border-gray-200 dark:border-gray-700 pb-2">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+            Latest Public Commits
+          </h2>
+          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+            Recent push activity from public repositories, revalidated hourly.
+          </p>
+        </div>
+        <div className="rounded-2xl border border-gray-200 dark:border-gray-800 divide-y divide-gray-200 dark:divide-gray-800">
+          {github.recentCommits.map((commit) => (
+            <a
+              key={`${commit.repoName}-${commit.sha}`}
+              href={commit.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col gap-3 px-5 py-4 transition-colors hover:bg-gray-50 dark:hover:bg-gray-900/50 sm:flex-row sm:items-start sm:justify-between"
+            >
+              <div className="min-w-0 space-y-1.5">
+                <div className="flex items-center gap-2 text-sm font-medium text-gray-900 dark:text-white">
+                  <GitCommitHorizontal size={15} className="text-gray-400" />
+                  <span className="truncate group-hover:underline">{commit.message}</span>
+                </div>
+                <div className="flex flex-wrap items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                  <span className="font-medium text-gray-700 dark:text-gray-300">{commit.repoName}</span>
+                  <span>#{commit.sha.slice(0, 7)}</span>
+                  <span>{commit.branch}</span>
+                </div>
+              </div>
+              <div className="flex-shrink-0 text-xs text-gray-500 dark:text-gray-400">
+                {dateFormatter.format(new Date(commit.committedAt))}
+              </div>
+            </a>
+          ))}
+        </div>
       </section>
 
       {/* Contact */}

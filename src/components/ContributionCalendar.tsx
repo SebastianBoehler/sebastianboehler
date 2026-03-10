@@ -1,11 +1,11 @@
 import type { ContributionYear } from "@/lib/github"
 
 const LEVEL_CLASSES = [
-  "bg-[#161b22]",
-  "bg-[#0e4429]",
-  "bg-[#006d32]",
-  "bg-[#26a641]",
-  "bg-[#39d353]",
+  "bg-[#ebedf0] dark:bg-[#161b22]",
+  "bg-[#9be9a8] dark:bg-[#0e4429]",
+  "bg-[#40c463] dark:bg-[#006d32]",
+  "bg-[#30a14e] dark:bg-[#26a641]",
+  "bg-[#216e39] dark:bg-[#39d353]",
 ] as const
 
 export default function ContributionCalendar({
@@ -14,21 +14,21 @@ export default function ContributionCalendar({
   years: ContributionYear[]
 }) {
   return (
-    <div className="rounded-3xl border border-[#30363d] bg-[#0d1117] p-5 text-white shadow-[0_20px_80px_rgba(0,0,0,0.28)] sm:p-7">
-      <div className="flex flex-col gap-3 border-b border-[#21262d] pb-5 sm:flex-row sm:items-end sm:justify-between">
+    <div className="rounded-3xl border border-[#d0d7de] bg-[#f6f8fa] p-5 text-[#1f2328] shadow-[0_20px_80px_rgba(15,23,42,0.08)] dark:border-[#30363d] dark:bg-[#0d1117] dark:text-white dark:shadow-[0_20px_80px_rgba(0,0,0,0.28)] sm:p-7">
+      <div className="flex flex-col gap-3 border-b border-[#d8dee4] pb-5 dark:border-[#21262d] sm:flex-row sm:items-end sm:justify-between">
         <div className="space-y-1">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#7d8590]">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#656d76] dark:text-[#7d8590]">
             GitHub Activity
           </p>
-          <h2 className="text-2xl font-semibold tracking-tight text-[#f0f6fc]">
+          <h2 className="text-2xl font-semibold tracking-tight text-[#1f2328] dark:text-[#f0f6fc]">
             Contribution history across all years
           </h2>
-          <p className="max-w-2xl text-sm text-[#8b949e]">
+          <p className="max-w-2xl text-sm text-[#57606a] dark:text-[#8b949e]">
             Same GitHub-style calendar view, stacked year by year so the full activity arc is visible
             at a glance.
           </p>
         </div>
-        <div className="flex items-center gap-2 text-xs text-[#8b949e]">
+        <div className="flex items-center gap-2 text-xs text-[#57606a] dark:text-[#8b949e]">
           <span>Less</span>
           {LEVEL_CLASSES.map((levelClass) => (
             <span key={levelClass} className={`h-2.5 w-2.5 rounded-[2px] ${levelClass}`} />
@@ -41,12 +41,12 @@ export default function ContributionCalendar({
         {years.map((year) => (
           <div
             key={year.year}
-            className="rounded-2xl border border-[#21262d] bg-[#0b1118]/70 p-4 sm:p-5"
+            className="rounded-2xl border border-[#d8dee4] bg-white/80 p-4 dark:border-[#21262d] dark:bg-[#0b1118]/70 sm:p-5"
           >
             <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
               <div>
-                <h3 className="text-lg font-semibold text-[#f0f6fc]">{year.year}</h3>
-                <p className="text-sm text-[#8b949e]">
+                <h3 className="text-lg font-semibold text-[#1f2328] dark:text-[#f0f6fc]">{year.year}</h3>
+                <p className="text-sm text-[#57606a] dark:text-[#8b949e]">
                   {year.total.toLocaleString("en-US")} contributions
                 </p>
               </div>

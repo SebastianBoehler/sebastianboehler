@@ -1,8 +1,8 @@
 # Sebastian Boehler
 
-Full-stack engineer focused on C++ trading infrastructure, DeFi systems, AI tooling, and product builds. Based in Germany. Building through [Sunderlabs](https://sunderlabs.com) and shipping projects at [sebastian-boehler.com](https://sebastian-boehler.com).
+Engineer shipping agent tooling, trading infrastructure, on-chain systems, and research software. Based in Germany. Building through [Sunderlabs](https://sunderlabs.com) and shipping projects at [sebastian-boehler.com](https://sebastian-boehler.com).
 
-Public GitHub snapshot as of Mar 10, 2026: 73 public repos, 21 followers, active on GitHub since Apr 19, 2017.
+Public GitHub snapshot as of Mar 12, 2026: 74 public repos, 21 followers, active on GitHub since Apr 19, 2017.
 
 ## Contribution history
 
@@ -14,23 +14,30 @@ Public GitHub snapshot as of Mar 10, 2026: 73 public repos, 21 followers, active
 
 All years from 2017-2026 are shown in one stacked calendar so the full activity arc is visible at a glance.
 
+## Current focus
+
+- **Agent tooling:** building fast Go CLIs for AI-assisted development workflows, including dependency diagnostics and deterministic file editing.
+- **Autonomous research systems:** shipping production-minded software for closed-loop materials and peptide experimentation.
+- **DeFi execution infrastructure:** evolving treasury automation and approval flows for stablecoin operations and Solana liquidity strategies.
+- **Academic and civic products:** building university tooling and map-first data products across Alma, ILIAS, mobility, and air-quality workflows.
+
 ## Recent public work
 
-- **[tue-api-wrapper](https://github.com/SebastianBoehler/tue-api-wrapper)** (Python, updated Mar 10, 2026) - The goal is straightforward: keep Alma and ILIAS as the source of truth, but build better navigation, search, and summarization layers on top.
-- **[yieldpilot](https://github.com/SebastianBoehler/yieldpilot)** (TypeScript, updated Mar 10, 2026) - Autonomous cross-chain treasury management for stablecoins.
-- **[physics_researcher](https://github.com/SebastianBoehler/physics_researcher)** (Python, updated Mar 10, 2026) - physics_researcher is a production-minded Python monorepo for an autonomous digital materials lab. It combines typed orchestration services, agent tooling, simulation adapters, experiment tracking, and local infrastructure so closed-loop materials or process optimization workflows can be developed, tested, and run from one repository.
-- **[stuttgart-pulse](https://github.com/SebastianBoehler/stuttgart-pulse)** (TypeScript, updated Mar 9, 2026) - Stuttgart Pulse is a map-first open-source explorer for Stuttgart mobility and air-quality data.
-- **[tue-cli](https://github.com/SebastianBoehler/tue-cli)** (TypeScript, updated Mar 8, 2026) - tue opens an interactive menu so you can pick actions and machines directly. The interactive UI supports arrow-key navigation with colorized headings/output.
-- **[data_literacy](https://github.com/SebastianBoehler/data_literacy)** (HTML, updated Mar 8, 2026) - Data Literacy Project — University of Tübingen, Winter 2025/26
+- **[agent-cli-utils](https://github.com/SebastianBoehler/agent-cli-utils)** (Go, updated Mar 12, 2026) - Fast Go CLIs for AI agent workflows, including dependency diagnostics and deterministic file-editing utilities.
+- **[physics_researcher](https://github.com/SebastianBoehler/physics_researcher)** (Python, updated Mar 11, 2026) - Production-minded software for autonomous materials and peptide research with typed orchestration, simulator adapters, and experiment tracking.
+- **[yieldpilot](https://github.com/SebastianBoehler/yieldpilot)** (TypeScript, updated Mar 11, 2026) - ACP-backed treasury operations layer for stablecoin management, wallet automation, and approval flows.
+- **[tue-api-wrapper](https://github.com/SebastianBoehler/tue-api-wrapper)** (Python, updated Mar 10, 2026) - Python tooling that layers cleaner navigation, search, and summarization on top of Alma and ILIAS.
+- **[stuttgart-pulse](https://github.com/SebastianBoehler/stuttgart-pulse)** (TypeScript, updated Mar 9, 2026) - Map-first open-source explorer for Stuttgart mobility and air-quality data.
+- **[tue-cli](https://github.com/SebastianBoehler/tue-cli)** (TypeScript, updated Mar 8, 2026) - Interactive terminal tooling for Tübingen university workflows with menu-driven navigation and colorized output.
 
 ## Latest public commits
 
-- **[yieldpilot](https://github.com/SebastianBoehler/yieldpilot)** `57c740f` on `main` (Mar 10, 2026) - [fix: use solana rpc for wallet portfolio snapshots](https://github.com/SebastianBoehler/yieldpilot/commit/57c740faeb8924be9a968c37bd5a5843449cfd34)
-- **[tue-api-wrapper](https://github.com/SebastianBoehler/tue-api-wrapper)** `aa50799` on `main` (Mar 10, 2026) - [Expand Alma and ILIAS dashboard integration](https://github.com/SebastianBoehler/tue-api-wrapper/commit/aa507993895283f6b66d20ff18e0dbe274bf06ba)
-- **[yieldpilot](https://github.com/SebastianBoehler/yieldpilot)** `36d161a` on `main` (Mar 10, 2026) - [fix: resolve app shell server component boundary](https://github.com/SebastianBoehler/yieldpilot/commit/36d161ae32414888411f6c8a6a0f3886b0d0cb56)
-- **[yieldpilot](https://github.com/SebastianBoehler/yieldpilot)** `769148d` on `main` (Mar 10, 2026) - [feat: improve wallet UX and migrate runtime to bun](https://github.com/SebastianBoehler/yieldpilot/commit/769148d16df2af912cded71969ba4db22b076a42)
-- **[physics_researcher](https://github.com/SebastianBoehler/physics_researcher)** `0a2efce` on `main` (Mar 10, 2026) - [Make optimizer and critic feasibility-aware](https://github.com/SebastianBoehler/physics_researcher/commit/0a2efceec116d18b1956a0a852695f3eb097b4ff)
-- **[physics_researcher](https://github.com/SebastianBoehler/physics_researcher)** `d985a05` on `main` (Mar 10, 2026) - [Fix campaign validation handling](https://github.com/SebastianBoehler/physics_researcher/commit/d985a0510b9708f75428e7ce75d1230bfbca9c3a)
+- **[agent-cli-utils](https://github.com/SebastianBoehler/agent-cli-utils)** `2189ac3` on `main` (Mar 12, 2026) - [Add dependency doctor CLI](https://github.com/SebastianBoehler/agent-cli-utils/commit/2189ac358bf1b8859494bb8fbc4cdf462f8e4066)
+- **[agent-cli-utils](https://github.com/SebastianBoehler/agent-cli-utils)** `f5d41cb` on `main` (Mar 12, 2026) - [Add Codex skills for each CLI](https://github.com/SebastianBoehler/agent-cli-utils/commit/f5d41cb0b7fd43536f79a428805ff3ddb0ff9ad0)
+- **[agent-cli-utils](https://github.com/SebastianBoehler/agent-cli-utils)** `e2604fb` on `main` (Mar 12, 2026) - [Add deterministic file edit CLI](https://github.com/SebastianBoehler/agent-cli-utils/commit/e2604fb33b117658c8f6ee1727071c11a8ec5c06)
+- **[agent-cli-utils](https://github.com/SebastianBoehler/agent-cli-utils)** `05e834a` on `main` (Mar 12, 2026) - [Turn repo into agent CLI toolkit](https://github.com/SebastianBoehler/agent-cli-utils/commit/05e834a713de41256955b2188a613d5b7c52225e)
+- **[agent-cli-utils](https://github.com/SebastianBoehler/agent-cli-utils)** `44a9ed4` on `main` (Mar 12, 2026) - [Update README to reflect binary name: agent-cli-utils](https://github.com/SebastianBoehler/agent-cli-utils/commit/44a9ed4560d56b6f953114550903a2920e1899cf)
+- **[physics_researcher](https://github.com/SebastianBoehler/physics_researcher)** `4cdfc4b` on `main` (Mar 11, 2026) - [Add purpose rankings to peptide research](https://github.com/SebastianBoehler/physics_researcher/commit/4cdfc4b08a03c0790b18aab9ba6c03fa7589dfdb)
 
 ## Links
 

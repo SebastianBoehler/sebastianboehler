@@ -13,6 +13,42 @@ const API_HEADERS = {
 const EXCLUDED_REPO_PATTERNS = [/^sebastianboehler$/i, /^technical-assessment/i]
 const RECENT_REPO_LIMIT = 6
 const RECENT_COMMIT_LIMIT = 6
+const SUMMARY_OVERRIDES = {
+  "agent-cli-utils":
+    "Fast Go CLIs for AI agent workflows, including dependency diagnostics and deterministic file-editing utilities.",
+  physics_researcher:
+    "Production-minded software for autonomous materials and peptide research with typed orchestration, simulator adapters, and experiment tracking.",
+  yieldpilot:
+    "ACP-backed treasury operations layer for stablecoin management, wallet automation, and approval flows.",
+  "tue-api-wrapper":
+    "Python tooling that layers cleaner navigation, search, and summarization on top of Alma and ILIAS.",
+  "stuttgart-pulse":
+    "Map-first open-source explorer for Stuttgart mobility and air-quality data.",
+  "tue-cli":
+    "Interactive terminal tooling for Tübingen university workflows with menu-driven navigation and colorized output.",
+}
+const CURRENT_FOCUS_ITEMS = [
+  {
+    label: "Agent tooling",
+    description:
+      "building fast Go CLIs for AI-assisted development workflows, including dependency diagnostics and deterministic file editing",
+  },
+  {
+    label: "Autonomous research systems",
+    description:
+      "shipping production-minded software for closed-loop materials and peptide experimentation",
+  },
+  {
+    label: "DeFi execution infrastructure",
+    description:
+      "evolving treasury automation and approval flows for stablecoin operations and Solana liquidity strategies",
+  },
+  {
+    label: "Academic and civic products",
+    description:
+      "building university tooling and map-first data products across Alma, ILIAS, mobility, and air-quality workflows",
+  },
+]
 const DATE_FORMATTER = new Intl.DateTimeFormat("en-US", {
   month: "short",
   day: "numeric",
@@ -169,7 +205,7 @@ async function buildRepoCards(repos) {
   const cards = []
 
   for (const repo of candidates) {
-    let summary = stripMarkdown(repo.description ?? "")
+    let summary = SUMMARY_OVERRIDES[repo.name] ?? stripMarkdown(repo.description ?? "")
     if (!isUsefulSummary(summary)) {
       summary = await fetchReadmeSummary(repo)
     }
@@ -349,6 +385,9 @@ function renderContributionSvg(years, theme = "dark") {
 function buildReadme({ profile, recent, recentCommits, contributions }) {
   const generatedOn = DATE_FORMATTER.format(new Date())
   const contributionRange = `${contributions[0].year}-${contributions.at(-1).year}`
+  const currentFocusSection = CURRENT_FOCUS_ITEMS.map(
+    (item) => `- **${item.label}:** ${item.description}.`
+  ).join("\n")
   const recentSection = recent
     .map(
       (repo) =>
@@ -365,7 +404,7 @@ function buildReadme({ profile, recent, recentCommits, contributions }) {
 
   return `# ${profile.name}
 
-Full-stack engineer focused on C++ trading infrastructure, DeFi systems, AI tooling, and product builds. Based in ${profile.location}. Building through [${profile.company}](https://sunderlabs.com) and shipping projects at [sebastian-boehler.com](${profile.blog}).
+Engineer shipping agent tooling, trading infrastructure, on-chain systems, and research software. Based in ${profile.location}. Building through [${profile.company}](https://sunderlabs.com) and shipping projects at [sebastian-boehler.com](${profile.blog}).
 
 Public GitHub snapshot as of ${generatedOn}: ${profile.public_repos} public repos, ${profile.followers} followers, active on GitHub since ${formatDate(profile.created_at)}.
 
@@ -378,6 +417,10 @@ Public GitHub snapshot as of ${generatedOn}: ${profile.public_repos} public repo
 </picture>
 
 All years from ${contributionRange} are shown in one stacked calendar so the full activity arc is visible at a glance.
+
+## Current focus
+
+${currentFocusSection}
 
 ## Recent public work
 

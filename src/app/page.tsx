@@ -9,8 +9,8 @@ const experience: readonly { company: string; role: string; period: string; link
     period: "2025 – Present",
     link: "https://sunderlabs.com",
     bullets: [
-      "Building AI experiments and products, including DeFi agents for automated liquidity management",
-      "Developed Orca CLMM Agent for concentrated liquidity pools on Solana",
+      "Building AI agent tooling, public data products, and DeFi infrastructure across web, CLI, and backend systems",
+      "Shipped treasury automation and concentrated-liquidity agent workflows for Solana and stablecoin operations",
     ],
   },
   {
@@ -54,12 +54,48 @@ const education: readonly { degree: string; school: string; period: string; note
 ]
 
 const skills = {
-  Languages: ["TypeScript", "Python", "C++", "C", "Rust", "Solidity"],
+  Languages: ["TypeScript", "Python", "Go", "C++", "C", "Rust", "Solidity"],
   "Web & Backend": ["React", "Next.js", "Node.js", "FastAPI", "PostgreSQL", "MongoDB", "Redis"],
   Blockchain: ["Solana", "Anchor", "Web3.js", "Ethereum"],
   "AI / ML": ["PyTorch", "TensorFlow", "LangChain", "HuggingFace"],
   Tools: ["Git", "Docker", "GCloud", "Vercel", "Linux"],
 } as const
+
+const currentFocus: readonly {
+  title: string
+  description: string
+  href: string
+  label: string
+}[] = [
+  {
+    title: "Agent Tooling",
+    description:
+      "Building fast Go CLIs for AI-assisted development workflows, including dependency diagnostics and deterministic file editing.",
+    href: "https://github.com/SebastianBoehler/agent-cli-utils",
+    label: "agent-cli-utils",
+  },
+  {
+    title: "Autonomous Research Systems",
+    description:
+      "Developing production-minded software for closed-loop materials and peptide research with typed orchestration, simulator adapters, and experiment tracking.",
+    href: "https://github.com/SebastianBoehler/physics_researcher",
+    label: "physics_researcher",
+  },
+  {
+    title: "DeFi Execution Infrastructure",
+    description:
+      "Evolving treasury automation and approval flows for stablecoin operations, Solana workflows, and concentrated liquidity strategies.",
+    href: "https://github.com/SebastianBoehler/yieldpilot",
+    label: "yieldpilot",
+  },
+  {
+    title: "Academic & Civic Products",
+    description:
+      "Shipping university tooling and map-first data products spanning Alma and ILIAS workflows, mobility, and air-quality exploration.",
+    href: "https://github.com/SebastianBoehler/tue-api-wrapper",
+    label: "tue-api-wrapper",
+  },
+] as const
 
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
   month: "short",
@@ -86,9 +122,10 @@ export default async function Home() {
             Sebastian Boehler
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-300">
-            Full-stack engineer building trading infrastructure, on-chain systems, and AI products.
-            Based in Stuttgart, Germany. Currently pursuing M.Sc. Computer Science at Tübingen and
-            shipping public work through GitHub and Sunderlabs.
+            Engineer building agent tooling, trading infrastructure, on-chain systems, and research
+            software. Based in Stuttgart, Germany. Currently pursuing M.Sc. Computer Science at
+            Tübingen and shipping public work through GitHub and Sunderlabs across DeFi, academic
+            tooling, city data, and autonomous lab systems.
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
             <a
@@ -173,6 +210,39 @@ export default async function Home() {
       </header>
 
       <ContributionCalendar years={github.contributionYears} />
+
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">
+          Current Focus
+        </h2>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {currentFocus.map((item) => (
+            <a
+              key={item.title}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group rounded-2xl border border-gray-200 dark:border-gray-800 p-5 transition-colors hover:border-gray-400 dark:hover:border-gray-600"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <h3 className="font-medium text-gray-900 dark:text-white">{item.title}</h3>
+                  <p className="mt-1 text-xs uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400">
+                    {item.label}
+                  </p>
+                </div>
+                <ExternalLink
+                  size={14}
+                  className="mt-1 text-gray-400 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
+              </div>
+              <p className="mt-3 text-sm leading-6 text-gray-600 dark:text-gray-400">
+                {item.description}
+              </p>
+            </a>
+          ))}
+        </div>
+      </section>
 
       {/* Experience & Education - 2 column */}
       <section className="grid md:grid-cols-3 gap-12">
@@ -350,8 +420,8 @@ export default async function Home() {
       <section className="border-t border-gray-200 dark:border-gray-700 pt-8 text-center space-y-4">
         <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Get in Touch</h2>
         <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto text-sm">
-          I&apos;m looking for internship opportunities in software engineering, AI/ML, or quantitative
-          development. Feel free to reach out!
+          Open to collaborations, internships, and engineering roles across software systems,
+          AI/ML, quantitative products, and research tooling.
         </p>
         <div className="flex justify-center gap-4">
           <a

@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "sync:github-profile": "node scripts/sync-github-profile.mjs"
+    "sync:github-profile": "node scripts/sync-github-profile.mjs",
+    "sync:github-throughput": "node scripts/generate-github-throughput-svg.mjs"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.11",

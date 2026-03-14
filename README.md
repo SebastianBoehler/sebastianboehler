@@ -14,6 +14,16 @@ Public GitHub snapshot as of Mar 12, 2026: 74 public repos, 21 followers, active
 
 All years from 2017-2026 are shown in one stacked calendar so the full activity arc is visible at a glance.
 
+## Code throughput
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/github-code-throughput-recent-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/github-code-throughput-recent-light.svg">
+  <img alt="GitHub code throughput by month" src="./assets/github-code-throughput-recent-light.svg">
+</picture>
+
+Monthly additions + deletions offer a second view of output, useful when commits are bundled or AI-assisted workflows change commit cadence.
+
 ## Current focus
 
 - **Agent tooling:** building fast Go CLIs for AI-assisted development workflows, including dependency diagnostics and deterministic file editing.

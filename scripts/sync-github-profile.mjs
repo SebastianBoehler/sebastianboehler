@@ -418,6 +418,16 @@ Public GitHub snapshot as of ${generatedOn}: ${profile.public_repos} public repo
 
 All years from ${contributionRange} are shown in one stacked calendar so the full activity arc is visible at a glance.
 
+## Code throughput
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/github-code-throughput-recent-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/github-code-throughput-recent-light.svg">
+  <img alt="GitHub code throughput by month" src="./assets/github-code-throughput-recent-light.svg">
+</picture>
+
+Monthly additions + deletions offer a second view of output, useful when commits are bundled or AI-assisted workflows change commit cadence.
+
 ## Current focus
 
 ${currentFocusSection}

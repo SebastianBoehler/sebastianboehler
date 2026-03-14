@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="860" height="568" viewBox="0 0 860 568" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">GitHub throughput for SebastianBoehler</title>
+  <desc id="desc">Monthly changed lines over the last 13 months with current month versus the same month last year.</desc>
+  <style>
+    text {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+  </style>
+  <rect x="28" y="16" width="804" height="536" fill="#0d1117" stroke="#30363d" />
+  <text x="56" y="54" fill="#f0f6fc" font-size="22" font-weight="700">GitHub code throughput</text>
+  <text x="56" y="78" fill="#8b949e" font-size="12"><tspan x="56" dy="0">Monthly additions + deletions across 55 owned repositories, public and private. Current</tspan><tspan x="56" dy="16">month cards are month-to-date and compared against the same day range last year.</tspan></text>
+  <rect x="56" y="108" width="174" height="104" fill="#111827" stroke="#21262d" />
+  <text x="72" y="132" fill="#7d8590" font-size="11" font-weight="600">March 2026 MTD</text>
+  <text x="72" y="166" fill="#f0f6fc" font-size="18" font-weight="700">2,698,967 LOC</text>
+  <text x="72" y="190" fill="#8b949e" font-size="11">249 commits</text>
+  <rect x="244" y="108" width="174" height="104" fill="#111827" stroke="#21262d" />
+  <text x="260" y="132" fill="#7d8590" font-size="11" font-weight="600">March 2025 MTD</text>
+  <text x="260" y="166" fill="#f0f6fc" font-size="24" font-weight="700">1,024 LOC</text>
+  <text x="260" y="190" fill="#8b949e" font-size="11">3 commits</text>
+  <rect x="432" y="108" width="174" height="104" fill="#111827" stroke="#21262d" />
+  <text x="448" y="132" fill="#7d8590" font-size="11" font-weight="600">Month YoY</text>
+  <text x="448" y="166" fill="#f0f6fc" font-size="24" font-weight="700">2635.7x</text>
+  <text x="448" y="190" fill="#8b949e" font-size="11">10,839 LOC / commit</text>
+  <rect x="620" y="108" width="174" height="104" fill="#111827" stroke="#21262d" />
+  <text x="636" y="132" fill="#7d8590" font-size="11" font-weight="600">YTD YoY</text>
+  <text x="636" y="166" fill="#f0f6fc" font-size="24" font-weight="700">8638.4x</text>
+  <text x="636" y="190" fill="#8b949e" font-size="11">8,845,716 vs 1,024 LOC</text>
+  <text x="56" y="248" fill="#7d8590" font-size="11">Monthly changed LOC</text>
+  <text x="804" y="248" fill="#8b949e" font-size="11" text-anchor="end">2,192 commits tracked through Mar 14, 2026</text>
+  <line x1="56" y1="462" x2="804" y2="462" stroke="#21262d" />
+  <rect x="56" y="452" width="36" height="8" fill="#3fb950"><title>March 2025: 48,119 changed LOC, 69 commits</title></rect>
+  <rect x="56" y="460" width="36" height="2" fill="#f85149"><title>March 2025: 48,119 changed LOC, 69 commits</title></rect>
+  <text x="74" y="486" fill="#7d8590" font-size="10" text-anchor="middle">Mar 25</text>
+  <rect x="110" y="452" width="36" height="7" fill="#3fb950"><title>April 2025: 34,747 changed LOC, 84 commits</title></rect>
+  <rect x="110" y="459" width="36" height="3" fill="#f85149"><title>April 2025: 34,747 changed LOC, 84 commits</title></rect>
+  <text x="128" y="486" fill="#7d8590" font-size="10" text-anchor="middle">Apr 25</text>
+  <rect x="164" y="355" width="36" height="93" fill="#3fb950"><title>May 2025: 2,139,614 changed LOC, 212 commits</title></rect>
+  <rect x="164" y="448" width="36" height="14" fill="#f85149"><title>May 2025: 2,139,614 changed LOC, 212 commits</title></rect>
+  <text x="182" y="486" fill="#7d8590" font-size="10" text-anchor="middle">May 25</text>
+  <rect x="218" y="360" width="36" height="92" fill="#3fb950"><title>June 2025: 2,046,795 changed LOC, 259 commits</title></rect>
+  <rect x="218" y="452" width="36" height="10" fill="#f85149"><title>June 2025: 2,046,795 changed LOC, 259 commits</title></rect>
+  <text x="236" y="486" fill="#7d8590" font-size="10" text-anchor="middle">Jun 25</text>
+  <rect x="272" y="452" width="36" height="7" fill="#3fb950"><title>July 2025: 183,556 changed LOC, 209 commits</title></rect>
+  <rect x="272" y="459" width="36" height="3" fill="#f85149"><title>July 2025: 183,556 changed LOC, 209 commits</title></rect>
+  <text x="290" y="486" fill="#7d8590" font-size="10" text-anchor="middle">Jul 25</text>
+  <rect x="326" y="452" width="36" height="8" fill="#3fb950"><title>August 2025: 16,241 changed LOC, 74 commits</title></rect>
+  <rect x="326" y="460" width="36" height="2" fill="#f85149"><title>August 2025: 16,241 changed LOC, 74 commits</title></rect>
+  <text x="344" y="486" fill="#7d8590" font-size="10" text-anchor="middle">Aug 25</text>
+  <rect x="380" y="452" width="36" height="6" fill="#3fb950"><title>September 2025: 64,251 changed LOC, 163 commits</title></rect>
+  <rect x="380" y="458" width="36" height="4" fill="#f85149"><title>September 2025: 64,251 changed LOC, 163 commits</title></rect>
+  <text x="398" y="486" fill="#7d8590" font-size="10" text-anchor="middle">Sep 25</text>
+  <rect x="434" y="452" width="36" height="8" fill="#3fb950"><title>October 2025: 16,932 changed LOC, 37 commits</title></rect>
+  <rect x="434" y="460" width="36" height="2" fill="#f85149"><title>October 2025: 16,932 changed LOC, 37 commits</title></rect>
+  <text x="452" y="486" fill="#7d8590" font-size="10" text-anchor="middle">Oct 25</text>
+  <rect x="488" y="452" width="36" height="5" fill="#3fb950"><title>November 2025: 85,345 changed LOC, 72 commits</title></rect>
+  <rect x="488" y="457" width="36" height="5" fill="#f85149"><title>November 2025: 85,345 changed LOC, 72 commits</title></rect>
+  <text x="506" y="486" fill="#7d8590" font-size="10" text-anchor="middle">Nov 25</text>
+  <rect x="542" y="452" width="36" height="6" fill="#3fb950"><title>December 2025: 81,927 changed LOC, 110 commits</title></rect>
+  <rect x="542" y="458" width="36" height="4" fill="#f85149"><title>December 2025: 81,927 changed LOC, 110 commits</title></rect>
+  <text x="560" y="486" fill="#7d8590" font-size="10" text-anchor="middle">Dec 25</text>
+  <rect x="596" y="272" width="36" height="102" fill="#3fb950"><title>January 2026: 3,798,410 changed LOC, 226 commits</title></rect>
+  <rect x="596" y="374" width="36" height="88" fill="#f85149"><title>January 2026: 3,798,410 changed LOC, 226 commits</title></rect>
+  <text x="614" y="486" fill="#7d8590" font-size="10" text-anchor="middle">Jan 26</text>
+  <rect x="650" y="345" width="36" height="89" fill="#3fb950"><title>February 2026: 2,348,339 changed LOC, 428 commits</title></rect>
+  <rect x="650" y="434" width="36" height="28" fill="#f85149"><title>February 2026: 2,348,339 changed LOC, 428 commits</title></rect>
+  <text x="668" y="486" fill="#7d8590" font-size="10" text-anchor="middle">Feb 26</text>
+  <rect x="704" y="327" width="36" height="124" fill="#3fb950"><title>March 2026: 2,698,967 changed LOC, 249 commits</title></rect>
+  <rect x="704" y="451" width="36" height="11" fill="#f85149"><title>March 2026: 2,698,967 changed LOC, 249 commits</title></rect>
+  <text x="722" y="486" fill="#7d8590" font-size="10" text-anchor="middle">Mar 26</text>
+  <rect x="56" y="484" width="10" height="10" fill="#3fb950" />
+  <text x="72" y="493" fill="#8b949e" font-size="11">Additions</text>
+  <rect x="142" y="484" width="10" height="10" fill="#f85149" />
+  <text x="158" y="493" fill="#8b949e" font-size="11">Deletions</text>
+  <text x="56" y="518" fill="#8b949e" font-size="11"><tspan x="56" dy="0">Includes owned public and private repositories via the authenticated GitHub CLI session. Measures code movement as</tspan><tspan x="56" dy="15">additions + deletions on default-branch commits authored by SebastianBoehler.</tspan></text>
+</svg>

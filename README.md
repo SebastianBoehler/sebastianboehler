@@ -2,7 +2,7 @@
 
 Engineer shipping agent tooling, trading infrastructure, on-chain systems, and research software. Based in Germany. Building through [Sunderlabs](https://sunderlabs.com) and shipping projects at [sebastian-boehler.com](https://sebastian-boehler.com).
 
-Public GitHub snapshot as of Mar 12, 2026: 74 public repos, 21 followers, active on GitHub since Apr 19, 2017.
+Public GitHub snapshot as of Mar 15, 2026: 76 public repos, 22 followers, active on GitHub since Apr 19, 2017.
 
 ## Contribution history
 
@@ -33,21 +33,21 @@ Monthly additions + deletions offer a second view of output, useful when commits
 
 ## Recent public work
 
-- **[agent-cli-utils](https://github.com/SebastianBoehler/agent-cli-utils)** (Go, updated Mar 12, 2026) - Fast Go CLIs for AI agent workflows, including dependency diagnostics and deterministic file-editing utilities.
+- **[tue-api-wrapper](https://github.com/SebastianBoehler/tue-api-wrapper)** (Python, updated Mar 14, 2026) - Python tooling that layers cleaner navigation, search, and summarization on top of Alma and ILIAS.
+- **[agent-cli-utils](https://github.com/SebastianBoehler/agent-cli-utils)** (Go, updated Mar 14, 2026) - Fast Go CLIs for AI agent workflows, including dependency diagnostics and deterministic file-editing utilities.
 - **[physics_researcher](https://github.com/SebastianBoehler/physics_researcher)** (Python, updated Mar 11, 2026) - Production-minded software for autonomous materials and peptide research with typed orchestration, simulator adapters, and experiment tracking.
 - **[yieldpilot](https://github.com/SebastianBoehler/yieldpilot)** (TypeScript, updated Mar 11, 2026) - ACP-backed treasury operations layer for stablecoin management, wallet automation, and approval flows.
-- **[tue-api-wrapper](https://github.com/SebastianBoehler/tue-api-wrapper)** (Python, updated Mar 10, 2026) - Python tooling that layers cleaner navigation, search, and summarization on top of Alma and ILIAS.
 - **[stuttgart-pulse](https://github.com/SebastianBoehler/stuttgart-pulse)** (TypeScript, updated Mar 9, 2026) - Map-first open-source explorer for Stuttgart mobility and air-quality data.
 - **[tue-cli](https://github.com/SebastianBoehler/tue-cli)** (TypeScript, updated Mar 8, 2026) - Interactive terminal tooling for Tübingen university workflows with menu-driven navigation and colorized output.
 
 ## Latest public commits
 
-- **[agent-cli-utils](https://github.com/SebastianBoehler/agent-cli-utils)** `2189ac3` on `main` (Mar 12, 2026) - [Add dependency doctor CLI](https://github.com/SebastianBoehler/agent-cli-utils/commit/2189ac358bf1b8859494bb8fbc4cdf462f8e4066)
-- **[agent-cli-utils](https://github.com/SebastianBoehler/agent-cli-utils)** `f5d41cb` on `main` (Mar 12, 2026) - [Add Codex skills for each CLI](https://github.com/SebastianBoehler/agent-cli-utils/commit/f5d41cb0b7fd43536f79a428805ff3ddb0ff9ad0)
-- **[agent-cli-utils](https://github.com/SebastianBoehler/agent-cli-utils)** `e2604fb` on `main` (Mar 12, 2026) - [Add deterministic file edit CLI](https://github.com/SebastianBoehler/agent-cli-utils/commit/e2604fb33b117658c8f6ee1727071c11a8ec5c06)
-- **[agent-cli-utils](https://github.com/SebastianBoehler/agent-cli-utils)** `05e834a` on `main` (Mar 12, 2026) - [Turn repo into agent CLI toolkit](https://github.com/SebastianBoehler/agent-cli-utils/commit/05e834a713de41256955b2188a613d5b7c52225e)
-- **[agent-cli-utils](https://github.com/SebastianBoehler/agent-cli-utils)** `44a9ed4` on `main` (Mar 12, 2026) - [Update README to reflect binary name: agent-cli-utils](https://github.com/SebastianBoehler/agent-cli-utils/commit/44a9ed4560d56b6f953114550903a2920e1899cf)
-- **[physics_researcher](https://github.com/SebastianBoehler/physics_researcher)** `4cdfc4b` on `main` (Mar 11, 2026) - [Add purpose rankings to peptide research](https://github.com/SebastianBoehler/physics_researcher/commit/4cdfc4b08a03c0790b18aab9ba6c03fa7589dfdb)
+- **[tue-api-wrapper](https://github.com/SebastianBoehler/tue-api-wrapper)** `58a3c78` on `main` (Mar 14, 2026) - [Add MIT license and clean README note](https://github.com/SebastianBoehler/tue-api-wrapper/commit/58a3c78bae9e058698511a7f6259658d73ab050b)
+- **[tue-api-wrapper](https://github.com/SebastianBoehler/tue-api-wrapper)** `7d8df8f` on `main` (Mar 14, 2026) - [Unify credentials and add README preview](https://github.com/SebastianBoehler/tue-api-wrapper/commit/7d8df8f74dc6b816db23c67248296a8ee322a982)
+- **[tue-api-wrapper](https://github.com/SebastianBoehler/tue-api-wrapper)** `f1be7cd` on `main` (Mar 14, 2026) - [Add open source contribution and community docs](https://github.com/SebastianBoehler/tue-api-wrapper/commit/f1be7cd8b38cb0b46c0994a82248fd4ba4b53eaf)
+- **[tue-api-wrapper](https://github.com/SebastianBoehler/tue-api-wrapper)** `0296150` on `main` (Mar 14, 2026) - [Add Unix-native Go CLI for Alma and ILIAS](https://github.com/SebastianBoehler/tue-api-wrapper/commit/029615060279f7b8e9953ca77885dd82582fec2a)
+- **[tue-api-wrapper](https://github.com/SebastianBoehler/tue-api-wrapper)** `a95043a` on `main` (Mar 14, 2026) - [Add authenticated Alma and ILIAS feature endpoints](https://github.com/SebastianBoehler/tue-api-wrapper/commit/a95043a297868e1feff5e744b4474e3c36cfe0a1)
+- **[agent-cli-utils](https://github.com/SebastianBoehler/agent-cli-utils)** `094409d` on `main` (Mar 14, 2026) - [Add company registry search CLI](https://github.com/SebastianBoehler/agent-cli-utils/commit/094409d509c75b9de5a338e87e952da0061d4e20)
 
 ## Links
 

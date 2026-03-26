@@ -1,5 +1,6 @@
 import { mkdir, writeFile } from "node:fs/promises"
 import path from "node:path"
+import { fetchContributionYear } from "./lib/github-contribution-data.mjs"
 
 const USERNAME = "SebastianBoehler"
 const PROFILE_REPO = "sebastianboehler"
@@ -234,35 +235,6 @@ function pickRecentRepos(cards, limit) {
     .slice(0, limit)
 }
 
-function getYearBounds(year) {
-  const yearStart = new Date(Date.UTC(year, 0, 1))
-  const firstSunday = new Date(yearStart)
-  firstSunday.setUTCDate(firstSunday.getUTCDate() - firstSunday.getUTCDay())
-  return { yearStart, firstSunday }
-}
-
-async function fetchContributionYear(year) {
-  const html = await fetchText(
-    `https://github.com/users/${USERNAME}/contributions?from=${year}-01-01&to=${year}-12-31`
-  )
-  const totalMatch = html.match(new RegExp(`([\\d,]+)\\s+contributions?\\s+in\\s+${year}`))
-  const total = totalMatch ? Number(totalMatch[1].replaceAll(",", "")) : 0
-  const { firstSunday } = getYearBounds(year)
-  const cellMatches = html.matchAll(/data-date="(\d{4}-\d{2}-\d{2})"[^>]*data-level="(\d)"/g)
-  const cells = []
-
-  for (const match of cellMatches) {
-    const [date, levelString] = [match[1], match[2]]
-    const cellDate = new Date(`${date}T00:00:00Z`)
-    const diffDays = Math.floor((cellDate.getTime() - firstSunday.getTime()) / 86_400_000)
-    const week = Math.floor(diffDays / 7)
-    const day = cellDate.getUTCDay()
-    cells.push({ date, week, day, level: Number(levelString) })
-  }
-
-  return { year, total, cells }
-}
-
 async function fetchRecentCommits() {
   const events = await fetchJson(`https://api.github.com/users/${USERNAME}/events/public?per_page=20`)
   const pushEvents = events
@@ -373,7 +345,7 @@ function renderContributionSvg(years, theme = "dark") {
   </style>
   <rect x="${xOffset}" y="12" width="${panelWidth}" height="${height - 24}" rx="18" fill="${palette.background}" stroke="${palette.panelStroke}"/>
   <text x="${xOffset + paddingX}" y="${paddingTop + 6}" fill="${palette.bodyText}" font-size="20" font-weight="700">GitHub contribution history</text>
-  <text x="${xOffset + paddingX}" y="${paddingTop + 28}" fill="${palette.mutedText}" font-size="12">All public contribution years stacked in one view. Darker green means heavier activity on GitHub&apos;s own scale for that year.</text>
+  <text x="${xOffset + paddingX}" y="${paddingTop + 28}" fill="${palette.mutedText}" font-size="12">All contribution years stacked in one view, including private activity available to the authenticated GitHub CLI session.</text>
   <text x="${xOffset + paddingX}" y="68" fill="${palette.mutedText}" font-size="11">Less</text>
   ${legend.join("\n  ")}
   <text x="${xOffset + paddingX + chartWidth - 18}" y="68" fill="${palette.mutedText}" font-size="11">More</text>
@@ -466,7 +438,9 @@ async function main() {
   const startYear = new Date(profile.created_at).getUTCFullYear()
   const endYear = new Date().getUTCFullYear()
   const contributionYears = await Promise.all(
-    Array.from({ length: endYear - startYear + 1 }, (_, offset) => fetchContributionYear(startYear + offset))
+    Array.from({ length: endYear - startYear + 1 }, (_, offset) =>
+      fetchContributionYear({ username: USERNAME, year: startYear + offset })
+    )
   )
 
   const darkSvg = renderContributionSvg(contributionYears, "dark")

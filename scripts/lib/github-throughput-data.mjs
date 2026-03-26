@@ -1,12 +1,9 @@
-import { execFile } from "node:child_process"
-import { promisify } from "node:util"
-
-const execFileAsync = promisify(execFile)
+import { runGhGraphql } from "./github-gh-client.mjs"
 
 const USERNAME = "SebastianBoehler"
 const EXCLUDED_REPO_PATTERNS = [/^sebastianboehler$/i, /^technical-assessment/i]
 const LOOKBACK_MONTHS = 13
-const MAX_CONCURRENT_REQUESTS = 6
+const MAX_CONCURRENT_REQUESTS = 1
 
 function isExcludedRepo(repo) {
   if (repo.fork || repo.archived || !repo.default_branch) {
@@ -44,21 +41,27 @@ async function mapWithConcurrency(items, limit, worker) {
   return results
 }
 
-async function runGhJson(args) {
-  const { stdout } = await execFileAsync("gh", ["api", ...args], {
-    maxBuffer: 1024 * 1024 * 64,
-  })
-
-  return JSON.parse(stdout)
+function wait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
-async function runGhGraphql(fields) {
-  const args = ["graphql"]
-  for (const [key, value] of Object.entries(fields)) {
-    args.push("-F", `${key}=${value}`)
+async function retryRepoCommits(repo, sinceIso) {
+  let attempt = 0
+  let lastError
+
+  while (attempt < 3) {
+    try {
+      return await listRepoCommits(repo, sinceIso)
+    } catch (error) {
+      lastError = error
+      attempt += 1
+      if (attempt < 3) {
+        await wait(250 * attempt)
+      }
+    }
   }
 
-  return runGhJson(args)
+  throw lastError
 }
 
 async function listOwnedRepos() {
@@ -261,7 +264,7 @@ export async function collectGitHubThroughput() {
 
   const commitGroups = await mapWithConcurrency(repos, MAX_CONCURRENT_REQUESTS, async (repo) => {
     try {
-      return await listRepoCommits(repo, firstMonthStart.toISOString())
+      return await retryRepoCommits(repo, firstMonthStart.toISOString())
     } catch (error) {
       return { error, repo: repo.name }
     }

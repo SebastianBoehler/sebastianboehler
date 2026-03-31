@@ -1,16 +1,9 @@
 import { mkdir, writeFile } from "node:fs/promises"
 import path from "node:path"
 import { fetchContributionYear } from "./lib/github-contribution-data.mjs"
+import { ensureGhAuth, runGhRestJson, runGhRestText } from "./lib/github-gh-client.mjs"
 
 const USERNAME = "SebastianBoehler"
-const PROFILE_REPO = "sebastianboehler"
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN || process.env.GH_TOKEN
-const API_HEADERS = {
-  Accept: "application/vnd.github+json",
-  "User-Agent": `${PROFILE_REPO}-profile-sync`,
-  ...(GITHUB_TOKEN ? { Authorization: `Bearer ${GITHUB_TOKEN}` } : {}),
-}
-
 const EXCLUDED_REPO_PATTERNS = [/^sebastianboehler$/i, /^technical-assessment/i]
 const RECENT_REPO_LIMIT = 6
 const RECENT_COMMIT_LIMIT = 6
@@ -57,22 +50,12 @@ const DATE_FORMATTER = new Intl.DateTimeFormat("en-US", {
   timeZone: "UTC",
 })
 
-async function fetchJson(url) {
-  const response = await fetch(url, { headers: API_HEADERS })
-  if (!response.ok) {
-    throw new Error(`Failed to fetch JSON from ${url}: ${response.status}`)
-  }
-
-  return response.json()
+async function fetchJson(url, extraArgs = []) {
+  return runGhRestJson(url, extraArgs)
 }
 
-async function fetchText(url) {
-  const response = await fetch(url, { headers: API_HEADERS })
-  if (!response.ok) {
-    throw new Error(`Failed to fetch text from ${url}: ${response.status}`)
-  }
-
-  return response.text()
+async function fetchText(url, extraArgs = []) {
+  return runGhRestText(url, extraArgs)
 }
 
 function escapeXml(value) {
@@ -123,7 +106,8 @@ async function fetchReadmeSummary(repo) {
   for (const branch of [...new Set(branchesToTry)]) {
     try {
       const readme = await fetchText(
-        `https://raw.githubusercontent.com/${USERNAME}/${repo.name}/${branch}/README.md`
+        `repos/${USERNAME}/${repo.name}/readme`,
+        ["-H", "Accept: application/vnd.github.raw+json", "-f", `ref=${branch}`]
       )
       const summary = extractSummaryFromReadme(readme)
       if (summary) {
@@ -236,7 +220,7 @@ function pickRecentRepos(cards, limit) {
 }
 
 async function fetchRecentCommits() {
-  const events = await fetchJson(`https://api.github.com/users/${USERNAME}/events/public?per_page=20`)
+  const events = await fetchJson(`users/${USERNAME}/events/public?per_page=20`)
   const pushEvents = events
     .filter((event) => event.type === "PushEvent" && event.payload?.head)
     .filter((event) => {
@@ -259,7 +243,7 @@ async function fetchRecentCommits() {
     uniquePushes.slice(0, RECENT_COMMIT_LIMIT).map(async (event) => {
       const [owner, repoName] = event.repo.name.split("/")
       const sha = event.payload.head
-      const commit = await fetchJson(`https://api.github.com/repos/${owner}/${repoName}/commits/${sha}`)
+      const commit = await fetchJson(`repos/${owner}/${repoName}/commits/${sha}`)
 
       return {
         branch: event.payload.ref?.replace("refs/heads/", "") ?? "main",
@@ -422,9 +406,11 @@ ${commitSection}
 }
 
 async function main() {
+  await ensureGhAuth()
+
   const [profile, repos, recentCommits] = await Promise.all([
-    fetchJson(`https://api.github.com/users/${USERNAME}`),
-    fetchJson(`https://api.github.com/users/${USERNAME}/repos?per_page=100&sort=updated`),
+    fetchJson(`users/${USERNAME}`),
+    fetchJson(`users/${USERNAME}/repos?per_page=100&sort=updated`),
     fetchRecentCommits(),
   ])
 

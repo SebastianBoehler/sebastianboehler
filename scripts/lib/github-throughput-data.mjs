@@ -21,6 +21,12 @@ function addUtcMonths(value, months) {
   return new Date(Date.UTC(value.getUTCFullYear(), value.getUTCMonth() + months, 1))
 }
 
+function earliestDate(...values) {
+  return values.reduce((earliest, current) =>
+    current.getTime() < earliest.getTime() ? current : earliest
+  )
+}
+
 async function mapWithConcurrency(items, limit, worker) {
   const results = new Array(items.length)
   let nextIndex = 0
@@ -257,14 +263,21 @@ function buildComparisonRanges(now) {
 
 export async function collectGitHubThroughput() {
   const now = new Date()
+  const comparisons = buildComparisonRanges(now)
   const firstMonthStart = addUtcMonths(startOfUtcMonth(now), -(LOOKBACK_MONTHS - 1))
+  const collectionStart = earliestDate(
+    firstMonthStart,
+    new Date(comparisons.comparisonYearStart),
+    new Date(comparisons.currentYearStart),
+    new Date(comparisons.comparisonMonthStart)
+  )
   const repos = (await listOwnedRepos())
     .filter((repo) => !isExcludedRepo(repo))
-    .filter((repo) => new Date(repo.pushed_at ?? repo.updated_at) >= firstMonthStart)
+    .filter((repo) => new Date(repo.pushed_at ?? repo.updated_at) >= collectionStart)
 
   const commitGroups = await mapWithConcurrency(repos, MAX_CONCURRENT_REQUESTS, async (repo) => {
     try {
-      return await retryRepoCommits(repo, firstMonthStart.toISOString())
+      return await retryRepoCommits(repo, collectionStart.toISOString())
     } catch (error) {
       return { error, repo: repo.name }
     }
@@ -284,7 +297,7 @@ export async function collectGitHubThroughput() {
 
   return {
     commits,
-    comparisons: buildComparisonRanges(now),
+    comparisons,
     months: buildMonthlySeries(commits, now),
     now: now.toISOString(),
     note,

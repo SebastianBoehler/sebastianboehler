@@ -2,7 +2,7 @@
 
 Engineer shipping agent tooling, trading infrastructure, on-chain systems, and research software. Based in Germany. Building through [Sunderlabs](https://sunderlabs.com) and shipping projects at [sebastian-boehler.com](https://sebastian-boehler.com).
 
-Public GitHub snapshot as of Apr 21, 2026: 87 public repos, 25 followers, active on GitHub since Apr 19, 2017.
+Public GitHub snapshot as of May 4, 2026: 89 public repos, 25 followers, active on GitHub since Apr 19, 2017.
 
 ## Contribution history
 
@@ -33,8 +33,8 @@ Monthly additions + deletions offer a second view of output, useful when commits
 
 ## Recent public work
 
-- **[tue-api-wrapper](https://github.com/SebastianBoehler/tue-api-wrapper)** (Python, updated Apr 21, 2026) - Python tooling that layers cleaner navigation, search, and summarization on top of Alma and ILIAS.
-- **[polymarket-cpp-client](https://github.com/SebastianBoehler/polymarket-cpp-client)** (C++, updated Apr 19, 2026) - Lightweight C++ client for Polymarket APIs with REST and WebSocket support, designed for trading and market data access.
+- **[tue-api-wrapper](https://github.com/SebastianBoehler/tue-api-wrapper)** (Python, updated May 4, 2026) - Python tooling that layers cleaner navigation, search, and summarization on top of Alma and ILIAS.
+- **[polymarket-cpp-client](https://github.com/SebastianBoehler/polymarket-cpp-client)** (C++, updated May 3, 2026) - Lightweight C++ client for Polymarket APIs with REST and WebSocket support, designed for trading and market data access.
 - **[agent-cli-utils](https://github.com/SebastianBoehler/agent-cli-utils)** (Go, updated Apr 6, 2026) - Fast Go CLIs for AI agent workflows, including dependency diagnostics and deterministic file-editing utilities.
 - **[python_livestream](https://github.com/SebastianBoehler/python_livestream)** (HTML, updated Mar 29, 2026) - Livestream AI generated news segments with grok search grounding and TTS frameworks to youtube
 - **[compute_atlas](https://github.com/SebastianBoehler/compute_atlas)** (TypeScript, updated Mar 25, 2026) - Open-source compute price oracle for transparent GPU market indexing and Solana devnet publication
@@ -42,12 +42,12 @@ Monthly additions + deletions offer a second view of output, useful when commits
 
 ## Latest public commits
 
-- **[tue-api-wrapper](https://github.com/SebastianBoehler/tue-api-wrapper)** `7ee860a` on `main` (Apr 21, 2026) - [fix(chatgpt): normalize terms and constrain dashboard widget](https://github.com/SebastianBoehler/tue-api-wrapper/commit/7ee860ae3a8e2b8460329851b4be392f462c4a47)
-- **[tue-api-wrapper](https://github.com/SebastianBoehler/tue-api-wrapper)** `3902480` on `main` (Apr 21, 2026) - [feat(ios): introduce redesigned app shell](https://github.com/SebastianBoehler/tue-api-wrapper/commit/3902480cbc936f1822816ab901b3d6bc7ab5e460)
-- **[tue-api-wrapper](https://github.com/SebastianBoehler/tue-api-wrapper)** `e897461` on `main` (Apr 21, 2026) - [chore(chatgpt): make mail tools configurable](https://github.com/SebastianBoehler/tue-api-wrapper/commit/e8974615ce6a0cc32dd950d652bf25e4b064fa31)
-- **[tue-api-wrapper](https://github.com/SebastianBoehler/tue-api-wrapper)** `0cd63a7` on `main` (Apr 21, 2026) - [fix(chatgpt): hydrate widget from host updates](https://github.com/SebastianBoehler/tue-api-wrapper/commit/0cd63a7ddf10fda5f986b0b26dda313aabdb65ff)
-- **[tue-api-wrapper](https://github.com/SebastianBoehler/tue-api-wrapper)** `f4bc6e3` on `main` (Apr 21, 2026) - [fix(api): handle missing timetable slot locations](https://github.com/SebastianBoehler/tue-api-wrapper/commit/f4bc6e3d554d1baae0a5a41b27f152ec04a4ca29)
-- **[tue-api-wrapper](https://github.com/SebastianBoehler/tue-api-wrapper)** `193d26b` on `main` (Apr 21, 2026) - [feat(ios): load grades natively](https://github.com/SebastianBoehler/tue-api-wrapper/commit/193d26b49013ee4ea1f23538d326d488672ffe8b)
+- **[tue-api-wrapper](https://github.com/SebastianBoehler/tue-api-wrapper)** `0723984` on `main` (May 4, 2026) - [fix(alma): expose study planner client method](https://github.com/SebastianBoehler/tue-api-wrapper/commit/07239841b5839bec028b8b1f545b0ead5c77cf7a)
+- **[tue-api-wrapper](https://github.com/SebastianBoehler/tue-api-wrapper)** `f66d0a0` on `main` (May 4, 2026) - [feat(alma): expand study coverage](https://github.com/SebastianBoehler/tue-api-wrapper/commit/f66d0a06f61c1808b4fc1e92a697433d80bdde0e)
+- **[tue-api-wrapper](https://github.com/SebastianBoehler/tue-api-wrapper)** `3602cc5` on `main` (May 3, 2026) - [docs: add desktop download page](https://github.com/SebastianBoehler/tue-api-wrapper/commit/3602cc5a70cb65812a9350c9879ba510863fa734)
+- **[tue-api-wrapper](https://github.com/SebastianBoehler/tue-api-wrapper)** `fb943c1` on `main` (May 3, 2026) - [feat(desktop): refine study hub dashboard surfaces](https://github.com/SebastianBoehler/tue-api-wrapper/commit/fb943c1dd7f1fa00c5dfb4ad19110d6c0598a9ef)
+- **[tue-api-wrapper](https://github.com/SebastianBoehler/tue-api-wrapper)** `e2162e3` on `main` (May 3, 2026) - [feat(desktop): add course discovery page](https://github.com/SebastianBoehler/tue-api-wrapper/commit/e2162e3573d926e5f8c5d7c872ba3c6d385b9376)
+- **[tue-api-wrapper](https://github.com/SebastianBoehler/tue-api-wrapper)** `839915c` on `main` (May 3, 2026) - [chore(ios): pin packages for ci builds](https://github.com/SebastianBoehler/tue-api-wrapper/commit/839915cc17e101a4e021ad81c8d46d21db615719)
 
 ## Links
 

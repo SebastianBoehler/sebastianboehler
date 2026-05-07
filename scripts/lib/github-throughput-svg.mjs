@@ -1,120 +1,14 @@
-const USERNAME = "SebastianBoehler"
-const LOOKBACK_MONTHS = 13
-const MONTH_LABEL_FORMATTER = new Intl.DateTimeFormat("en-US", {
-  month: "short",
-  year: "2-digit",
-  timeZone: "UTC",
-})
-const MONTH_TITLE_FORMATTER = new Intl.DateTimeFormat("en-US", {
-  month: "long",
-  year: "numeric",
-  timeZone: "UTC",
-})
-const DATE_FORMATTER = new Intl.DateTimeFormat("en-US", {
-  month: "short",
-  day: "numeric",
-  year: "numeric",
-  timeZone: "UTC",
-})
-
-function escapeXml(value) {
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&apos;")
-}
-
-function formatMonthLabel(value) {
-  return MONTH_LABEL_FORMATTER.format(new Date(value))
-}
-
-function formatMonthTitle(value) {
-  return MONTH_TITLE_FORMATTER.format(new Date(value))
-}
-
-function formatDate(value) {
-  return DATE_FORMATTER.format(new Date(value))
-}
-
-function formatNumber(value) {
-  return value.toLocaleString("en-US")
-}
-
-function formatPercent(value) {
-  if (value === null) {
-    return "n/a"
-  }
-
-  const prefix = value > 0 ? "+" : ""
-  return `${prefix}${value.toFixed(0)}%`
-}
-
-function formatChange(currentValue, previousValue) {
-  const deltaPercent = computeDeltaPercent(currentValue, previousValue)
-  if (deltaPercent === null) {
-    return "new"
-  }
-
-  if (previousValue > 0 && Math.abs(deltaPercent) >= 1000) {
-    return `${(currentValue / previousValue).toFixed(1)}x`
-  }
-
-  return formatPercent(deltaPercent)
-}
-
-function estimateFontSize(text, maxWidth, preferredSize, minSize) {
-  const safeLength = Math.max(String(text).length, 1)
-  const estimatedSize = Math.floor(maxWidth / (safeLength * 0.58))
-  return Math.max(minSize, Math.min(preferredSize, estimatedSize))
-}
-
-function wrapText(text, maxCharsPerLine, maxLines) {
-  const words = String(text).split(/\s+/).filter(Boolean)
-  const lines = []
-  let currentLine = ""
-  let wordIndex = 0
-
-  while (wordIndex < words.length) {
-    const word = words[wordIndex]
-    const nextLine = currentLine ? `${currentLine} ${word}` : word
-    if (nextLine.length <= maxCharsPerLine) {
-      currentLine = nextLine
-      wordIndex += 1
-      continue
-    }
-
-    if (currentLine) {
-      lines.push(currentLine)
-      currentLine = ""
-      if (lines.length === maxLines - 1) {
-        break
-      }
-      continue
-    }
-
-    const clippedWord =
-      word.length > maxCharsPerLine ? `${word.slice(0, Math.max(0, maxCharsPerLine - 1))}…` : word
-    lines.push(clippedWord)
-    wordIndex += 1
-    if (lines.length === maxLines - 1) {
-      break
-    }
-  }
-
-  const remainingWords = words.slice(wordIndex)
-  const finalLineSource = [currentLine, ...remainingWords].filter(Boolean).join(" ")
-  if (finalLineSource) {
-    const trimmed =
-      finalLineSource.length > maxCharsPerLine
-        ? `${finalLineSource.slice(0, Math.max(0, maxCharsPerLine - 1)).trimEnd()}…`
-        : finalLineSource
-    lines.push(trimmed)
-  }
-
-  return lines.slice(0, maxLines)
-}
+import { LOOKBACK_MONTHS, USERNAME } from "./github-throughput-helpers.mjs"
+import {
+  escapeXml,
+  estimateFontSize,
+  formatChange,
+  formatDate,
+  formatMonthLabel,
+  formatMonthTitle,
+  formatNumber,
+  wrapText,
+} from "./github-throughput-svg-format.mjs"
 
 function renderMultilineText({ x, y, lines, fill, fontSize, fontWeight, lineHeight, textAnchor }) {
   const anchorAttribute = textAnchor ? ` text-anchor="${textAnchor}"` : ""
@@ -125,14 +19,6 @@ function renderMultilineText({ x, y, lines, fill, fontSize, fontWeight, lineHeig
         `<tspan x="${x}" dy="${index === 0 ? 0 : lineHeight}">${escapeXml(line)}</tspan>`
     )
     .join("")}</text>`
-}
-
-function computeDeltaPercent(currentValue, previousValue) {
-  if (previousValue <= 0) {
-    return currentValue > 0 ? null : 0
-  }
-
-  return ((currentValue - previousValue) / previousValue) * 100
 }
 
 function getPalette(theme) {

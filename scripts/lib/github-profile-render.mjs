@@ -109,6 +109,7 @@ ${repos}
 
 - [Portfolio](${profile.blog})
 - [GitHub](https://github.com/${USERNAME})
+- [Hugging Face](https://huggingface.co/sebastianboehler)
 - [LinkedIn](https://www.linkedin.com/in/sebastian-boehler/)
 - [X](https://x.com/${profile.twitter_username})
 `

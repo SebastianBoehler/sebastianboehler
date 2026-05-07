@@ -56,6 +56,9 @@ export default function ProfileHero({ github }: { github: GitHubSnapshot }) {
         <ProfileLink href="https://github.com/SebastianBoehler">
           github.com/SebastianBoehler
         </ProfileLink>
+        <ProfileLink href="https://huggingface.co/sebastianboehler">
+          huggingface.co/sebastianboehler
+        </ProfileLink>
         <div>contact@sebastian-boehler.com</div>
         <div className="pt-2 text-gray-500">Stuttgart, Germany</div>
       </aside>

@@ -2,15 +2,11 @@
 <svg width="760" height="852" viewBox="0 0 760 852" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">All GitHub contribution years for SebastianBoehler</title>
   <desc id="desc">Stacked yearly GitHub contribution heatmaps from 2017 to 2026, newest year first.</desc>
-  <style>
-    text {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    }
-  </style>
+  <style>text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }</style>
   <rect x="24" y="12" width="712" height="828" rx="18" fill="#0d1117" stroke="#30363d"/>
   <text x="48" y="42" fill="#f0f6fc" font-size="20" font-weight="700">GitHub contribution history</text>
-  <text x="48" y="64" fill="#8b949e" font-size="12">All contribution years stacked in one view, including private activity available to the authenticated GitHub CLI session.</text>
-  <text x="48" y="68" fill="#8b949e" font-size="11">Less</text>
+  <text x="48" y="64" fill="#8b949e" font-size="12">All contribution years stacked in one GitHub-style view.</text>
+  <text x="562" y="68" fill="#8b949e" font-size="11">Less</text>
   <rect x="594" y="50" width="10" height="10" rx="2" fill="#161b22" />
   <rect x="612" y="50" width="10" height="10" rx="2" fill="#0e4429" />
   <rect x="630" y="50" width="10" height="10" rx="2" fill="#006d32" />
@@ -18,7 +14,7 @@
   <rect x="666" y="50" width="10" height="10" rx="2" fill="#39d353" />
   <text x="694" y="68" fill="#8b949e" font-size="11">More</text>
   <text x="48" y="126" fill="#f0f6fc" font-size="15" font-weight="700">2026</text>
-  <text x="48" y="144" fill="#8b949e" font-size="11">2,098 contributions</text>
+  <text x="48" y="144" fill="#8b949e" font-size="11">2,253 contributions</text>
   <rect x="184" y="152" width="8" height="8" rx="2" fill="#0e4429" />
   <rect x="184" y="162" width="8" height="8" rx="2" fill="#0e4429" />
   <rect x="184" y="172" width="8" height="8" rx="2" fill="#0e4429" />
@@ -142,10 +138,10 @@
   <rect x="354" y="162" width="8" height="8" rx="2" fill="#0e4429" />
   <rect x="354" y="172" width="8" height="8" rx="2" fill="#0e4429" />
   <rect x="364" y="112" width="8" height="8" rx="2" fill="#0e4429" />
-  <rect x="364" y="122" width="8" height="8" rx="2" fill="#006d32" />
-  <rect x="364" y="132" width="8" height="8" rx="2" fill="#161b22" />
-  <rect x="364" y="142" width="8" height="8" rx="2" fill="#161b22" />
-  <rect x="364" y="152" width="8" height="8" rx="2" fill="#161b22" />
+  <rect x="364" y="122" width="8" height="8" rx="2" fill="#26a641" />
+  <rect x="364" y="132" width="8" height="8" rx="2" fill="#26a641" />
+  <rect x="364" y="142" width="8" height="8" rx="2" fill="#006d32" />
+  <rect x="364" y="152" width="8" height="8" rx="2" fill="#006d32" />
   <rect x="364" y="162" width="8" height="8" rx="2" fill="#161b22" />
   <rect x="364" y="172" width="8" height="8" rx="2" fill="#161b22" />
   <rect x="374" y="112" width="8" height="8" rx="2" fill="#161b22" />

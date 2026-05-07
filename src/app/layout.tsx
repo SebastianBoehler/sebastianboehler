@@ -11,9 +11,9 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://sebastianboehler.com'),
-  title: 'Sebastian Boehler | Full-Stack Developer & Solana Engineer',
-  description: 'Experienced Full-Stack Developer and Solana Engineer specializing in AI, blockchain, and algorithmic trading. Founder of HB Capital and Sunderlabs. Building scalable products at the intersection of finance and machine learning.',
-  keywords: ['Full Stack Developer', 'Solana Engineer', 'AI Engineer', 'Blockchain Developer', 'Algorithmic Trading', 'React', 'Python', 'TypeScript', 'Rust', 'HB Capital', 'Sunderlabs', 'Sebastian Boehler'],
+  title: 'Sebastian Boehler | Machine Learning & Research Software',
+  description: 'Computer science graduate student at the University of Tübingen focused on machine learning, research software, dialogue systems, and AI-assisted engineering.',
+  keywords: ['Machine Learning', 'Research Assistant', 'Research Software', 'Dialogue Systems', 'QLoRA', 'AI Engineer', 'University of Tübingen', 'Python', 'PyTorch', 'TypeScript', 'Sebastian Boehler'],
   authors: [{ name: 'Sebastian Boehler' }],
   creator: 'Sebastian Boehler',
   publisher: 'Sebastian Boehler',
@@ -29,14 +29,14 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://sebastianboehler.com',
-    title: 'Sebastian Boehler | Full-Stack Developer & Solana Engineer',
-    description: 'Experienced Full-Stack Developer and Solana Engineer specializing in AI, blockchain, and algorithmic trading. Founder of HB Capital and Sunderlabs.',
+    title: 'Sebastian Boehler | Machine Learning & Research Software',
+    description: 'Computer science graduate student at the University of Tübingen focused on machine learning, research software, and dialogue systems.',
     siteName: 'Sebastian Boehler - Portfolio',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Sebastian Boehler | Full-Stack Developer & Solana Engineer',
-    description: 'Experienced Full-Stack Developer and Solana Engineer specializing in AI, blockchain, and algorithmic trading.',
+    title: 'Sebastian Boehler | Machine Learning & Research Software',
+    description: 'Computer science graduate student focused on machine learning, research software, and dialogue systems.',
     creator: '@sebastianboehler',
   },
 }

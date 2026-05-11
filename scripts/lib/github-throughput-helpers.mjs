@@ -8,6 +8,8 @@ export const EXCLUDED_REPO_PATTERNS = [
   /^markettensor$/i,
   /^marketing/i,
   /^jurisflow$/i,
+  /^html5-playable-ad-demos$/i,
+  /^studyos-agent-gateway$/i,
 ]
 
 export function isExcludedRepo(repo) {

@@ -108,8 +108,8 @@ export async function buildRepoCards(
   return cards
 }
 
-export function pickRecentRepos(cards: RepoCard[], limit: number) {
+export function pickSelectedRepos(cards: RepoCard[], limit: number) {
   return [...cards]
-    .sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt))
+    .sort((a, b) => b.stars - a.stars || Date.parse(b.updatedAt) - Date.parse(a.updatedAt))
     .slice(0, limit)
 }

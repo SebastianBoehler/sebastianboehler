@@ -144,9 +144,9 @@ async function buildRepoCards(repos) {
   return cards
 }
 
-function pickRecentRepos(cards) {
+function pickSelectedRepos(cards) {
   return [...cards]
-    .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
+    .sort((a, b) => b.stars - a.stars || new Date(b.updatedAt) - new Date(a.updatedAt))
     .slice(0, RECENT_REPO_LIMIT)
 }
 
@@ -159,9 +159,9 @@ async function main() {
   ])
   const candidateRepos = repos
     .filter((repo) => !isExcludedRepo(repo))
-    .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
-    .slice(0, 24)
-  const recent = pickRecentRepos(await buildRepoCards(candidateRepos))
+    .sort((a, b) => b.stargazers_count - a.stargazers_count || new Date(b.updated_at) - new Date(a.updated_at))
+    .slice(0, 36)
+  const recent = pickSelectedRepos(await buildRepoCards(candidateRepos))
   const startYear = new Date(profile.created_at).getUTCFullYear()
   const endYear = new Date().getUTCFullYear()
   const contributionYears = await Promise.all(

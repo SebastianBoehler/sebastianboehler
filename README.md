@@ -2,7 +2,7 @@
 
 Computer science graduate student at the University of Tübingen building research software, agent tooling, and infrastructure for AI-assisted engineering. Based in Germany. Shipping public work through [Sunderlabs](https://sunderlabs.com) and [sebastian-boehler.com](https://sebastian-boehler.com).
 
-Public GitHub snapshot as of May 7, 2026: 89 public repos, 26 followers, active on GitHub since Apr 19, 2017.
+Public GitHub snapshot as of May 11, 2026: 91 public repos, 27 followers, active on GitHub since Apr 19, 2017.
 
 ## Contribution history
 
@@ -26,12 +26,12 @@ All years from 2017-2026 are shown in one stacked calendar so the full activity 
 
 ## Selected public work
 
-- **[tue-api-wrapper](https://github.com/SebastianBoehler/tue-api-wrapper)** (Python, updated May 7, 2026) - Python tooling that layers cleaner navigation, search, and summarization on top of Alma and ILIAS.
-- **[polymarket-cpp-client](https://github.com/SebastianBoehler/polymarket-cpp-client)** (C++, updated May 5, 2026) - Lightweight C++ client for Polymarket APIs with REST and WebSocket support, designed for trading and market data access.
-- **[agent-cli-utils](https://github.com/SebastianBoehler/agent-cli-utils)** (Go, updated Apr 6, 2026) - Fast Go CLIs for AI agent workflows, including dependency diagnostics and deterministic file-editing utilities.
-- **[python_livestream](https://github.com/SebastianBoehler/python_livestream)** (HTML, updated Mar 29, 2026) - Livestream AI generated news segments with grok search grounding and TTS frameworks to youtube
-- **[bybit_market_maker_cpp](https://github.com/SebastianBoehler/bybit_market_maker_cpp)** (C++, updated Mar 21, 2026) - C++ market-making example for Bybit linear perpetuals: laddered quotes with inventory skew, TP/optional SL, exposure guard, and fee/funding-aware PnL via private websockets.
+- **[polymarket-cpp-client](https://github.com/SebastianBoehler/polymarket-cpp-client)** (C++, updated May 8, 2026) - Lightweight C++ client for Polymarket APIs with REST and WebSocket support, designed for trading and market data access.
+- **[tue-api-wrapper](https://github.com/SebastianBoehler/tue-api-wrapper)** (Python, updated May 11, 2026) - Python tooling that layers cleaner navigation, search, and summarization on top of Alma and ILIAS.
 - **[orpheus-podcast](https://github.com/SebastianBoehler/orpheus-podcast)** (Python, updated Mar 18, 2026) - Framework for podcast creation with search grounded llms for script generation and open source tts libraries
+- **[solana-dapp-learning](https://github.com/SebastianBoehler/solana-dapp-learning)** (TypeScript, updated Apr 8, 2025) - Creating my first DAPP on solana with Next.JS
+- **[bybit_market_maker_cpp](https://github.com/SebastianBoehler/bybit_market_maker_cpp)** (C++, updated Mar 21, 2026) - C++ market-making example for Bybit linear perpetuals: laddered quotes with inventory skew, TP/optional SL, exposure guard, and fee/funding-aware PnL via private websockets.
+- **[domain-check-mcp](https://github.com/SebastianBoehler/domain-check-mcp)** (JavaScript, updated Aug 7, 2025) - A Model Context Protocol (MCP) server for checking domain availability using IONOS endpoints
 
 ## Links
 

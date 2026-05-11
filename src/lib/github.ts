@@ -4,7 +4,7 @@ import {
   RECENT_REPO_LIMIT,
   USERNAME,
 } from "@/lib/github-config"
-import { buildRepoCards, extractSummaryFromReadme, pickRecentRepos } from "@/lib/github-readme"
+import { buildRepoCards, extractSummaryFromReadme, pickSelectedRepos } from "@/lib/github-readme"
 import type {
   ContributionYear,
   GitHubProfile,
@@ -125,11 +125,11 @@ export async function getGitHubSnapshot(): Promise<GitHubSnapshot> {
 
   const candidateRepos = repos
     .filter((repo) => !isExcludedRepo(repo))
-    .sort((a, b) => Date.parse(b.updated_at) - Date.parse(a.updated_at))
-    .slice(0, 24)
+    .sort((a, b) => b.stargazers_count - a.stargazers_count || Date.parse(b.updated_at) - Date.parse(a.updated_at))
+    .slice(0, 36)
 
   const repoCards = await buildRepoCards(candidateRepos, fetchReadmeSummary)
-  const recentRepos = pickRecentRepos(repoCards, RECENT_REPO_LIMIT)
+  const recentRepos = pickSelectedRepos(repoCards, RECENT_REPO_LIMIT)
   const startYear = new Date(profile.created_at).getUTCFullYear()
   const currentYear = new Date().getUTCFullYear()
   const contributionYears = await Promise.all(

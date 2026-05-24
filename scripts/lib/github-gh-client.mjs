@@ -2,16 +2,19 @@ import { execFile } from "node:child_process"
 import { promisify } from "node:util"
 
 const execFileAsync = promisify(execFile)
+const GH_COMMAND_TIMEOUT_MS = 30_000
 
 export async function ensureGhAuth() {
   await execFileAsync("gh", ["auth", "status"], {
     maxBuffer: 1024 * 1024 * 4,
+    timeout: GH_COMMAND_TIMEOUT_MS,
   })
 }
 
 export async function runGh(args) {
   const { stdout } = await execFileAsync("gh", args, {
     maxBuffer: 1024 * 1024 * 64,
+    timeout: GH_COMMAND_TIMEOUT_MS,
   })
 
   return stdout

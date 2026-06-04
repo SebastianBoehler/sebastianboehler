@@ -19,11 +19,11 @@ export default async function Home() {
     <div className="mx-auto max-w-5xl space-y-14 px-6 py-14 sm:py-16">
       <ProfileHero github={github} />
       <PublicationsSection />
-      <ContributionCalendar years={github.contributionYears} />
       <CurrentFocusSection />
       <ExperienceEducationSection />
       <SkillsSection />
       <RepositoriesSection github={github} />
+      <ContributionCalendar years={github.contributionYears} />
       <ContactSection />
     </div>
   )

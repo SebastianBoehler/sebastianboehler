@@ -14,18 +14,12 @@ export default function ContributionCalendar({
   years: ContributionYear[]
 }) {
   return (
-    <div className="border border-[#d0d7de] bg-white p-5 text-[#1f2328] dark:border-[#30363d] dark:bg-[#0d1117] dark:text-white sm:p-7">
-      <div className="flex flex-col gap-3 border-b border-[#d8dee4] pb-5 dark:border-[#21262d] sm:flex-row sm:items-end sm:justify-between">
+    <section className="space-y-5 border-t border-gray-200 pt-10 text-[#1f2328] dark:border-gray-800 dark:text-white">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div className="space-y-1">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#656d76] dark:text-[#7d8590]">
-            GitHub Activity
-          </p>
-          <h2 className="text-2xl font-semibold tracking-tight text-[#1f2328] dark:text-[#f0f6fc]">
-            Contribution history across all years
-          </h2>
-          <p className="max-w-2xl text-sm text-[#57606a] dark:text-[#8b949e]">
-            Same GitHub-style calendar orientation, with weekdays running vertically inside each
-            week column and years stacked for comparison.
+          <h2 className="text-xl font-semibold text-gray-950 dark:text-white">GitHub Activity</h2>
+          <p className="max-w-2xl text-sm text-gray-500 dark:text-gray-400">
+            Contribution history across all years.
           </p>
         </div>
         <div className="flex items-center gap-2 text-xs text-[#57606a] dark:text-[#8b949e]">
@@ -37,23 +31,21 @@ export default function ContributionCalendar({
         </div>
       </div>
 
-      <div className="mt-6 space-y-4">
-        {years.map((year) => (
-          <div
-            key={year.year}
-            className="border border-[#d8dee4] bg-white p-4 dark:border-[#21262d] dark:bg-[#0b1118] sm:p-5"
-          >
-            <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-              <div>
-                <h3 className="text-lg font-semibold text-[#1f2328] dark:text-[#f0f6fc]">{year.year}</h3>
-                <p className="text-sm text-[#57606a] dark:text-[#8b949e]">
+      <div className="overflow-x-auto">
+        <div className="min-w-[760px] space-y-3">
+          {years.map((year) => (
+            <div
+              key={year.year}
+              className="grid grid-cols-[96px_1fr] items-start gap-4 border-b border-gray-100 pb-3 last:border-b-0 dark:border-gray-900"
+            >
+              <div className="pt-0.5">
+                <h3 className="text-sm font-semibold text-[#1f2328] dark:text-[#f0f6fc]">{year.year}</h3>
+                <p className="text-xs text-[#57606a] dark:text-[#8b949e]">
                   {year.total.toLocaleString("en-US")} contributions
                 </p>
               </div>
-            </div>
 
-            <div>
-              <div className="grid w-full grid-cols-[repeat(53,minmax(0,1fr))] grid-rows-7 gap-[2px] sm:gap-[3px]">
+              <div className="grid grid-cols-[repeat(53,8px)] grid-rows-7 gap-[2px]">
                 {Array.from({ length: 53 * 7 }, (_, index) => {
                   const week = Math.floor(index / 7)
                   const day = index % 7
@@ -63,7 +55,7 @@ export default function ContributionCalendar({
                   return (
                     <div
                       key={`${year.year}-${week}-${day}`}
-                      className={`aspect-square w-full rounded-[1px] min-[520px]:rounded-[2px] ${levelClass}`}
+                      className={`h-2 w-2 rounded-[1px] ${levelClass}`}
                       style={{ gridColumn: week + 1, gridRow: day + 1 }}
                       title={
                         cell
@@ -75,9 +67,9 @@ export default function ContributionCalendar({
                 })}
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   )
 }

@@ -3,14 +3,14 @@ import { CURRENT_FOCUS_ITEMS, DATE_FORMATTER, USERNAME } from "./github-profile-
 export function renderContributionSvg(years, theme = "dark") {
   const descendingYears = [...years].sort((a, b) => b.year - a.year)
   const width = 760
-  const paddingX = 24
-  const labelWidth = 136
-  const cell = 8
+  const paddingX = 22
+  const labelWidth = 126
+  const cell = 7
   const gap = 2
   const cellPitch = cell + gap
-  const rowHeight = 72
-  const headerHeight = 104
-  const footerHeight = 28
+  const rowHeight = 62
+  const headerHeight = 76
+  const footerHeight = 20
   const gridWidth = cell * 53 + gap * 52
   const chartWidth = labelWidth + gridWidth
   const panelWidth = chartWidth + paddingX * 2
@@ -19,8 +19,8 @@ export function renderContributionSvg(years, theme = "dark") {
   const palette =
     theme === "light"
       ? {
-          background: "#f6f8fa",
-          panelStroke: "#d0d7de",
+          background: "#ffffff",
+          panelStroke: "#d8dee4",
           bodyText: "#1f2328",
           mutedText: "#57606a",
           colors: ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"],
@@ -34,8 +34,8 @@ export function renderContributionSvg(years, theme = "dark") {
         }
   const fontFamily = '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif'
   const legend = palette.colors.map((color, index) => {
-    const x = xOffset + paddingX + chartWidth - 118 + index * 18
-    return `<rect x="${x}" y="50" width="10" height="10" rx="2" fill="${color}" />`
+    const x = xOffset + paddingX + chartWidth - 100 + index * 16
+    return `<rect x="${x}" y="39" width="9" height="9" rx="2" fill="${color}" />`
   })
   const rows = descendingYears.flatMap((yearData, index) => {
     const rowY = headerHeight + index * rowHeight
@@ -46,8 +46,8 @@ export function renderContributionSvg(years, theme = "dark") {
     })
 
     return [
-      `<text x="${xOffset + paddingX}" y="${rowY + 22}" fill="${palette.bodyText}" font-size="15" font-weight="700">${yearData.year}</text>`,
-      `<text x="${xOffset + paddingX}" y="${rowY + 40}" fill="${palette.mutedText}" font-size="11">${yearData.total.toLocaleString("en-US")} contributions</text>`,
+      `<text x="${xOffset + paddingX}" y="${rowY + 20}" fill="${palette.bodyText}" font-size="14" font-weight="600">${yearData.year}</text>`,
+      `<text x="${xOffset + paddingX}" y="${rowY + 38}" fill="${palette.mutedText}" font-size="10">${yearData.total.toLocaleString("en-US")} contributions</text>`,
       ...cells,
     ]
   })
@@ -57,12 +57,11 @@ export function renderContributionSvg(years, theme = "dark") {
   <title id="title">All GitHub contribution years for ${USERNAME}</title>
   <desc id="desc">Stacked yearly GitHub contribution heatmaps from ${descendingYears.at(-1)?.year ?? ""} to ${descendingYears[0]?.year ?? ""}, newest year first.</desc>
   <style>text { font-family: ${fontFamily}; }</style>
-  <rect x="${xOffset}" y="12" width="${panelWidth}" height="${height - 24}" rx="18" fill="${palette.background}" stroke="${palette.panelStroke}"/>
-  <text x="${xOffset + paddingX}" y="42" fill="${palette.bodyText}" font-size="20" font-weight="700">GitHub contribution history</text>
-  <text x="${xOffset + paddingX}" y="64" fill="${palette.mutedText}" font-size="12">All contribution years stacked in one GitHub-style view.</text>
-  <text x="${xOffset + paddingX + chartWidth - 150}" y="68" fill="${palette.mutedText}" font-size="11">Less</text>
+  <rect x="${xOffset}" y="8" width="${panelWidth}" height="${height - 16}" rx="8" fill="${palette.background}" stroke="${palette.panelStroke}"/>
+  <text x="${xOffset + paddingX}" y="40" fill="${palette.bodyText}" font-size="16" font-weight="600">GitHub contribution history</text>
+  <text x="${xOffset + paddingX + chartWidth - 134}" y="48" fill="${palette.mutedText}" font-size="10">Less</text>
   ${legend.join("\n  ")}
-  <text x="${xOffset + paddingX + chartWidth - 18}" y="68" fill="${palette.mutedText}" font-size="11">More</text>
+  <text x="${xOffset + paddingX + chartWidth - 20}" y="48" fill="${palette.mutedText}" font-size="10">More</text>
   ${rows.join("\n  ")}
 </svg>
 `
@@ -83,16 +82,6 @@ Computer science graduate student at the University of Tübingen building resear
 
 Public GitHub snapshot as of ${generatedOn}: ${profile.public_repos} public repos, ${profile.followers} followers, active on GitHub since ${formatDate(profile.created_at)}.
 
-## Contribution history
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/github-contributions-all-years-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="./assets/github-contributions-all-years-light.svg">
-  <img alt="Stacked GitHub contribution history" src="./assets/github-contributions-all-years-light.svg">
-</picture>
-
-All years from ${contributionRange} are shown in one stacked calendar so the full activity arc is visible at a glance.
-
 ## Research
 
 - **QLoRA Fine-Tuning for Next User Turn Prediction and Multi-Step Dialogue Rollouts** - conference presentation, IEEE ICETSIS 2026, Bahrain. Proceedings pending.
@@ -104,6 +93,16 @@ ${focus}
 ## Selected public work
 
 ${repos}
+
+## Contribution history
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/github-contributions-all-years-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/github-contributions-all-years-light.svg">
+  <img alt="Stacked GitHub contribution history" src="./assets/github-contributions-all-years-light.svg">
+</picture>
+
+All years from ${contributionRange} are shown in one stacked calendar so the full activity arc is visible at a glance.
 
 ## Links
 

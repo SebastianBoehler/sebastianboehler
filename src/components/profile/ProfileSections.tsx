@@ -23,7 +23,7 @@ const experience: readonly Experience[] = [
   {
     company: "HB Capital",
     role: "Co-founder & CTO",
-    period: "2022-Present",
+    period: "Jul 2023-Present",
     bullets: [
       "Built algorithmic crypto trading systems with backtesting and multi-exchange support.",
       "Handled technical development, infrastructure, and on-chain smart contracts.",
@@ -32,8 +32,17 @@ const experience: readonly Experience[] = [
   {
     company: "LI.FI",
     role: "Backend Developer",
-    period: "2021-2022",
+    period: "Jul 2020-Jul 2023",
     bullets: ["Developed backend systems for cross-chain DeFi products."],
+  },
+  {
+    company: "remotly GmbH",
+    role: "Backend Developer & Freelance IT Consultant",
+    period: "Dec 2020-May 2021; freelance afterward",
+    bullets: [
+      "Built internal IT solutions and automation tooling, including unofficial API integrations for missing product workflows.",
+      "Continued supporting internal systems as a freelancer after the initial six-month part-time role.",
+    ],
   },
 ] as const
 

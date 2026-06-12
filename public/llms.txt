@@ -1,6 +1,8 @@
 # llms.txt for sebastian-boehler.com
 WEBSITE: https://www.sebastian-boehler.com
 BLOG: https://www.sebastian-boehler.com/blog
+BLOG_POST_PHYSICS_ML: https://www.sebastian-boehler.com/blog/physics-in-machine-learning
+BLOG_POST_LATENT_SPACE: https://www.sebastian-boehler.com/blog/latent-space
 LINKEDIN: https://www.linkedin.com/in/sebastian-boehler/
 GITHUB: https://github.com/SebastianBoehler
 CV: https://www.sebastian-boehler.com/sebastian_boehler_cv.pdf
@@ -54,4 +56,3 @@ Worked for:
 
 All pages are publicly accessible and may be indexed, summarized, or cached by automated agents.
 Attribution is appreciated when quoting or referencing content from this site.
-

@@ -9,11 +9,18 @@ type PromptPoint = {
   drift: [number, number]
 }
 
+type WordPoint = {
+  label: string
+  x: number
+  y: number
+  color: string
+}
+
 const steps = [
   {
-    label: "Coordinates",
-    title: "1. Meaning becomes position",
-    description: "The grid stands in for a much larger vector space. Each prompt region has a location.",
+    label: "Word clusters",
+    title: "1. Similar words cluster",
+    description: "Words used in similar contexts land near each other: pets, code, and finance form rough neighborhoods.",
   },
   {
     label: "Trajectories",
@@ -21,21 +28,45 @@ const steps = [
     description: "Changing the wording pulls the model state toward a different region and answer style.",
   },
   {
+    label: "Conversation",
+    title: "3. A chat keeps moving",
+    description: "Each turn starts from the accumulated context, so the conversation traces a path through regions.",
+  },
+  {
     label: "Run clouds",
-    title: "3. Repeated generations form clusters",
+    title: "4. Repeated generations form clouds",
     description: "Sampling from the next-token distribution creates nearby but not identical outputs.",
   },
   {
     label: "Landscape",
-    title: "4. Regions sit on a landscape",
+    title: "5. Regions sit on a landscape",
     description: "The mesh is a simplified way to see basins of likely continuation, not a measured embedding.",
   },
 ] as const
+
+const wordPoints: WordPoint[] = [
+  { label: "cat", x: 18, y: 24, color: "#2563eb" },
+  { label: "kitten", x: 24, y: 29, color: "#2563eb" },
+  { label: "pet", x: 16, y: 34, color: "#2563eb" },
+  { label: "compiler", x: 54, y: 18, color: "#059669" },
+  { label: "runtime", x: 63, y: 24, color: "#059669" },
+  { label: "function", x: 58, y: 33, color: "#059669" },
+  { label: "bond", x: 75, y: 52, color: "#dc2626" },
+  { label: "market", x: 83, y: 58, color: "#dc2626" },
+  { label: "rate", x: 72, y: 63, color: "#dc2626" },
+]
 
 const prompts: PromptPoint[] = [
   { label: "beginner explainer", color: "#2563eb", center: [32, 42], drift: [15, -8] },
   { label: "geometric derivation", color: "#059669", center: [55, 30], drift: [-9, -12] },
   { label: "poetic metaphor", color: "#dc2626", center: [68, 58], drift: [8, 14] },
+]
+
+const conversationPath = [
+  { label: "ask intuition", x: 27, y: 44 },
+  { label: "add equations", x: 46, y: 34 },
+  { label: "request code", x: 62, y: 25 },
+  { label: "ask caveats", x: 72, y: 45 },
 ]
 
 export default function LatentSpaceVisual() {
@@ -45,8 +76,9 @@ export default function LatentSpaceVisual() {
   const samples = useMemo(() => makeSamples(spread), [spread])
   const activeStep = steps[step]
   const showPaths = step >= 1
-  const showClouds = step >= 2
-  const showMesh = step >= 3
+  const showConversation = step >= 2
+  const showClouds = step >= 3
+  const showMesh = step >= 4
 
   return (
     <figure className="my-10 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-800 dark:bg-gray-950 sm:p-5">
@@ -74,7 +106,7 @@ export default function LatentSpaceVisual() {
         </label>
       </div>
 
-      <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-4" role="tablist" aria-label="Latent space explanation steps">
+      <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-5" role="tablist" aria-label="Latent space explanation steps">
         {steps.map((item, index) => (
           <button
             key={item.label}
@@ -103,6 +135,14 @@ export default function LatentSpaceVisual() {
             </defs>
             <rect width="100" height="78" className="fill-gray-50 text-gray-200 dark:fill-gray-950 dark:text-gray-800" />
             <rect width="100" height="78" fill="url(#latent-grid)" opacity="0.85" />
+            {wordPoints.map((point) => (
+              <g key={point.label}>
+                <circle cx={point.x} cy={point.y} r="1.8" fill={point.color} opacity="0.85" />
+                <text x={point.x + 2.5} y={point.y + 1} className="fill-gray-700 text-[2.7px] dark:fill-gray-300">
+                  {point.label}
+                </text>
+              </g>
+            ))}
             {showPaths &&
               prompts.map((prompt) => (
                 <path
@@ -119,6 +159,26 @@ export default function LatentSpaceVisual() {
               samples.map((point) => (
                 <circle key={point.id} cx={point.x} cy={point.y} r="0.85" fill={point.color} opacity="0.42" />
               ))}
+            {showConversation && (
+              <g>
+                <polyline
+                  points={conversationPath.map((point) => `${point.x},${point.y}`).join(" ")}
+                  fill="none"
+                  stroke="#7c3aed"
+                  strokeWidth="1"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                {conversationPath.map((point, index) => (
+                  <g key={point.label}>
+                    <circle cx={point.x} cy={point.y} r="2" fill="#7c3aed" />
+                    <text x={point.x + 2.8} y={point.y + (index % 2 === 0 ? -2.4 : 4)} className="fill-gray-950 text-[2.6px] dark:fill-white">
+                      {index + 1}. {point.label}
+                    </text>
+                  </g>
+                ))}
+              </g>
+            )}
             {prompts.map((prompt) => (
               <g key={`${prompt.label}-center`}>
                 <circle cx={prompt.center[0]} cy={prompt.center[1]} r="2.2" fill={prompt.color} />
@@ -154,12 +214,12 @@ export default function LatentSpaceVisual() {
             })}
           </svg>
           <p className="mt-3 text-sm leading-6 text-gray-600 dark:text-gray-400">
-            The mesh is not a real embedding projection. It is a reading aid: nearby basins mean similar prompt pressure, while the cloud radius means expected output variation.
+            The mesh is not a real embedding projection. It is a reading aid: nearby basins mean similar prompt pressure, while the purple path shows conversation drift.
           </p>
         </div>
       </div>
       <figcaption className="mt-4 border-t border-gray-200 pt-3 text-sm leading-6 text-gray-600 dark:border-gray-800 dark:text-gray-400">
-        Figure 1. A compressed sketch of prompt trajectories and run clouds. The layout is illustrative: it shows the shape of the idea, not a measured embedding projection.
+        Figure 1. A compressed sketch of word clusters, prompt trajectories, conversation drift, and run clouds. The layout is illustrative: it shows the shape of the idea, not a measured embedding projection.
       </figcaption>
     </figure>
   )

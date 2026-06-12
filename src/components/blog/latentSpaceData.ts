@@ -12,6 +12,12 @@ export type WordPoint = {
   color: string
 }
 
+export type LandscapePath = {
+  id: string
+  color: string
+  points: [number, number][]
+}
+
 export const latentSteps = [
   {
     label: "Word clusters",
@@ -30,8 +36,8 @@ export const latentSteps = [
   },
   {
     label: "Landscape",
-    title: "4. Regions sit on a landscape",
-    description: "The surface is an analogy: lower basins represent continuation regions that are easier for this context to fall into.",
+    title: "4. Starting points shape lineages",
+    description: "Different initial contexts begin in different regions, then each answer token changes the next state and traces a lineage across the landscape.",
   },
 ] as const
 
@@ -58,6 +64,42 @@ export const conversationPath = [
   { label: "add equations", x: 42, y: 33 },
   { label: "request code", x: 58, y: 25 },
   { label: "ask caveats", x: 72, y: 43 },
+]
+
+export const landscapePaths: LandscapePath[] = [
+  {
+    id: "beginner",
+    color: "#2563eb",
+    points: [
+      [18, 45],
+      [28, 42],
+      [38, 44],
+      [48, 50],
+      [58, 54],
+    ],
+  },
+  {
+    id: "technical",
+    color: "#059669",
+    points: [
+      [38, 22],
+      [47, 28],
+      [55, 34],
+      [64, 42],
+      [72, 48],
+    ],
+  },
+  {
+    id: "metaphor",
+    color: "#dc2626",
+    points: [
+      [77, 31],
+      [69, 36],
+      [61, 43],
+      [53, 50],
+      [45, 56],
+    ],
+  },
 ]
 
 export function makeSamples(spread: number) {

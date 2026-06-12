@@ -3,7 +3,7 @@
 import Image from "next/image"
 import type { ReactNode } from "react"
 import { useMemo, useState } from "react"
-import { conversationPath, latentSteps, makeSamples, prompts, wordPoints } from "@/components/blog/latentSpaceData"
+import { conversationPath, landscapePaths, latentSteps, makeSamples, prompts, wordPoints } from "@/components/blog/latentSpaceData"
 
 export default function LatentSpaceVisual() {
   const [temperature, setTemperature] = useState(42)
@@ -12,6 +12,7 @@ export default function LatentSpaceVisual() {
   const samples = useMemo(() => makeSamples(4 + temperature / 9), [temperature])
   const isCloudStep = step === 2
   const isLandscapeStep = step === 3
+  const updateTemperature = (value: string) => setTemperature(Number(value))
 
   return (
     <figure className="my-10 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-800 dark:bg-gray-950 sm:p-5">
@@ -33,7 +34,8 @@ export default function LatentSpaceVisual() {
               min="0"
               max="100"
               value={temperature}
-              onChange={(event) => setTemperature(Number(event.target.value))}
+              onInput={(event) => updateTemperature(event.currentTarget.value)}
+              onChange={(event) => updateTemperature(event.currentTarget.value)}
             />
           </label>
         ) : null}
@@ -133,14 +135,46 @@ function LandscapePanel() {
     <div className="mt-6 grid gap-5 lg:grid-cols-[1.35fr_0.65fr]">
       <div className="relative aspect-[88/62] overflow-hidden rounded-md border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
         <Image src="/blog/latent-space-landscape-clean.png" alt="Axis-free 3D toy continuation landscape with a contour floor projection" fill sizes="(min-width: 1024px) 540px, 100vw" className="object-cover" />
+        <LandscapeTrajectories />
       </div>
       <div className="rounded-md border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-900">
         <h3 className="text-sm font-semibold text-gray-950 dark:text-white">Read it as a metaphor</h3>
         <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">
-          The contour floor is the 2D reference map. The raised surface is not the training loss; it is a teaching sketch for likely continuation regions after context has already conditioned the model.
+          The contour floor is the 2D reference map. The raised surface is not the training loss; it is a teaching sketch for likely continuation regions after context has already conditioned the model. Each colored line is a possible conversation lineage from a different starting context.
         </p>
       </div>
     </div>
+  )
+}
+
+function LandscapeTrajectories() {
+  return (
+    <svg viewBox="0 0 100 70" role="img" aria-label="Animated conversation lineages across a 3D latent-space landscape" className="absolute inset-0 h-full w-full">
+      <style>{`
+        @media (prefers-reduced-motion: no-preference) {
+          .landscape-lineage { stroke-dasharray: 90; stroke-dashoffset: 90; animation: lineage-draw 4.4s ease-in-out infinite; }
+          .landscape-dot { animation: lineage-dot 4.4s ease-in-out infinite; }
+        }
+        @keyframes lineage-draw { 0% { stroke-dashoffset: 90; opacity: .28; } 38%, 88% { stroke-dashoffset: 0; opacity: .98; } 100% { stroke-dashoffset: 0; opacity: .35; } }
+        @keyframes lineage-dot { 0%, 22% { opacity: .18; transform: scale(.82); } 52%, 82% { opacity: 1; transform: scale(1); } 100% { opacity: .25; transform: scale(.9); } }
+      `}</style>
+      <g fill="none" strokeLinecap="round" strokeLinejoin="round">
+        {landscapePaths.map((path, pathIndex) => {
+          const line = path.points.map(([x, y]) => `${x},${y}`).join(" ")
+          const start = path.points[0]
+          const end = path.points[path.points.length - 1]
+
+          return (
+            <g key={path.id} style={{ animationDelay: `${pathIndex * 420}ms` }}>
+              <polyline points={line} stroke="white" strokeWidth="3.8" opacity="0.78" className="landscape-lineage" style={{ animationDelay: `${pathIndex * 420}ms` }} />
+              <polyline points={line} stroke={path.color} strokeWidth="2" className="landscape-lineage" style={{ animationDelay: `${pathIndex * 420}ms` }} />
+              <circle cx={start[0]} cy={start[1]} r="2.4" fill="white" stroke={path.color} strokeWidth="1.4" opacity="0.95" />
+              <circle cx={end[0]} cy={end[1]} r="2.7" fill={path.color} className="landscape-dot" style={{ animationDelay: `${pathIndex * 420 + 900}ms`, transformOrigin: `${end[0]}px ${end[1]}px` }} />
+            </g>
+          )
+        })}
+      </g>
+    </svg>
   )
 }
 

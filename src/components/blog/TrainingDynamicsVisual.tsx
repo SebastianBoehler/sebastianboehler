@@ -14,6 +14,7 @@ export default function TrainingDynamicsVisual() {
   const [mode, setMode] = useState<Mode>("batch")
   const [noise, setNoise] = useState(48)
   const heat = noise / 100
+  const updateNoise = (value: string) => setNoise(Number(value))
 
   return (
     <figure className="my-10 rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-950 sm:p-5">
@@ -53,7 +54,8 @@ export default function TrainingDynamicsVisual() {
               min="0"
               max="100"
               value={noise}
-              onChange={(event) => setNoise(Number(event.target.value))}
+              onInput={(event) => updateNoise(event.currentTarget.value)}
+              onChange={(event) => updateNoise(event.currentTarget.value)}
             />
           </label>
         </div>
@@ -90,7 +92,8 @@ function BatchView({ heat }: { heat: number }) {
         <ellipse key={radius} cx="76" cy="55" rx={radius} ry={radius * 0.45} fill="none" className="stroke-gray-300 dark:stroke-gray-700" strokeWidth="0.8" />
       ))}
       <path d="M 13 13 C 28 20, 44 30, 59 41 S 74 52, 76 55" fill="none" stroke="#059669" strokeWidth="1.6" strokeDasharray="4 2" />
-      <path d={jagged} fill="none" stroke="#2563eb" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" markerEnd="url(#training-arrow-head)" />
+      <path d={jagged} fill="none" stroke="#2563eb" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M 72.2 52.6 L 75.2 54.4" fill="none" stroke="#2563eb" strokeWidth="1.9" strokeLinecap="round" markerEnd="url(#training-arrow-head)" />
       <circle cx="13" cy="13" r="2.5" fill="#f59e0b" />
       <circle cx="76" cy="55" r="3" className="fill-gray-950 dark:fill-white" />
       <text x="10" y="9" className="fill-gray-500 text-[3px] dark:fill-gray-300">start</text>
@@ -176,8 +179,13 @@ function makeJaggedPath(heat: number) {
   return Array.from({ length: 11 })
     .map((_, index) => {
       const t = index / 10
-      const x = 13 + t * 63 + Math.sin(index * 1.7) * heat * 4
-      const y = 13 + t * 42 + Math.cos(index * 2.1) * heat * 6
+      if (index === 10) {
+        return "L 72.2 52.6"
+      }
+
+      const taper = 1 - t * 0.72
+      const x = 13 + t * 59.2 + Math.sin(index * 1.7) * heat * 3.1 * taper
+      const y = 13 + t * 39.6 + Math.cos(index * 2.1) * heat * 4.2 * taper
       return `${index === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)}`
     })
     .join(" ")

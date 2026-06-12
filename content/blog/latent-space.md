@@ -115,6 +115,33 @@ model into a region before the first output token is sampled. A bare prompt like
 examples and analogies more likely. A coding prompt makes implementation details
 more likely. A poetic prompt makes metaphor more likely.
 
+But here is the subtle part: **nearby in representation space does not
+automatically mean high next-token probability**.
+
+Imagine the context is:
+
+> I drove to work in my
+
+The token "car" might be likely. Words like "bicycle", "motorbike", "truck",
+and "vehicle" may live nearby in a semantic neighborhood because they are all
+transport words. But only some of them fit this exact sentence well. Grammar,
+idiom, world knowledge, style, and the previous tokens all affect the final
+score. "Bicycle" can be close to "car" in meaning and still be less likely after
+"in my" because people usually say "in my car" and "on my bicycle".
+
+So the visual should be read like this:
+
+- The starting context changes the hidden state.
+- That hidden state is compared against many possible next tokens.
+- Semantically nearby tokens often become plausible alternatives.
+- The actual probabilities also depend on syntax, phrasing, frequency, and the
+  exact conversation so far.
+
+The model's final next-token probabilities are produced by a learned projection
+and softmax, not by simply choosing the geometrically nearest word on a 2D map.
+The map is useful because it shows neighborhoods of related meaning. It is
+misleading only if we pretend distance alone is the probability rule.
+
 If the settings are fixed, the weights are fixed, and the computer repeats the
 same calculation exactly, this landscape of possibilities is the fixed part.
 The model is not confused. It has assigned scores to the possible next tokens.

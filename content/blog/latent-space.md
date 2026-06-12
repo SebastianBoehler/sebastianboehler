@@ -186,6 +186,40 @@ different examples, styles, or reasoning paths.
 So there are two things to keep separate: the probabilities the model computes,
 and the run cloud you observe when the system actually generates answers.
 
+There is an important practical result here. A deployed model can sometimes
+produce different answers even when the requested temperature is zero. That
+does not mean the model contains a little random creature making choices. The
+cleaner explanation is that real serving systems change the exact computation:
+requests are batched, kernels use parallel floating point operations, and tiny
+rounding differences can appear when the operation shape changes. Thinking
+Machines Lab describes this as a lack of **batch invariance**: the same request
+can receive slightly different numerical results depending on what it is
+batched with.
+
+Those differences are usually tiny. Most of the time they do not matter. But if
+two next-token choices are almost tied, a tiny logit difference can flip which
+token wins. After that first different token, generation is autoregressive: the
+new token is added back into the context, so the next prediction is now made
+from a slightly different state. A tiny branch can become a visibly different
+answer.
+
+[[visual:nondeterminism-boundary]]
+
+So the useful picture is not "the model jumps randomly across latent space."
+It is more like this:
+
+- The same prompt lands in almost the same region each time.
+- Implementation nondeterminism creates a small cloud around that state.
+- If the cloud is far from a decision boundary, every run looks the same.
+- If the cloud crosses a boundary between two near-tied continuations, runs can
+  branch.
+- Once a branch starts, later tokens can amplify the difference.
+
+Some researchers call the observed hidden randomness at nominal temperature
+zero a kind of **background temperature**. That phrase is useful because it
+keeps the two knobs separate: the temperature you ask for, and the effective
+variation created by the serving system.
+
 There is also a separate kind of noise during training. Stochastic gradient
 descent trains the weights by looking at mini-batches of data, so the training
 path can wiggle through the loss landscape. That is different from generation
@@ -193,7 +227,26 @@ time. During a normal chat, the weights are already fixed. The noise you see is
 mostly about decoding choices and serving details, not the model learning a new
 valley while it answers.
 
-## Step 9: skills are context engineering
+## Step 9: small experiments make the cloud visible
+
+The simplest experiment is not to prove what happens inside a specific GPU. It
+is to measure the outside behavior. Send the exact same prompt many times, keep
+the model, temperature, and settings fixed, then compare the outputs. Count how
+often the text is identical. If it differs, find the first token or word where
+the runs diverge. That first divergence is the boundary you are looking for.
+
+I added a small code artifact for that style of test in
+`experiments/llm-nondeterminism`. It records repeated completions as JSONL and
+prints a compact summary. If you run it at temperature zero and still see
+multiple unique outputs, that is evidence of serving-level variation. If you run
+it at higher temperature, you are mostly measuring intentional sampling.
+
+The experiment is deliberately modest. It cannot see the model's true latent
+space, and it cannot prove which GPU kernel caused a difference. What it can do
+is make the run cloud concrete: same prompt, same settings, observed output
+spread.
+
+## Step 10: skills are context engineering
 
 A skill is a structured way to add context before the model has to decide what
 to do. It might include definitions, procedures, examples, constraints, file
@@ -231,7 +284,7 @@ new law of nature, but it can act like a constraint on the answer space. It
 reduces the directions that are plausible, the same way a physical simulator or
 reward constraint reduces useless moves for an RL agent.
 
-## Step 10: prompts steer regions
+## Step 11: prompts steer regions
 
 This changes how prompt engineering should feel. A prompt is not a magic spell.
 It is a steering function. It pushes the model toward a region, a style, and a
@@ -254,3 +307,6 @@ answers the model is likely to produce.
 - [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 - [The Curious Case of Neural Text Degeneration](https://arxiv.org/abs/1904.09751)
 - [Language Models are Few-Shot Learners](https://arxiv.org/abs/2005.14165)
+- [Defeating Nondeterminism in LLM Inference](https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/)
+- [Introducing Background Temperature to Characterise Hidden Randomness in Large Language Models](https://arxiv.org/abs/2604.22411)
+- [The Impact of Non-determinism on Reproducibility in Deep Learning](https://arxiv.org/abs/2207.09955)

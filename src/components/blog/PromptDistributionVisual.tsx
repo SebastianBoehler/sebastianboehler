@@ -6,9 +6,9 @@ import { useState } from "react"
 const scenarios = [
   {
     label: "bare prompt",
-    x: 34,
-    y: 48,
-    note: "The model knows the topic, but the answer style is still broad.",
+    x: 45,
+    y: 45,
+    note: "The model knows the topic, but the answer style is still broad and can still move toward several regions.",
     bars: [
       ["analogy", 32, "#2563eb"],
       ["definition", 25, "#7c3aed"],
@@ -58,6 +58,8 @@ const scenarios = [
   },
 ] as const
 
+const start = { x: 34, y: 48 }
+
 export default function PromptDistributionVisual() {
   const [index, setIndex] = useState(0)
   const active = scenarios[index]
@@ -67,7 +69,7 @@ export default function PromptDistributionVisual() {
       <div>
         <h2 className="text-lg font-semibold text-gray-950 dark:text-white">Start point changes the distribution</h2>
         <p className="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-400">
-          The same broad topic can lead to different likely next moves once the prompt adds audience, task, or skill context.
+          The same broad topic can lead to different likely next moves once the prompt adds audience, task, or skill context. The state can shift regions; it is not locked to the first cluster forever.
         </p>
       </div>
 
@@ -92,12 +94,12 @@ export default function PromptDistributionVisual() {
 
       <div className="mt-6 grid gap-5 lg:grid-cols-[1fr_0.9fr]">
         <div className="relative aspect-[100/78] overflow-hidden rounded-md border border-gray-200 dark:border-gray-800">
-          <Image src="/blog/latent-space-projection.png" alt="Toy latent-space contour plot used to show prompt start points" fill sizes="(min-width: 1024px) 323px, 100vw" className="object-cover" />
+          <Image src="/blog/latent-space-projection-clean.png" alt="Axis-free toy latent-space contour plot used to show prompt start points" fill sizes="(min-width: 1024px) 323px, 100vw" className="object-cover" />
           <svg viewBox="0 0 100 78" className="absolute inset-0 h-full w-full" role="img" aria-label="Prompt start point moving through latent space">
-            <path d={`M 34 48 C ${(34 + active.x) / 2} ${active.y + 10}, ${active.x - 8} ${active.y + 5}, ${active.x} ${active.y}`} fill="none" strokeWidth="1.2" strokeLinecap="round" className="stroke-gray-950 dark:stroke-white" />
-            <circle cx="34" cy="48" r="2.4" className="fill-gray-950 dark:fill-white" />
+            <path d={`M ${start.x} ${start.y} Q ${(start.x + active.x) / 2} ${Math.min(start.y, active.y) - 6}, ${active.x} ${active.y}`} fill="none" strokeWidth="1.2" strokeLinecap="round" className="stroke-gray-950 dark:stroke-white" />
+            <circle cx={start.x} cy={start.y} r="2.4" fill="none" strokeWidth="0.9" className="stroke-gray-950 dark:stroke-white" />
             <circle cx={active.x} cy={active.y} r="3.2" fill="#f59e0b" strokeWidth="0.7" className="stroke-gray-950 dark:stroke-white" />
-            <text x="37" y="47" className="fill-gray-950 stroke-white text-[3px] dark:fill-white dark:stroke-gray-950" paintOrder="stroke" strokeWidth="0.55">
+            <text x={start.x - 14} y={start.y - 4} className="fill-gray-950 stroke-white text-[3px] dark:fill-white dark:stroke-gray-950" paintOrder="stroke" strokeWidth="0.55">
               initial topic
             </text>
             <text x={active.x + 3.5} y={active.y - 2.5} className="fill-gray-950 stroke-white text-[3px] dark:fill-white dark:stroke-gray-950" paintOrder="stroke" strokeWidth="0.55">

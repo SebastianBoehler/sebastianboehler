@@ -4,8 +4,8 @@ description: "A step-by-step visual explanation of how prompts become directions
 date: "2026-06-12"
 tags: ["Latent Space", "LLMs", "Visualization"]
 visual: "latent-space"
-image: "/blog/latent-space-projection.png"
-imageAlt: "Matplotlib contour plot showing word clusters, prompt paths, and run clouds in a toy latent space."
+image: "/blog/latent-space-projection-clean.png"
+imageAlt: "Axis-free Matplotlib contour plot showing word clusters, prompt paths, and run clouds in a toy latent space."
 ---
 
 Large language models can feel mysterious because we talk to them with words,
@@ -55,8 +55,8 @@ The real model space has thousands of dimensions, so we cannot draw it directly.
 The plot below compresses the idea into two dimensions. That compression is not
 the real model, and the plotted coordinates are not measured from a specific
 LLM. It is a teaching sketch that lets us reason visually. Click the tabs from
-left to right: first clusters, then prompt movement, then conversation movement,
-then randomness.
+left to right: first clusters, then an animated context path, then run clouds,
+then the landscape analogy.
 
 [[visual:latent-space]]
 
@@ -71,6 +71,13 @@ That is why I find it better to think of a prompt as a **trajectory**. It moves
 through a sequence of internal states. This is not a measured physical path
 through one fixed map. It is a mental model for how each extra token changes the
 model's next guess.
+
+The trajectory is not locked inside the first cluster forever. Context usually
+anchors the model near a region, but a strong instruction can move the
+contextual state toward a different neighborhood. "Explain this simply" and
+"now derive it rigorously" can pull the same topic into different answer
+families. The base embedding map is not being retrained; the contextual state is
+being recomputed from the text in front of the model.
 
 ## Step 4: a conversation keeps moving
 
@@ -88,6 +95,10 @@ toward code and systems.
 Good conversations often work because each turn narrows the region. Bad
 conversations often fail because the path wanders: the model keeps carrying
 old context, ambiguous intent, or conflicting style pressure.
+
+So a conversation is a balance. It has inertia because earlier turns remain in
+context, but it is not a prison. Later turns can correct, narrow, or redirect
+the path if they are specific enough.
 
 [[visual:conversation-drift]]
 

@@ -80,6 +80,8 @@ Good conversations often work because each turn narrows the region. Bad
 conversations often fail because the path wanders: the model keeps carrying
 old context, ambiguous intent, or conflicting style pressure.
 
+[[visual:conversation-drift]]
+
 ## Step 5: the model predicts a distribution
 
 The model does not choose one next word directly. It produces a probability
@@ -87,9 +89,17 @@ distribution over possible next tokens. In plain language, it says: these next
 tokens are likely, these are unlikely, and these are almost impossible in this
 context.
 
+This is where the starting point matters. The prompt has already moved the
+model into a region before the first output token is sampled. A bare prompt like
+"explain latent space" leaves many directions open. A beginner prompt makes
+examples and analogies more likely. A coding prompt makes implementation details
+more likely. A poetic prompt makes metaphor more likely.
+
 If the settings are fixed, the weights are fixed, and the numerical computation
 is exactly repeated, this distribution is the deterministic part. The model is
 not confused. It has computed a landscape of possibilities.
+
+[[visual:prompt-distribution]]
 
 ## Step 6: generation samples a path
 
@@ -128,7 +138,38 @@ reasoning paths.
 The theoretical object is the probability distribution. The practical object is
 the distribution plus the run cloud you observe when the system actually runs.
 
-## Step 9: prompts steer regions
+## Step 9: skills are context engineering
+
+A skill is a structured way to add context before the model has to decide what
+to do. It might include definitions, procedures, examples, constraints, file
+paths, style rules, or domain vocabulary. That extra context changes the start
+point.
+
+In the latent-space picture, a skill does not make the model smarter by itself.
+It steers the model closer to the region where the useful answer already lives.
+It narrows the distribution. It makes irrelevant continuations less likely and
+domain-specific continuations more likely.
+
+This is why context engineering matters. You are not only asking a question.
+You are shaping the state from which the model predicts. A weak context leaves
+the model high on the landscape, where many paths are plausible. A strong
+context places it near a basin: a region where the next steps are more coherent,
+more specific, and less likely to wander.
+
+The phrase "local minimum" is useful as a metaphor, but it needs care. During a
+chat, the model is not training its weights or literally optimizing into a
+minimum. The weights are fixed. What changes is the hidden state and the
+probability distribution. Still, the basin image is helpful: more context can
+move the conversation deeper into one region, so nearby next steps become much
+more likely than far-away ones.
+
+Different initial contexts can therefore lead to completely different clusters
+of outputs. The same user can ask about latent space as a beginner, as a
+mathematician, as a programmer, or as a writer. Those are not tiny wording
+changes. They are different start points, and they pull the conversation toward
+different answer families.
+
+## Step 10: prompts steer regions
 
 This changes how prompt engineering should feel. A prompt is not a magic spell.
 It is a steering function. It pushes the model toward a region, a style, and a

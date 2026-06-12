@@ -40,7 +40,7 @@ const steps = [
   {
     label: "Landscape",
     title: "5. Regions sit on a landscape",
-    description: "The mesh is a simplified way to see basins of likely continuation, not a measured embedding.",
+    description: "The surface is a simplified energy view: paths settle into different likely-continuation basins.",
   },
 ] as const
 
@@ -57,9 +57,9 @@ const wordPoints: WordPoint[] = [
 ]
 
 const prompts: PromptPoint[] = [
-  { label: "beginner explainer", color: "#2563eb", center: [32, 42], drift: [15, -8] },
-  { label: "geometric derivation", color: "#059669", center: [55, 30], drift: [-9, -12] },
-  { label: "poetic metaphor", color: "#dc2626", center: [68, 58], drift: [8, 14] },
+  { label: "beginner explainer", color: "#2563eb", center: [34, 45], drift: [-18, 9] },
+  { label: "geometric derivation", color: "#059669", center: [58, 27], drift: [-20, 4] },
+  { label: "poetic metaphor", color: "#dc2626", center: [72, 56], drift: [-18, -5] },
 ]
 
 const conversationPath = [
@@ -79,6 +79,10 @@ export default function LatentSpaceVisual() {
   const showConversation = step >= 2
   const showClouds = step >= 3
   const showMesh = step >= 4
+  const showPrompts = step >= 1
+  const showWordLabels = step === 0
+  const showPromptLabels = step === 1
+  const showConversationLabels = step === 2
 
   return (
     <figure className="my-10 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-800 dark:bg-gray-950 sm:p-5">
@@ -89,18 +93,19 @@ export default function LatentSpaceVisual() {
             {activeStep.description}
           </p>
         </div>
-        <label htmlFor="latent-space-spread" className="w-full text-sm text-gray-600 dark:text-gray-400 md:w-56">
+        <label htmlFor="latent-space-spread" className={`w-full text-sm md:w-56 ${showClouds ? "text-gray-600 dark:text-gray-400" : "text-gray-400 dark:text-gray-600"}`}>
           <span className="flex justify-between">
             <span>sampling spread</span>
-            <span>{temperature}%</span>
+            <span>{showClouds ? `${temperature}%` : "Run clouds"}</span>
           </span>
           <input
             id="latent-space-spread"
-            className="mt-2 w-full accent-gray-950 dark:accent-white"
+            className="mt-2 w-full accent-gray-950 disabled:cursor-not-allowed disabled:opacity-40 dark:accent-white"
             type="range"
             min="0"
             max="100"
             value={temperature}
+            disabled={!showClouds}
             onChange={(event) => setTemperature(Number(event.target.value))}
           />
         </label>
@@ -126,34 +131,67 @@ export default function LatentSpaceVisual() {
       </div>
 
       <div className="mt-6 grid gap-5 lg:grid-cols-[1.4fr_1fr]">
-        <div className="overflow-hidden rounded-md border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
-          <svg viewBox="0 0 100 78" role="img" aria-label="2D latent-space prompt clusters" className="h-auto w-full">
-            <defs>
-              <pattern id="latent-grid" width="10" height="10" patternUnits="userSpaceOnUse">
-                <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" strokeWidth="0.25" />
-              </pattern>
-            </defs>
-            <rect width="100" height="78" className="fill-gray-50 text-gray-200 dark:fill-gray-950 dark:text-gray-800" />
-            <rect width="100" height="78" fill="url(#latent-grid)" opacity="0.85" />
+        <div
+          className="relative aspect-[100/78] overflow-hidden rounded-md border border-gray-200 bg-white bg-cover bg-center dark:border-gray-800"
+          style={{ backgroundImage: "url('/blog/latent-space-projection.png')" }}
+        >
+          <svg
+            viewBox="0 0 100 78"
+            role="img"
+            aria-label="2D latent-space prompt clusters"
+            className="absolute inset-0 h-full w-full"
+          >
+            <rect width="100" height="78" fill="white" opacity="0.02" />
             {wordPoints.map((point) => (
               <g key={point.label}>
+                <title>{point.label}</title>
                 <circle cx={point.x} cy={point.y} r="1.8" fill={point.color} opacity="0.85" />
-                <text x={point.x + 2.5} y={point.y + 1} className="fill-gray-700 text-[2.7px] dark:fill-gray-300">
-                  {point.label}
-                </text>
+                {showWordLabels && (
+                  <text
+                    x={point.x + 2.5}
+                    y={point.y + 1}
+                    className="fill-gray-800 text-[3.1px] dark:fill-gray-200"
+                    paintOrder="stroke"
+                    stroke="white"
+                    strokeWidth="0.55"
+                  >
+                    {point.label}
+                  </text>
+                )}
               </g>
             ))}
             {showPaths &&
               prompts.map((prompt) => (
-                <path
-                  key={prompt.label}
-                  d={`M ${prompt.center[0] - prompt.drift[0] * 0.45} ${prompt.center[1] - prompt.drift[1] * 0.45} C ${prompt.center[0] - 8} ${prompt.center[1] - 10}, ${prompt.center[0] + 8} ${prompt.center[1] + 10}, ${prompt.center[0]} ${prompt.center[1]}`}
-                  fill="none"
-                  stroke={prompt.color}
-                  strokeDasharray="2 2"
-                  strokeWidth="0.7"
-                  opacity="0.7"
-                />
+                <g key={prompt.label}>
+                  <title>{prompt.label}</title>
+                  <path
+                    d={`M ${prompt.center[0] + prompt.drift[0]} ${prompt.center[1] + prompt.drift[1]} C ${prompt.center[0] - 12} ${prompt.center[1] + prompt.drift[1] * 0.6}, ${prompt.center[0] - 8} ${prompt.center[1] - 6}, ${prompt.center[0]} ${prompt.center[1]}`}
+                    fill="none"
+                    stroke={prompt.color}
+                    strokeWidth="1.1"
+                    opacity="0.85"
+                  />
+                  <path
+                    d={`M ${prompt.center[0] - 2.8} ${prompt.center[1] - 0.5} L ${prompt.center[0]} ${prompt.center[1]} L ${prompt.center[0] - 1.2} ${prompt.center[1] + 2.5}`}
+                    fill="none"
+                    stroke={prompt.color}
+                    strokeLinecap="round"
+                    strokeWidth="1"
+                  />
+                  <circle cx={prompt.center[0] + prompt.drift[0]} cy={prompt.center[1] + prompt.drift[1]} r="1.2" fill={prompt.color} opacity="0.55" />
+                  {showPromptLabels && (
+                    <text
+                      x={prompt.center[0] + prompt.drift[0] - 2}
+                      y={prompt.center[1] + prompt.drift[1] - 2.2}
+                      className="fill-gray-700 text-[2.9px] dark:fill-gray-300"
+                      paintOrder="stroke"
+                      stroke="white"
+                      strokeWidth="0.45"
+                    >
+                      start
+                    </text>
+                  )}
+                </g>
               ))}
             {showClouds &&
               samples.map((point) => (
@@ -161,6 +199,7 @@ export default function LatentSpaceVisual() {
               ))}
             {showConversation && (
               <g>
+                <title>conversation path over turns</title>
                 <polyline
                   points={conversationPath.map((point) => `${point.x},${point.y}`).join(" ")}
                   fill="none"
@@ -172,54 +211,61 @@ export default function LatentSpaceVisual() {
                 {conversationPath.map((point, index) => (
                   <g key={point.label}>
                     <circle cx={point.x} cy={point.y} r="2" fill="#7c3aed" />
-                    <text x={point.x + 2.8} y={point.y + (index % 2 === 0 ? -2.4 : 4)} className="fill-gray-950 text-[2.6px] dark:fill-white">
-                      {index + 1}. {point.label}
-                    </text>
+                    {showConversationLabels && (
+                      <text
+                        x={point.x + 2.8}
+                        y={point.y + (index % 2 === 0 ? -2.4 : 4)}
+                        className="fill-gray-950 text-[3px] dark:fill-white"
+                        paintOrder="stroke"
+                        stroke="white"
+                        strokeWidth="0.55"
+                      >
+                        {index + 1}. {point.label}
+                      </text>
+                    )}
                   </g>
                 ))}
               </g>
             )}
-            {prompts.map((prompt) => (
-              <g key={`${prompt.label}-center`}>
-                <circle cx={prompt.center[0]} cy={prompt.center[1]} r="2.2" fill={prompt.color} />
-                <text x={prompt.center[0] + 3.5} y={prompt.center[1] - 2.8} className="fill-gray-950 text-[3px] dark:fill-white">
-                  {prompt.label}
-                </text>
-              </g>
-            ))}
+            {showPrompts &&
+              prompts.map((prompt) => (
+                <g key={`${prompt.label}-center`}>
+                  <title>{prompt.label}</title>
+                  <circle cx={prompt.center[0]} cy={prompt.center[1]} r="2.2" fill={prompt.color} />
+                  {showPromptLabels && (
+                    <text
+                      x={prompt.center[0] + 3.5}
+                      y={prompt.center[1] - 2.8}
+                      className="fill-gray-950 text-[3.2px] dark:fill-white"
+                      paintOrder="stroke"
+                      stroke="white"
+                      strokeWidth="0.55"
+                    >
+                      {prompt.label}
+                    </text>
+                  )}
+                </g>
+              ))}
           </svg>
         </div>
 
         <div className="rounded-md border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-900">
-          <h3 className="text-sm font-semibold text-gray-950 dark:text-white">Compressed mesh view</h3>
-          <svg viewBox="0 0 112 94" role="img" aria-label="3D-style latent-space mesh" className="mt-3 h-auto w-full">
-            {Array.from({ length: 9 }).map((_, row) =>
-              Array.from({ length: 9 }).map((__, col) => {
-                const x = 13 + col * 10 + row * 2.3
-                const y = 72 - row * 6.2 - Math.sin((col + row + temperature / 18) * 0.9) * 5
-                return <circle key={`${row}-${col}`} cx={x} cy={y} r="0.75" className="fill-gray-400 dark:fill-gray-600" opacity={showMesh ? 1 : 0.25} />
-              }),
-            )}
-            {prompts.map((prompt) => {
-              const x = 18 + prompt.center[0] * 0.78
-              const y = 78 - prompt.center[1] * 0.55
-
-              return (
-                <g key={`${prompt.label}-mesh`}>
-                  <line x1={x} y1={y + 12} x2={x} y2={y} stroke={prompt.color} strokeWidth="0.8" opacity={showMesh ? 0.8 : 0.25} />
-                  <circle cx={x} cy={y} r={2.6 + temperature / 42} fill={prompt.color} opacity={showClouds ? 0.24 : 0.08} />
-                  <circle cx={x} cy={y} r="1.9" fill={prompt.color} />
-                </g>
-              )
-            })}
-          </svg>
+          <h3 className="text-sm font-semibold text-gray-950 dark:text-white">Landscape view</h3>
+          <div
+            role="img"
+            aria-label="Matplotlib 3D latent landscape surface"
+            className={`mt-3 aspect-[88/62] rounded-md border border-gray-100 bg-cover bg-center transition-opacity dark:border-gray-800 ${
+              showMesh ? "opacity-100" : "opacity-45"
+            }`}
+            style={{ backgroundImage: "url('/blog/latent-space-landscape.png')" }}
+          />
           <p className="mt-3 text-sm leading-6 text-gray-600 dark:text-gray-400">
-            The mesh is not a real embedding projection. It is a reading aid: nearby basins mean similar prompt pressure, while the purple path shows conversation drift.
+            This is not a real embedding projection. It is a reading aid: lower basins mean more likely continuation regions, and colored paths show different prompt starts settling into different basins.
           </p>
         </div>
       </div>
       <figcaption className="mt-4 border-t border-gray-200 pt-3 text-sm leading-6 text-gray-600 dark:border-gray-800 dark:text-gray-400">
-        Figure 1. A compressed sketch of word clusters, prompt trajectories, conversation drift, and run clouds. The layout is illustrative: it shows the shape of the idea, not a measured embedding projection.
+        Figure 1. A Matplotlib-generated toy projection with interactive overlays for word clusters, prompt trajectories, conversation drift, and run clouds. It explains the geometry of the idea; it is not a measured embedding from a specific model.
       </figcaption>
     </figure>
   )

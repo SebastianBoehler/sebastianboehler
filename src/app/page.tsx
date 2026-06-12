@@ -10,7 +10,7 @@ import {
 } from "@/components/profile/ProfileSections"
 import { getGitHubSnapshot } from "@/lib/github"
 
-export const revalidate = 60 * 60
+export const revalidate = 3600
 
 export default async function Home() {
   const github = await getGitHubSnapshot()

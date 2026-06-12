@@ -4,9 +4,9 @@ import MarkdownContent from "@/components/blog/MarkdownContent"
 import { getBlogPost, getBlogPosts } from "@/lib/blog"
 
 type BlogPostPageProps = {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
@@ -23,7 +23,8 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: BlogPostPageProps) {
   try {
-    const post = await getBlogPost(params.slug)
+    const { slug } = await params
+    const post = await getBlogPost(slug)
 
     return {
       title: `${post.title} | Sebastian Boehler`,
@@ -38,7 +39,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   let post
 
   try {
-    post = await getBlogPost(params.slug)
+    const { slug } = await params
+    post = await getBlogPost(slug)
   } catch {
     notFound()
   }

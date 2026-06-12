@@ -9,7 +9,7 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems: { label: string; href: string }[] = [
-    //{ label: 'Contact', href: '/contact' },
+    { label: 'Blog', href: '/blog' },
   ];
 
   return (

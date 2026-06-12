@@ -148,6 +148,13 @@ different examples, styles, or reasoning paths.
 So there are two things to keep separate: the probabilities the model computes,
 and the run cloud you observe when the system actually generates answers.
 
+There is also a separate kind of noise during training. Stochastic gradient
+descent trains the weights by looking at mini-batches of data, so the training
+path can wiggle through the loss landscape. That is different from generation
+time. During a normal chat, the weights are already fixed. The noise you see is
+mostly about decoding choices and serving details, not the model learning a new
+valley while it answers.
+
 ## Step 9: skills are context engineering
 
 A skill is a structured way to add context before the model has to decide what
@@ -180,6 +187,11 @@ of outputs. The same user can ask about latent space as a beginner, as a
 mathematician, as a programmer, or as a writer. Those are not tiny wording
 changes. They are different start points, and they pull the conversation toward
 different answer families.
+
+This is the useful version of the physics analogy: a prompt or skill is not a
+new law of nature, but it can act like a constraint on the answer space. It
+reduces the directions that are plausible, the same way a physical simulator or
+reward constraint reduces useless moves for an RL agent.
 
 ## Step 10: prompts steer regions
 

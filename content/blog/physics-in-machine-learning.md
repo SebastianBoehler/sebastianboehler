@@ -1,6 +1,6 @@
 ---
 title: "How Physics Shows Up in Machine Learning"
-description: "A plain-language guide to states, flows, energy landscapes, constraints, symmetries, conservation laws, and physics-informed machine learning."
+description: "A plain-language guide to SGD noise, states, flows, energy landscapes, constraints, symmetries, conservation laws, and physics-informed machine learning."
 date: "2026-06-12"
 tags: ["Machine Learning", "Physics", "PIML"]
 visual: "physics-informed"
@@ -37,7 +37,29 @@ This is one reason physics-informed methods can be valuable when data is
 expensive. In many physical domains, you do not have billions of examples. You
 have a few sensors, a simulator, or an equation that is partly known.
 
-## Step 2: a state is the system right now
+## Step 2: training is drift plus shake
+
+The clean picture of learning is a ball rolling smoothly downhill. That picture
+is useful, but it hides the part that makes modern training work.
+
+Full-batch gradient descent asks every training example where downhill is. That
+is expensive. Stochastic gradient descent uses a small mini-batch instead. The
+mini-batch direction is cheaper and usually points roughly downhill, but it is
+also noisy. The model lurches, not glides.
+
+That noise is not only a mistake. Early in training, the average downhill pull
+often dominates, so the model improves quickly. Later, when it reaches a flat
+or shallow region, the shaking can help it explore nearby parameter settings
+instead of freezing at the first acceptable point.
+
+[[visual:training-dynamics]]
+
+This is where the physics language becomes more than decoration. The gradient
+acts like drift or gravity. Mini-batch noise acts like heat. Learning rate,
+batch size, momentum, and weight decay change the effective temperature,
+damping, and pull of the system.
+
+## Step 3: a state is the system right now
 
 Physics often starts with a state. For a pendulum, the state might be angle and
 velocity. For a fluid, it might be velocity, pressure, and density at many
@@ -56,7 +78,7 @@ Neural ordinary differential equations are one clean example. Instead of viewing
 a network as a fixed stack of discrete layers, they learn a continuous change
 rule and use an ODE solver to move the hidden state forward.
 
-## Step 3: flow means "how the state moves"
+## Step 4: flow means "how the state moves"
 
 A flow field tells you the direction a system wants to move at each point. Put a
 particle here, and the arrows tell you where it goes next.
@@ -74,7 +96,7 @@ The distinction matters. A language model is not automatically simulating
 physics. But physics gives us a vocabulary for thinking about states,
 directions, stability, and change.
 
-## Step 4: energy means "how compatible is this state?"
+## Step 5: energy means "how compatible is this state?"
 
 An energy landscape assigns a score to possible states. Lower energy usually
 means the state is more compatible with what the system wants. Higher energy
@@ -101,7 +123,7 @@ That is why initial context matters. A prompt can place the model near one
 answer family instead of another. A skill, system prompt, example, or long
 conversation can narrow the likely region even more.
 
-## Step 5: constraints make bad answers expensive
+## Step 6: constraints make bad answers expensive
 
 The most direct way to combine physics and ML is to add a constraint. The model
 still learns from data, but it is penalized when it violates a known rule.
@@ -123,7 +145,7 @@ That does not make the method magic. If the equation is wrong, incomplete, or
 too expensive to enforce, the model can still fail. But it changes the game: the
 model is no longer free to fit any pattern that happens to match the data.
 
-## Step 6: conservation laws reduce drift
+## Step 7: conservation laws reduce drift
 
 Some physical systems preserve quantities. Energy, momentum, mass, or charge may
 stay constant under the right assumptions.
@@ -141,7 +163,7 @@ The broader lesson is simple: if a quantity should be conserved, encode that
 fact somehow. Put it in the architecture, the loss, the data generation process,
 or the simulator loop.
 
-## Step 7: symmetries tell the model what should not matter
+## Step 8: symmetries tell the model what should not matter
 
 Physics is full of symmetries. A law may not care where an object is translated.
 It may not care how the coordinate system is rotated. It may care about relative
@@ -156,7 +178,7 @@ reflections.
 This is another way physics helps: it tells the model which differences are
 real and which are just coordinate choices.
 
-## Step 8: simulators can teach or correct models
+## Step 9: simulators can teach or correct models
 
 Many physical domains already have simulators. They may be slow, imperfect, or
 expensive, but they contain knowledge.
@@ -172,7 +194,22 @@ Machine learning can use simulators in several ways:
 The practical pattern is hybrid: let data handle what the law does not capture,
 and let the law or simulator keep the model from making physically absurd moves.
 
-## Step 9: how this connects back to latent space
+## Step 10: physics in reinforcement learning
+
+Reinforcement learning is where the physics connection becomes very concrete.
+An agent chooses actions, the environment responds, and the agent slowly learns
+which actions lead to reward.
+
+If the environment is physical, an unconstrained agent can waste enormous time
+trying actions that could never work in the real world. A robot cannot ignore
+gravity. A drone cannot teleport sideways. A character controller cannot bend a
+knee backward without consequences.
+
+Physics can enter the RL loop through the simulator, the reward, the action
+space, or the model architecture. The goal is not to remove learning. The goal
+is to make the agent spend more of its learning budget on plausible behavior.
+
+## Step 11: how this connects back to latent space
 
 Latent space is not automatically a physical space. The axes are learned
 representations, not meters or seconds. Still, physics gives useful language for
@@ -193,7 +230,7 @@ The safe version of the analogy is:
 This language is useful as long as we remember which parts are literal and which
 parts are pictures.
 
-## Step 10: the practical takeaway
+## Step 12: the practical takeaway
 
 Physics in machine learning is not one technique. It is a toolbox of ways to add
 structure:
@@ -217,10 +254,14 @@ and what laws should it respect?
 
 - [Physics-informed machine learning](https://www.nature.com/articles/s42254-021-00314-5)
 - [Physics Informed Deep Learning (Part I)](https://arxiv.org/abs/1711.10561)
+- [Stochastic Gradient Descent as Approximate Bayesian Inference](https://arxiv.org/abs/1704.04289)
+- [On the Generalization Benefit of Noise in Stochastic Gradient Descent](https://proceedings.mlr.press/v119/smith20a/smith20a.pdf)
 - [Neural Ordinary Differential Equations](https://arxiv.org/abs/1806.07366)
 - [Hamiltonian Neural Networks](https://arxiv.org/abs/1906.01563)
 - [Neural networks and physical systems with emergent collective computational abilities](https://pmc.ncbi.nlm.nih.gov/articles/PMC346238/)
 - [A Tutorial on Energy-Based Learning](https://yann.lecun.com/exdb/publis/pdf/lecun-06.pdf)
+- [DeepMimic: Example-Guided Deep Reinforcement Learning of Physics-Based Character Skills](https://arxiv.org/abs/1804.02717)
+- [A Survey on Physics Informed Reinforcement Learning](https://arxiv.org/abs/2309.01909)
 - [Group Equivariant Convolutional Networks](https://arxiv.org/abs/1602.07576)
 - [Geometric Deep Learning: Grids, Groups, Graphs, Geodesics, and Gauges](https://arxiv.org/abs/2104.13478)
 - [Representation Learning: A Review and New Perspectives](https://arxiv.org/abs/1206.5538)

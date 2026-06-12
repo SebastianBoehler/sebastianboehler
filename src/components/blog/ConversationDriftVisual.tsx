@@ -46,9 +46,9 @@ export default function ConversationDriftVisual() {
             <rect width="100" height="72" className="fill-gray-50 dark:fill-gray-900" />
             <path d="M 8 18 C 24 8, 41 11, 54 23 S 82 34, 94 19" fill="none" className="stroke-gray-300 dark:stroke-gray-700" strokeWidth="0.8" />
             <path d="M 8 51 C 27 34, 43 43, 58 52 S 82 62, 94 43" fill="none" className="stroke-gray-300 dark:stroke-gray-700" strokeWidth="0.8" />
-            <text x="8" y="66" className="fill-gray-500 text-[3px]">intuitive</text>
-            <text x="43" y="12" className="fill-gray-500 text-[3px]">formal</text>
-            <text x="73" y="66" className="fill-gray-500 text-[3px]">practical</text>
+            <text x="8" y="66" className="fill-gray-500 text-[3px] dark:fill-gray-300">intuitive</text>
+            <text x="43" y="12" className="fill-gray-500 text-[3px] dark:fill-gray-300">formal</text>
+            <text x="73" y="66" className="fill-gray-500 text-[3px] dark:fill-gray-300">practical</text>
             {visibleTurns.length > 1 && (
               <polyline
                 points={visibleTurns.map((point) => `${point.x},${point.y}`).join(" ")}

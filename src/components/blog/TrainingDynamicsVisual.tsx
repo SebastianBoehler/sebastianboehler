@@ -82,7 +82,7 @@ function BatchView({ heat }: { heat: number }) {
     <svg viewBox="0 0 100 70" role="img" aria-label="Full batch descent compared with noisy mini-batch descent" className="h-auto w-full">
       <defs>
         <marker id="training-arrow-head" markerHeight="5" markerWidth="5" orient="auto" refX="4" refY="2.5">
-          <path d="M 0 0 L 5 2.5 L 0 5 z" fill="#64748b" />
+          <path d="M 0 0 L 5 2.5 L 0 5 z" className="fill-slate-500 dark:fill-slate-300" />
         </marker>
       </defs>
       <rect width="100" height="70" className="fill-gray-50 dark:fill-gray-900" />
@@ -92,9 +92,9 @@ function BatchView({ heat }: { heat: number }) {
       <path d="M 13 13 C 28 20, 44 30, 59 41 S 74 52, 76 55" fill="none" stroke="#059669" strokeWidth="1.6" strokeDasharray="4 2" />
       <path d={jagged} fill="none" stroke="#2563eb" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" markerEnd="url(#training-arrow-head)" />
       <circle cx="13" cy="13" r="2.5" fill="#f59e0b" />
-      <circle cx="76" cy="55" r="3" fill="#111827" className="dark:fill-white" />
-      <text x="10" y="9" className="fill-gray-500 text-[3px]">start</text>
-      <text x="70" y="63" className="fill-gray-500 text-[3px]">low loss</text>
+      <circle cx="76" cy="55" r="3" className="fill-gray-950 dark:fill-white" />
+      <text x="10" y="9" className="fill-gray-500 text-[3px] dark:fill-gray-300">start</text>
+      <text x="70" y="63" className="fill-gray-500 text-[3px] dark:fill-gray-300">low loss</text>
     </svg>
   )
 }
@@ -115,8 +115,8 @@ function CloudView({ heat }: { heat: number }) {
         <circle key={index} cx={x} cy={y} r="1.8" fill="#2563eb" opacity={opacity} />
       ))}
       <path d="M 18 18 L 34 27 M 37 28 L 53 38 M 57 39 L 73 49" stroke="#059669" strokeWidth="1.5" markerEnd="url(#cloud-arrow-head)" />
-      <text x="11" y="11" className="fill-gray-500 text-[3px]">early drift</text>
-      <text x="62" y="60" className="fill-gray-500 text-[3px]">stationary cloud</text>
+      <text x="11" y="11" className="fill-gray-500 text-[3px] dark:fill-gray-300">early drift</text>
+      <text x="62" y="60" className="fill-gray-500 text-[3px] dark:fill-gray-300">stationary cloud</text>
     </svg>
   )
 }
@@ -127,13 +127,13 @@ function RlView({ heat }: { heat: number }) {
   return (
     <svg viewBox="0 0 100 70" role="img" aria-label="Physics constrained reinforcement learning action space" className="h-auto w-full">
       <rect width="100" height="70" className="fill-gray-50 dark:fill-gray-900" />
-      <path d="M 9 47 C 23 38, 35 35, 48 36 S 72 44, 91 31" fill="none" stroke="#cbd5e1" strokeWidth="15" strokeLinecap="round" opacity="0.55" />
+      <path d="M 9 47 C 23 38, 35 35, 48 36 S 72 44, 91 31" fill="none" strokeWidth="15" strokeLinecap="round" opacity="0.55" className="stroke-slate-300 dark:stroke-slate-700" />
       <path d={loosePath} fill="none" stroke="#dc2626" strokeWidth="1.6" strokeDasharray="3 2" />
       <path d="M 11 55 C 24 45, 35 43, 47 44 S 73 51, 89 40" fill="none" stroke="#2563eb" strokeWidth="2.2" strokeLinecap="round" />
       <circle cx="11" cy="55" r="2.5" fill="#f59e0b" />
       <circle cx="89" cy="40" r="2.5" fill="#059669" />
-      <text x="10" y="14" className="fill-gray-500 text-[3px]">unconstrained trial</text>
-      <text x="48" y="62" className="fill-gray-500 text-[3px]">physics corridor</text>
+      <text x="10" y="14" className="fill-gray-500 text-[3px] dark:fill-gray-300">unconstrained trial</text>
+      <text x="48" y="62" className="fill-gray-500 text-[3px] dark:fill-gray-300">physics corridor</text>
     </svg>
   )
 }

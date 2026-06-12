@@ -151,9 +151,8 @@ export default function LatentSpaceVisual() {
                   <text
                     x={point.x + 2.5}
                     y={point.y + 1}
-                    className="fill-gray-800 text-[3.1px] dark:fill-gray-200"
+                    className="fill-gray-800 stroke-white text-[3.1px] dark:fill-gray-100 dark:stroke-gray-950"
                     paintOrder="stroke"
-                    stroke="white"
                     strokeWidth="0.55"
                   >
                     {point.label}
@@ -184,9 +183,8 @@ export default function LatentSpaceVisual() {
                     <text
                       x={prompt.center[0] + prompt.drift[0] - 2}
                       y={prompt.center[1] + prompt.drift[1] - 2.2}
-                      className="fill-gray-700 text-[2.9px] dark:fill-gray-300"
+                      className="fill-gray-700 stroke-white text-[2.9px] dark:fill-gray-100 dark:stroke-gray-950"
                       paintOrder="stroke"
-                      stroke="white"
                       strokeWidth="0.45"
                     >
                       start
@@ -216,9 +214,8 @@ export default function LatentSpaceVisual() {
                       <text
                         x={point.x + 2.8}
                         y={point.y + (index % 2 === 0 ? -2.4 : 4)}
-                        className="fill-gray-950 text-[3px] dark:fill-white"
+                        className="fill-gray-950 stroke-white text-[3px] dark:fill-white dark:stroke-gray-950"
                         paintOrder="stroke"
-                        stroke="white"
                         strokeWidth="0.55"
                       >
                         {index + 1}. {point.label}
@@ -237,9 +234,8 @@ export default function LatentSpaceVisual() {
                     <text
                       x={prompt.center[0] + 3.5}
                       y={prompt.center[1] - 2.8}
-                      className="fill-gray-950 text-[3.2px] dark:fill-white"
+                      className="fill-gray-950 stroke-white text-[3.2px] dark:fill-white dark:stroke-gray-950"
                       paintOrder="stroke"
-                      stroke="white"
                       strokeWidth="0.55"
                     >
                       {prompt.label}

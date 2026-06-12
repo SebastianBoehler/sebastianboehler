@@ -94,13 +94,13 @@ export default function PromptDistributionVisual() {
         <div className="relative aspect-[100/78] overflow-hidden rounded-md border border-gray-200 dark:border-gray-800">
           <Image src="/blog/latent-space-projection.png" alt="Toy latent-space contour plot used to show prompt start points" fill sizes="(min-width: 1024px) 323px, 100vw" className="object-cover" />
           <svg viewBox="0 0 100 78" className="absolute inset-0 h-full w-full" role="img" aria-label="Prompt start point moving through latent space">
-            <path d={`M 34 48 C ${(34 + active.x) / 2} ${active.y + 10}, ${active.x - 8} ${active.y + 5}, ${active.x} ${active.y}`} fill="none" stroke="#111827" strokeWidth="1.2" strokeLinecap="round" />
-            <circle cx="34" cy="48" r="2.4" fill="#111827" />
-            <circle cx={active.x} cy={active.y} r="3.2" fill="#f59e0b" stroke="#111827" strokeWidth="0.7" />
-            <text x="37" y="47" className="fill-gray-950 text-[3px]" paintOrder="stroke" stroke="white" strokeWidth="0.55">
+            <path d={`M 34 48 C ${(34 + active.x) / 2} ${active.y + 10}, ${active.x - 8} ${active.y + 5}, ${active.x} ${active.y}`} fill="none" strokeWidth="1.2" strokeLinecap="round" className="stroke-gray-950 dark:stroke-white" />
+            <circle cx="34" cy="48" r="2.4" className="fill-gray-950 dark:fill-white" />
+            <circle cx={active.x} cy={active.y} r="3.2" fill="#f59e0b" strokeWidth="0.7" className="stroke-gray-950 dark:stroke-white" />
+            <text x="37" y="47" className="fill-gray-950 stroke-white text-[3px] dark:fill-white dark:stroke-gray-950" paintOrder="stroke" strokeWidth="0.55">
               initial topic
             </text>
-            <text x={active.x + 3.5} y={active.y - 2.5} className="fill-gray-950 text-[3px]" paintOrder="stroke" stroke="white" strokeWidth="0.55">
+            <text x={active.x + 3.5} y={active.y - 2.5} className="fill-gray-950 stroke-white text-[3px] dark:fill-white dark:stroke-gray-950" paintOrder="stroke" strokeWidth="0.55">
               {active.label}
             </text>
           </svg>

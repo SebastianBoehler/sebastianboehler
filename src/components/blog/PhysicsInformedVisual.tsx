@@ -104,14 +104,14 @@ function ConstraintView({
     <svg viewBox="0 0 100 70" role="img" aria-label="Physics constraint changes a fitted model curve" className="h-auto w-full">
       <rect width="100" height="70" className="fill-gray-50 dark:fill-gray-900" />
       <path d="M 8 60 H 96 M 8 8 V 60" fill="none" className="stroke-gray-300 dark:stroke-gray-700" strokeWidth="0.8" />
-      <path d={toPath(dataOnly)} fill="none" stroke="#94a3b8" strokeDasharray="2 2" strokeWidth="1.1" />
+      <path d={toPath(dataOnly)} fill="none" strokeDasharray="2 2" strokeWidth="1.1" className="stroke-slate-400 dark:stroke-slate-500" />
       <path d={toPath(physicsOnly)} fill="none" stroke="#059669" strokeDasharray="4 2" strokeWidth="1.1" opacity="0.6" />
-      <path d={toPath(curve)} fill="none" stroke="#111827" strokeWidth="1.8" className="dark:stroke-white" />
+      <path d={toPath(curve)} fill="none" strokeWidth="1.8" className="stroke-gray-950 dark:stroke-white" />
       {data.map(([x, y]) => (
         <circle key={`${x}-${y}`} cx={x} cy={y} r="2.1" fill="#2563eb" opacity="0.85" />
       ))}
-      <text x="10" y="12" className="fill-gray-500 text-[3px]">noisy observations</text>
-      <text x="53" y="13" className="fill-gray-500 text-[3px]">law-shaped solution</text>
+      <text x="10" y="12" className="fill-gray-500 text-[3px] dark:fill-gray-300">noisy observations</text>
+      <text x="53" y="13" className="fill-gray-500 text-[3px] dark:fill-gray-300">law-shaped solution</text>
     </svg>
   )
 }
@@ -134,13 +134,12 @@ function EnergyView({ blend }: { blend: number }) {
           rx={radius}
           ry={radius * 0.42}
           fill="none"
-          stroke={index === 3 ? "#111827" : "#cbd5e1"}
           strokeWidth={index === 3 ? 1.3 : 0.9}
           opacity={0.9 - index * 0.12}
-          className={index === 3 ? "dark:stroke-white" : "dark:stroke-gray-700"}
+          className={index === 3 ? "stroke-gray-950 dark:stroke-white" : "stroke-slate-300 dark:stroke-gray-700"}
         />
       ))}
-      <ellipse cx="50" cy="47" rx="7" ry="3.6" fill="#111827" className="dark:fill-white" opacity="0.9" />
+      <ellipse cx="50" cy="47" rx="7" ry="3.6" className="fill-gray-950 dark:fill-white" opacity="0.9" />
       {paths.map((path, index) => (
         <path key={path} d={path} fill="none" stroke={["#2563eb", "#dc2626", "#059669"][index]} strokeWidth="1.7" strokeLinecap="round" />
       ))}
@@ -151,8 +150,8 @@ function EnergyView({ blend }: { blend: number }) {
       ].map(([x, y]) => (
         <circle key={`${x}-${y}`} cx={x} cy={y} r="2.2" fill="#f59e0b" />
       ))}
-      <text x="8" y="10" className="fill-gray-500 text-[3px]">higher energy</text>
-      <text x="55" y="51" className="fill-gray-500 text-[3px]">stable basin</text>
+      <text x="8" y="10" className="fill-gray-500 text-[3px] dark:fill-gray-300">higher energy</text>
+      <text x="55" y="51" className="fill-gray-500 text-[3px] dark:fill-gray-300">stable basin</text>
     </svg>
   )
 }
@@ -170,18 +169,18 @@ function FlowView({ blend }: { blend: number }) {
     <svg viewBox="0 0 100 70" role="img" aria-label="Vector field showing learned dynamics over time" className="h-auto w-full">
       <defs>
         <marker id="arrow-head" markerHeight="5" markerWidth="5" orient="auto" refX="4" refY="2.5">
-          <path d="M 0 0 L 5 2.5 L 0 5 z" fill="#64748b" />
+          <path d="M 0 0 L 5 2.5 L 0 5 z" className="fill-slate-500 dark:fill-slate-300" />
         </marker>
       </defs>
       <rect width="100" height="70" className="fill-gray-50 dark:fill-gray-900" />
       {arrows.map(([x1, y1, x2, y2]) => (
-        <path key={`${x1}-${y1}`} d={`M ${x1} ${y1} L ${x2} ${y2}`} stroke="#64748b" strokeWidth="1" markerEnd="url(#arrow-head)" opacity="0.75" />
+        <path key={`${x1}-${y1}`} d={`M ${x1} ${y1} L ${x2} ${y2}`} strokeWidth="1" markerEnd="url(#arrow-head)" opacity="0.75" className="stroke-slate-500 dark:stroke-slate-300" />
       ))}
-      <path d="M 12 56 C 28 38, 35 44, 43 31 S 65 17, 84 25" fill="none" stroke="#111827" strokeWidth="2" className="dark:stroke-white" />
+      <path d="M 12 56 C 28 38, 35 44, 43 31 S 65 17, 84 25" fill="none" strokeWidth="2" className="stroke-gray-950 dark:stroke-white" />
       <circle cx="12" cy="56" r="2.5" fill="#2563eb" />
       <circle cx="84" cy="25" r="2.5" fill="#059669" />
-      <text x="9" y="63" className="fill-gray-500 text-[3px]">state now</text>
-      <text x="76" y="20" className="fill-gray-500 text-[3px]">state later</text>
+      <text x="9" y="63" className="fill-gray-500 text-[3px] dark:fill-gray-300">state now</text>
+      <text x="76" y="20" className="fill-gray-500 text-[3px] dark:fill-gray-300">state later</text>
     </svg>
   )
 }

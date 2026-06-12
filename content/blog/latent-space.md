@@ -4,6 +4,8 @@ description: "A step-by-step visual explanation of how prompts become directions
 date: "2026-06-12"
 tags: ["Latent Space", "LLMs", "Visualization"]
 visual: "latent-space"
+image: "/blog/latent-space-projection.png"
+imageAlt: "Matplotlib contour plot showing word clusters, prompt paths, and run clouds in a toy latent space."
 ---
 
 Large language models can feel mysterious because we talk to them with words,

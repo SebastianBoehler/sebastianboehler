@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { useMemo, useState } from "react"
 
 type PromptPoint = {
@@ -132,9 +133,9 @@ export default function LatentSpaceVisual() {
 
       <div className="mt-6 grid gap-5 lg:grid-cols-[1.4fr_1fr]">
         <div
-          className="relative aspect-[100/78] overflow-hidden rounded-md border border-gray-200 bg-white bg-cover bg-center dark:border-gray-800"
-          style={{ backgroundImage: "url('/blog/latent-space-projection.png')" }}
+          className="relative aspect-[100/78] overflow-hidden rounded-md border border-gray-200 bg-white dark:border-gray-800"
         >
+          <Image src="/blog/latent-space-projection.png" alt="Toy latent-space contour plot with word clusters and probability regions" fill sizes="(min-width: 1024px) 396px, 100vw" className="object-cover" />
           <svg
             viewBox="0 0 100 78"
             role="img"
@@ -254,11 +255,12 @@ export default function LatentSpaceVisual() {
           <div
             role="img"
             aria-label="Matplotlib 3D latent landscape surface"
-            className={`mt-3 aspect-[88/62] rounded-md border border-gray-100 bg-cover bg-center transition-opacity dark:border-gray-800 ${
+            className={`relative mt-3 aspect-[88/62] overflow-hidden rounded-md border border-gray-100 transition-opacity dark:border-gray-800 ${
               showMesh ? "opacity-100" : "opacity-45"
             }`}
-            style={{ backgroundImage: "url('/blog/latent-space-landscape.png')" }}
-          />
+          >
+            <Image src="/blog/latent-space-landscape.png" alt="3D toy energy landscape with colored prompt trajectories ending near probability basins" fill sizes="(min-width: 1024px) 282px, 100vw" className="object-cover" />
+          </div>
           <p className="mt-3 text-sm leading-6 text-gray-600 dark:text-gray-400">
             This is not a real embedding projection or training-style optimization. It is a reading aid: lower basins mean higher-probability continuation regions, and colored paths show different prompt starts ending near different regions.
           </p>

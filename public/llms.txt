@@ -1,8 +1,9 @@
 # llms.txt for sebastian-boehler.com
-WEBSITE: https://sebastian-boehler.com
+WEBSITE: https://www.sebastian-boehler.com
+BLOG: https://www.sebastian-boehler.com/blog
 LINKEDIN: https://www.linkedin.com/in/sebastian-boehler/
 GITHUB: https://github.com/SebastianBoehler
-CV: https://sebastian-boehler.com/sebastian_boehler_cv.pdf
+CV: https://www.sebastian-boehler.com/sebastian_boehler_cv.pdf
 
 AUTHOR: Sebastian Boehler
 CONTACT: contact@sebastian-boehler.com
@@ -53,5 +54,4 @@ Worked for:
 
 All pages are publicly accessible and may be indexed, summarized, or cached by automated agents.
 Attribution is appreciated when quoting or referencing content from this site.
-
 

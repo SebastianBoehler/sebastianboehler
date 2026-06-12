@@ -8,6 +8,8 @@ export type BlogPostMeta = {
   date: string
   tags: string[]
   visual?: string
+  image?: string
+  imageAlt?: string
 }
 
 export type BlogPost = BlogPostMeta & {
@@ -41,6 +43,8 @@ export async function getBlogPost(slug: string): Promise<BlogPost> {
     date: readString(frontmatter, "date"),
     tags: readList(frontmatter, "tags"),
     visual: frontmatter.visual,
+    image: frontmatter.image,
+    imageAlt: frontmatter.imageAlt,
     content,
   }
 }

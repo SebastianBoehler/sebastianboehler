@@ -1,7 +1,9 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import MarkdownContent from "@/components/blog/MarkdownContent"
 import { getBlogPost, getBlogPosts } from "@/lib/blog"
+import { absoluteUrl, site } from "@/lib/site"
 
 type BlogPostPageProps = {
   params: Promise<{
@@ -21,14 +23,45 @@ export async function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }))
 }
 
-export async function generateMetadata({ params }: BlogPostPageProps) {
+export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   try {
     const { slug } = await params
     const post = await getBlogPost(slug)
+    const url = absoluteUrl(`/blog/${post.slug}`)
+    const image = post.image ? absoluteUrl(post.image) : undefined
 
     return {
-      title: `${post.title} | Sebastian Boehler`,
+      title: post.title,
       description: post.description,
+      keywords: post.tags,
+      authors: [{ name: site.author, url: site.url }],
+      alternates: {
+        canonical: `/blog/${post.slug}`,
+      },
+      openGraph: {
+        type: "article",
+        url,
+        title: post.title,
+        description: post.description,
+        siteName: site.name,
+        publishedTime: post.date,
+        authors: [site.author],
+        tags: post.tags,
+        images: image
+          ? [
+              {
+                url: image,
+                alt: post.imageAlt ?? post.title,
+              },
+            ]
+          : undefined,
+      },
+      twitter: {
+        card: image ? "summary_large_image" : "summary",
+        title: post.title,
+        description: post.description,
+        images: image ? [image] : undefined,
+      },
     }
   } catch {
     return {}
@@ -45,8 +78,32 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound()
   }
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "@id": `${absoluteUrl(`/blog/${post.slug}`)}#article`,
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    dateModified: post.date,
+    image: post.image ? [absoluteUrl(post.image)] : undefined,
+    mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),
+    author: {
+      "@id": `${site.url}/#person`,
+    },
+    publisher: {
+      "@id": `${site.url}/#person`,
+    },
+    keywords: post.tags.join(", "),
+    inLanguage: "en",
+  }
+
   return (
     <article className="mx-auto max-w-3xl px-6 py-14 sm:py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <Link href="/blog" className="text-sm font-medium text-gray-600 hover:text-gray-950 dark:text-gray-400 dark:hover:text-white">
         Back to blog
       </Link>

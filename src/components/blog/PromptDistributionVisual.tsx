@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { useState } from "react"
 
 const scenarios = [
@@ -90,7 +91,8 @@ export default function PromptDistributionVisual() {
       </div>
 
       <div className="mt-6 grid gap-5 lg:grid-cols-[1fr_0.9fr]">
-        <div className="relative aspect-[100/78] overflow-hidden rounded-md border border-gray-200 bg-cover bg-center dark:border-gray-800" style={{ backgroundImage: "url('/blog/latent-space-projection.png')" }}>
+        <div className="relative aspect-[100/78] overflow-hidden rounded-md border border-gray-200 dark:border-gray-800">
+          <Image src="/blog/latent-space-projection.png" alt="Toy latent-space contour plot used to show prompt start points" fill sizes="(min-width: 1024px) 323px, 100vw" className="object-cover" />
           <svg viewBox="0 0 100 78" className="absolute inset-0 h-full w-full" role="img" aria-label="Prompt start point moving through latent space">
             <path d={`M 34 48 C ${(34 + active.x) / 2} ${active.y + 10}, ${active.x - 8} ${active.y + 5}, ${active.x} ${active.y}`} fill="none" stroke="#111827" strokeWidth="1.2" strokeLinecap="round" />
             <circle cx="34" cy="48" r="2.4" fill="#111827" />

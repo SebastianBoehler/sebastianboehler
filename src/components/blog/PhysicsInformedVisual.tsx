@@ -27,6 +27,7 @@ export default function PhysicsInformedVisual() {
   const [mode, setMode] = useState<Mode>("constraint")
   const [physicsWeight, setPhysicsWeight] = useState(58)
   const blend = physicsWeight / 100
+  const updatePhysicsWeight = (value: string) => setPhysicsWeight(Number(value))
   const curve = useMemo(() => makeCurve(blend), [blend])
   const dataOnly = useMemo(() => makeCurve(0), [])
   const physicsOnly = useMemo(() => makeCurve(1), [])
@@ -69,7 +70,8 @@ export default function PhysicsInformedVisual() {
               min="0"
               max="100"
               value={physicsWeight}
-              onChange={(event) => setPhysicsWeight(Number(event.target.value))}
+              onInput={(event) => updatePhysicsWeight(event.currentTarget.value)}
+              onChange={(event) => updatePhysicsWeight(event.currentTarget.value)}
             />
           </label>
         </div>
@@ -160,10 +162,10 @@ function FlowView({ blend }: { blend: number }) {
   const arrows = Array.from({ length: 24 }).map((_, index) => {
     const x = 14 + (index % 6) * 14
     const y = 14 + Math.floor(index / 6) * 12
-    const dx = Math.cos((x + y) / 18) * (2 + blend * 4)
-    const dy = Math.sin((x - y) / 16) * (2 + blend * 4)
+    const [dx, dy] = flowAt(x, y, blend)
     return [x, y, x + dx, y + dy] as const
   })
+  const trajectory = makeFlowTrajectory(blend)
 
   return (
     <svg viewBox="0 0 100 70" role="img" aria-label="Vector field showing learned dynamics over time" className="h-auto w-full">
@@ -176,11 +178,13 @@ function FlowView({ blend }: { blend: number }) {
       {arrows.map(([x1, y1, x2, y2]) => (
         <path key={`${x1}-${y1}`} d={`M ${x1} ${y1} L ${x2} ${y2}`} strokeWidth="1" markerEnd="url(#arrow-head)" opacity="0.75" className="stroke-slate-500 dark:stroke-slate-300" />
       ))}
-      <path d="M 12 56 C 28 38, 35 44, 43 31 S 65 17, 84 25" fill="none" strokeWidth="2" className="stroke-gray-950 dark:stroke-white" />
-      <circle cx="12" cy="56" r="2.5" fill="#2563eb" />
-      <circle cx="84" cy="25" r="2.5" fill="#059669" />
+      <path d={toSmoothPath(trajectory)} fill="none" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" className="stroke-gray-950 dark:stroke-white" />
+      {trajectory.filter((_, index) => index % 4 === 0).map(([x, y], index) => (
+        <circle key={`${x}-${y}-${index}`} cx={x} cy={y} r={index === 0 ? 2.5 : 1.3} fill={index === 0 ? "#2563eb" : "#64748b"} opacity={index === 0 ? 1 : 0.82} />
+      ))}
+      <circle cx={trajectory[trajectory.length - 1][0]} cy={trajectory[trajectory.length - 1][1]} r="2.5" fill="#059669" />
       <text x="9" y="63" className="fill-gray-500 text-[3px] dark:fill-gray-300">state now</text>
-      <text x="76" y="20" className="fill-gray-500 text-[3px] dark:fill-gray-300">state later</text>
+      <text x="72" y="20" className="fill-gray-500 text-[3px] dark:fill-gray-300">state later</text>
     </svg>
   )
 }
@@ -189,7 +193,7 @@ function Explanation({ mode, physicsWeight }: { mode: Mode; physicsWeight: numbe
   const text = {
     constraint: "The model fits observations, but the physics term penalizes curves that violate the expected law.",
     energy: "A lower-energy basin is an outcome the system tends to settle into. In some models this is literal; for LLMs it is mostly a useful analogy.",
-    flow: "A flow view asks how the state changes over time. Neural ODEs learn this change rule instead of stacking only discrete layers.",
+    flow: "The arrows are the learned change rule. The black path now follows that rule, so stronger physics pressure visibly redirects the state trajectory.",
   }[mode]
 
   return (
@@ -228,6 +232,48 @@ function makeCurve(blend: number) {
   })
 }
 
+function makeFlowTrajectory(blend: number) {
+  const points: [number, number][] = [[12, 56]]
+
+  for (let index = 0; index < 22; index += 1) {
+    const [x, y] = points[index]
+    const [dx, dy] = flowAt(x, y, blend)
+    points.push([clamp(x + dx * 1.2, 8, 92), clamp(y + dy * 1.2, 8, 62)])
+  }
+
+  return points
+}
+
+function flowAt(x: number, y: number, blend: number) {
+  const dataDx = (32 - x) * 0.06 + Math.sin(y / 8) * 1.35
+  const dataDy = (18 - y) * 0.075 + Math.cos(x / 10) * 0.85
+  const targetDx = (84 - x) * 0.082
+  const targetDy = (25 - y) * 0.082
+  const damping = 0.82 + blend * 0.22
+
+  return [
+    (dataDx * (1 - blend) + targetDx * blend) * damping,
+    (dataDy * (1 - blend) + targetDy * blend) * damping,
+  ] as const
+}
+
 function toPath(points: readonly (readonly [number, number])[]) {
   return points.map(([x, y], index) => `${index === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)}`).join(" ")
+}
+
+function toSmoothPath(points: readonly (readonly [number, number])[]) {
+  const [start, ...rest] = points
+  const path = rest.slice(0, -1).reduce((currentPath, [x, y], index) => {
+    const [nextX, nextY] = rest[index + 1]
+    const midX = ((x + nextX) / 2).toFixed(1)
+    const midY = ((y + nextY) / 2).toFixed(1)
+    return `${currentPath} Q ${x.toFixed(1)} ${y.toFixed(1)} ${midX} ${midY}`
+  }, `M ${start[0].toFixed(1)} ${start[1].toFixed(1)}`)
+  const [endX, endY] = rest[rest.length - 1]
+
+  return `${path} T ${endX.toFixed(1)} ${endY.toFixed(1)}`
+}
+
+function clamp(value: number, min: number, max: number) {
+  return Math.min(max, Math.max(min, value))
 }

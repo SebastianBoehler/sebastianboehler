@@ -3,6 +3,7 @@
 import Image from "next/image"
 import type { ReactNode } from "react"
 import { useMemo, useState } from "react"
+import LatentLandscapePlot from "@/components/blog/LatentLandscapePlot"
 import { conversationPath, latentSteps, makeSamples, prompts, wordPoints } from "@/components/blog/latentSpaceData"
 
 export default function LatentSpaceVisual() {
@@ -70,7 +71,7 @@ export default function LatentSpaceVisual() {
       )}
 
       <figcaption className="mt-4 border-t border-gray-200 pt-3 text-sm leading-6 text-gray-600 dark:border-gray-800 dark:text-gray-400">
-        Figure 1. Toy projections and a generated 3D landscape. They explain the geometry of the idea; they are not measured embeddings from a specific model.
+        Figure 1. Toy projections and an interactive 3D landscape. They explain the geometry of the idea; they are not measured embeddings from a specific model.
       </figcaption>
     </figure>
   )
@@ -132,28 +133,14 @@ function AnimatedPath() {
 
 function LandscapePanel() {
   return (
-    <div className="mt-6 grid gap-5 lg:grid-cols-[1.35fr_0.65fr]">
-      <div className="relative aspect-[88/62] overflow-hidden rounded-md border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
-        <Image
-          src="/blog/latent-space-landscape-lineages.webp"
-          alt="Animated Matplotlib 3D latent landscape with conversation lineage dots drawn on the surface"
-          fill
-          unoptimized
-          sizes="(min-width: 1024px) 540px, 100vw"
-          className="object-cover motion-reduce:hidden"
-        />
-        <Image
-          src="/blog/latent-space-landscape-lineages.png"
-          alt="Matplotlib 3D latent landscape with conversation lineage dots drawn on the surface"
-          fill
-          sizes="(min-width: 1024px) 540px, 100vw"
-          className="hidden object-cover motion-reduce:block"
-        />
+    <div className="mt-6 space-y-4">
+      <div className="h-[360px] sm:h-[430px] lg:h-[520px]">
+        <LatentLandscapePlot />
       </div>
       <div className="rounded-md border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-900">
         <h3 className="text-sm font-semibold text-gray-950 dark:text-white">Read it as a metaphor</h3>
         <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">
-          The contour floor is the 2D reference map. The raised surface is not the training loss; it is a teaching sketch for likely continuation regions after context has already conditioned the model. The dots and lines are rendered inside the same 3D scene to show possible lineages from different starting contexts.
+          This is a toy energy landscape: the raised surface is not the training loss, and the two curves are not measured model traces. They show the metaphor more cleanly: different starting contexts can follow different continuation lineages toward a compatible basin. Drag the scene to inspect the geometry.
         </p>
       </div>
     </div>

@@ -122,7 +122,7 @@ function parseBlocks(content: string): Block[] {
 }
 
 function renderInline(text: string) {
-  const segments = text.split(/(\*\*[^*]+\*\*)/g)
+  const segments = text.split(/(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/g)
 
   return segments.map((segment, index) => {
     if (segment.startsWith("**") && segment.endsWith("**")) {
@@ -130,6 +130,22 @@ function renderInline(text: string) {
         <strong key={`${segment}-${index}`} className="font-semibold text-gray-950 dark:text-white">
           {segment.slice(2, -2)}
         </strong>
+      )
+    }
+
+    const link = segment.match(/^\[([^\]]+)\]\(([^)]+)\)$/)
+
+    if (link) {
+      return (
+        <a
+          key={`${segment}-${index}`}
+          href={link[2]}
+          className="font-medium text-gray-950 underline decoration-gray-300 underline-offset-4 hover:decoration-gray-950 dark:text-white dark:decoration-gray-700 dark:hover:decoration-white"
+          target="_blank"
+          rel="noreferrer"
+        >
+          {link[1]}
+        </a>
       )
     }
 

@@ -66,7 +66,7 @@ export default function PromptDistributionVisual() {
       <div>
         <h2 className="text-lg font-semibold text-gray-950 dark:text-white">Start point changes the distribution</h2>
         <p className="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-400">
-          The same broad topic can produce different next-token distributions once the prompt adds audience, task, or skill context.
+          The same broad topic can lead to different likely next moves once the prompt adds audience, task, or skill context.
         </p>
       </div>
 
@@ -124,7 +124,7 @@ export default function PromptDistributionVisual() {
       </div>
 
       <figcaption className="mt-4 border-t border-gray-200 pt-3 text-sm leading-6 text-gray-600 dark:border-gray-800 dark:text-gray-400">
-        Figure 3. Context does not add a magic answer. It changes the hidden state, which changes the probability distribution over likely next moves.
+        Figure 3. Context does not add a magic answer. It changes the model state, which changes the probability distribution over likely next moves. The percentages are illustrative, not measured from a model.
       </figcaption>
     </figure>
   )

@@ -9,12 +9,14 @@ visual: "latent-space"
 Large language models can feel mysterious because we talk to them with words,
 but they do not think in words. They compute with numbers. A prompt enters as
 text, gets split into tokens, and each token is converted into a vector: a list
-of numbers that places it somewhere in a learned space.
+of numbers. The model then updates those vectors by looking at the surrounding
+text. So the vector for a word is not just "the word itself"; it is the word in
+this sentence, in this task, with this surrounding context.
 
-The first useful idea is simple: **meaning becomes position**. Words, phrases,
-and partial answers are represented by locations and directions. Similar things
-usually land near each other. Different styles, tasks, and levels of detail pull
-the model in different directions.
+The first useful idea is simple: **meaning becomes a direction in number
+space**. Similar things often end up near each other. Different styles, tasks,
+and levels of detail push the model toward different regions before it starts
+answering.
 
 This is why latent space is useful as a mental model. It lets us stop thinking
 of language as a bag of strings and start thinking of it as geometry.
@@ -36,7 +38,8 @@ helped predict related continuations.
 So the model learns neighborhoods. Animal words form one rough neighborhood.
 Programming words form another. Finance words form another. These neighborhoods
 are not clean boxes. They overlap, stretch, and bend. "Mouse" can live near pets
-or computers depending on context.
+or computers depending on context. That is the important part: context can move
+the same word toward a different neighborhood.
 
 ## Step 2: similar words form clusters
 
@@ -48,9 +51,10 @@ different local region.
 
 The real model space has thousands of dimensions, so we cannot draw it directly.
 The plot below compresses the idea into two dimensions. That compression is not
-the real model. It is a teaching sketch that lets us reason visually. Click the
-tabs from left to right: first clusters, then prompt movement, then conversation
-movement, then randomness.
+the real model, and the plotted coordinates are not measured from a specific
+LLM. It is a teaching sketch that lets us reason visually. Click the tabs from
+left to right: first clusters, then prompt movement, then conversation movement,
+then randomness.
 
 [[visual:latent-space]]
 
@@ -62,19 +66,22 @@ simple language and examples. Adding "geometrically" pulls it toward derivation.
 Adding "as a metaphor" pulls it toward imagery.
 
 That is why I find it better to think of a prompt as a **trajectory**. It moves
-through the model's internal space. The final state after reading the prompt is
-where the model starts predicting the next token.
+through a sequence of internal states. This is not a measured physical path
+through one fixed map. It is a mental model for how each extra token changes the
+model's next guess.
 
 ## Step 4: a conversation keeps moving
 
-A conversation is a longer trajectory. The first user message creates a state.
-The assistant answer changes the context. The next user message does not start
-from zero; it starts from the whole conversation so far.
+A conversation is a longer trajectory. In many chat systems, each turn is
+read together with the transcript so far. The next user message does not start
+from zero; it is evaluated in the context of the conversation that still fits
+inside the context window.
 
 That means a chat can drift. If the first turn asks for an intuitive
-explanation, the state moves toward examples and plain language. If the second
-turn asks for equations, the state moves toward formalism. If the third turn
-asks for implementation details, the state bends again toward code and systems.
+explanation, later answers are more likely to use examples and plain language.
+If the second turn asks for equations, the likely answer shifts toward formal
+language. If the third turn asks for implementation details, it shifts again
+toward code and systems.
 
 Good conversations often work because each turn narrows the region. Bad
 conversations often fail because the path wanders: the model keeps carrying
@@ -95,34 +102,35 @@ model into a region before the first output token is sampled. A bare prompt like
 examples and analogies more likely. A coding prompt makes implementation details
 more likely. A poetic prompt makes metaphor more likely.
 
-If the settings are fixed, the weights are fixed, and the numerical computation
-is exactly repeated, this distribution is the deterministic part. The model is
-not confused. It has computed a landscape of possibilities.
+If the settings are fixed, the weights are fixed, and the computer repeats the
+same calculation exactly, this landscape of possibilities is the fixed part.
+The model is not confused. It has assigned scores to the possible next tokens.
 
 [[visual:prompt-distribution]]
 
 ## Step 6: generation samples a path
 
 Text generation turns that probability distribution into one actual token, then
-feeds that token back into the model and repeats the process. Each sampled token
-bends the next state. After many steps, a whole answer has been traced through
-the space.
+adds that token back into the context and repeats the process. Each chosen token
+changes the next set of probabilities. After many steps, a whole answer has been
+built one token at a time.
 
-Temperature and related settings control how adventurous this sampling is. Low
-temperature stays close to the highest-probability path. Higher temperature
-allows more side paths. In the visual, move the sampling-spread slider and watch
-the repeated runs widen or tighten.
+Temperature and related settings control how adventurous this sampling is. Lower
+temperature concentrates probability on already likely tokens. Higher
+temperature spreads probability mass across more alternatives. In the visual,
+move the sampling-spread slider and watch the repeated runs widen or tighten.
 
 ## Step 7: repeated runs form a cloud
 
-If you run the same prompt many times, you do not get one perfect point. You get
-a cluster of outputs. I call that cluster the **run cloud**.
+If you run the same prompt many times with sampling enabled, you do not get one
+perfect point. You get a distribution over possible strings. If you embed those
+generated answers and plot them, you can think of the result as a **run cloud**.
 
-The center of the run cloud is the answer the model most naturally wants to
-give. The width of the cloud is how much practical variation you should expect.
-Some prompts create tight clouds: many runs say almost the same thing. Other
-prompts create wide clouds: runs drift into different examples, styles, or
-reasoning paths.
+The densest part of the run cloud is the kind of answer the model most often
+samples under those settings. The width of the cloud is how much practical
+variation you should expect. Some prompts create tight clouds: many runs say
+almost the same thing. Other prompts create wide clouds: runs drift into
+different examples, styles, or reasoning paths.
 
 ## Step 8: randomness has layers
 
@@ -130,13 +138,13 @@ reasoning paths.
 
 - **Sampling variance**: the decoder intentionally chooses among plausible next
   tokens.
-- **Numerical variance**: tiny floating point differences can affect borderline
-  choices.
-- **System variance**: batching, kernels, drivers, and host scheduling can alter
-  the exact numerical path through equivalent computations.
+- **Numerical variance**: parallel floating point operations can produce tiny
+  differences, especially when operation order changes.
+- **Serving variance**: batching, kernels, hardware, model versions, and backend
+  configuration can change whether repeated calls are exactly reproducible.
 
-The theoretical object is the probability distribution. The practical object is
-the distribution plus the run cloud you observe when the system actually runs.
+So there are two things to keep separate: the probabilities the model computes,
+and the run cloud you observe when the system actually generates answers.
 
 ## Step 9: skills are context engineering
 
@@ -148,7 +156,8 @@ point.
 In the latent-space picture, a skill does not make the model smarter by itself.
 It steers the model closer to the region where the useful answer already lives.
 It narrows the distribution. It makes irrelevant continuations less likely and
-domain-specific continuations more likely.
+domain-specific continuations more likely. The model has not learned new
+weights. It is using the text you gave it as steering information.
 
 This is why context engineering matters. You are not only asking a question.
 You are shaping the state from which the model predicts. A weak context leaves
@@ -156,12 +165,13 @@ the model high on the landscape, where many paths are plausible. A strong
 context places it near a basin: a region where the next steps are more coherent,
 more specific, and less likely to wander.
 
-The phrase "local minimum" is useful as a metaphor, but it needs care. During a
-chat, the model is not training its weights or literally optimizing into a
-minimum. The weights are fixed. What changes is the hidden state and the
-probability distribution. Still, the basin image is helpful: more context can
-move the conversation deeper into one region, so nearby next steps become much
-more likely than far-away ones.
+The phrase "local minimum" is useful only as a metaphor. During a chat, the
+model is not training its weights or literally optimizing into a minimum. The
+weights are fixed. What changes is the hidden state and the probability
+distribution. If we draw a landscape where valleys mean "answers the model is
+more likely to give", then a basin means a region of likely continuations. No
+optimizer is rolling downhill during normal generation; the landscape is just a
+picture for the probabilities.
 
 Different initial contexts can therefore lead to completely different clusters
 of outputs. The same user can ask about latent space as a beginner, as a
@@ -180,7 +190,15 @@ is one whose run cloud stays inside the region you want. If the cloud is wide,
 you either accept variety, lower the sampling spread, add constraints, or break
 the task into smaller steps.
 
-The main takeaway: latent space is a way to reason about direction. Prompts move
-through it, conversations continue moving through it, decoding samples paths
-inside it, and repeated runs reveal the cloud of answers the model is likely to
-produce.
+The main takeaway: latent space is a way to reason about direction. Prompts
+change the model's internal state, conversations change the context, decoding
+samples from the resulting probabilities, and repeated runs reveal the cloud of
+answers the model is likely to produce.
+
+## Papers behind the mental model
+
+- [Distributed Representations of Words and Phrases and their Compositionality](https://arxiv.org/abs/1310.4546)
+- [How Contextual are Contextualized Word Representations?](https://arxiv.org/abs/1909.00512)
+- [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
+- [The Curious Case of Neural Text Degeneration](https://arxiv.org/abs/1904.09751)
+- [Language Models are Few-Shot Learners](https://arxiv.org/abs/2005.14165)

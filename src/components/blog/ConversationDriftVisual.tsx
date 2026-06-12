@@ -20,7 +20,7 @@ export default function ConversationDriftVisual() {
         <div>
           <h2 className="text-lg font-semibold text-gray-950 dark:text-white">Conversation drift</h2>
           <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-600 dark:text-gray-400">
-            Move through the turns to see how the context stops being a single prompt and becomes a path.
+            Move through the turns to see how accumulated context keeps shifting likely continuations.
           </p>
         </div>
         <label htmlFor="conversation-turn" className="w-full text-sm text-gray-600 dark:text-gray-400 sm:w-56">
@@ -83,7 +83,7 @@ export default function ConversationDriftVisual() {
       </div>
 
       <figcaption className="mt-4 border-t border-gray-200 pt-3 text-sm leading-6 text-gray-600 dark:border-gray-800 dark:text-gray-400">
-        Figure 2. A conversation is not a reset after every message. Each turn bends the current context toward a new region.
+        Figure 2. A conversation is not a reset after every message. Each turn changes the conditioning context for the next prediction.
       </figcaption>
     </figure>
   )

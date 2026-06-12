@@ -25,12 +25,12 @@ const steps = [
   {
     label: "Trajectories",
     title: "2. Prompts bend the path",
-    description: "Changing the wording pulls the model state toward a different region and answer style.",
+    description: "Changing the wording changes the contextual state and shifts likely answer styles.",
   },
   {
     label: "Conversation",
     title: "3. A chat keeps moving",
-    description: "Each turn starts from the accumulated context, so the conversation traces a path through regions.",
+    description: "Each turn is read with the accumulated context, so likely continuations keep shifting.",
   },
   {
     label: "Run clouds",
@@ -40,7 +40,7 @@ const steps = [
   {
     label: "Landscape",
     title: "5. Regions sit on a landscape",
-    description: "The surface is a simplified energy view: paths settle into different likely-continuation basins.",
+    description: "The surface is an analogy: lower basins represent higher-probability continuation regions.",
   },
 ] as const
 
@@ -260,12 +260,12 @@ export default function LatentSpaceVisual() {
             style={{ backgroundImage: "url('/blog/latent-space-landscape.png')" }}
           />
           <p className="mt-3 text-sm leading-6 text-gray-600 dark:text-gray-400">
-            This is not a real embedding projection. It is a reading aid: lower basins mean more likely continuation regions, and colored paths show different prompt starts settling into different basins.
+            This is not a real embedding projection or training-style optimization. It is a reading aid: lower basins mean higher-probability continuation regions, and colored paths show different prompt starts ending near different regions.
           </p>
         </div>
       </div>
       <figcaption className="mt-4 border-t border-gray-200 pt-3 text-sm leading-6 text-gray-600 dark:border-gray-800 dark:text-gray-400">
-        Figure 1. A Matplotlib-generated toy projection with interactive overlays for word clusters, prompt trajectories, conversation drift, and run clouds. It explains the geometry of the idea; it is not a measured embedding from a specific model.
+        Figure 1. A Matplotlib-generated toy projection with interactive overlays for word clusters, prompt-shifted states, conversation drift, and run clouds. It explains the geometry of the idea; it is not a measured embedding from a specific model.
       </figcaption>
     </figure>
   )

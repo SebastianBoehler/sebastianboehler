@@ -236,8 +236,9 @@ often the text is identical. If it differs, find the first token or word where
 the runs diverge. That first divergence is the boundary you are looking for.
 
 I added a small code artifact for that style of test in
-`experiments/llm-nondeterminism`. It records repeated completions as JSONL and
-prints a compact summary. If you run it at temperature zero and still see
+`experiments/llm-nondeterminism`. The Python script generates the boundary
+effect plots locally. The API collector records repeated completions as JSONL
+and prints a compact summary. If you run it at temperature zero and still see
 multiple unique outputs, that is evidence of serving-level variation. If you run
 it at higher temperature, you are mostly measuring intentional sampling.
 

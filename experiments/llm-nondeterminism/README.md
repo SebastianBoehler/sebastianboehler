@@ -15,6 +15,19 @@ kernel or serving-batch cause. Use it to answer practical questions:
 
 ## Run
 
+First run the local boundary-effect simulation. It does not call an API. It
+backs the article's claim with a controlled toy model: tiny perturbations only
+change the first token when they cross a decision boundary.
+
+```bash
+python3 experiments/llm-nondeterminism/boundary_effect.py
+```
+
+It writes `boundary-effect.png`, `boundary-effect.svg`, and `summary.json` to
+`experiments/llm-nondeterminism/runs/boundary-effect/`.
+
+Then run the API collector when you want to measure real provider behavior:
+
 ```bash
 OPENROUTER_API_KEY=... \
 node experiments/llm-nondeterminism/collect-runs.mjs \

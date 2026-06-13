@@ -4,6 +4,7 @@ import PromptDistributionVisual from "@/components/blog/PromptDistributionVisual
 import PhysicsInformedVisual from "@/components/blog/PhysicsInformedVisual"
 import TrainingDynamicsVisual from "@/components/blog/TrainingDynamicsVisual"
 import NondeterminismBoundaryVisual from "@/components/blog/NondeterminismBoundaryVisual"
+import LearningFeedbackVisual from "@/components/blog/LearningFeedbackVisual"
 
 export default function PostVisual({ visual }: { visual?: string }) {
   if (visual === "latent-space") {
@@ -28,6 +29,10 @@ export default function PostVisual({ visual }: { visual?: string }) {
 
   if (visual === "nondeterminism-boundary") {
     return <NondeterminismBoundaryVisual />
+  }
+
+  if (visual === "learning-feedback") {
+    return <LearningFeedbackVisual />
   }
 
   return null

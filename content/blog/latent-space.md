@@ -267,7 +267,61 @@ The model is not confused. It has assigned scores to the possible next tokens.
 
 [[visual:prompt-distribution]]
 
-## Step 7: generation samples a path
+## Step 7: reasoning can be text or hidden state
+
+Chain-of-thought reasoning is the familiar version: the model writes
+intermediate steps as ordinary text before giving the final answer. This can
+help because each written step becomes part of the context. The model can look
+back at its own scratchpad, catch local mistakes, and decompose a problem into
+smaller moves.
+
+But a written chain of thought is also expensive. Every intermediate word has
+to be decoded, stored in the context, and then attended to later. Many tokens
+are there for human-readable grammar: "therefore", "next", "we can see", and so
+on. They make the reasoning inspectable, but they are not always the most
+compact form of the computation.
+
+Latent reasoning asks a different question: what if some intermediate reasoning
+steps stay in continuous hidden-state space instead of being converted into
+visible words? In a normal language model, a hidden state is usually projected
+into logits, decoded into a token, appended to the context, and then processed
+again. Latent-reasoning methods try to feed some hidden states or soft
+representations forward directly, using them like internal scratchpad states.
+
+That can be more token-efficient because one vector can carry information that
+would take many words to spell out. It can also avoid committing too early to
+one exact sentence. A text chain has to choose a discrete path: token, token,
+token. A continuous state can, at least in principle, keep several partial
+possibilities alive before the model commits to words.
+
+Recent work explores this directly. Coconut, for example, treats the last
+hidden state as a "continuous thought" and feeds it back as the next input
+embedding instead of immediately decoding it into text. SoftCoT and
+SwiReasoning explore related soft or switchable reasoning modes. The practical
+idea is not that natural language reasoning disappears. It is that a model can
+mix modes: use visible chain-of-thought when human-readable working memory is
+useful, and use latent computation when compact internal search is enough.
+
+There is a tradeoff. Visible chain-of-thought costs tokens, but it gives humans
+something to inspect. Latent reasoning can be more efficient, but it is harder
+to monitor. Also, written chain-of-thought is not guaranteed to be a faithful
+transcript of the model's real causes. It can be a useful scratchpad, a
+rationalization, or both. So the safe mental model is:
+
+- **Hidden state reasoning** is the model's internal vector computation.
+- **Chain-of-thought** is reasoning externalized into language tokens.
+- **Latent reasoning methods** try to do more of the intermediate work before
+  paying the cost of text.
+- **Final answers** are still sampled token by token unless the whole interface
+  changes.
+
+This fits the latent-space picture. Natural language is a narrow channel
+through the model's space. It is useful because humans can read it. It is
+inefficient because every idea has to squeeze through discrete tokens. Latent
+reasoning keeps some work in the wider continuous space, then only decodes when
+the model needs to communicate.
+
+## Step 8: generation samples a path
 
 Text generation turns that probability distribution into one actual token, then
 adds that token back into the context and repeats the process. Each chosen token
@@ -279,7 +333,7 @@ temperature concentrates probability on already likely tokens. Higher
 temperature spreads probability mass across more alternatives. In the visual,
 move the sampling-spread slider and watch the repeated runs widen or tighten.
 
-## Step 8: repeated runs form a cloud
+## Step 9: repeated runs form a cloud
 
 If you run the same prompt many times, you may not get one perfect point. You
 get a distribution over possible strings. If you embed those generated answers
@@ -297,7 +351,7 @@ how much practical variation you should expect. Some prompts create tight
 clouds: many runs say almost the same thing. Other prompts create wider clouds:
 runs drift into different examples, styles, or reasoning paths.
 
-## Step 9: randomness has layers
+## Step 10: randomness has layers
 
 "Randomness" is too blunt. Several layers can contribute to the spread:
 
@@ -356,7 +410,7 @@ time. During a normal chat, the weights are already fixed. The noise you see is
 mostly about decoding choices and serving details, not the model learning a new
 valley while it answers.
 
-## Step 10: small experiments make the cloud visible
+## Step 11: small experiments make the cloud visible
 
 The simplest experiment is not to prove what happens inside a specific GPU. It
 is to measure the outside behavior. Send the exact same prompt many times, keep
@@ -376,12 +430,19 @@ space, and it cannot prove which GPU kernel caused a difference. What it can do
 is make the run cloud concrete: same prompt, same settings, observed output
 spread.
 
-## Step 11: skills are context engineering
+## Step 12: skills are context engineering
 
 A skill is a structured way to add context before the model has to decide what
 to do. It might include definitions, procedures, examples, constraints, file
 paths, style rules, or domain vocabulary. That extra context changes the start
 point.
+
+In agent systems, "skill" often means something more specific than a prompt
+snippet: a file, workflow, tool contract, or memory surface that the harness can
+load when the task calls for it. I unpack that system-level version in
+[Context Engineering for Agents](/blog/context-engineering-for-agents). Here,
+the important point is simpler: loaded context changes the state from which the
+model predicts.
 
 In the latent-space picture, a skill does not make the model smarter by itself.
 It steers the model closer to the region where the useful answer already lives.
@@ -414,7 +475,7 @@ new law of nature, but it can act like a constraint on the answer space. It
 reduces the directions that are plausible, the same way a physical simulator or
 reward constraint reduces useless moves for an RL agent.
 
-## Step 12: prompts steer regions
+## Step 13: prompts steer regions
 
 This changes how prompt engineering should feel. A prompt is not a magic spell.
 It is a steering function. It pushes the model toward a region, a style, and a
@@ -437,6 +498,11 @@ answers the model is likely to produce.
 - [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 - [The Curious Case of Neural Text Degeneration](https://arxiv.org/abs/1904.09751)
 - [Language Models are Few-Shot Learners](https://arxiv.org/abs/2005.14165)
+- [Chain-of-Thought Prompting Elicits Reasoning in Large Language Models](https://arxiv.org/abs/2201.11903)
+- [Language Models Don't Always Say What They Think](https://arxiv.org/abs/2305.04388)
+- [Training Large Language Models to Reason in a Continuous Latent Space](https://arxiv.org/abs/2412.06769)
+- [SoftCoT: Soft Chain-of-Thought for Efficient Reasoning with LLMs](https://aclanthology.org/2025.acl-long.1137/)
+- [SwiReasoning: Switch-Thinking in Latent and Explicit for Pareto-Superior Reasoning LLMs](https://arxiv.org/abs/2510.05069)
 - [Defeating Nondeterminism in LLM Inference](https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/)
 - [Introducing Background Temperature to Characterise Hidden Randomness in Large Language Models](https://arxiv.org/abs/2604.22411)
 - [The Impact of Non-determinism on Reproducibility in Deep Learning](https://arxiv.org/abs/2207.09955)

@@ -5,6 +5,8 @@ import PhysicsInformedVisual from "@/components/blog/PhysicsInformedVisual"
 import TrainingDynamicsVisual from "@/components/blog/TrainingDynamicsVisual"
 import NondeterminismBoundaryVisual from "@/components/blog/NondeterminismBoundaryVisual"
 import LearningFeedbackVisual from "@/components/blog/LearningFeedbackVisual"
+import ContextEngineeringVisual from "@/components/blog/ContextEngineeringVisual"
+import NeuroInspiredVisual from "@/components/blog/NeuroInspiredVisual"
 
 export default function PostVisual({ visual }: { visual?: string }) {
   if (visual === "latent-space") {
@@ -33,6 +35,14 @@ export default function PostVisual({ visual }: { visual?: string }) {
 
   if (visual === "learning-feedback") {
     return <LearningFeedbackVisual />
+  }
+
+  if (visual === "context-engineering") {
+    return <ContextEngineeringVisual />
+  }
+
+  if (visual === "neuro-inspired-learning") {
+    return <NeuroInspiredVisual />
   }
 
   return null

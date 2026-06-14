@@ -100,6 +100,9 @@ connections in response to experience. It includes synaptic plasticity,
 functional reorganization, and other mechanisms. A simple version is: neurons
 and networks that are repeatedly useful become easier to activate later.
 
+For the deeper bridge between synapses, myelin, credit assignment, and machine
+learning, see [Neuroscience and Machine Learning](/blog/neuroscience-and-machine-learning).
+
 But "the brain rewires itself" can become misleading if we treat it like a
 motivational slogan. Plasticity is not automatically good. The brain can also
 learn distractions, fear, bad habits, shallow shortcuts, and wrong procedures.

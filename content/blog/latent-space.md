@@ -281,15 +281,21 @@ move the sampling-spread slider and watch the repeated runs widen or tighten.
 
 ## Step 8: repeated runs form a cloud
 
-If you run the same prompt many times with sampling enabled, you do not get one
-perfect point. You get a distribution over possible strings. If you embed those
-generated answers and plot them, you can think of the result as a **run cloud**.
+If you run the same prompt many times, you may not get one perfect point. You
+get a distribution over possible strings. If you embed those generated answers
+and plot them, you can think of the result as a **run cloud**.
 
-The densest part of the run cloud is the kind of answer the model most often
-samples under those settings. The width of the cloud is how much practical
-variation you should expect. Some prompts create tight clouds: many runs say
-almost the same thing. Other prompts create wide clouds: runs drift into
-different examples, styles, or reasoning paths.
+There are two different reasons this can happen. The first is intentional:
+sampling and temperature ask the decoder to choose among plausible tokens. The
+second is unintentional: even with nominal sampling disabled, a production
+serving system can introduce tiny numerical differences before the decoder makes
+its choice.
+
+So the densest part of the run cloud is the kind of answer the system most often
+produces under those settings and serving conditions. The width of the cloud is
+how much practical variation you should expect. Some prompts create tight
+clouds: many runs say almost the same thing. Other prompts create wider clouds:
+runs drift into different examples, styles, or reasoning paths.
 
 ## Step 9: randomness has layers
 
@@ -308,12 +314,14 @@ and the run cloud you observe when the system actually generates answers.
 There is an important practical result here. A deployed model can sometimes
 produce different answers even when the requested temperature is zero. That
 does not mean the model contains a little random creature making choices. The
-cleaner explanation is that real serving systems change the exact computation:
-requests are batched, kernels use parallel floating point operations, and tiny
-rounding differences can appear when the operation shape changes. Thinking
-Machines Lab describes this as a lack of **batch invariance**: the same request
-can receive slightly different numerical results depending on what it is
-batched with.
+cleaner explanation is that real serving systems can change the exact
+computation. Thinking Machines Lab argues that the central culprit is often
+dynamic batching. Your request may be processed alone in one run and beside
+other requests in another run. If the kernels are not **batch invariant**, the
+same request can receive slightly different numerical results when the batch
+shape changes. This is not just "the model decided randomly." It is an
+implementation-level perturbation: floating point arithmetic, reduction order,
+kernel shape, and server load affect the logits by a tiny amount.
 
 Those differences are usually tiny. Most of the time they do not matter. But if
 two next-token choices are almost tied, a tiny logit difference can flip which
@@ -328,7 +336,9 @@ So the useful picture is not "the model jumps randomly across latent space."
 It is more like this:
 
 - The same prompt lands in almost the same region each time.
-- Implementation nondeterminism creates a small cloud around that state.
+- Sampling can deliberately choose different plausible tokens.
+- Implementation nondeterminism can create a small cloud around the same state
+  even when nominal temperature is zero.
 - If the cloud is far from a decision boundary, every run looks the same.
 - If the cloud crosses a boundary between two near-tied continuations, runs can
   branch.

@@ -44,9 +44,11 @@ where the observed runs diverge.
 ## Read the result
 
 At `temperature 0`, multiple unique outputs suggest serving-level variation,
-model routing changes, or another non-sampling source. At higher temperatures,
-variation is expected because the sampler intentionally chooses among plausible
-tokens.
+model routing changes, or another non-sampling source. Thinking Machines Lab's
+useful framing is batch invariance: if the same request is computed in a
+different dynamic batch, non-invariant kernels can produce tiny logit
+differences. At higher temperatures, variation is expected because the sampler
+intentionally chooses among plausible tokens.
 
 Keep the model name, prompt, temperature, top-p, and provider fixed when
 comparing runs. Otherwise the experiment mixes too many causes.

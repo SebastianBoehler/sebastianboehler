@@ -60,17 +60,30 @@ then the landscape analogy.
 
 [[visual:latent-space]]
 
-## Step 3: a prompt is not a point
+## Step 3: a prompt becomes a path and a point
 
-A prompt is a sequence. Each token changes the state a little. "Explain latent
-space" starts in one region. Adding "to a beginner" pushes the state toward
-simple language and examples. Adding "geometrically" pulls it toward derivation.
-Adding "as a metaphor" pulls it toward imagery.
+A prompt starts as a sequence. Each token is processed in order, and each token
+changes the contextual state a little. "Explain latent space" starts in one
+region. Adding "to a beginner" pushes the state toward simple language and
+examples. Adding "geometrically" pulls it toward derivation. Adding "as a
+metaphor" pulls it toward imagery.
 
-That is why I find it better to think of a prompt as a **trajectory**. It moves
-through a sequence of internal states. This is not a measured physical path
-through one fixed map. It is a mental model for how each extra token changes the
-model's next guess.
+So there are two valid views:
+
+- As input, a prompt is a sequence of tokens.
+- After the model has processed that sequence, the current context can be
+  represented by a hidden state vector. For a specific layer and token position,
+  that vector is a point in representation space.
+
+That is why I find it better to think of a prompt as a **trajectory that ends in
+a state**. The trajectory is the sequence of internal updates caused by the
+tokens. The endpoint is the current context state from which the model predicts
+the next token.
+
+This is not a measured physical path through one fixed map. It is a mental
+model for how each extra token changes the model's next guess. The exact "point"
+also depends on which layer and which token position you inspect, so there is
+not one universal prompt coordinate that all models expose.
 
 The trajectory is not locked inside the first cluster forever. Context usually
 anchors the model near a region, but a strong instruction can move the
@@ -102,7 +115,70 @@ the path if they are specific enough.
 
 [[visual:conversation-drift]]
 
-## Step 5: the model predicts a distribution
+## Step 5: attention decides what context matters now
+
+There is one more mechanism between "the context is in the model" and "the
+model predicts the next token": attention.
+
+A transformer does not simply average the whole prompt into one static point.
+It keeps a representation for each token position. In each attention layer, a
+token can look at other tokens and mix in information from them. Technically,
+the model makes queries, keys, and values. A query from the current position is
+compared with keys from earlier positions. That comparison produces attention
+weights. Those weights decide how much value information flows from those
+earlier tokens into the current token's representation.
+
+So if the context contains an article about cars, planes, and ships, then the
+question you append matters a lot. A question like "Why do wings generate lift?"
+can make the current token states draw more from the plane-related parts. A
+question like "Why does a hull displace water?" can draw more from the
+ship-related parts. The full context is available, but the model does not use
+all of it equally for every next-token decision.
+
+This is why "where the whole input lies in latent space" is still too simple.
+The model is not only asking:
+
+- what is the general topic of the context?
+
+It is also asking:
+
+- which earlier tokens matter for this exact next token?
+- which instruction is currently active?
+- which examples, definitions, or constraints should be copied into the current
+  state?
+
+Attention is the mechanism that lets the prompt re-weight the context. The
+result is still a contextual state vector, but that state has been built by
+selectively routing information from the sequence, not by treating the entire
+article as one undifferentiated blob.
+
+That contextual state is what I mean by **hidden state** in this post. It is
+not the raw word embedding anymore. A raw embedding is closer to "what this
+token usually means." A hidden state is closer to "what this token or current
+position means after reading this whole context." It has already been shaped by
+attention, feed-forward layers, position information, and the surrounding
+tokens.
+
+For next-token prediction, the most important hidden state is usually the state
+at the current final position: the place where the model has integrated the
+prompt and is ready to predict what comes next. You can think of that state as
+the endpoint of the context trajectory. It is a point in a model layer's
+representation space, but it is a point that was constructed from the whole
+sequence.
+
+This also explains why a long context does not control the next token only by
+its broad topic. If an article mentions cars, planes, and ships, the appended
+question changes the final hidden state by changing which earlier tokens become
+relevant. The continuation is controlled by the context as routed through
+attention, not by a single static "article location."
+
+Attention is also not a perfect human-style explanation of what the model
+"cares about." Different heads and layers track different patterns, and the
+final answer also depends on feed-forward layers and the output projection. But
+as a first mental model, attention explains why the appended question can steer
+which parts of a long context shape the next prediction.
+
+## Step 6: the model predicts a distribution
 
 The model does not choose one next word directly. It produces a probability
 distribution over possible next tokens. In plain language, it says: these next
@@ -123,24 +199,67 @@ Imagine the context is:
 > I drove to work in my
 
 The token "car" might be likely. Words like "bicycle", "motorbike", "truck",
-and "vehicle" may live nearby in a semantic neighborhood because they are all
-transport words. But only some of them fit this exact sentence well. Grammar,
-idiom, world knowledge, style, and the previous tokens all affect the final
-score. "Bicycle" can be close to "car" in meaning and still be less likely after
-"in my" because people usually say "in my car" and "on my bicycle".
+and "vehicle" may live near it in a rough semantic neighborhood because they
+are all transport words. But that neighborhood is not the whole decision. The
+model has just built a contextual state from the exact phrase "I drove to work
+in my". Attention has routed information from the relevant earlier tokens into
+that state: "drove", "to work", and especially the phrase "in my" matter for
+what can naturally come next.
+
+So "bicycle" can be semantically close to "car" and still be much less likely
+here, because the context usually wants "in my car" rather than "in my bicycle".
+If the sentence were "I rode to work on my", attention would build a different
+contextual state and "bicycle" would become much more compatible. The semantic
+cluster did not disappear; the prompt changed which parts of that cluster are
+usable for this exact continuation.
 
 So the visual should be read like this:
 
 - The starting context changes the hidden state.
-- That hidden state is compared against many possible next tokens.
-- Semantically nearby tokens often become plausible alternatives.
-- The actual probabilities also depend on syntax, phrasing, frequency, and the
-  exact conversation so far.
+- Attention decides which earlier tokens matter for the current prediction.
+- That contextual state is compared against many possible next tokens.
+- Semantically nearby tokens often become plausible alternatives, but only if
+  they also fit the active context.
+- The actual probabilities also depend on syntax, phrasing, frequency, task
+  instruction, and the exact conversation so far.
 
 The model's final next-token probabilities are produced by a learned projection
 and softmax, not by simply choosing the geometrically nearest word on a 2D map.
 The map is useful because it shows neighborhoods of related meaning. It is
 misleading only if we pretend distance alone is the probability rule.
+
+One more step makes this clearer. After the prompt has been processed, the
+model has a contextual hidden state for "what should come next here?" That state
+is used to score many candidate tokens. You can loosely imagine each possible
+token having an output direction, and the current hidden state asking: "how
+compatible is this token with the context right now?"
+
+Those scores are called logits. The model then turns logits into probabilities
+with softmax. The highest score is not always the only reasonable continuation.
+Several tokens may be plausible for different reasons: meaning, grammar, style,
+frequency, task instruction, or the conversation so far. Sampling chooses one
+token from that probability distribution. Then the chosen token is appended to
+the context, the model recomputes the next hidden state, and the process repeats.
+
+So the continuation is not:
+
+- find the closest word in semantic space,
+- output that word,
+- move to the next closest word.
+
+It is closer to:
+
+- use attention and feed-forward layers to turn the whole sequence into a final
+  hidden state,
+- score every possible next token against that final state,
+- convert scores into a distribution,
+- sample or choose one token,
+- feed that token back into the context and continue.
+
+This is why "car" can beat "vehicle" after "I drove to work in my", even if
+both words live near each other semantically. The model is not asking only
+"which token is nearby?" It is asking "which token best continues this exact
+sentence, in this exact conversation, under this decoding setting?"
 
 If the settings are fixed, the weights are fixed, and the computer repeats the
 same calculation exactly, this landscape of possibilities is the fixed part.
@@ -148,7 +267,7 @@ The model is not confused. It has assigned scores to the possible next tokens.
 
 [[visual:prompt-distribution]]
 
-## Step 6: generation samples a path
+## Step 7: generation samples a path
 
 Text generation turns that probability distribution into one actual token, then
 adds that token back into the context and repeats the process. Each chosen token
@@ -160,7 +279,7 @@ temperature concentrates probability on already likely tokens. Higher
 temperature spreads probability mass across more alternatives. In the visual,
 move the sampling-spread slider and watch the repeated runs widen or tighten.
 
-## Step 7: repeated runs form a cloud
+## Step 8: repeated runs form a cloud
 
 If you run the same prompt many times with sampling enabled, you do not get one
 perfect point. You get a distribution over possible strings. If you embed those
@@ -172,7 +291,7 @@ variation you should expect. Some prompts create tight clouds: many runs say
 almost the same thing. Other prompts create wide clouds: runs drift into
 different examples, styles, or reasoning paths.
 
-## Step 8: randomness has layers
+## Step 9: randomness has layers
 
 "Randomness" is too blunt. Several layers can contribute to the spread:
 
@@ -227,7 +346,7 @@ time. During a normal chat, the weights are already fixed. The noise you see is
 mostly about decoding choices and serving details, not the model learning a new
 valley while it answers.
 
-## Step 9: small experiments make the cloud visible
+## Step 10: small experiments make the cloud visible
 
 The simplest experiment is not to prove what happens inside a specific GPU. It
 is to measure the outside behavior. Send the exact same prompt many times, keep
@@ -247,7 +366,7 @@ space, and it cannot prove which GPU kernel caused a difference. What it can do
 is make the run cloud concrete: same prompt, same settings, observed output
 spread.
 
-## Step 10: skills are context engineering
+## Step 11: skills are context engineering
 
 A skill is a structured way to add context before the model has to decide what
 to do. It might include definitions, procedures, examples, constraints, file
@@ -285,7 +404,7 @@ new law of nature, but it can act like a constraint on the answer space. It
 reduces the directions that are plausible, the same way a physical simulator or
 reward constraint reduces useless moves for an RL agent.
 
-## Step 11: prompts steer regions
+## Step 12: prompts steer regions
 
 This changes how prompt engineering should feel. A prompt is not a magic spell.
 It is a steering function. It pushes the model toward a region, a style, and a

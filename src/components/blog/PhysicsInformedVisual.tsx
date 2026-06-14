@@ -119,11 +119,7 @@ function ConstraintView({
 }
 
 function EnergyView({ blend }: { blend: number }) {
-  const paths = [
-    `M 15 17 C ${29 + blend * 9} ${20 + blend * 8}, ${38 + blend * 13} ${36 + blend * 7}, 50 47`,
-    `M 86 14 C ${73 - blend * 10} ${22 + blend * 7}, ${66 - blend * 13} ${36 + blend * 7}, 50 47`,
-    `M 28 61 C ${35 + blend * 4} ${55 - blend * 2}, ${42 + blend * 6} ${50 - blend * 1}, 50 47`,
-  ]
+  const activePath = `M 15 18 C ${28 + blend * 8} ${21 + blend * 18}, ${38 + blend * 9} ${35 + blend * 6}, 50 47`
 
   return (
     <svg viewBox="0 0 100 70" role="img" aria-label="Energy landscape with trajectories settling into a basin" className="h-auto w-full">
@@ -141,19 +137,14 @@ function EnergyView({ blend }: { blend: number }) {
           className={index === 3 ? "stroke-gray-950 dark:stroke-white" : "stroke-slate-300 dark:stroke-gray-700"}
         />
       ))}
+      <path d="M 27 20 C 37 28, 40 41, 48 52" fill="none" stroke="#dc2626" strokeWidth="7" strokeLinecap="round" opacity={0.14 + blend * 0.24} />
       <ellipse cx="50" cy="47" rx="7" ry="3.6" className="fill-gray-950 dark:fill-white" opacity="0.9" />
-      {paths.map((path, index) => (
-        <path key={path} d={path} fill="none" stroke={["#2563eb", "#dc2626", "#059669"][index]} strokeWidth="1.7" strokeLinecap="round" />
-      ))}
-      {[
-        [15, 17],
-        [86, 14],
-        [28, 61],
-      ].map(([x, y]) => (
-        <circle key={`${x}-${y}`} cx={x} cy={y} r="2.2" fill="#f59e0b" />
-      ))}
-      <text x="8" y="10" className="fill-gray-500 text-[3px] dark:fill-gray-300">higher energy</text>
-      <text x="55" y="51" className="fill-gray-500 text-[3px] dark:fill-gray-300">stable basin</text>
+      <path d="M 15 18 L 50 47" fill="none" stroke="#64748b" strokeDasharray="2 2" strokeWidth="1.5" opacity="0.7" />
+      <path d={activePath} fill="none" stroke="#2563eb" strokeWidth="2.4" strokeLinecap="round" />
+      <circle cx="15" cy="18" r="2.4" fill="#f59e0b" />
+      <circle cx="50" cy="47" r="2.6" fill="#059669" />
+      <text x="8" y="10" className="fill-gray-500 text-[3px] dark:fill-gray-300">same objective</text>
+      <text x="54" y="55" className="fill-gray-500 text-[3px] dark:fill-gray-300">low-loss basin</text>
     </svg>
   )
 }
@@ -192,7 +183,7 @@ function FlowView({ blend }: { blend: number }) {
 function Explanation({ mode, physicsWeight }: { mode: Mode; physicsWeight: number }) {
   const text = {
     constraint: "The model fits observations, but the physics term penalizes curves that violate the expected law.",
-    energy: "A lower-energy basin is an outcome the system tends to settle into. In some models this is literal; for LLMs it is mostly a useful analogy.",
+    energy: "The dashed shortcut is reward-only search. Stronger physics pressure bends the live path around violations while keeping the same low-loss target.",
     flow: "The arrows are the learned change rule. The black path now follows that rule, so stronger physics pressure visibly redirects the state trajectory.",
   }[mode]
 

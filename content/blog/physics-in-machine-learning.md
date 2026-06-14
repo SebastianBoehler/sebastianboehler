@@ -114,6 +114,13 @@ The marble-in-a-bowl picture is useful:
 - A basin is the region that falls into that outcome.
 - A barrier is what separates one basin from another.
 
+The important idea is not only "go downhill." It is "go downhill inside the
+world you are allowed to move through." A reward-only learner may discover a
+shortcut to a low-loss state. If the shortcut breaks physics, it is not a real
+solution. Adding physics changes the shape of the search space: the same basin
+can still be the goal, but the path toward it bends around impossible or
+expensive states.
+
 For LLMs, be careful. During normal generation, the model is not training its
 weights and literally rolling downhill into a new minimum. The weights are
 fixed. But the analogy is still helpful if "low energy" means "more likely or
@@ -200,6 +207,11 @@ Reinforcement learning is where the physics connection becomes very concrete.
 An agent chooses actions, the environment responds, and the agent slowly learns
 which actions lead to reward.
 
+The simplest story is: "maximize reward." But the environment decides what
+actions are available, what happens after each action, and which shortcuts are
+allowed. Physics changes that environment. It does not necessarily change the
+goal. It changes the routes that are feasible on the way to the goal.
+
 If the environment is physical, an unconstrained agent can waste enormous time
 trying actions that could never work in the real world. A robot cannot ignore
 gravity. A drone cannot teleport sideways. A character controller cannot bend a
@@ -208,6 +220,8 @@ knee backward without consequences.
 Physics can enter the RL loop through the simulator, the reward, the action
 space, or the model architecture. The goal is not to remove learning. The goal
 is to make the agent spend more of its learning budget on plausible behavior.
+In the landscape picture, the agent may still settle into a good basin, but
+physics reshapes which slopes, ridges, and paths actually exist.
 
 ## Step 11: how this connects back to latent space
 

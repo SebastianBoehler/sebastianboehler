@@ -113,7 +113,7 @@ So memory should be retrieved with a reason, checked against the current
 workspace when possible, and kept smaller than the task itself.
 
 Good memory retrieval is not "remember everything." It is "retrieve the few
-facts that change what I should do next."
+facts that change the next action."
 
 ## Step 5: tools change the loop
 
@@ -217,8 +217,8 @@ attention for the information that actually changes the next action.
 
 ## Step 9: how this connects back to latent space
 
-In the latent-space article, I described prompts and skills as steering the
-model's hidden state. This article describes the system around that steering.
+The latent-space article describes prompts and skills as steering the model's
+hidden state. This article describes the system around that steering.
 
 The harness decides which text enters the model. That text changes attention,
 hidden states, logits, and tool choices. A skill is one kind of steering text. A

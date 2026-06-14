@@ -42,8 +42,8 @@ That is the first bridge to ML.
 
 ## Step 2: synapses are the closest weight analogy
 
-Your intuition about "making certain paths more likely" is closest to synaptic
-plasticity.
+A common intuition is that learning makes certain paths more likely. In the
+brain, that idea is closest to synaptic plasticity.
 
 A synapse is a connection where one neuron influences another. Synaptic
 plasticity means that influence can change. Long-term potentiation can make a
@@ -142,9 +142,9 @@ The clean comparison is:
 - **Reinforcement learning**: a machine-learning frame for trial, outcome,
   reward, and policy change.
 
-If you imagine learning as a path becoming easier to travel, synapses are the
-gates, myelin is the road quality, neuromodulators are traffic signals, and
-credit assignment is deciding which part of the route should be repaired.
+Imagine learning as a path becoming easier to travel. Synapses are the gates,
+myelin is the road quality, neuromodulators are traffic signals, and credit
+assignment is deciding which part of the route should be repaired.
 
 That picture is simple, but it is closer than saying "the brain updates weights"
 or "myelin makes the connection stronger."

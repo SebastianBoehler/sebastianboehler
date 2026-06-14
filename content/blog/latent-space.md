@@ -75,8 +75,8 @@ So there are two valid views:
   represented by a hidden state vector. For a specific layer and token position,
   that vector is a point in representation space.
 
-That is why I find it better to think of a prompt as a **trajectory that ends in
-a state**. The trajectory is the sequence of internal updates caused by the
+That is why a useful mental model is a prompt as a **trajectory that ends in a
+state**. The trajectory is the sequence of internal updates caused by the
 tokens. The endpoint is the current context state from which the model predicts
 the next token.
 
@@ -152,9 +152,9 @@ result is still a contextual state vector, but that state has been built by
 selectively routing information from the sequence, not by treating the entire
 article as one undifferentiated blob.
 
-That contextual state is what I mean by **hidden state** in this post. It is
-not the raw word embedding anymore. A raw embedding is closer to "what this
-token usually means." A hidden state is closer to "what this token or current
+That contextual state is what this post means by **hidden state**. It is not
+the raw word embedding anymore. A raw embedding is closer to "what this token
+usually means." A hidden state is closer to "what this token or current
 position means after reading this whole context." It has already been shaped by
 attention, feed-forward layers, position information, and the surrounding
 tokens.
@@ -418,12 +418,12 @@ the model, temperature, and settings fixed, then compare the outputs. Count how
 often the text is identical. If it differs, find the first token or word where
 the runs diverge. That first divergence is the boundary you are looking for.
 
-I added a small code artifact for that style of test in
+The repo includes a small code artifact for that style of test in
 `experiments/llm-nondeterminism`. The Python script generates the boundary
 effect plots locally. The API collector records repeated completions as JSONL
-and prints a compact summary. If you run it at temperature zero and still see
-multiple unique outputs, that is evidence of serving-level variation. If you run
-it at higher temperature, you are mostly measuring intentional sampling.
+and prints a compact summary. If repeated temperature-zero runs still produce
+multiple unique outputs, that is evidence of serving-level variation. Higher
+temperature runs mostly measure intentional sampling.
 
 The experiment is deliberately modest. It cannot see the model's true latent
 space, and it cannot prove which GPU kernel caused a difference. What it can do
@@ -439,7 +439,7 @@ point.
 
 In agent systems, "skill" often means something more specific than a prompt
 snippet: a file, workflow, tool contract, or memory surface that the harness can
-load when the task calls for it. I unpack that system-level version in
+load when the task calls for it. That system-level version is covered in
 [Context Engineering for Agents](/blog/context-engineering-for-agents). Here,
 the important point is simpler: loaded context changes the state from which the
 model predicts.

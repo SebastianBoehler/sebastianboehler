@@ -67,6 +67,14 @@ const skills = {
   Blockchain: ["Solana", "Anchor", "Web3.js", "Ethereum"],
 } as const
 
+const publication = {
+  title: "QLoRA Fine-Tuning for Next User Turn Prediction and Multi-Step Dialogue Rollouts",
+  url: "https://doi.org/10.1109/ICETSIS68266.2026.11549360",
+  doi: "10.1109/ICETSIS68266.2026.11549360",
+  details:
+    "IEEE proceedings article, 2026 ASU International Conference in Emerging Technologies for Sustainability and Intelligent Systems (ICETSIS), Manama, Bahrain, pp. 1548-1555.",
+} as const
+
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
   month: "short",
   day: "numeric",
@@ -79,10 +87,15 @@ export function PublicationsSection() {
     <ProfileSection title="Research">
       <div className="border-l-2 border-gray-950 pl-5 dark:border-white">
         <p className="text-sm font-medium text-gray-950 dark:text-white">
-          QLoRA Fine-Tuning for Next User Turn Prediction and Multi-Step Dialogue Rollouts
+          <a href={publication.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
+            {publication.title}
+          </a>
         </p>
         <p className="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-400">
-          Conference presentation, IEEE ICETSIS 2026, Bahrain. Proceedings pending.
+          {publication.details} DOI:{" "}
+          <a href={publication.url} target="_blank" rel="noopener noreferrer" className="hover:text-gray-950 hover:underline dark:hover:text-white">
+            {publication.doi}
+          </a>
         </p>
       </div>
     </ProfileSection>

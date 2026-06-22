@@ -2,11 +2,11 @@
 
 Computer science graduate student at the University of Tübingen building research software, agent tooling, and infrastructure for AI-assisted engineering. Based in Germany. Shipping public work through [Sunderlabs](https://sunderlabs.com) and [sebastian-boehler.com](https://sebastian-boehler.com).
 
-Public GitHub snapshot as of Jun 13, 2026: 98 public repos, 29 followers, active on GitHub since Apr 19, 2017.
+Public GitHub snapshot as of Jun 22, 2026: 101 public repos, 30 followers, active on GitHub since Apr 19, 2017.
 
 ## Research
 
-- **QLoRA Fine-Tuning for Next User Turn Prediction and Multi-Step Dialogue Rollouts** - conference presentation, IEEE ICETSIS 2026, Bahrain. Proceedings pending.
+- **[QLoRA Fine-Tuning for Next User Turn Prediction and Multi-Step Dialogue Rollouts](https://doi.org/10.1109/ICETSIS68266.2026.11549360)** - IEEE proceedings article, 2026 ASU International Conference in Emerging Technologies for Sustainability and Intelligent Systems (ICETSIS), Manama, Bahrain, pp. 1548-1555. DOI: [10.1109/ICETSIS68266.2026.11549360](https://doi.org/10.1109/ICETSIS68266.2026.11549360).
 
 ## Current focus
 
@@ -16,7 +16,7 @@ Public GitHub snapshot as of Jun 13, 2026: 98 public repos, 29 followers, active
 
 ## Selected public work
 
-- **[polymarket-cpp-client](https://github.com/SebastianBoehler/polymarket-cpp-client)** (C++, updated Jun 6, 2026) - Lightweight C++ client for Polymarket APIs with REST and WebSocket support, designed for trading and market data access.
+- **[polymarket-cpp-client](https://github.com/SebastianBoehler/polymarket-cpp-client)** (C++, updated Jun 21, 2026) - Lightweight C++ client for Polymarket APIs with REST and WebSocket support, designed for trading and market data access.
 - **[orpheus-podcast](https://github.com/SebastianBoehler/orpheus-podcast)** (Python, updated May 21, 2026) - Framework for podcast creation with search grounded llms for script generation and open source tts libraries
 - **[solana-dapp-learning](https://github.com/SebastianBoehler/solana-dapp-learning)** (TypeScript, updated Apr 8, 2025) - Creating my first DAPP on solana with Next.JS
 - **[bybit_market_maker_cpp](https://github.com/SebastianBoehler/bybit_market_maker_cpp)** (C++, updated May 25, 2026) - C++ market-making example for Bybit linear perpetuals: laddered quotes with inventory skew, TP/optional SL, exposure guard, and fee/funding-aware PnL via private websockets.

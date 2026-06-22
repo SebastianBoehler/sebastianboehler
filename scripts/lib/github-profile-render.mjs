@@ -1,5 +1,12 @@
 import { CURRENT_FOCUS_ITEMS, DATE_FORMATTER, USERNAME } from "./github-profile-config.mjs"
 
+const PUBLICATION_TITLE =
+  "QLoRA Fine-Tuning for Next User Turn Prediction and Multi-Step Dialogue Rollouts"
+const PUBLICATION_DOI = "10.1109/ICETSIS68266.2026.11549360"
+const PUBLICATION_URL = `https://doi.org/${PUBLICATION_DOI}`
+const PUBLICATION_DETAILS =
+  "IEEE proceedings article, 2026 ASU International Conference in Emerging Technologies for Sustainability and Intelligent Systems (ICETSIS), Manama, Bahrain, pp. 1548-1555"
+
 export function renderContributionSvg(years, theme = "dark") {
   const descendingYears = [...years].sort((a, b) => b.year - a.year)
   const width = 760
@@ -84,7 +91,7 @@ Public GitHub snapshot as of ${generatedOn}: ${profile.public_repos} public repo
 
 ## Research
 
-- **QLoRA Fine-Tuning for Next User Turn Prediction and Multi-Step Dialogue Rollouts** - conference presentation, IEEE ICETSIS 2026, Bahrain. Proceedings pending.
+- **[${PUBLICATION_TITLE}](${PUBLICATION_URL})** - ${PUBLICATION_DETAILS}. DOI: [${PUBLICATION_DOI}](${PUBLICATION_URL}).
 
 ## Current focus
 

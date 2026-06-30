@@ -12,22 +12,22 @@
   <text x="56" y="78" fill="#57606a" font-size="12"><tspan x="56" dy="0">Monthly additions + deletions across 63 owned repositories, public and private. Current</tspan><tspan x="56" dy="16">month cards are month-to-date and compared against the same day range last year.</tspan></text>
   <rect x="56" y="108" width="174" height="104" fill="#ffffff" stroke="#d8dee4" />
   <text x="72" y="132" fill="#656d76" font-size="11" font-weight="600">June 2026 MTD</text>
-  <text x="72" y="166" fill="#1f2328" font-size="22" font-weight="700">100,431 LOC</text>
-  <text x="72" y="190" fill="#57606a" font-size="11">151 commits</text>
+  <text x="72" y="166" fill="#1f2328" font-size="22" font-weight="700">227,072 LOC</text>
+  <text x="72" y="190" fill="#57606a" font-size="11">328 commits</text>
   <rect x="244" y="108" width="174" height="104" fill="#ffffff" stroke="#d8dee4" />
   <text x="260" y="132" fill="#656d76" font-size="11" font-weight="600">June 2025 MTD</text>
-  <text x="260" y="166" fill="#1f2328" font-size="18" font-weight="700">1,031,280 LOC</text>
-  <text x="260" y="190" fill="#57606a" font-size="11">175 commits</text>
+  <text x="260" y="166" fill="#1f2328" font-size="18" font-weight="700">1,031,456 LOC</text>
+  <text x="260" y="190" fill="#57606a" font-size="11">177 commits</text>
   <rect x="432" y="108" width="174" height="104" fill="#ffffff" stroke="#d8dee4" />
   <text x="448" y="132" fill="#656d76" font-size="11" font-weight="600">Month YoY</text>
-  <text x="448" y="166" fill="#1f2328" font-size="24" font-weight="700">-90%</text>
-  <text x="448" y="190" fill="#57606a" font-size="11">665 LOC / commit</text>
+  <text x="448" y="166" fill="#1f2328" font-size="24" font-weight="700">-78%</text>
+  <text x="448" y="190" fill="#57606a" font-size="11">692 LOC / commit</text>
   <rect x="620" y="108" width="174" height="104" fill="#ffffff" stroke="#d8dee4" />
   <text x="636" y="132" fill="#656d76" font-size="11" font-weight="600">YTD YoY</text>
-  <text x="636" y="166" fill="#1f2328" font-size="24" font-weight="700">+109%</text>
-  <text x="636" y="190" fill="#57606a" font-size="9">4,826,169 vs 2,306,017 LOC</text>
+  <text x="636" y="166" fill="#1f2328" font-size="24" font-weight="700">+115%</text>
+  <text x="636" y="190" fill="#57606a" font-size="9">4,952,810 vs 2,306,193 LOC</text>
   <text x="56" y="248" fill="#656d76" font-size="11">Monthly changed LOC</text>
-  <text x="804" y="248" fill="#57606a" font-size="11" text-anchor="end">2,446 commits tracked through Jun 22, 2026</text>
+  <text x="804" y="248" fill="#57606a" font-size="11" text-anchor="end">2,623 commits tracked through Jun 24, 2026</text>
   <line x1="56" y1="462" x2="804" y2="462" stroke="#d8dee4" />
   <rect x="56" y="361" width="36" height="90" fill="#1f883d"><title>June 2025: 1,081,413 changed LOC, 235 commits</title></rect>
   <rect x="56" y="451" width="36" height="11" fill="#cf222e"><title>June 2025: 1,081,413 changed LOC, 235 commits</title></rect>
@@ -65,8 +65,8 @@
   <rect x="650" y="423" width="36" height="32" fill="#1f883d"><title>May 2026: 414,112 changed LOC, 476 commits</title></rect>
   <rect x="650" y="455" width="36" height="7" fill="#cf222e"><title>May 2026: 414,112 changed LOC, 476 commits</title></rect>
   <text x="668" y="486" fill="#656d76" font-size="10" text-anchor="middle">May 26</text>
-  <rect x="704" y="452" width="36" height="8" fill="#1f883d"><title>June 2026: 100,431 changed LOC, 151 commits</title></rect>
-  <rect x="704" y="460" width="36" height="2" fill="#cf222e"><title>June 2026: 100,431 changed LOC, 151 commits</title></rect>
+  <rect x="704" y="441" width="36" height="11" fill="#1f883d"><title>June 2026: 227,072 changed LOC, 328 commits</title></rect>
+  <rect x="704" y="452" width="36" height="10" fill="#cf222e"><title>June 2026: 227,072 changed LOC, 328 commits</title></rect>
   <text x="722" y="486" fill="#656d76" font-size="10" text-anchor="middle">Jun 26</text>
   <rect x="56" y="484" width="10" height="10" fill="#1f883d" />
   <text x="72" y="493" fill="#57606a" font-size="11">Additions</text>

@@ -10,12 +10,14 @@ if (!apiKey) {
 
 const model = args.model ?? "openai/gpt-4.1-mini"
 const prompt = args.prompt ?? "Explain latent space in one paragraph."
+const promptRepeat = readInteger(args["repeat-prompt"] ?? "1", "repeat-prompt")
+const requestPrompt = repeatPrompt(prompt, promptRepeat)
 const runs = readInteger(args.runs ?? "20", "runs")
 const temperature = readNumber(args.temperature ?? "0", "temperature")
 const topP = readNumber(args["top-p"] ?? "1", "top-p")
 const outDir = path.resolve(args.out ?? "experiments/llm-nondeterminism/runs")
 const stamp = new Date().toISOString().replace(/[:.]/g, "-")
-const baseName = `${stamp}-${model.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "")}`
+const baseName = `${stamp}-${model.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "")}-x${promptRepeat}`
 const jsonlPath = path.join(outDir, `${baseName}.jsonl`)
 const summaryPath = path.join(outDir, `${baseName}.summary.json`)
 
@@ -25,17 +27,18 @@ const completions = []
 
 for (let index = 0; index < runs; index += 1) {
   const startedAt = new Date().toISOString()
-  const completion = await complete({ model, prompt, temperature, topP })
-  const record = { index, startedAt, model, temperature, topP, prompt, completion }
+  const completion = await complete({ model, prompt: requestPrompt, temperature, topP })
+  const record = { index, startedAt, model, temperature, topP, prompt: requestPrompt, basePrompt: prompt, promptRepeat, completion }
   completions.push(completion)
   await fs.appendFile(jsonlPath, `${JSON.stringify(record)}\n`)
   console.log(`[${index + 1}/${runs}] ${completion.slice(0, 90).replace(/\s+/g, " ")}`)
 }
 
 const summary = summarize(completions)
-await fs.writeFile(summaryPath, `${JSON.stringify({ model, prompt, temperature, topP, runs, ...summary }, null, 2)}\n`)
+await fs.writeFile(summaryPath, `${JSON.stringify({ model, prompt: requestPrompt, basePrompt: prompt, promptRepeat, temperature, topP, runs, ...summary }, null, 2)}\n`)
 
 console.log("\nSummary")
+console.log(`prompt repeat: ${promptRepeat}`)
 console.log(`unique outputs: ${summary.uniqueOutputs}/${runs}`)
 console.log(`first divergence word: ${summary.firstDivergenceWord ?? "none"}`)
 console.log(`jsonl: ${jsonlPath}`)
@@ -108,6 +111,10 @@ function readArgs(values) {
   }
 
   return result
+}
+
+function repeatPrompt(prompt, count) {
+  return Array.from({ length: count }, () => prompt).join("\n\n")
 }
 
 function readInteger(value, label) {

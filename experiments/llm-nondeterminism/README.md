@@ -41,6 +41,59 @@ Results are written to `experiments/llm-nondeterminism/runs/`, which is ignored
 by git. The summary prints the unique-output count and the first word position
 where the observed runs diverge.
 
+## Prompt duplication
+
+Run the controlled duplication artifact when you want to reason about "sending
+the same prompt twice" as a latent-state intervention:
+
+```bash
+python3 experiments/llm-nondeterminism/prompt_duplication_effect.py
+```
+
+It writes `prompt-duplication-latent.png`, `prompt-duplication-latent.svg`,
+`metrics.csv`, and `summary.json` to
+`experiments/llm-nondeterminism/runs/prompt-duplication-effect/`.
+
+The toy model appends the same answer sentinel to each condition, then compares:
+
+- `single`: the prompt once
+- `duplicated`: the same prompt twice
+- `padding`: the prompt once plus same-length neutral padding
+
+The important distinction is that duplicated text is not a scalar multiplier on
+one prompt vector. The second copy has different positions, attends to earlier
+tokens, and changes the final readout state through the transformer's nonlinear
+layers. The same-length padding control separates semantic repetition from pure
+length and position effects; either can move the readout, but they are not the
+same intervention.
+
+For real model output, use the collector's `--repeat-prompt` flag and compare
+matched settings:
+
+```bash
+PROMPT="Explain latent space in one sentence without metaphors."
+
+OPENROUTER_API_KEY=... \
+node experiments/llm-nondeterminism/collect-runs.mjs \
+  --model openai/gpt-4.1-mini \
+  --prompt "$PROMPT" \
+  --repeat-prompt 1 \
+  --runs 8 \
+  --temperature 0
+
+OPENROUTER_API_KEY=... \
+node experiments/llm-nondeterminism/collect-runs.mjs \
+  --model openai/gpt-4.1-mini \
+  --prompt "$PROMPT" \
+  --repeat-prompt 2 \
+  --runs 8 \
+  --temperature 0
+```
+
+Keep model, provider, temperature, top-p, and prompt text fixed. Only change
+`--repeat-prompt`; otherwise the comparison mixes repetition with unrelated
+sources of variation.
+
 ## Read the result
 
 At `temperature 0`, multiple unique outputs suggest serving-level variation,

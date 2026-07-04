@@ -24,6 +24,8 @@ of that boosted-tree idea.
 So XGBoost is not a separate kind of intelligence. It is one strong point on a
 map.
 
+[[visual:model-selection-map]]
+
 ## Start with the prediction problem
 
 Before choosing an algorithm, name the task.

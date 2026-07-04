@@ -140,6 +140,8 @@ This is the strongest part of the paper. It moves the story from "these tasks
 activate overlapping units" to "these units are selectively important for
 behavior."
 
+[[visual:modularity-bridge]]
+
 ## Step 6: the controls make the result harder to dismiss
 
 There are several obvious objections.

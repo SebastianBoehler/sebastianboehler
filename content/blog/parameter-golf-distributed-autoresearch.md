@@ -48,6 +48,8 @@ look like a production pipeline:
 The public pull request becomes a research artifact. The leaderboard becomes a
 state machine.
 
+[[visual:autoresearch-loop]]
+
 ## The PR graph is the research commons
 
 In a normal private lab, failed experiments disappear into notebooks, Slack

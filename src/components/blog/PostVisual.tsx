@@ -7,6 +7,9 @@ import NondeterminismBoundaryVisual from "@/components/blog/NondeterminismBounda
 import LearningFeedbackVisual from "@/components/blog/LearningFeedbackVisual"
 import ContextEngineeringVisual from "@/components/blog/ContextEngineeringVisual"
 import NeuroInspiredVisual from "@/components/blog/NeuroInspiredVisual"
+import ModelSelectionMapVisual from "@/components/blog/ModelSelectionMapVisual"
+import AutoresearchLoopVisual from "@/components/blog/AutoresearchLoopVisual"
+import ModularityBridgeVisual from "@/components/blog/ModularityBridgeVisual"
 
 export default function PostVisual({ visual }: { visual?: string }) {
   if (visual === "latent-space") {
@@ -43,6 +46,18 @@ export default function PostVisual({ visual }: { visual?: string }) {
 
   if (visual === "neuro-inspired-learning") {
     return <NeuroInspiredVisual />
+  }
+
+  if (visual === "model-selection-map") {
+    return <ModelSelectionMapVisual />
+  }
+
+  if (visual === "autoresearch-loop") {
+    return <AutoresearchLoopVisual />
+  }
+
+  if (visual === "modularity-bridge") {
+    return <ModularityBridgeVisual />
   }
 
   return null

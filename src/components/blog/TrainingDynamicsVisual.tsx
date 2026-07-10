@@ -17,7 +17,7 @@ export default function TrainingDynamicsVisual() {
   const updateNoise = (value: string) => setNoise(Number(value))
 
   return (
-    <figure className="my-10 rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-950 sm:p-5">
+    <figure className="concept-lab">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div>
           <h2 className="text-lg font-semibold text-gray-950 dark:text-white">Training is drift plus shake</h2>
@@ -62,7 +62,7 @@ export default function TrainingDynamicsVisual() {
       </div>
 
       <div className="mt-6 grid gap-5 lg:grid-cols-[1.35fr_0.65fr]">
-        <div className="rounded-md border border-gray-200 bg-gray-50 p-3 dark:border-gray-800 dark:bg-gray-900">
+        <div className="lab-stage">
           {mode === "batch" ? <BatchView heat={heat} /> : null}
           {mode === "cloud" ? <CloudView heat={heat} /> : null}
           {mode === "rl" ? <RlView heat={heat} /> : null}
@@ -70,7 +70,7 @@ export default function TrainingDynamicsVisual() {
         <Explanation mode={mode} noise={noise} />
       </div>
 
-      <figcaption className="mt-4 border-t border-gray-200 pt-3 text-sm leading-6 text-gray-600 dark:border-gray-800 dark:text-gray-400">
+      <figcaption className="lab-caption text-sm leading-6 text-gray-600 dark:text-gray-400">
         Figure 2. A simplified training-dynamics view: gradients create drift, mini-batches create shake, and physical constraints can turn a huge action space into a smaller plausible one.
       </figcaption>
     </figure>

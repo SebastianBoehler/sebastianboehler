@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import VisualMetric from "@/components/blog/VisualMetric"
 
 type View = "brain" | "dense" | "moe"
 
@@ -33,12 +32,40 @@ const domains = [
   { label: "social", color: "#059669", x: 76, y: 55 },
 ] as const
 
+const evidence = {
+  brain: {
+    label: "What the comparison preserves",
+    items: [
+      "Specialization is functional: different tasks repeatedly recruit partly separate networks.",
+      "The systems still share information; modularity is not isolation.",
+      "The useful claim is a pressure against interference, not that a brain region equals an LLM unit.",
+    ],
+  },
+  dense: {
+    label: "What the paper actually measures",
+    items: [
+      "Tasks in the same domain shared 12.9% of their top-attributed units, compared with 3.0% across domains.",
+      "Ablating within-domain units reduced task performance by 25.9%, compared with 2.5% for cross-domain units.",
+      "Those are population-level patterns, not four neatly separated boxes inside a model.",
+    ],
+  },
+  moe: {
+    label: "What explicit routing does—and does not—show",
+    items: [
+      "A router can direct tokens to different experts, which makes specialization architectural.",
+      "An expert can still be reused across many skills and domains.",
+      "Routing alone does not establish a clean cognitive module; it only creates capacity for one.",
+    ],
+  },
+} as const
+
 export default function ModularityBridgeVisual() {
   const [view, setView] = useState<View>("dense")
   const active = views.find((item) => item.id === view) ?? views[0]
+  const activeEvidence = evidence[view]
 
   return (
-    <figure className="my-10 rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-950 sm:p-5">
+    <figure className="concept-lab">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div>
           <h2 className="text-lg font-semibold text-gray-950 dark:text-white">Three kinds of modularity</h2>
@@ -65,7 +92,7 @@ export default function ModularityBridgeVisual() {
       </div>
 
       <div className="mt-6 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
-        <div className="overflow-hidden rounded-md border border-gray-200 bg-gray-50 p-3 dark:border-gray-800 dark:bg-gray-900">
+        <div className="lab-stage">
           <svg viewBox="0 0 100 76" role="img" aria-label="Comparison of brain, dense LLM, and mixture of experts modularity" className="h-auto w-full">
             <rect width="100" height="76" className="fill-gray-50 dark:fill-gray-900" />
             {view === "brain" ? <BrainView /> : null}
@@ -74,20 +101,20 @@ export default function ModularityBridgeVisual() {
           </svg>
         </div>
 
-        <div className="rounded-md border border-gray-200 p-4 dark:border-gray-800">
+        <div className="lab-insight py-1">
           <h3 className="text-sm font-semibold text-gray-950 dark:text-white">{active.title}</h3>
           <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">{active.copy}</p>
-          <div className="mt-4 space-y-3">
-            <VisualMetric label="within-domain overlap" value={64.5} color="#2563eb" displayValue="12.9%" />
-            <VisualMetric label="cross-domain overlap" value={15} color="#94a3b8" displayValue="3.0%" />
-            <VisualMetric label="within-domain ablation" value={64.8} color="#dc2626" displayValue="25.9%" />
-            <VisualMetric label="cross-domain ablation" value={6.3} color="#94a3b8" displayValue="2.5%" />
+          <div className="mt-4 border-t border-gray-200 pt-3 dark:border-gray-800">
+            <h4 className="text-xs font-medium uppercase tracking-[0.12em] text-gray-500 dark:text-gray-400">{activeEvidence.label}</h4>
+            <ul className="mt-3 space-y-3 text-sm leading-6 text-gray-600 dark:text-gray-400">
+              {activeEvidence.items.map((item) => <li key={item}>{item}</li>)}
+            </ul>
           </div>
         </div>
       </div>
 
-      <figcaption className="mt-4 border-t border-gray-200 pt-3 text-sm leading-6 text-gray-600 dark:border-gray-800 dark:text-gray-400">
-        Figure 1. The bars preserve the paper ratios visually by scaling overlap against 20% and ablation against 40%.
+      <figcaption className="lab-caption text-sm leading-6 text-gray-600 dark:text-gray-400">
+        Figure 1. The dense-model view is grounded in the paper&apos;s attribution and ablation results. The brain and MoE views show the analogy boundaries, not equivalent measurements.
       </figcaption>
     </figure>
   )

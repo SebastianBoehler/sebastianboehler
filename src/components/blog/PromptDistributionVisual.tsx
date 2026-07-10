@@ -65,7 +65,7 @@ export default function PromptDistributionVisual() {
   const active = scenarios[index]
 
   return (
-    <figure className="my-10 rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-950 sm:p-5">
+    <figure className="concept-lab">
       <div>
         <h2 className="text-lg font-semibold text-gray-950 dark:text-white">Start point changes the distribution</h2>
         <p className="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-400">
@@ -127,7 +127,7 @@ export default function PromptDistributionVisual() {
         </div>
       </div>
 
-      <figcaption className="mt-4 border-t border-gray-200 pt-3 text-sm leading-6 text-gray-600 dark:border-gray-800 dark:text-gray-400">
+      <figcaption className="lab-caption text-sm leading-6 text-gray-600 dark:text-gray-400">
         Figure 3. Context does not add a magic answer. It changes the model state, which changes the probability distribution over likely next moves. The percentages are illustrative, not measured from a model.
       </figcaption>
     </figure>

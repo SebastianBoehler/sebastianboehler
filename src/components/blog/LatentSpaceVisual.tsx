@@ -16,7 +16,7 @@ export default function LatentSpaceVisual() {
   const updateTemperature = (value: string) => setTemperature(Number(value))
 
   return (
-    <figure className="my-10 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-800 dark:bg-gray-950 sm:p-5">
+    <figure className="concept-lab">
       <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
         <div>
           <h2 className="text-lg font-semibold text-gray-950 dark:text-white">{activeStep.title}</h2>
@@ -70,7 +70,7 @@ export default function LatentSpaceVisual() {
         </div>
       )}
 
-      <figcaption className="mt-4 border-t border-gray-200 pt-3 text-sm leading-6 text-gray-600 dark:border-gray-800 dark:text-gray-400">
+      <figcaption className="lab-caption text-sm leading-6 text-gray-600 dark:text-gray-400">
         Figure 1. Toy projections and an interactive 3D landscape. They explain the geometry of the idea; they are not measured embeddings from a specific model.
       </figcaption>
     </figure>

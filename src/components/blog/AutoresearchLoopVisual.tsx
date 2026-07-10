@@ -1,20 +1,18 @@
 "use client"
 
 import { useState } from "react"
-import VisualMetric from "@/components/blog/VisualMetric"
 
 type Stage = "search" | "gate" | "compound"
 
-const stages: { id: Stage; label: string; title: string; copy: string; metrics: [string, number, string][] }[] = [
+const stages: { id: Stage; label: string; title: string; copy: string; signals: [string, string][] }[] = [
   {
     id: "search",
     label: "search",
     title: "Private trial-and-error",
     copy: "Most experiments should stay local: generate hypotheses, patch code, run the benchmark, and keep only useful evidence.",
-    metrics: [
-      ["experiment throughput", 88, "#2563eb"],
-      ["public noise", 18, "#dc2626"],
-      ["local memory", 72, "#059669"],
+    signals: [
+      ["Work privately", "Most candidate changes should earn evidence before anyone else needs to review them."],
+      ["Keep the trace", "A benchmark result is useful only when its change and conditions can be inspected later."],
     ],
   },
   {
@@ -22,10 +20,9 @@ const stages: { id: Stage; label: string; title: string; copy: string; metrics: 
     label: "gate",
     title: "Review keeps the commons usable",
     copy: "A submission becomes useful only when the metric, artifact rules, attribution, and reproducibility story survive review.",
-    metrics: [
-      ["benchmark pressure", 94, "#f59e0b"],
-      ["review load", 66, "#dc2626"],
-      ["reproducibility", 78, "#059669"],
+    signals: [
+      ["Make the claim checkable", "Score, artifact rules, attribution, and reproduction need to survive outside the author's machine."],
+      ["Spend review carefully", "The gate prevents a fast search process from flooding the public record with weak signal."],
     ],
   },
   {
@@ -33,10 +30,9 @@ const stages: { id: Stage; label: string; title: string; copy: string; metrics: 
     label: "compound",
     title: "Public diffs compound",
     copy: "Accepted ideas become reusable research parts. The next searcher can inspect, copy, correct, and recombine them.",
-    metrics: [
-      ["reuse value", 92, "#059669"],
-      ["frontier movement", 84, "#7c3aed"],
-      ["attribution need", 76, "#f59e0b"],
+    signals: [
+      ["Publish reusable evidence", "An accepted diff becomes a building block, not merely a finished experiment."],
+      ["Preserve provenance", "Future work needs to know what it reused, what changed, and who supplied the idea."],
     ],
   },
 ]
@@ -60,7 +56,7 @@ export default function AutoresearchLoopVisual() {
   }[stage]
 
   return (
-    <figure className="my-10 rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-950 sm:p-5">
+    <figure className="concept-lab">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div>
           <h2 className="text-lg font-semibold text-gray-950 dark:text-white">The benchmark turns search into infrastructure</h2>
@@ -87,7 +83,7 @@ export default function AutoresearchLoopVisual() {
       </div>
 
       <div className="mt-6 grid gap-5 lg:grid-cols-[1.2fr_0.8fr]">
-        <div className="overflow-hidden rounded-md border border-gray-200 bg-gray-50 p-3 dark:border-gray-800 dark:bg-gray-900">
+        <div className="lab-stage">
           <svg viewBox="0 0 100 76" role="img" aria-label="Distributed autoresearch loop" className="h-auto w-full">
             <defs>
               <marker id="autoresearch-arrow" markerHeight="5" markerWidth="5" orient="auto" refX="4" refY="2.5">
@@ -105,18 +101,21 @@ export default function AutoresearchLoopVisual() {
           </svg>
         </div>
 
-        <div className="rounded-md border border-gray-200 p-4 dark:border-gray-800">
+        <div className="lab-insight py-1">
           <h3 className="text-sm font-semibold text-gray-950 dark:text-white">{active.title}</h3>
           <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">{active.copy}</p>
-          <div className="mt-4 space-y-3">
-            {active.metrics.map(([label, value, color]) => (
-              <VisualMetric key={label} label={label} value={value} color={color} />
+          <dl className="mt-4 divide-y divide-gray-200 border-y border-gray-200 dark:divide-gray-800 dark:border-gray-800">
+            {active.signals.map(([term, detail]) => (
+              <div key={term} className="py-3">
+                <dt className="text-sm font-medium text-gray-950 dark:text-white">{term}</dt>
+                <dd className="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-400">{detail}</dd>
+              </div>
             ))}
-          </div>
+          </dl>
         </div>
       </div>
 
-      <figcaption className="mt-4 border-t border-gray-200 pt-3 text-sm leading-6 text-gray-600 dark:border-gray-800 dark:text-gray-400">
+      <figcaption className="lab-caption text-sm leading-6 text-gray-600 dark:text-gray-400">
         Figure 1. The useful unit is the whole loop: benchmark, patch, score, review, public diff, and reuse.
       </figcaption>
     </figure>

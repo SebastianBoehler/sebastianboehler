@@ -16,7 +16,7 @@ export default function LearningFeedbackVisual() {
   const state = useMemo(() => modelLearning(retrieval, feedback, spacing), [retrieval, feedback, spacing])
 
   return (
-    <figure className="my-10 rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-950 sm:p-5">
+    <figure className="concept-lab">
       <div className="grid gap-5 lg:grid-cols-[1fr_0.85fr]">
         <div>
           <h2 className="text-lg font-semibold text-gray-950 dark:text-white">The learning loop</h2>
@@ -32,7 +32,7 @@ export default function LearningFeedbackVisual() {
       </div>
 
       <div className="mt-6 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
-        <div className="overflow-hidden rounded-md border border-gray-200 bg-gray-50 dark:border-gray-800 dark:bg-gray-900">
+        <div className="lab-stage p-0">
           <svg viewBox="0 0 100 76" role="img" aria-label="Feedback loop for learning and memory consolidation" className="h-auto w-full">
             <rect width="100" height="76" className="fill-gray-50 dark:fill-gray-900" />
             <path d="M 18 44 C 24 18, 55 9, 67 35 S 92 45, 82 58 S 38 72, 18 44" fill="none" strokeWidth={1.2 + state.loopStrength * 2.2} strokeLinecap="round" className="stroke-gray-950 dark:stroke-white" opacity="0.82" />
@@ -66,7 +66,7 @@ export default function LearningFeedbackVisual() {
         </div>
       </div>
 
-      <figcaption className="mt-4 border-t border-gray-200 pt-3 text-sm leading-6 text-gray-600 dark:border-gray-800 dark:text-gray-400">
+      <figcaption className="lab-caption text-sm leading-6 text-gray-600 dark:text-gray-400">
         Figure 1. A teaching model, not a biological measurement. It shows why a good study session should generate an answer, compare it, repair it, and return later.
       </figcaption>
     </figure>

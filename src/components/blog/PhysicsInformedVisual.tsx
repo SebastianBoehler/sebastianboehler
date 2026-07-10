@@ -33,7 +33,7 @@ export default function PhysicsInformedVisual() {
   const physicsOnly = useMemo(() => makeCurve(1), [])
 
   return (
-    <figure className="my-10 rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-950 sm:p-5">
+    <figure className="concept-lab">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div>
           <h2 className="text-lg font-semibold text-gray-950 dark:text-white">Physics changes the search space</h2>
@@ -78,7 +78,7 @@ export default function PhysicsInformedVisual() {
       </div>
 
       <div className="mt-6 grid gap-5 lg:grid-cols-[1.35fr_0.65fr]">
-        <div className="rounded-md border border-gray-200 bg-gray-50 p-3 dark:border-gray-800 dark:bg-gray-900">
+        <div className="lab-stage">
           {mode === "constraint" ? <ConstraintView curve={curve} dataOnly={dataOnly} physicsOnly={physicsOnly} /> : null}
           {mode === "energy" ? <EnergyView blend={blend} /> : null}
           {mode === "flow" ? <FlowView blend={blend} /> : null}
@@ -86,7 +86,7 @@ export default function PhysicsInformedVisual() {
         <Explanation mode={mode} physicsWeight={physicsWeight} />
       </div>
 
-      <figcaption className="mt-4 border-t border-gray-200 pt-3 text-sm leading-6 text-gray-600 dark:border-gray-800 dark:text-gray-400">
+      <figcaption className="lab-caption text-sm leading-6 text-gray-600 dark:text-gray-400">
         Figure 1. A toy model of physics-guided learning. Data still matters, but laws, symmetries, conservation rules, or simulators make some solutions easier to reach than others.
       </figcaption>
     </figure>
@@ -114,6 +114,14 @@ function ConstraintView({
       ))}
       <text x="10" y="12" className="fill-gray-500 text-[3px] dark:fill-gray-300">noisy observations</text>
       <text x="53" y="13" className="fill-gray-500 text-[3px] dark:fill-gray-300">law-shaped solution</text>
+      <g transform="translate(12 64)">
+        <path d="M 0 0 H 7" className="stroke-slate-400 dark:stroke-slate-500" strokeWidth="1.2" strokeDasharray="2 2" />
+        <text x="9" y="1.1" className="fill-gray-500 text-[2.6px] dark:fill-gray-300">data only</text>
+        <path d="M 32 0 H 39" stroke="#059669" strokeWidth="1.2" strokeDasharray="4 2" />
+        <text x="41" y="1.1" className="fill-gray-500 text-[2.6px] dark:fill-gray-300">physical prior</text>
+        <path d="M 69 0 H 76" className="stroke-gray-950 dark:stroke-white" strokeWidth="1.7" />
+        <text x="78" y="1.1" className="fill-gray-500 text-[2.6px] dark:fill-gray-300">blend</text>
+      </g>
     </svg>
   )
 }

@@ -16,7 +16,7 @@ export default function NeuroInspiredVisual() {
   const strength = practice / 100
 
   return (
-    <figure className="my-10 rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-950 sm:p-5">
+    <figure className="concept-lab">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div>
           <h2 className="text-lg font-semibold text-gray-950 dark:text-white">Learning changes useful pathways</h2>
@@ -61,13 +61,13 @@ export default function NeuroInspiredVisual() {
       </div>
 
       <div className="mt-6 grid gap-5 lg:grid-cols-[1.25fr_0.75fr]">
-        <div className="rounded-md border border-gray-200 bg-gray-50 p-3 dark:border-gray-800 dark:bg-gray-900">
+        <div className="lab-stage">
           <Pathway view={view} strength={strength} />
         </div>
         <Panel view={view} practice={practice} />
       </div>
 
-      <figcaption className="mt-4 border-t border-gray-200 pt-3 text-sm leading-6 text-gray-600 dark:border-gray-800 dark:text-gray-400">
+      <figcaption className="lab-caption text-sm leading-6 text-gray-600 dark:text-gray-400">
         Figure 1. A toy pathway, not a biological diagram. Synaptic strength is closest to an ML weight analogy; myelin is closer to timing, reliability, and efficiency.
       </figcaption>
     </figure>

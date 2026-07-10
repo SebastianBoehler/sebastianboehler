@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useState } from "react"
 
 const tasks = [
   {
@@ -44,10 +44,9 @@ const tasks = [
 export default function ContextEngineeringVisual() {
   const [index, setIndex] = useState(0)
   const active = tasks[index]
-  const total = useMemo(() => Math.round(active.loads.reduce((sum, [, value]) => sum + value, 0) / active.loads.length), [active])
 
   return (
-    <figure className="my-10 rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-950 sm:p-5">
+    <figure className="concept-lab">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div>
           <h2 className="text-lg font-semibold text-gray-950 dark:text-white">Context is routed in layers</h2>
@@ -74,7 +73,7 @@ export default function ContextEngineeringVisual() {
       </div>
 
       <div className="mt-6 grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
-        <div className="overflow-hidden rounded-md border border-gray-200 bg-gray-50 p-4 dark:border-gray-800 dark:bg-gray-900">
+        <div className="lab-stage">
           <svg viewBox="0 0 100 76" role="img" aria-label="Agent context routing diagram" className="h-auto w-full">
             <defs>
               <marker id="context-arrow" markerHeight="5" markerWidth="5" orient="auto" refX="4" refY="2.5">
@@ -100,33 +99,34 @@ export default function ContextEngineeringVisual() {
           </svg>
         </div>
 
-        <div className="rounded-md border border-gray-200 p-4 dark:border-gray-800">
+        <div className="lab-insight py-1">
           <h3 className="text-sm font-semibold text-gray-950 dark:text-white">{active.prompt}</h3>
           <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">{active.note}</p>
-          <div className="mt-4 space-y-3">
+          <div className="mt-4 divide-y divide-gray-200 border-y border-gray-200 dark:divide-gray-800 dark:border-gray-800">
             {active.loads.map(([label, value, color]) => (
-              <div key={label}>
-                <div className="flex justify-between text-xs font-medium text-gray-600 dark:text-gray-400">
-                  <span>{label}</span>
-                  <span>{value}%</span>
-                </div>
-                <div className="mt-1 h-2 rounded-full bg-gray-100 dark:bg-gray-800">
-                  <div className="h-2 rounded-full" style={{ width: `${value}%`, backgroundColor: color }} />
-                </div>
+              <div key={label} className="flex items-center justify-between gap-4 py-3 text-sm">
+                <span className="flex items-center gap-2 text-gray-950 dark:text-white">
+                  <span className="h-2 w-2 rounded-full" style={{ backgroundColor: color }} />
+                  {label}
+                </span>
+                <span className="text-xs font-medium uppercase tracking-[0.1em] text-gray-500 dark:text-gray-400">{contextAction(value)}</span>
               </div>
             ))}
           </div>
-          <p className="mt-4 text-sm leading-6 text-gray-600 dark:text-gray-400">
-            Average context relevance: <span className="font-semibold text-gray-950 dark:text-white">{total}%</span>
-          </p>
         </div>
       </div>
 
-      <figcaption className="mt-4 border-t border-gray-200 pt-3 text-sm leading-6 text-gray-600 dark:border-gray-800 dark:text-gray-400">
-        Figure 1. A toy routing view. The percentages are illustrative: they show which context surfaces should become active for each task type.
+      <figcaption className="lab-caption text-sm leading-6 text-gray-600 dark:text-gray-400">
+        Figure 1. A toy routing view. Select a task to see the decision: keep only the bootstrap always on, load useful context now, and hold unrelated material back.
       </figcaption>
     </figure>
   )
+}
+
+function contextAction(value: number) {
+  if (value >= 95) return "always on"
+  if (value >= 60) return "load now"
+  return "hold back"
 }
 
 function Node({ x, y, label, active = false }: { x: number; y: number; label: string; active?: boolean }) {

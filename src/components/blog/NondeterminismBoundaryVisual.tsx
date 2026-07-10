@@ -15,10 +15,11 @@ export default function NondeterminismBoundaryVisual() {
   const points = useMemo(() => makeRuns(noise, margin), [noise, margin])
   const branched = points.filter((point) => point.branch).length
   const stable = points.length - branched
+  const branchRate = Math.round((branched / runCount) * 100)
   const boundary = boundaryFor(margin)
 
   return (
-    <figure className="my-10 rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-950 sm:p-5">
+    <figure className="concept-lab">
       <div className="grid gap-5 lg:grid-cols-[1fr_0.8fr]">
         <div>
           <h2 className="text-lg font-semibold text-gray-950 dark:text-white">Nondeterminism is a boundary effect</h2>
@@ -29,13 +30,13 @@ export default function NondeterminismBoundaryVisual() {
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
           <Control
             id="nondeterminism-noise"
-            label="serving perturbation"
+            label="implementation-level noise"
             value={noise}
             onChange={setNoise}
           />
           <Control
             id="nondeterminism-margin"
-            label="top-2 logit margin"
+            label="separation between top choices"
             value={margin}
             onChange={setMargin}
           />
@@ -43,7 +44,7 @@ export default function NondeterminismBoundaryVisual() {
       </div>
 
       <div className="mt-6 grid gap-5 lg:grid-cols-[1.35fr_0.65fr]">
-        <div className="overflow-hidden rounded-md border border-gray-200 bg-gray-50 dark:border-gray-800 dark:bg-gray-900">
+        <div className="lab-stage p-0">
           <svg viewBox="0 0 100 72" role="img" aria-label="Repeated runs near a decision boundary" className="h-auto w-full">
             <rect width="100" height="72" className="fill-gray-50 dark:fill-gray-900" />
             <ellipse cx={basins.stable.x} cy={basins.stable.y} rx="20" ry="12" fill={basins.stable.color} opacity="0.12" />
@@ -74,7 +75,7 @@ export default function NondeterminismBoundaryVisual() {
           </svg>
         </div>
 
-        <div className="rounded-md border border-gray-200 p-4 dark:border-gray-800">
+        <div className="lab-insight py-1">
           <h3 className="text-sm font-semibold text-gray-950 dark:text-white">What to notice</h3>
           <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">
             The prompt does not jump anywhere arbitrary. The cloud is small. But if the cloud crosses the dashed boundary, a few runs pick the alternate continuation and then autoregression amplifies the branch.
@@ -83,10 +84,13 @@ export default function NondeterminismBoundaryVisual() {
             <Readout label="stable runs" value={stable} color={basins.stable.color} />
             <Readout label="branched runs" value={branched} color={basins.branch.color} />
           </div>
+          <p className="mt-4 text-sm font-medium text-gray-950 dark:text-white" aria-live="polite">
+            In this toy run, {branchRate}% of samples cross the boundary.
+          </p>
         </div>
       </div>
 
-      <figcaption className="mt-4 border-t border-gray-200 pt-3 text-sm leading-6 text-gray-600 dark:border-gray-800 dark:text-gray-400">
+      <figcaption className="lab-caption text-sm leading-6 text-gray-600 dark:text-gray-400">
         Figure 4. A toy sketch of inference nondeterminism. The cloud represents tiny implementation-level perturbations; the dashed line represents a near-tie between plausible next tokens.
       </figcaption>
     </figure>

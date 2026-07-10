@@ -10,12 +10,12 @@ const turns = [
 ]
 
 export default function ConversationDriftVisual() {
-  const [turn, setTurn] = useState(1)
-  const visibleTurns = turns.slice(0, turn)
+  const [turn, setTurn] = useState(0)
+  const visibleTurns = turns.slice(0, turn + 1)
   const activeTurn = visibleTurns[visibleTurns.length - 1]
 
   return (
-    <figure className="my-10 rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-950 sm:p-5">
+    <figure className="concept-lab">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h2 className="text-lg font-semibold text-gray-950 dark:text-white">Conversation drift</h2>
@@ -23,25 +23,28 @@ export default function ConversationDriftVisual() {
             Move through the turns to see how accumulated context keeps shifting likely continuations.
           </p>
         </div>
-        <label htmlFor="conversation-turn" className="w-full text-sm text-gray-600 dark:text-gray-400 sm:w-56">
-          <span className="flex justify-between">
-            <span>visible turns</span>
-            <span>{turn}</span>
-          </span>
-          <input
-            id="conversation-turn"
-            className="mt-2 w-full accent-gray-950 dark:accent-white"
-            type="range"
-            min="1"
-            max={turns.length}
-            value={turn}
-            onChange={(event) => setTurn(Number(event.target.value))}
-          />
-        </label>
+        <div className="grid w-full grid-cols-2 gap-1 sm:w-72" role="tablist" aria-label="Choose the latest instruction">
+          {turns.map((item, index) => (
+            <button
+              key={item.label}
+              type="button"
+              role="tab"
+              aria-selected={turn === index}
+              className={`rounded border px-2 py-1.5 text-left text-xs font-medium transition-colors ${
+                turn === index
+                  ? "border-gray-950 bg-gray-950 text-white dark:border-white dark:bg-white dark:text-gray-950"
+                  : "border-gray-200 text-gray-600 hover:border-gray-400 dark:border-gray-800 dark:text-gray-400"
+              }`}
+              onClick={() => setTurn(index)}
+            >
+              {item.label.replace(/^\d+\. /, "")}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="mt-5 grid gap-5 lg:grid-cols-[1.2fr_0.8fr]">
-        <div className="overflow-hidden rounded-md border border-gray-200 bg-gray-50 dark:border-gray-800 dark:bg-gray-900">
+        <div className="lab-stage p-0">
           <svg viewBox="0 0 100 72" role="img" aria-label="Conversation path through latent space" className="h-auto w-full">
             <rect width="100" height="72" className="fill-gray-50 dark:fill-gray-900" />
             <ellipse cx="23" cy="56" rx="17" ry="10" fill="#2563eb" opacity="0.12" />
@@ -75,8 +78,9 @@ export default function ConversationDriftVisual() {
           </svg>
         </div>
 
-        <div className="rounded-md border border-gray-200 p-4 dark:border-gray-800">
-          <h3 className="text-sm font-semibold text-gray-950 dark:text-white">{activeTurn.label}</h3>
+        <div className="lab-insight py-1">
+          <p className="text-xs font-medium uppercase tracking-[0.12em] text-gray-500 dark:text-gray-400">Latest instruction</p>
+          <h3 className="mt-2 text-sm font-semibold text-gray-950 dark:text-white">{activeTurn.label}</h3>
           <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">{activeTurn.note}</p>
           <p className="mt-3 text-sm leading-6 text-gray-600 dark:text-gray-400">
             The path can cross regions. The transcript anchors the next turn, but a strong new instruction can still steer the conversation elsewhere.
@@ -89,7 +93,7 @@ export default function ConversationDriftVisual() {
         </div>
       </div>
 
-      <figcaption className="mt-4 border-t border-gray-200 pt-3 text-sm leading-6 text-gray-600 dark:border-gray-800 dark:text-gray-400">
+      <figcaption className="lab-caption text-sm leading-6 text-gray-600 dark:text-gray-400">
         Figure 2. A conversation is not a reset after every message. Each turn changes the conditioning context for the next prediction.
       </figcaption>
     </figure>

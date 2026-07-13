@@ -1,86 +1,78 @@
-export type PromptPoint = {
-  label: string
-  color: string
-  center: [number, number]
-  drift: [number, number]
-}
+export type PromptFrameId = "beginner" | "formal" | "metaphor"
 
-export type WordPoint = {
+export type Fit = "strong" | "plausible" | "weak"
+
+export interface PromptFrame {
+  id: PromptFrameId
   label: string
-  x: number
-  y: number
-  color: string
+  modifier: string
+  tokens: readonly string[]
+  regions: readonly { label: string; fit: Fit; note: string }[]
+  continuations: readonly { label: string; fit: Fit; note: string }[]
+  runFamily: readonly string[]
+  endpoint: string
 }
 
 export const latentSteps = [
-  {
-    label: "Word clusters",
-    title: "1. Similar words cluster",
-    description: "Words used in similar contexts land near each other: pets, code, and finance form rough neighborhoods.",
-  },
-  {
-    label: "Path",
-    title: "2. Context draws a path",
-    description: "A prompt or conversation updates the contextual state step by step; it can cross neighborhoods when the context changes enough.",
-  },
-  {
-    label: "Run clouds",
-    title: "3. Repeated generations form clouds",
-    description: "Sampling from the next-token distribution creates nearby but not identical outputs around the conditioned region.",
-  },
-  {
-    label: "Landscape",
-    title: "4. Starting points shape lineages",
-    description: "Different initial contexts begin in different regions, then each answer token changes the next state and traces a lineage across the landscape.",
-  },
+  { label: "Learned map", shortLabel: "Map" },
+  { label: "Contextual state", shortLabel: "State" },
+  { label: "Likely continuations", shortLabel: "Options" },
+  { label: "Repeated runs", shortLabel: "Runs" },
 ] as const
 
-export const wordPoints: WordPoint[] = [
-  { label: "cat", x: 18, y: 24, color: "#2563eb" },
-  { label: "kitten", x: 24, y: 29, color: "#2563eb" },
-  { label: "pet", x: 16, y: 34, color: "#2563eb" },
-  { label: "compiler", x: 54, y: 18, color: "#059669" },
-  { label: "runtime", x: 63, y: 24, color: "#059669" },
-  { label: "function", x: 58, y: 33, color: "#059669" },
-  { label: "bond", x: 75, y: 52, color: "#dc2626" },
-  { label: "market", x: 83, y: 58, color: "#dc2626" },
-  { label: "rate", x: 72, y: 63, color: "#dc2626" },
-]
-
-export const prompts: PromptPoint[] = [
-  { label: "beginner explainer", color: "#2563eb", center: [34, 45], drift: [-18, 9] },
-  { label: "geometric derivation", color: "#059669", center: [58, 27], drift: [-20, 4] },
-  { label: "poetic metaphor", color: "#dc2626", center: [72, 56], drift: [-18, -5] },
-]
-
-export const conversationPath = [
-  { label: "ask intuition", x: 24, y: 43 },
-  { label: "add equations", x: 42, y: 33 },
-  { label: "request code", x: 58, y: 25 },
-  { label: "ask caveats", x: 72, y: 43 },
-]
-
-export function makeSamples(spread: number) {
-  return prompts.flatMap((prompt, promptIndex) =>
-    Array.from({ length: 38 }).map((_, index) => {
-      const angle = seeded(promptIndex * 100 + index) * Math.PI * 2
-      const radius = Math.sqrt(seeded(promptIndex * 180 + index * 7)) * spread
-
-      return {
-        id: `${prompt.label}-${index}`,
-        color: prompt.color,
-        x: clamp(prompt.center[0] + Math.cos(angle) * radius, 4, 96),
-        y: clamp(prompt.center[1] + Math.sin(angle) * radius, 4, 74),
-      }
-    }),
-  )
-}
-
-function seeded(seed: number) {
-  const value = Math.sin(seed * 12.9898) * 43758.5453
-  return value - Math.floor(value)
-}
-
-function clamp(value: number, min: number, max: number) {
-  return Math.min(max, Math.max(min, value))
-}
+export const promptFrames: readonly PromptFrame[] = [
+  {
+    id: "beginner",
+    label: "Beginner",
+    modifier: "to a beginner",
+    tokens: ["Explain", "latent", "space", "to", "a", "beginner"],
+    endpoint: "plain-language explanation",
+    regions: [
+      { label: "examples", fit: "strong", note: "Concrete comparisons fit the audience cue." },
+      { label: "definitions", fit: "plausible", note: "Technical terms still need a short definition." },
+      { label: "derivations", fit: "weak", note: "Formal detail is not the requested starting point." },
+    ],
+    continuations: [
+      { label: "Imagine a map…", fit: "strong", note: "Begins with an accessible analogy." },
+      { label: "A latent space is…", fit: "plausible", note: "A concise definition also fits." },
+      { label: "Let z be…", fit: "weak", note: "An equation-first answer conflicts with the cue." },
+    ],
+    runFamily: ["map analogy", "room analogy", "neighborhood example"],
+  },
+  {
+    id: "formal",
+    label: "Formal",
+    modifier: "geometrically",
+    tokens: ["Explain", "latent", "space", "geometrically"],
+    endpoint: "mathematical explanation",
+    regions: [
+      { label: "derivations", fit: "strong", note: "The framing requests structure and notation." },
+      { label: "definitions", fit: "plausible", note: "Terms still need to be established first." },
+      { label: "examples", fit: "plausible", note: "Examples can support, but no longer lead." },
+    ],
+    continuations: [
+      { label: "Let z be…", fit: "strong", note: "A coordinate-based opening fits the instruction." },
+      { label: "A latent space is…", fit: "plausible", note: "A definition can introduce the notation." },
+      { label: "Imagine a map…", fit: "weak", note: "A loose analogy underserves the requested rigor." },
+    ],
+    runFamily: ["vector derivation", "distance argument", "projection example"],
+  },
+  {
+    id: "metaphor",
+    label: "Metaphor",
+    modifier: "as a metaphor",
+    tokens: ["Explain", "latent", "space", "as", "a", "metaphor"],
+    endpoint: "image-led explanation",
+    regions: [
+      { label: "imagery", fit: "strong", note: "The instruction privileges a memorable picture." },
+      { label: "examples", fit: "plausible", note: "Concrete scenes can extend the metaphor." },
+      { label: "derivations", fit: "weak", note: "Notation would interrupt the requested mode." },
+    ],
+    continuations: [
+      { label: "Picture a landscape…", fit: "strong", note: "Starts inside the requested image." },
+      { label: "Imagine a library…", fit: "plausible", note: "A second metaphor is also compatible." },
+      { label: "Let z be…", fit: "weak", note: "Formal notation pulls away from the framing." },
+    ],
+    runFamily: ["landscape metaphor", "library metaphor", "constellation metaphor"],
+  },
+] as const

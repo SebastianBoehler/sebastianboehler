@@ -1,135 +1,193 @@
 "use client"
 
-import Image from "next/image"
 import { useState } from "react"
+import { ConceptLab } from "@/components/blog/visuals/ConceptLab"
+import {
+  Annotation,
+  ComparisonRows,
+  QualitativeRows,
+  SegmentedChoice,
+  TokenStrip,
+} from "@/components/blog/visuals/VisualPrimitives"
 
-const scenarios = [
-  {
-    label: "bare prompt",
-    x: 45,
-    y: 45,
-    note: "The model knows the topic, but the answer style is still broad and can still move toward several regions.",
-    bars: [
-      ["analogy", 32, "#2563eb"],
-      ["definition", 25, "#7c3aed"],
-      ["math", 18, "#059669"],
-      ["code", 14, "#0891b2"],
-      ["caveat", 11, "#dc2626"],
-    ],
-  },
-  {
-    label: "beginner context",
-    x: 23,
-    y: 35,
-    note: "Context pulls probability toward examples and plain language.",
-    bars: [
-      ["analogy", 48, "#2563eb"],
-      ["definition", 27, "#7c3aed"],
-      ["math", 8, "#059669"],
-      ["code", 7, "#0891b2"],
-      ["caveat", 10, "#dc2626"],
-    ],
-  },
-  {
-    label: "skill context",
-    x: 64,
-    y: 27,
-    note: "A skill narrows the region by adding task rules and local vocabulary.",
-    bars: [
-      ["procedure", 41, "#059669"],
-      ["checklist", 24, "#0891b2"],
-      ["code", 18, "#2563eb"],
-      ["analogy", 6, "#7c3aed"],
-      ["caveat", 11, "#dc2626"],
-    ],
-  },
-  {
-    label: "poetic context",
-    x: 77,
-    y: 57,
-    note: "A different start point puts likely completions in another cluster.",
-    bars: [
-      ["metaphor", 45, "#dc2626"],
-      ["analogy", 23, "#7c3aed"],
-      ["definition", 14, "#2563eb"],
-      ["math", 7, "#059669"],
-      ["code", 11, "#0891b2"],
-    ],
-  },
+type Wording = "drive" | "ride"
+type Fit = "strong" | "plausible" | "weak"
+
+interface PromptScenario {
+  id: Wording
+  label: string
+  tokens: readonly string[]
+  changedTokens: readonly string[]
+  cues: readonly { label: string; fit: Fit; note: string }[]
+  candidates: readonly { label: string; fit: Fit; note: string }[]
+  selected: string
+  branch: readonly string[]
+  lineage: string
+}
+
+const steps = [
+  { label: "Prompt", shortLabel: "Prompt" },
+  { label: "Context cues", shortLabel: "Cues" },
+  { label: "Candidate fit", shortLabel: "Fit" },
+  { label: "First token", shortLabel: "Token" },
+  { label: "Branch", shortLabel: "Branch" },
 ] as const
 
-const start = { x: 34, y: 48 }
+const scenarios: readonly PromptScenario[] = [
+  {
+    id: "drive",
+    label: "drove … in",
+    tokens: ["I", "drove", "to", "work", "in", "my"],
+    changedTokens: ["drove", "in"],
+    cues: [
+      { label: "drove", fit: "strong", note: "Activates a motor-vehicle reading." },
+      { label: "in my", fit: "strong", note: "Favors something a person sits inside." },
+      { label: "to work", fit: "plausible", note: "Supports an ordinary commute." },
+    ],
+    candidates: [
+      { label: "car", fit: "strong", note: "Fits meaning, syntax, and the preposition." },
+      { label: "vehicle", fit: "plausible", note: "Semantically compatible, but less idiomatic here." },
+      { label: "bicycle", fit: "weak", note: "Related to commuting, but conflicts with “in my.”" },
+    ],
+    selected: "car",
+    branch: ["I", "drove", "to", "work", "in", "my", "car"],
+    lineage: "The next state now includes “car,” making vehicle-specific details easier to continue.",
+  },
+  {
+    id: "ride",
+    label: "rode … on",
+    tokens: ["I", "rode", "to", "work", "on", "my"],
+    changedTokens: ["rode", "on"],
+    cues: [
+      { label: "rode", fit: "strong", note: "Activates a rideable-transport reading." },
+      { label: "on my", fit: "strong", note: "Favors something a person sits on." },
+      { label: "to work", fit: "plausible", note: "Keeps the commute setting constant." },
+    ],
+    candidates: [
+      { label: "bicycle", fit: "strong", note: "Fits meaning, syntax, and the preposition." },
+      { label: "motorbike", fit: "plausible", note: "Another compatible rideable vehicle." },
+      { label: "car", fit: "weak", note: "Semantically nearby, but conflicts with “on my.”" },
+    ],
+    selected: "bicycle",
+    branch: ["I", "rode", "to", "work", "on", "my", "bicycle"],
+    lineage: "The next state now includes “bicycle,” making cycling-specific details easier to continue.",
+  },
+]
+
+const stepNotes = [
+  "Start with the exact sequence the model receives.",
+  "Attention and learned transformations make some words more useful for this prediction than others.",
+  "The contextual state scores every possible next token; semantic proximity alone does not decide the winner.",
+  "One compatible token is selected in this teaching trace and appended to the context.",
+  "That first difference becomes input to the next prediction, so later text can diverge further.",
+] as const
 
 export default function PromptDistributionVisual() {
-  const [index, setIndex] = useState(0)
-  const active = scenarios[index]
+  const [step, setStep] = useState(0)
+  const [wording, setWording] = useState<Wording>("drive")
+  const scenario = scenarios.find((item) => item.id === wording) ?? scenarios[0]
 
   return (
-    <figure className="concept-lab">
-      <div>
-        <h2 className="text-lg font-semibold text-gray-950 dark:text-white">Start point changes the distribution</h2>
-        <p className="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-400">
-          The same broad topic can lead to different likely next moves once the prompt adds audience, task, or skill context. The state can shift regions; it is not locked to the first cluster forever.
-        </p>
+    <ConceptLab
+      title="From prompt to branch"
+      description="Change only the verb and preposition, then scrub through the causal chain from text to a different continuation."
+      methodology="Five-step causal trace · qualitative"
+      steps={steps}
+      activeStep={step}
+      onStepChange={setStep}
+      headerActions={
+        <SegmentedChoice
+          label="Prompt wording"
+          choices={scenarios}
+          value={wording}
+          onChange={setWording}
+        />
+      }
+      insights={[
+        {
+          label: "Causal variable",
+          body: <>Swap “drove … in” for “rode … on.” The commute and sentence structure stay fixed.</>,
+          tone: "intervention",
+        },
+        { label: "At this step", body: stepNotes[step], tone: "accent" },
+      ]}
+      caption="A qualitative next-token trace, not output captured from a specific model. It separates semantic neighborhood, contextual fit, token selection, and autoregressive branching."
+    >
+      <div aria-live="polite">
+        <Stage step={step} scenario={scenario} />
       </div>
+    </ConceptLab>
+  )
+}
 
-      <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-4" role="tablist" aria-label="Prompt context scenarios">
-        {scenarios.map((scenario, scenarioIndex) => (
-          <button
-            key={scenario.label}
-            type="button"
-            role="tab"
-            aria-selected={index === scenarioIndex}
-            className={`rounded-md border px-3 py-2 text-sm font-medium ${
-              index === scenarioIndex
-                ? "border-gray-950 bg-gray-950 text-white dark:border-white dark:bg-white dark:text-gray-950"
-                : "border-gray-200 bg-white text-gray-700 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
-            }`}
-            onClick={() => setIndex(scenarioIndex)}
-          >
-            {scenario.label}
-          </button>
-        ))}
+function Stage({ step, scenario }: { step: number; scenario: PromptScenario }) {
+  const promptTokens = scenario.tokens.map((text) => ({
+    text,
+    tone: scenario.changedTokens.includes(text) ? "intervention" as const : "default" as const,
+  }))
+
+  if (step === 0) {
+    return <TokenStrip label="Exact prompt prefix" tokens={promptTokens} />
+  }
+
+  if (step === 1) {
+    return (
+      <div className="space-y-6">
+        <TokenStrip label="Exact prompt prefix" tokens={promptTokens} />
+        <QualitativeRows label="Context cues for the blank" rows={scenario.cues} />
       </div>
+    )
+  }
 
-      <div className="mt-6 grid gap-5 lg:grid-cols-[1fr_0.9fr]">
-        <div className="relative aspect-[100/78] overflow-hidden rounded-md border border-gray-200 dark:border-gray-800">
-          <Image src="/blog/latent-space-projection-clean.png" alt="Axis-free toy latent-space contour plot used to show prompt start points" fill sizes="(min-width: 1024px) 323px, 100vw" className="object-cover" />
-          <svg viewBox="0 0 100 78" className="absolute inset-0 h-full w-full" role="img" aria-label="Prompt start point moving through latent space">
-            <path d={`M ${start.x} ${start.y} Q ${(start.x + active.x) / 2} ${Math.min(start.y, active.y) - 6}, ${active.x} ${active.y}`} fill="none" strokeWidth="1.2" strokeLinecap="round" className="stroke-gray-950 dark:stroke-white" />
-            <circle cx={start.x} cy={start.y} r="2.4" fill="none" strokeWidth="0.9" className="stroke-gray-950 dark:stroke-white" />
-            <circle cx={active.x} cy={active.y} r="3.2" fill="#f59e0b" strokeWidth="0.7" className="stroke-gray-950 dark:stroke-white" />
-            <text x={start.x - 14} y={start.y - 4} className="fill-gray-950 stroke-white text-[3px] dark:fill-white dark:stroke-gray-950" paintOrder="stroke" strokeWidth="0.55">
-              initial topic
-            </text>
-            <text x={active.x + 3.5} y={active.y - 2.5} className="fill-gray-950 stroke-white text-[3px] dark:fill-white dark:stroke-gray-950" paintOrder="stroke" strokeWidth="0.55">
-              {active.label}
-            </text>
-          </svg>
-        </div>
-
-        <div className="rounded-md border border-gray-200 p-4 dark:border-gray-800">
-          <h3 className="text-sm font-semibold text-gray-950 dark:text-white">Likely next directions</h3>
-          <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">{active.note}</p>
-          <div className="mt-4 space-y-3">
-            {active.bars.map(([label, value, color]) => (
-              <div key={label}>
-                <div className="flex justify-between text-xs font-medium text-gray-600 dark:text-gray-400">
-                  <span>{label}</span>
-                  <span>{value}%</span>
-                </div>
-                <div className="mt-1 h-2 rounded-full bg-gray-100 dark:bg-gray-800">
-                  <div className="h-2 rounded-full" style={{ width: `${value}%`, backgroundColor: color }} />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+  if (step === 2) {
+    return (
+      <div className="space-y-6">
+        <TokenStrip label="Prompt context held constant" tokens={promptTokens} />
+        <QualitativeRows label="Candidate next-token compatibility" rows={scenario.candidates} />
+        <Annotation label="What changed" tone="intervention">
+          The highlighted wording changes which candidate best satisfies the sentence, even though the commute setting stays the same.
+        </Annotation>
       </div>
+    )
+  }
 
-      <figcaption className="lab-caption text-sm leading-6 text-gray-600 dark:text-gray-400">
-        Figure 3. Context does not add a magic answer. It changes the model state, which changes the probability distribution over likely next moves. The percentages are illustrative, not measured from a model.
-      </figcaption>
-    </figure>
+  if (step === 3) {
+    return (
+      <div className="space-y-6">
+        <TokenStrip label="Prompt context held constant" tokens={promptTokens} />
+        <QualitativeRows
+          label="Candidate next-token compatibility"
+          rows={scenario.candidates.map((candidate) => ({
+            ...candidate,
+            selected: candidate.label === scenario.selected,
+          }))}
+        />
+        <Annotation label="Selected in this teaching trace" tone="accent">
+          <strong className="text-stone-950 dark:text-white">{scenario.selected}</strong> is appended to the prompt. Selection happens from contextual scores, not by choosing the nearest word on a map.
+        </Annotation>
+      </div>
+    )
+  }
+
+  return (
+    <div className="space-y-6">
+      <TokenStrip
+        label="Context for the next prediction"
+        tokens={scenario.branch.map((text, index) => ({
+          text,
+          tone: index === scenario.branch.length - 1 ? "accent" as const : "default" as const,
+        }))}
+      />
+      <Annotation label="Autoregressive consequence" tone="accent">
+        {scenario.lineage}
+      </Annotation>
+      <ComparisonRows
+        rows={[
+          { label: "Wording", baseline: "drove … in", changed: "rode … on" },
+          { label: "First token", baseline: "car", changed: "bicycle" },
+          { label: "Next lineage", baseline: "vehicle details", changed: "cycling details" },
+        ]}
+      />
+    </div>
   )
 }

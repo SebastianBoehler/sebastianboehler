@@ -1,157 +1,206 @@
 "use client"
 
 import { useState } from "react"
+import { ConceptLab } from "@/components/blog/visuals/ConceptLab"
+import {
+  Annotation,
+  ComparisonRows,
+  SegmentedChoice,
+  TokenStrip,
+} from "@/components/blog/visuals/VisualPrimitives"
 
-type View = "synapse" | "myelin" | "credit"
+type Mechanism = "synapse" | "myelin" | "credit"
+type Intervention = "reduced" | "baseline" | "enhanced"
 
-const views: { id: View; label: string }[] = [
-  { id: "synapse", label: "synapse" },
-  { id: "myelin", label: "myelin" },
-  { id: "credit", label: "credit" },
-]
+const mechanismChoices = [
+  { id: "synapse", label: "Synapse" },
+  { id: "myelin", label: "Myelin" },
+  { id: "credit", label: "Credit signal" },
+] as const
+
+const mechanismCopy = {
+  synapse: {
+    title: "Connection influence",
+    description: "Synaptic plasticity changes how strongly one neuron influences another. This is the narrowest useful bridge to an ML weight.",
+    boundary: "A biological synapse is a living, timed, chemical structure—not a scalar stored in model memory.",
+    interventions: [
+      { id: "reduced", label: "Weakened" },
+      { id: "baseline", label: "Baseline" },
+      { id: "enhanced", label: "Strengthened" },
+    ],
+  },
+  myelin: {
+    title: "Conduction timing",
+    description: "Myelin changes the speed, reliability, and synchronization of signals traveling along an axon.",
+    boundary: "Myelin improves the communication channel; it does not decide which answer is correct or directly set synaptic influence.",
+    interventions: [
+      { id: "reduced", label: "Less insulation" },
+      { id: "baseline", label: "Baseline" },
+      { id: "enhanced", label: "More insulation" },
+    ],
+  },
+  credit: {
+    title: "Update eligibility",
+    description: "Credit assignment links a later error, reward, or attention signal to the recent activity that should change.",
+    boundary: "A global reward signal can gate learning, but it does not contain a full backpropagated gradient for every connection.",
+    interventions: [
+      { id: "reduced", label: "Diffuse feedback" },
+      { id: "baseline", label: "Baseline" },
+      { id: "enhanced", label: "Timely feedback" },
+    ],
+  },
+} as const
 
 export default function NeuroInspiredVisual() {
-  const [view, setView] = useState<View>("synapse")
-  const [practice, setPractice] = useState(62)
-  const strength = practice / 100
+  const [mechanism, setMechanism] = useState<Mechanism>("synapse")
+  const [intervention, setIntervention] = useState<Intervention>("enhanced")
+  const active = mechanismCopy[mechanism]
+  const rows = comparisonFor(mechanism, intervention)
 
   return (
-    <figure className="concept-lab">
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-        <div>
-          <h2 className="text-lg font-semibold text-gray-950 dark:text-white">Learning changes useful pathways</h2>
-          <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-600 dark:text-gray-400">
-            Practice does not copy a file into the brain. It changes synapses, timing, and feedback signals that make useful activity patterns easier to reuse.
+    <ConceptLab
+      title="Change one learning mechanism at a time"
+      description="Hold the pathway fixed, intervene on one mechanism, and inspect which property changes—and which properties do not."
+      methodology="mechanism comparison"
+      headerActions={
+        <SegmentedChoice
+          label="Choose a biological mechanism"
+          choices={mechanismChoices}
+          value={mechanism}
+          onChange={setMechanism}
+        />
+      }
+      insights={[
+        { label: active.title, body: active.description, tone: "accent" },
+        { label: "Analogy boundary", body: active.boundary },
+      ]}
+      footer={
+        <Annotation label="What the intervention isolates" tone="intervention">
+          {interventionSummary(mechanism, intervention)}
+        </Annotation>
+      }
+      caption="A qualitative mechanism comparison, not a biological simulation. Synaptic influence, conduction timing, and credit assignment solve different parts of learning."
+    >
+      <div className="space-y-8">
+        <TokenStrip
+          label="Path under inspection"
+          tokens={pathTokens(mechanism)}
+        />
+
+        <section aria-labelledby="neuro-intervention" className="border-y border-[rgb(var(--lab-rule))] py-6">
+          <p className="lab-kicker">Intervention</p>
+          <h3 id="neuro-intervention" className="mt-2 text-lg font-semibold text-[rgb(var(--lab-ink))]">
+            Change {active.title.toLowerCase()}
+          </h3>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-[rgb(var(--lab-muted))]">
+            The other two mechanisms remain at baseline so the causal distinction stays visible.
           </p>
-        </div>
-        <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
-          <div className="flex rounded-md border border-gray-200 p-1 dark:border-gray-800">
-            {views.map((item) => (
-              <button
-                key={item.id}
-                className={`rounded px-3 py-1.5 text-sm transition ${
-                  view === item.id
-                    ? "bg-gray-950 text-white dark:bg-white dark:text-gray-950"
-                    : "text-gray-600 hover:text-gray-950 dark:text-gray-400 dark:hover:text-white"
-                }`}
-                type="button"
-                onClick={() => setView(item.id)}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
-          <label htmlFor="practice" className="w-full text-sm text-gray-600 dark:text-gray-400 sm:w-56">
-            <span className="flex justify-between">
-              <span>practice signal</span>
-              <span>{practice}%</span>
-            </span>
-            <input
-              id="practice"
-              className="mt-2 w-full accent-gray-950 dark:accent-white"
-              type="range"
-              min="0"
-              max="100"
-              value={practice}
-              onChange={(event) => setPractice(Number(event.currentTarget.value))}
-              onInput={(event) => setPractice(Number(event.currentTarget.value))}
+          <div className="mt-5">
+            <SegmentedChoice
+              label={`Change ${active.title.toLowerCase()}`}
+              choices={active.interventions}
+              value={intervention}
+              onChange={setIntervention}
             />
-          </label>
-        </div>
-      </div>
+          </div>
+        </section>
 
-      <div className="mt-6 grid gap-5 lg:grid-cols-[1.25fr_0.75fr]">
-        <div className="lab-stage">
-          <Pathway view={view} strength={strength} />
-        </div>
-        <Panel view={view} practice={practice} />
+        <ComparisonRows rows={rows} />
       </div>
-
-      <figcaption className="lab-caption text-sm leading-6 text-gray-600 dark:text-gray-400">
-        Figure 1. A toy pathway, not a biological diagram. Synaptic strength is closest to an ML weight analogy; myelin is closer to timing, reliability, and efficiency.
-      </figcaption>
-    </figure>
+    </ConceptLab>
   )
 }
 
-function Pathway({ view, strength }: { view: View; strength: number }) {
-  const stroke = 2 + strength * 5
-  const wrapOpacity = view === "myelin" ? 0.35 + strength * 0.55 : 0.16 + strength * 0.25
-  const creditOpacity = view === "credit" ? 0.25 + strength * 0.55 : 0.12
+function comparisonFor(mechanism: Mechanism, intervention: Intervention) {
+  const changed = effectFor(mechanism, intervention)
 
-  return (
-    <svg viewBox="0 0 120 76" role="img" aria-label="Brain inspired learning pathway" className="h-auto w-full">
-      <defs>
-        <marker id="neuro-arrow" markerHeight="6" markerWidth="6" orient="auto" refX="5" refY="3">
-          <path d="M 0 0 L 6 3 L 0 6 z" className="fill-gray-500 dark:fill-gray-300" />
-        </marker>
-      </defs>
-      <rect width="120" height="76" className="fill-gray-50 dark:fill-gray-900" />
-      <path d="M 14 38 C 27 20, 44 21, 57 35" fill="none" stroke="#64748b" strokeWidth="1.5" opacity="0.55" markerEnd="url(#neuro-arrow)" />
-      <path d="M 63 41 C 78 55, 96 54, 108 36" fill="none" stroke="#64748b" strokeWidth="1.5" opacity="0.55" markerEnd="url(#neuro-arrow)" />
-
-      {view === "myelin" ? (
-        <>
-          <MyelinWrap x={30} y={25} opacity={wrapOpacity} />
-          <MyelinWrap x={37} y={24} opacity={wrapOpacity} />
-          <MyelinWrap x={44} y={27} opacity={wrapOpacity} />
-          <MyelinWrap x={80} y={51} opacity={wrapOpacity} />
-          <MyelinWrap x={88} y={50} opacity={wrapOpacity} />
-          <MyelinWrap x={96} y={45} opacity={wrapOpacity} />
-        </>
-      ) : null}
-
-      <circle cx="14" cy="38" r="7" className="fill-white stroke-gray-300 dark:fill-gray-950 dark:stroke-gray-700" strokeWidth="1.2" />
-      <circle cx="60" cy="38" r="8" className="fill-white stroke-gray-300 dark:fill-gray-950 dark:stroke-gray-700" strokeWidth="1.2" />
-      <circle cx="108" cy="36" r="7" className="fill-white stroke-gray-300 dark:fill-gray-950 dark:stroke-gray-700" strokeWidth="1.2" />
-
-      <path d="M 21 38 C 35 35, 45 35, 52 38" fill="none" stroke="#2563eb" strokeLinecap="round" strokeWidth={stroke} opacity={0.72} />
-      <path d="M 68 39 C 82 43, 94 42, 101 37" fill="none" stroke="#059669" strokeLinecap="round" strokeWidth={1.8 + strength * 3.5} opacity={0.7} />
-
-      <path d="M 104 24 C 89 9, 49 9, 23 27" fill="none" stroke="#8b5cf6" strokeDasharray="3 2" strokeWidth="2" opacity={creditOpacity} />
-      {view === "credit" ? <circle cx={78 - strength * 18} cy="14" r={2.4 + strength * 1.8} fill="#8b5cf6" opacity="0.85" /> : null}
-
-      <text x="9" y="62" className="fill-gray-500 text-[4px] dark:fill-gray-300">cue</text>
-      <text x="51" y="62" className="fill-gray-500 text-[4px] dark:fill-gray-300">hidden path</text>
-      <text x="99" y="62" className="fill-gray-500 text-[4px] dark:fill-gray-300">action</text>
-    </svg>
-  )
+  return [
+    {
+      label: "Connection influence",
+      baseline: "Existing postsynaptic effect",
+      changed: changed.influence,
+    },
+    {
+      label: "Arrival timing",
+      baseline: "Existing conduction speed and synchrony",
+      changed: changed.timing,
+    },
+    {
+      label: "Which activity updates",
+      baseline: "Depends on recent local activity and feedback",
+      changed: changed.eligibility,
+    },
+    {
+      label: "Closest ML bridge",
+      baseline: "One abstract learning pathway",
+      changed: changed.bridge,
+    },
+  ]
 }
 
-function MyelinWrap({ x, y, opacity }: { x: number; y: number; opacity: number }) {
-  return <ellipse cx={x} cy={y} rx="4.4" ry="2.2" fill="#f59e0b" opacity={opacity} transform={`rotate(-24 ${x} ${y})`} />
+function effectFor(mechanism: Mechanism, intervention: Intervention) {
+  const noChange = "No direct change in this intervention"
+
+  if (intervention === "baseline") {
+    return {
+      influence: "Held at baseline",
+      timing: "Held at baseline",
+      eligibility: "Held at baseline",
+      bridge: "No mechanism has been perturbed",
+    }
+  }
+
+  if (mechanism === "synapse") {
+    return {
+      influence: intervention === "enhanced" ? "Stronger postsynaptic effect" : "Weaker postsynaptic effect",
+      timing: noChange,
+      eligibility: "Not determined by connection strength alone",
+      bridge: "Adjusting a connection weight, with important biological caveats",
+    }
+  }
+
+  if (mechanism === "myelin") {
+    return {
+      influence: "Synaptic strength remains unchanged",
+      timing: intervention === "enhanced" ? "Faster, more reliable, better synchronized arrival" : "Slower, less reliable, less synchronized arrival",
+      eligibility: noChange,
+      bridge: "Changing channel latency and reliability, not a model weight",
+    }
+  }
+
+  return {
+    influence: noChange,
+    timing: "Axon conduction speed remains unchanged",
+    eligibility: intervention === "enhanced" ? "Timely feedback better identifies recent eligible activity" : "Diffuse feedback leaves credit more ambiguous",
+    bridge: "A reward or error signal gating which recent activity should update",
+  }
 }
 
-function Panel({ view, practice }: { view: View; practice: number }) {
-  const copy = {
-    synapse: "This is the closest biological analogy to a neural-network weight: repeated useful activity can strengthen or weaken synaptic influence.",
-    myelin: "Myelin does not choose the output. It can make active axons transmit signals faster, more reliably, and with better timing.",
-    credit: "The hard part is knowing which connection deserved the update. Brains use local activity plus global signals such as reward, attention, and error.",
-  }[view]
+function pathTokens(mechanism: Mechanism) {
+  const tokens = {
+    synapse: [
+      { text: "cue" },
+      { text: "synaptic influence", tone: "intervention" as const },
+      { text: "downstream response", tone: "accent" as const },
+    ],
+    myelin: [
+      { text: "cue" },
+      { text: "axon conduction", tone: "intervention" as const },
+      { text: "arrival timing", tone: "accent" as const },
+    ],
+    credit: [
+      { text: "action" },
+      { text: "reward / error", tone: "intervention" as const },
+      { text: "eligible activity", tone: "accent" as const },
+    ],
+  }
 
-  return (
-    <div className="rounded-md border border-gray-200 p-4 dark:border-gray-800">
-      <h3 className="text-sm font-semibold text-gray-950 dark:text-white">What changes?</h3>
-      <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">{copy}</p>
-      <div className="mt-4 space-y-3 text-sm">
-        <Metric label="synaptic gain" value={Math.min(96, 28 + Math.round(practice * 0.68))} color="#2563eb" />
-        <Metric label="timing reliability" value={Math.min(94, 20 + Math.round(practice * 0.58))} color="#f59e0b" />
-        <Metric label="credit signal" value={Math.min(90, 18 + Math.round(practice * 0.52))} color="#8b5cf6" />
-      </div>
-    </div>
-  )
+  return tokens[mechanism]
 }
 
-function Metric({ label, value, color }: { label: string; value: number; color: string }) {
-  return (
-    <div>
-      <div className="flex justify-between text-gray-600 dark:text-gray-400">
-        <span>{label}</span>
-        <span>{value}%</span>
-      </div>
-      <div className="mt-1 h-2 rounded-full bg-gray-100 dark:bg-gray-800">
-        <div className="h-2 rounded-full" style={{ width: `${value}%`, backgroundColor: color }} />
-      </div>
-    </div>
-  )
+function interventionSummary(mechanism: Mechanism, intervention: Intervention) {
+  if (intervention === "baseline") return "Nothing changes yet. Choose either intervention to create a controlled comparison."
+  if (mechanism === "synapse") return "Only the strength of influence changes; signal timing and credit assignment do not automatically improve with it."
+  if (mechanism === "myelin") return "Only transmission quality changes; the connection does not become more correct or more deserving of an update."
+  return "Only update eligibility changes; the pathway does not instantly become stronger or faster."
 }

@@ -51,12 +51,12 @@ vectors. The model learns that "dog" and "puppy" can often appear in similar
 places. It also learns that "gradient", "loss", and "optimizer" belong to a
 different local region.
 
-The real model space has thousands of dimensions, so we cannot draw it directly.
-The plot below compresses the idea into two dimensions. That compression is not
-the real model, and the plotted coordinates are not measured from a specific
-LLM. It is a teaching sketch that lets us reason visually. Click the tabs from
-left to right: first clusters, then an animated context path, then run clouds,
-then the landscape analogy.
+The real model space has thousands of dimensions, so a literal map would be
+misleading. The notebook below keeps the geometry qualitative instead. Choose a
+prompt framing, then move from the learned map to the current contextual state,
+the likely continuation families, and repeated runs. The important comparison
+is what stays fixed and what changes; none of the labels are measured from a
+specific LLM.
 
 [[visual:latent-space]]
 
@@ -265,6 +265,11 @@ If the settings are fixed, the weights are fixed, and the computer repeats the
 same calculation exactly, this landscape of possibilities is the fixed part.
 The model is not confused. It has assigned scores to the possible next tokens.
 
+The notebook below changes only the verb and preposition in one sentence. Move
+through the five stages to see how that small wording change alters the useful
+context cues, the qualitative candidate ordering, the selected token, and then
+the context used for every later token.
+
 [[visual:prompt-distribution]]
 
 ## Step 7: reasoning can be text or hidden state
@@ -383,6 +388,10 @@ token wins. After that first different token, generation is autoregressive: the
 new token is added back into the context, so the next prediction is now made
 from a slightly different state. A tiny branch can become a visibly different
 answer.
+
+The boundary test below holds the small perturbation constant and changes only
+the margin between the leading candidates. That isolates why the same numerical
+noise is invisible in one case and branch-producing in the other.
 
 [[visual:nondeterminism-boundary]]
 

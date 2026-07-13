@@ -1,101 +1,98 @@
 "use client"
 
 import { useState } from "react"
+import { ConceptLab } from "@/components/blog/visuals/ConceptLab"
+import { QualitativeRows } from "@/components/blog/visuals/VisualPrimitives"
 
 const turns = [
-  { label: "1. intuitive question", x: 21, y: 56, note: "plain language and examples" },
-  { label: "2. ask for math", x: 43, y: 36, note: "more formal, more precise" },
-  { label: "3. ask for code", x: 66, y: 27, note: "implementation details" },
-  { label: "4. ask for caveats", x: 79, y: 48, note: "uncertainty and boundaries" },
-]
+  {
+    label: "Ask for intuition",
+    shortLabel: "Intuition",
+    message: "Explain latent space intuitively.",
+    carried: "The conversation now favors plain language and concrete examples.",
+    tendencies: [
+      { label: "analogy", fit: "strong", note: "Directly requested." },
+      { label: "formalism", fit: "weak", note: "Not yet requested." },
+      { label: "implementation", fit: "weak", note: "Outside the current scope." },
+    ],
+  },
+  {
+    label: "Request equations",
+    shortLabel: "Equations",
+    message: "Now make that mathematically precise.",
+    carried: "The intuitive framing remains available, but the latest instruction raises the value of notation.",
+    tendencies: [
+      { label: "formalism", fit: "strong", note: "The latest turn asks for precision." },
+      { label: "analogy", fit: "plausible", note: "Earlier context can still support the derivation." },
+      { label: "implementation", fit: "weak", note: "Code is still not requested." },
+    ],
+  },
+  {
+    label: "Request code",
+    shortLabel: "Code",
+    message: "Show how this would look in code.",
+    carried: "The response can reuse the earlier concept and notation while moving toward implementation.",
+    tendencies: [
+      { label: "implementation", fit: "strong", note: "The latest turn names the desired output." },
+      { label: "formalism", fit: "plausible", note: "Prior notation can explain the code." },
+      { label: "analogy", fit: "plausible", note: "Useful only where it clarifies an operation." },
+    ],
+  },
+  {
+    label: "Add caveats",
+    shortLabel: "Caveats",
+    message: "State where this analogy breaks down.",
+    carried: "The subject remains the same, but the latest turn redirects attention toward uncertainty and boundaries.",
+    tendencies: [
+      { label: "limitations", fit: "strong", note: "Explicitly requested now." },
+      { label: "implementation", fit: "plausible", note: "Earlier code may supply concrete caveats." },
+      { label: "new analogy", fit: "weak", note: "Would distract from the boundary check." },
+    ],
+  },
+] as const
 
 export default function ConversationDriftVisual() {
-  const [turn, setTurn] = useState(0)
-  const visibleTurns = turns.slice(0, turn + 1)
-  const activeTurn = visibleTurns[visibleTurns.length - 1]
+  const [turnIndex, setTurnIndex] = useState(0)
+  const current = turns[turnIndex]
+  const visibleTurns = turns.slice(0, turnIndex + 1)
 
   return (
-    <figure className="concept-lab">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-        <div>
-          <h2 className="text-lg font-semibold text-gray-950 dark:text-white">Conversation drift</h2>
-          <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-600 dark:text-gray-400">
-            Move through the turns to see how accumulated context keeps shifting likely continuations.
-          </p>
-        </div>
-        <div className="grid w-full grid-cols-2 gap-1 sm:w-72" role="tablist" aria-label="Choose the latest instruction">
-          {turns.map((item, index) => (
-            <button
-              key={item.label}
-              type="button"
-              role="tab"
-              aria-selected={turn === index}
-              className={`rounded border px-2 py-1.5 text-left text-xs font-medium transition-colors ${
-                turn === index
-                  ? "border-gray-950 bg-gray-950 text-white dark:border-white dark:bg-white dark:text-gray-950"
-                  : "border-gray-200 text-gray-600 hover:border-gray-400 dark:border-gray-800 dark:text-gray-400"
-              }`}
-              onClick={() => setTurn(index)}
-            >
-              {item.label.replace(/^\d+\. /, "")}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div className="mt-5 grid gap-5 lg:grid-cols-[1.2fr_0.8fr]">
-        <div className="lab-stage p-0">
-          <svg viewBox="0 0 100 72" role="img" aria-label="Conversation path through latent space" className="h-auto w-full">
-            <rect width="100" height="72" className="fill-gray-50 dark:fill-gray-900" />
-            <ellipse cx="23" cy="56" rx="17" ry="10" fill="#2563eb" opacity="0.12" />
-            <ellipse cx="46" cy="35" rx="18" ry="11" fill="#7c3aed" opacity="0.12" />
-            <ellipse cx="67" cy="27" rx="16" ry="10" fill="#059669" opacity="0.12" />
-            <ellipse cx="79" cy="48" rx="14" ry="9" fill="#dc2626" opacity="0.12" />
-            <path d="M 8 18 C 24 8, 41 11, 54 23 S 82 34, 94 19" fill="none" className="stroke-gray-300 dark:stroke-gray-700" strokeWidth="0.8" />
-            <path d="M 8 51 C 27 34, 43 43, 58 52 S 82 62, 94 43" fill="none" className="stroke-gray-300 dark:stroke-gray-700" strokeWidth="0.8" />
-            <text x="8" y="66" className="fill-gray-500 text-[3px] dark:fill-gray-300">intuitive</text>
-            <text x="43" y="15" className="fill-gray-500 text-[3px] dark:fill-gray-300">formal</text>
-            <text x="70" y="66" className="fill-gray-500 text-[3px] dark:fill-gray-300">practical</text>
-            {visibleTurns.length > 1 && (
-              <polyline
-                points={visibleTurns.map((point) => `${point.x},${point.y}`).join(" ")}
-                fill="none"
-                stroke="#7c3aed"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-              />
-            )}
-            {visibleTurns.map((point, index) => (
-              <g key={point.label}>
-                <title>{point.label}: {point.note}</title>
-                <circle cx={point.x} cy={point.y} r="3" fill="#7c3aed" opacity={index === visibleTurns.length - 1 ? 1 : 0.55} />
-                <text x={point.x + 4} y={point.y - 3} className="fill-gray-950 text-[3px] dark:fill-white">
-                  {index + 1}
-                </text>
-              </g>
-            ))}
-          </svg>
-        </div>
-
-        <div className="lab-insight py-1">
-          <p className="text-xs font-medium uppercase tracking-[0.12em] text-gray-500 dark:text-gray-400">Latest instruction</p>
-          <h3 className="mt-2 text-sm font-semibold text-gray-950 dark:text-white">{activeTurn.label}</h3>
-          <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">{activeTurn.note}</p>
-          <p className="mt-3 text-sm leading-6 text-gray-600 dark:text-gray-400">
-            The path can cross regions. The transcript anchors the next turn, but a strong new instruction can still steer the conversation elsewhere.
-          </p>
-          <ol className="mt-4 space-y-2 text-sm text-gray-600 dark:text-gray-400">
-            {visibleTurns.map((item) => (
-              <li key={item.label}>{item.label}</li>
+    <ConceptLab
+      title="Each turn changes the next answer without erasing the earlier ones"
+      description="Move the latest turn forward. The manipulated variable is the transcript prefix available to the next prediction."
+      methodology="Conditioning trace · fixed example"
+      steps={turns}
+      activeStep={turnIndex}
+      onStepChange={setTurnIndex}
+      insights={[
+        { label: "Latest instruction", body: current.message, tone: "intervention" },
+        { label: "What remains in context", body: current.carried, tone: "accent" },
+      ]}
+      caption="The transcript creates inertia, not a locked route. A specific later instruction can preserve the topic while redirecting the answer family."
+    >
+      <div className="space-y-7" aria-live="polite">
+        <section aria-labelledby="conversation-prefix-heading">
+          <h3 id="conversation-prefix-heading" className="lab-kicker">Transcript available now</h3>
+          <ol className="mt-3 divide-y divide-stone-300 border-y border-stone-300 dark:divide-stone-700 dark:border-stone-700">
+            {visibleTurns.map((turn, index) => (
+              <li
+                key={turn.label}
+                className="grid gap-1 py-3 sm:grid-cols-[5rem_1fr] sm:gap-4"
+                aria-current={index === turnIndex ? "step" : undefined}
+              >
+                <span className="text-xs font-semibold uppercase tracking-wide text-stone-500 dark:text-stone-400">
+                  Turn {index + 1}
+                </span>
+                <span className={index === turnIndex ? "font-medium text-[rgb(var(--lab-accent))]" : "text-stone-700 dark:text-stone-300"}>
+                  {turn.message}
+                </span>
+              </li>
             ))}
           </ol>
-        </div>
-      </div>
+        </section>
 
-      <figcaption className="lab-caption text-sm leading-6 text-gray-600 dark:text-gray-400">
-        Figure 2. A conversation is not a reset after every message. Each turn changes the conditioning context for the next prediction.
-      </figcaption>
-    </figure>
+        <QualitativeRows label="Likely emphasis in the next answer" rows={current.tendencies} />
+      </div>
+    </ConceptLab>
   )
 }

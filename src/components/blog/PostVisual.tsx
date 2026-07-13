@@ -1,64 +1,50 @@
-import LatentSpaceVisual from "@/components/blog/LatentSpaceVisual"
-import ConversationDriftVisual from "@/components/blog/ConversationDriftVisual"
-import PromptDistributionVisual from "@/components/blog/PromptDistributionVisual"
-import PhysicsInformedVisual from "@/components/blog/PhysicsInformedVisual"
-import TrainingDynamicsVisual from "@/components/blog/TrainingDynamicsVisual"
-import NondeterminismBoundaryVisual from "@/components/blog/NondeterminismBoundaryVisual"
-import LearningFeedbackVisual from "@/components/blog/LearningFeedbackVisual"
-import ContextEngineeringVisual from "@/components/blog/ContextEngineeringVisual"
-import NeuroInspiredVisual from "@/components/blog/NeuroInspiredVisual"
-import ModelSelectionMapVisual from "@/components/blog/ModelSelectionMapVisual"
+import type { ComponentType } from "react"
 import AutoresearchLoopVisual from "@/components/blog/AutoresearchLoopVisual"
+import ContextEngineeringVisual from "@/components/blog/ContextEngineeringVisual"
+import ConversationDriftVisual from "@/components/blog/ConversationDriftVisual"
+import LatentSpaceVisual from "@/components/blog/LatentSpaceVisual"
+import LearningFeedbackVisual from "@/components/blog/LearningFeedbackVisual"
+import ModelSelectionMapVisual from "@/components/blog/ModelSelectionMapVisual"
 import ModularityBridgeVisual from "@/components/blog/ModularityBridgeVisual"
+import NeuroInspiredVisual from "@/components/blog/NeuroInspiredVisual"
+import NondeterminismBoundaryVisual from "@/components/blog/NondeterminismBoundaryVisual"
+import PhysicsInformedVisual from "@/components/blog/PhysicsInformedVisual"
+import PromptDistributionVisual from "@/components/blog/PromptDistributionVisual"
+import TrainingDynamicsVisual from "@/components/blog/TrainingDynamicsVisual"
+
+const VISUALS = {
+  "autoresearch-loop": AutoresearchLoopVisual,
+  "context-engineering": ContextEngineeringVisual,
+  "conversation-drift": ConversationDriftVisual,
+  "latent-space": LatentSpaceVisual,
+  "learning-feedback": LearningFeedbackVisual,
+  "model-selection-map": ModelSelectionMapVisual,
+  "modularity-bridge": ModularityBridgeVisual,
+  "neuro-inspired-learning": NeuroInspiredVisual,
+  "nondeterminism-boundary": NondeterminismBoundaryVisual,
+  "physics-informed": PhysicsInformedVisual,
+  "prompt-distribution": PromptDistributionVisual,
+  "training-dynamics": TrainingDynamicsVisual,
+} satisfies Record<string, ComponentType>
+
+type VisualId = keyof typeof VISUALS
 
 export default function PostVisual({ visual }: { visual?: string }) {
-  if (visual === "latent-space") {
-    return <LatentSpaceVisual />
+  if (!visual || !isVisualId(visual)) {
+    return (
+      <aside
+        role="alert"
+        className="my-12 border-y border-red-200 py-5 text-sm leading-6 text-red-700 dark:border-red-900 dark:text-red-300"
+      >
+        This article visualization could not be loaded because its identifier is invalid.
+      </aside>
+    )
   }
 
-  if (visual === "conversation-drift") {
-    return <ConversationDriftVisual />
-  }
+  const Visual = VISUALS[visual]
+  return <Visual />
+}
 
-  if (visual === "prompt-distribution") {
-    return <PromptDistributionVisual />
-  }
-
-  if (visual === "physics-informed") {
-    return <PhysicsInformedVisual />
-  }
-
-  if (visual === "training-dynamics") {
-    return <TrainingDynamicsVisual />
-  }
-
-  if (visual === "nondeterminism-boundary") {
-    return <NondeterminismBoundaryVisual />
-  }
-
-  if (visual === "learning-feedback") {
-    return <LearningFeedbackVisual />
-  }
-
-  if (visual === "context-engineering") {
-    return <ContextEngineeringVisual />
-  }
-
-  if (visual === "neuro-inspired-learning") {
-    return <NeuroInspiredVisual />
-  }
-
-  if (visual === "model-selection-map") {
-    return <ModelSelectionMapVisual />
-  }
-
-  if (visual === "autoresearch-loop") {
-    return <AutoresearchLoopVisual />
-  }
-
-  if (visual === "modularity-bridge") {
-    return <ModularityBridgeVisual />
-  }
-
-  return null
+function isVisualId(value: string): value is VisualId {
+  return value in VISUALS
 }

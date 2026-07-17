@@ -2,7 +2,7 @@
 
 Computer science graduate student at the University of Tübingen building research software, agent tooling, and infrastructure for AI-assisted engineering. Based in Germany. Shipping public work through [Sunderlabs](https://sunderlabs.com) and [sebastian-boehler.com](https://sebastian-boehler.com).
 
-Public GitHub snapshot as of Jul 13, 2026: 102 public repos, 31 followers, active on GitHub since Apr 19, 2017.
+Public GitHub snapshot as of Jul 17, 2026: 102 public repos, 31 followers, active on GitHub since Apr 19, 2017.
 
 ## Research
 
@@ -21,7 +21,7 @@ Public GitHub snapshot as of Jul 13, 2026: 102 public repos, 31 followers, activ
 - **[solana-dapp-learning](https://github.com/SebastianBoehler/solana-dapp-learning)** (TypeScript, updated Apr 8, 2025) - Creating my first DAPP on solana with Next.JS
 - **[bybit_market_maker_cpp](https://github.com/SebastianBoehler/bybit_market_maker_cpp)** (C++, updated Jul 11, 2026) - C++ market-making example for Bybit linear perpetuals: laddered quotes with inventory skew, TP/optional SL, exposure guard, and fee/funding-aware PnL via private websockets.
 - **[domain-check-mcp](https://github.com/SebastianBoehler/domain-check-mcp)** (JavaScript, updated Aug 7, 2025) - A Model Context Protocol (MCP) server for checking domain availability using IONOS endpoints
-- **[sec-data-fetcher](https://github.com/SebastianBoehler/sec-data-fetcher)** (TypeScript, updated Jul 8, 2026) - SEC Edgar API Wrapper
+- **[python_livestream](https://github.com/SebastianBoehler/python_livestream)** (HTML, updated Jul 14, 2026) - Livestream AI generated news segments with grok search grounding and TTS frameworks to youtube
 
 ## Contribution history
 

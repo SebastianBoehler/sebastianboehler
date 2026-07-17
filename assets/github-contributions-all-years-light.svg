@@ -13,7 +13,7 @@
   <rect x="644" y="39" width="9" height="9" rx="2" fill="#216e39" />
   <text x="660" y="48" fill="#57606a" font-size="10">More</text>
   <text x="79" y="96" fill="#1f2328" font-size="14" font-weight="600">2026</text>
-  <text x="79" y="114" fill="#57606a" font-size="10">4,828 contributions</text>
+  <text x="79" y="114" fill="#57606a" font-size="10">5,014 contributions</text>
   <rect x="205" y="120" width="7" height="7" rx="2" fill="#9be9a8" />
   <rect x="205" y="129" width="7" height="7" rx="2" fill="#9be9a8" />
   <rect x="205" y="138" width="7" height="7" rx="2" fill="#9be9a8" />
@@ -207,11 +207,11 @@
   <rect x="448" y="129" width="7" height="7" rx="2" fill="#9be9a8" />
   <rect x="448" y="138" width="7" height="7" rx="2" fill="#9be9a8" />
   <rect x="457" y="84" width="7" height="7" rx="2" fill="#9be9a8" />
-  <rect x="457" y="93" width="7" height="7" rx="2" fill="#9be9a8" />
-  <rect x="457" y="102" width="7" height="7" rx="2" fill="#ebedf0" />
-  <rect x="457" y="111" width="7" height="7" rx="2" fill="#ebedf0" />
-  <rect x="457" y="120" width="7" height="7" rx="2" fill="#ebedf0" />
-  <rect x="457" y="129" width="7" height="7" rx="2" fill="#ebedf0" />
+  <rect x="457" y="93" width="7" height="7" rx="2" fill="#40c463" />
+  <rect x="457" y="102" width="7" height="7" rx="2" fill="#40c463" />
+  <rect x="457" y="111" width="7" height="7" rx="2" fill="#9be9a8" />
+  <rect x="457" y="120" width="7" height="7" rx="2" fill="#9be9a8" />
+  <rect x="457" y="129" width="7" height="7" rx="2" fill="#9be9a8" />
   <rect x="457" y="138" width="7" height="7" rx="2" fill="#ebedf0" />
   <rect x="466" y="84" width="7" height="7" rx="2" fill="#ebedf0" />
   <rect x="466" y="93" width="7" height="7" rx="2" fill="#ebedf0" />

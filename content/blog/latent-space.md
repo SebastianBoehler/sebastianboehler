@@ -484,6 +484,35 @@ new law of nature, but it can act like a constraint on the answer space. It
 reduces the directions that are plausible, the same way a physical simulator or
 reward constraint reduces useless moves for an RL agent.
 
+### Inputs are both data and control
+
+The deeper principle is that inputs do not merely give a language model
+information. They also configure its computation. Instructions,
+demonstrations, retrieved documents, tool output, and quoted text all change
+hidden states and attention patterns. Each can shift which behavior the model is
+prepared to execute next.
+
+[Research on function vectors](https://arxiv.org/abs/2310.15213) gives a concrete
+causal example. The authors extract compact task representations transported by
+a small set of attention heads. Adding one of these vectors to a middle-layer
+hidden state can make a model execute the represented task in zero-shot or
+unrelated contexts. The intervention changes activations directly, but it shows
+that a shift in internal state can do more than change the topic or tone: it can
+invoke a behavior.
+
+Ordinary prompts influence those activations indirectly, through tokens and the
+model's full computation. That distinction matters. The function-vector result
+does not prove that a prompt adds one clean vector, or that every instruction
+uses the same mechanism. It does support the broader picture of input as a way
+to steer internal computation.
+
+This is also the foundation of prompt injection. Transformers have no inherent
+trust boundary separating "instructions" from "data"; both arrive through the
+same token channel. An untrusted document or tool result can therefore contain
+text that pulls the model away from the intended task and toward an attacker's
+task. Helpful context engineering and malicious prompt injection use the same
+general property: input changes state. They differ in authorization and intent.
+
 ## Step 13: prompts steer regions
 
 This changes how prompt engineering should feel. A prompt is not a magic spell.
@@ -507,6 +536,7 @@ answers the model is likely to produce.
 - [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 - [The Curious Case of Neural Text Degeneration](https://arxiv.org/abs/1904.09751)
 - [Language Models are Few-Shot Learners](https://arxiv.org/abs/2005.14165)
+- [Function Vectors in Large Language Models](https://arxiv.org/abs/2310.15213)
 - [Chain-of-Thought Prompting Elicits Reasoning in Large Language Models](https://arxiv.org/abs/2201.11903)
 - [Language Models Don't Always Say What They Think](https://arxiv.org/abs/2305.04388)
 - [Training Large Language Models to Reason in a Continuous Latent Space](https://arxiv.org/abs/2412.06769)

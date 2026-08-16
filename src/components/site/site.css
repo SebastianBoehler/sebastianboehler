@@ -169,6 +169,11 @@
   gap: 0.25rem 1rem;
 }
 
+.site-footer__links a {
+  min-width: 44px;
+  justify-content: center;
+}
+
 .site-footer__links a:hover {
   color: var(--text);
 }

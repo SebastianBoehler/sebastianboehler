@@ -26,7 +26,8 @@
 }
 
 .concept-lab button {
-  min-height: 2.5rem;
+  min-width: 44px;
+  min-height: 44px;
 }
 
 .concept-lab button:focus-visible,

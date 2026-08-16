@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test": "bun test",
     "sync:github-profile": "node scripts/sync-github-profile.mjs",
     "sync:github-throughput": "node scripts/generate-github-throughput-svg.mjs"
   },
@@ -34,6 +35,7 @@
     "@types/react": "^18.3.31",
     "@types/react-dom": "^18.3.7",
     "autoprefixer": "^10.5.0",
+    "bun-types": "^1.3.14",
     "eslint": "^8.57.1",
     "eslint-config-next": "15.5.19",
     "postcss": "^8.5.15",

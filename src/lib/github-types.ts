@@ -34,6 +34,10 @@ export type ContributionYear = {
   cells: ContributionCell[]
 }
 
+export type ContributionArcState =
+  | { status: "ready"; years: ContributionYear[] }
+  | { status: "unavailable"; message: string }
+
 export type GitHubSnapshot = {
   currentYear: number
   profile: GitHubProfile

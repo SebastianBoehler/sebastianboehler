@@ -2,54 +2,154 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+:root {
+  --canvas: oklch(0.985 0.006 85);
+  --surface: oklch(1 0 0);
+  --text: oklch(0.19 0.025 255);
+  --muted: oklch(0.47 0.025 255);
+  --line: oklch(0.89 0.012 255);
+  --accent: oklch(0.55 0.2 255);
+  --focus: oklch(0.62 0.19 250);
+  --on-accent: oklch(0.99 0.003 85);
+  --accent-hover: oklch(0.49 0.2 255);
+  --image-outline: oklch(0 0 0 / 0.12);
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+
+.dark {
+  --canvas: oklch(0.14 0.025 255);
+  --surface: oklch(0.18 0.025 255);
+  --text: oklch(0.95 0.01 85);
+  --muted: oklch(0.72 0.018 255);
+  --line: oklch(0.3 0.025 255);
+  --accent: oklch(0.72 0.16 250);
+  --focus: oklch(0.78 0.14 245);
+  --on-accent: oklch(0.12 0.025 255);
+  --accent-hover: oklch(0.78 0.14 250);
+  --image-outline: oklch(1 0 0 / 0.14);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--canvas);
+  color-scheme: light;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body,
+button,
+input,
+textarea,
+select {
+  font-family: var(--font-sans);
+}
+
+body {
+  margin: 0;
+  background: var(--canvas);
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+main {
+  min-height: 70vh;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p,
+li {
+  text-wrap: pretty;
+}
+
+time,
+code,
+pre {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+[id] {
+  scroll-margin-top: 6rem;
+}
+
+button,
+a {
+  touch-action: manipulation;
+}
+
+::selection {
+  background: color-mix(in oklch, var(--accent) 24%, transparent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: 0.75rem;
+  left: 0.75rem;
+  min-height: 44px;
+  padding: 0 1rem;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 0.5rem;
+  background: var(--text);
+  color: var(--canvas);
+  font-weight: 650;
+  transform: translateY(calc(-100% - 1rem));
+  transition: transform 160ms ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --muted: oklch(0.34 0.025 255);
+    --line: oklch(0.56 0.02 255);
+    --accent: oklch(0.43 0.2 255);
+    --focus: oklch(0.38 0.2 250);
+  }
+
+  .dark {
+    --muted: oklch(0.84 0.018 255);
+    --line: oklch(0.7 0.02 255);
+    --accent: oklch(0.82 0.13 250);
+    --focus: oklch(0.86 0.12 245);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
-@layer components {
-  .section-container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24;
+@media (forced-colors: active) {
+  :focus-visible {
+    outline-color: Highlight;
   }
-
-  .heading-1 {
-    @apply text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white;
-  }
-
-  .heading-2 {
-    @apply text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white;
-  }
-
-  .paragraph {
-    @apply text-gray-600 dark:text-gray-300;
-  }
-}
-
-@layer utilities {
-  /* Hide scrollbars while keeping scroll functionality */
-  .no-scrollbar::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
-  }
-
-  .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-  }
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.5s ease-out forwards;
 }

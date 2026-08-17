@@ -96,10 +96,17 @@
   color: var(--lab-accent);
 }
 
-.cameraButton:focus-visible,
-.replay:focus-visible {
+.cameraButton:focus-visible {
   position: relative;
   z-index: 2;
+}
+
+.replay:focus-visible {
+  z-index: 2;
+}
+
+.cameraButton:focus-visible,
+.replay:focus-visible {
   outline: 2px solid var(--lab-accent);
   outline-offset: -3px;
 }
@@ -137,6 +144,16 @@
 @media (min-width: 1024px) {
   .root {
     height: 570px;
+  }
+}
+
+@media (max-width: 359px) {
+  .replay {
+    bottom: 4.75rem;
+  }
+
+  .hint {
+    bottom: 8.35rem;
   }
 }
 

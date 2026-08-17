@@ -108,3 +108,19 @@ test("uses opaque overlays and 44px camera targets", async () => {
   expect(css).toContain("prefers-reduced-transparency: reduce")
   expect(css).toContain("forced-colors: active")
 })
+
+test("keeps replay absolutely anchored when keyboard focused", async () => {
+  const css = await Bun.file("src/components/blog/LatentLandscapePlot.module.css").text()
+  const replayFocusRule = css.match(/\.replay:focus-visible\s*\{[^}]+\}/)?.[0] ?? ""
+
+  expect(replayFocusRule).not.toContain("position: relative")
+  expect(replayFocusRule).toContain("z-index: 2")
+})
+
+test("stacks replay above the camera group at narrow viewport widths", async () => {
+  const css = await Bun.file("src/components/blog/LatentLandscapePlot.module.css").text()
+  const narrowRules = css.match(/@media \(max-width: 359px\) \{[\s\S]+/)?.[0] ?? ""
+  const replayRule = narrowRules.match(/\.replay\s*\{[^}]+\}/)?.[0] ?? ""
+
+  expect(replayRule).toContain("bottom: 4.75rem")
+})

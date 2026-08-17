@@ -158,12 +158,12 @@ function QuestionStep({
   const [question, detail] = questions[activeStep]
 
   return (
-    <section aria-labelledby="model-question" className="border-y border-[rgb(var(--lab-rule))] py-6">
+    <section aria-labelledby="model-question" className="border-y border-[var(--lab-rule)] py-6">
       <p className="lab-kicker">Question {activeStep + 1} of {questions.length}</p>
-      <h3 id="model-question" className="mt-2 text-lg font-semibold text-[rgb(var(--lab-ink))]">
+      <h3 id="model-question" className="mt-2 text-lg font-semibold text-[var(--lab-ink)]">
         {question}
       </h3>
-      <p className="mt-2 max-w-2xl text-sm leading-6 text-[rgb(var(--lab-muted))]">{detail}</p>
+      <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--lab-muted)]">{detail}</p>
       <div className="mt-5">
         {activeStep === 0 ? (
           <SegmentedChoice label={question} choices={inputChoices} value={inputForm} onChange={setInputForm} />

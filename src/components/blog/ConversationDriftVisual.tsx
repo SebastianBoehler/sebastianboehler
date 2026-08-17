@@ -83,7 +83,7 @@ export default function ConversationDriftVisual() {
                 <span className="text-xs font-semibold uppercase tracking-wide text-stone-500 dark:text-stone-400">
                   Turn {index + 1}
                 </span>
-                <span className={index === turnIndex ? "font-medium text-[rgb(var(--lab-accent))]" : "text-stone-700 dark:text-stone-300"}>
+                <span className={index === turnIndex ? "font-medium text-[var(--lab-accent)]" : "text-stone-700 dark:text-stone-300"}>
                   {turn.message}
                 </span>
               </li>

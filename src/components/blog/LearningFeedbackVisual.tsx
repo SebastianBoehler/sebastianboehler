@@ -112,19 +112,19 @@ export default function LearningFeedbackVisual() {
         <p className="sr-only" aria-live="polite" aria-atomic="true">
           {plan.label}. {plan.note}
         </p>
-        <div className="flex flex-col gap-4 border-y border-[rgb(var(--lab-rule))] py-5 sm:flex-row sm:items-start sm:justify-between">
+        <div className="flex flex-col gap-4 border-y border-[var(--lab-rule)] py-5 sm:flex-row sm:items-start sm:justify-between">
           <div>
             <p className="lab-kicker">Study timeline</p>
-            <h3 className="mt-2 text-lg font-semibold text-[rgb(var(--lab-ink))]">
+            <h3 className="mt-2 text-lg font-semibold text-[var(--lab-ink)]">
               {plan.label}
             </h3>
           </div>
-          <p className="max-w-md text-sm leading-6 text-[rgb(var(--lab-muted))]">
+          <p className="max-w-md text-sm leading-6 text-[var(--lab-muted)]">
             {plan.note}
           </p>
         </div>
 
-        <ol className="divide-y divide-[rgb(var(--lab-rule))]">
+        <ol className="divide-y divide-[var(--lab-rule)]">
           <TimelineStep
             index="01"
             when="Start"
@@ -174,7 +174,7 @@ function ChoiceGroup({
 }) {
   return (
     <div>
-      <p className="mb-2 text-xs font-semibold uppercase tracking-[0.04em] text-[rgb(var(--lab-muted))]">
+      <p className="mb-2 text-xs font-semibold uppercase tracking-[0.04em] text-[var(--lab-muted)]">
         {label}
       </p>
       {children}
@@ -195,15 +195,15 @@ function TimelineStep({
 }) {
   return (
     <li className="grid gap-2 py-4 sm:grid-cols-[2.5rem_9rem_minmax(0,1fr)] sm:gap-4">
-      <span className="font-mono text-xs font-semibold text-[rgb(var(--lab-accent))]">
+      <span className="font-mono text-xs font-semibold text-[var(--lab-accent)]">
         {index}
       </span>
-      <strong className="text-sm text-[rgb(var(--lab-ink))]">{when}</strong>
+      <strong className="text-sm text-[var(--lab-ink)]">{when}</strong>
       <span>
-        <span className="block text-sm font-medium text-[rgb(var(--lab-ink))]">
+        <span className="block text-sm font-medium text-[var(--lab-ink)]">
           {action}
         </span>
-        <span className="mt-1 block text-sm leading-6 text-[rgb(var(--lab-muted))]">
+        <span className="mt-1 block text-sm leading-6 text-[var(--lab-muted)]">
           {purpose}
         </span>
       </span>

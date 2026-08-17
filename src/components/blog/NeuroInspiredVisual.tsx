@@ -87,12 +87,12 @@ export default function NeuroInspiredVisual() {
           tokens={pathTokens(mechanism)}
         />
 
-        <section aria-labelledby="neuro-intervention" className="border-y border-[rgb(var(--lab-rule))] py-6">
+        <section aria-labelledby="neuro-intervention" className="border-y border-[var(--lab-rule)] py-6">
           <p className="lab-kicker">Intervention</p>
-          <h3 id="neuro-intervention" className="mt-2 text-lg font-semibold text-[rgb(var(--lab-ink))]">
+          <h3 id="neuro-intervention" className="mt-2 text-lg font-semibold text-[var(--lab-ink)]">
             Change {active.title.toLowerCase()}
           </h3>
-          <p className="mt-2 max-w-2xl text-sm leading-6 text-[rgb(var(--lab-muted))]">
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--lab-muted)]">
             The other two mechanisms remain at baseline so the causal distinction stays visible.
           </p>
           <div className="mt-5">

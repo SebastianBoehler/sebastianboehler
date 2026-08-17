@@ -132,10 +132,10 @@ export default function TrainingDynamicsVisual() {
         <div className="grid gap-5 md:grid-cols-[minmax(0,1fr)_15rem] md:items-start">
           <div>
             <p className="lab-kicker">Selected regime</p>
-            <h3 className="mt-2 text-lg font-semibold text-[rgb(var(--lab-ink))]">
+            <h3 className="mt-2 text-lg font-semibold text-[var(--lab-ink)]">
               {active.title}
             </h3>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-[rgb(var(--lab-muted))]">
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--lab-muted)]">
               {active.setup}
             </p>
           </div>
@@ -150,7 +150,7 @@ export default function TrainingDynamicsVisual() {
             <caption className="sr-only">
               Four consecutive updates for the selected batch regime
             </caption>
-            <thead className="border-y border-[rgb(var(--lab-rule))] text-xs uppercase tracking-[0.04em] text-[rgb(var(--lab-muted))]">
+            <thead className="border-y border-[var(--lab-rule)] text-xs uppercase tracking-[0.04em] text-[var(--lab-muted)]">
               <tr>
                 <th className="px-2 py-3 font-semibold" scope="col">
                   Update
@@ -166,22 +166,22 @@ export default function TrainingDynamicsVisual() {
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[rgb(var(--lab-rule))]">
+            <tbody className="divide-y divide-[var(--lab-rule)]">
               {active.updates.map(([step, evidence, direction, result]) => (
                 <tr key={step}>
                   <th
-                    className="px-2 py-3 font-mono text-xs font-semibold text-[rgb(var(--lab-accent))]"
+                    className="px-2 py-3 font-mono text-xs font-semibold text-[var(--lab-accent)]"
                     scope="row"
                   >
                     {step}
                   </th>
-                  <td className="px-2 py-3 font-medium text-[rgb(var(--lab-ink))]">
+                  <td className="px-2 py-3 font-medium text-[var(--lab-ink)]">
                     {evidence}
                   </td>
-                  <td className="px-2 py-3 text-[rgb(var(--lab-muted))]">
+                  <td className="px-2 py-3 text-[var(--lab-muted)]">
                     {direction}
                   </td>
-                  <td className="px-2 py-3 text-[rgb(var(--lab-muted))]">
+                  <td className="px-2 py-3 text-[var(--lab-muted)]">
                     {result}
                   </td>
                 </tr>

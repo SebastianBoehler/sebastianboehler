@@ -134,7 +134,7 @@ export default function PhysicsInformedVisual() {
       insights={insights}
       caption="A qualitative counterfactual. The observations and model are held fixed; only the physics penalty changes. A misspecified law can make the guided model worse, not better."
       footer={
-        <p className="text-sm leading-6 text-[rgb(var(--lab-muted))]">
+        <p className="text-sm leading-6 text-[var(--lab-muted)]">
           Read the columns as hypotheses to test: a physics term is valuable
           only when it reduces meaningful violations without destroying the fit
           that the data supports.
@@ -157,10 +157,10 @@ export default function PhysicsInformedVisual() {
           {active.question} {active.note}
         </p>
         <p className="lab-kicker">Inspection question</p>
-        <h3 className="mt-2 text-lg font-semibold text-[rgb(var(--lab-ink))]">
+        <h3 className="mt-2 text-lg font-semibold text-[var(--lab-ink)]">
           {active.question}
         </h3>
-        <p className="mt-2 max-w-3xl text-sm leading-6 text-[rgb(var(--lab-muted))]">
+        <p className="mt-2 max-w-3xl text-sm leading-6 text-[var(--lab-muted)]">
           {active.note}
         </p>
         <div className="mt-5">

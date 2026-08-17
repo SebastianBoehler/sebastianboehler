@@ -104,12 +104,12 @@ export default function ContextEngineeringVisual() {
         </div>
 
         <Annotation label="User task" tone="intervention">
-          <p className="font-medium text-[rgb(var(--lab-ink))]">{task.prompt}</p>
+          <p className="font-medium text-[var(--lab-ink)]">{task.prompt}</p>
           <p className="mt-2">{task.rationale}</p>
         </Annotation>
 
         <section aria-label="Context routing decision">
-          <div className="grid grid-cols-[minmax(0,1fr)_8rem] gap-4 border-y border-[rgb(var(--lab-rule))] py-2 text-xs font-semibold uppercase tracking-[0.04em] text-[rgb(var(--lab-muted))]">
+          <div className="grid grid-cols-[minmax(0,1fr)_8rem] gap-4 border-y border-[var(--lab-rule)] py-2 text-xs font-semibold uppercase tracking-[0.04em] text-[var(--lab-muted)]">
             <span>Context source</span>
             <span>Decision</span>
           </div>
@@ -118,16 +118,16 @@ export default function ContextEngineeringVisual() {
             return (
               <div
                 key={source.label}
-                className="grid min-h-12 grid-cols-[minmax(0,1fr)_8rem] items-center gap-4 border-b border-[rgb(var(--lab-rule))] text-sm"
+                className="grid min-h-12 grid-cols-[minmax(0,1fr)_8rem] items-center gap-4 border-b border-[var(--lab-rule)] text-sm"
               >
-                <span className={route === "hold back" ? "text-[rgb(var(--lab-muted))]" : "font-medium"}>{source.label}</span>
+                <span className={route === "hold back" ? "text-[var(--lab-muted)]" : "font-medium"}>{source.label}</span>
                 <span className={routeTone(route)}>{route}</span>
               </div>
             )
           })}
         </section>
 
-        <p className="text-sm leading-6 text-[rgb(var(--lab-muted))]" aria-live="polite">
+        <p className="text-sm leading-6 text-[var(--lab-muted)]" aria-live="polite">
           {strategy === "selective"
             ? `${heldBack} unrelated sources remain discoverable without competing with the active task.`
             : "The task signal now competes with every unrelated instruction in the catalog."}
@@ -143,7 +143,7 @@ function routeFor(route: Route, strategy: Strategy): Route {
 }
 
 function routeTone(route: Route) {
-  if (route === "always on") return "text-xs font-semibold uppercase tracking-[0.04em] text-[rgb(var(--lab-ink))]"
-  if (route === "load now") return "text-xs font-semibold uppercase tracking-[0.04em] text-[rgb(var(--lab-accent))]"
-  return "text-xs font-semibold uppercase tracking-[0.04em] text-[rgb(var(--lab-muted))]"
+  if (route === "always on") return "text-xs font-semibold uppercase tracking-[0.04em] text-[var(--lab-ink)]"
+  if (route === "load now") return "text-xs font-semibold uppercase tracking-[0.04em] text-[var(--lab-accent)]"
+  return "text-xs font-semibold uppercase tracking-[0.04em] text-[var(--lab-muted)]"
 }

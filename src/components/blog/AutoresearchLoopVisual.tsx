@@ -82,20 +82,20 @@ export default function AutoresearchLoopVisual() {
     >
       <div className="space-y-7">
         <Annotation label="Candidate hypothesis" tone="intervention">
-          <p className="font-medium text-[rgb(var(--lab-ink))]">{candidate.hypothesis}</p>
+          <p className="font-medium text-[var(--lab-ink)]">{candidate.hypothesis}</p>
         </Annotation>
 
-        <ol className="border-t border-[rgb(var(--lab-rule))]" aria-label="Experiment evidence trail">
+        <ol className="border-t border-[var(--lab-rule)]" aria-label="Experiment evidence trail">
           {STEPS.map((stage, index) => {
             const state = stateFor(index, step, candidate.accepted)
             return (
               <li
                 key={stage.label}
-                className="grid min-h-16 grid-cols-[2rem_minmax(7rem,0.7fr)_minmax(0,1.4fr)_5.5rem] items-center gap-3 border-b border-[rgb(var(--lab-rule))] py-3 text-sm max-sm:grid-cols-[2rem_minmax(0,1fr)_5.5rem]"
+                className="grid min-h-16 grid-cols-[2rem_minmax(7rem,0.7fr)_minmax(0,1.4fr)_5.5rem] items-center gap-3 border-b border-[var(--lab-rule)] py-3 text-sm max-sm:grid-cols-[2rem_minmax(0,1fr)_5.5rem]"
               >
-                <span className="font-mono text-xs text-[rgb(var(--lab-muted))]">0{index + 1}</span>
+                <span className="font-mono text-xs text-[var(--lab-muted)]">0{index + 1}</span>
                 <strong>{stage.label}</strong>
-                <span className="text-[rgb(var(--lab-muted))] max-sm:col-span-3 max-sm:col-start-2">
+                <span className="text-[var(--lab-muted)] max-sm:col-span-3 max-sm:col-start-2">
                   {stageCopy(index, candidate.accepted, candidate.evidence, candidate.outcome)}
                 </span>
                 <span className={stateTone(state)} aria-current={index === step ? "step" : undefined}>
@@ -106,10 +106,10 @@ export default function AutoresearchLoopVisual() {
           })}
         </ol>
 
-        <div className="grid gap-4 border-l-2 border-[rgb(var(--lab-accent))] pl-4 sm:grid-cols-[1fr_auto] sm:items-center">
+        <div className="grid gap-4 border-l-2 border-[var(--lab-accent)] pl-4 sm:grid-cols-[1fr_auto] sm:items-center">
           <div>
             <p className="lab-kicker">Public research graph</p>
-            <p className="mt-2 text-sm leading-6 text-[rgb(var(--lab-muted))]" aria-live="polite">
+            <p className="mt-2 text-sm leading-6 text-[var(--lab-muted)]" aria-live="polite">
               {step < 3
                 ? "The candidate is still private while its evidence is tested."
                 : candidate.accepted
@@ -117,7 +117,7 @@ export default function AutoresearchLoopVisual() {
                   : "The rejected claim stays out of the public frontier; its private trace can still guide the next hypothesis."}
             </p>
           </div>
-          <span className="text-sm font-semibold text-[rgb(var(--lab-accent))]">
+          <span className="text-sm font-semibold text-[var(--lab-accent)]">
             {step >= 3 && candidate.accepted ? "Reusable evidence" : "No public node yet"}
           </span>
         </div>
@@ -144,8 +144,8 @@ function stageCopy(index: number, accepted: boolean, evidence: string, outcome: 
 
 function stateTone(state: StageState) {
   const base = "text-right text-xs font-semibold uppercase tracking-[0.04em]"
-  if (state === "active") return `${base} text-[rgb(var(--lab-accent))]`
-  if (state === "fail") return `${base} text-[rgb(var(--lab-intervention))]`
-  if (state === "pass" || state === "available") return `${base} text-[rgb(var(--lab-ink))]`
-  return `${base} text-[rgb(var(--lab-muted))]`
+  if (state === "active") return `${base} text-[var(--lab-accent)]`
+  if (state === "fail") return `${base} text-[var(--lab-intervention)]`
+  if (state === "pass" || state === "available") return `${base} text-[var(--lab-ink)]`
+  return `${base} text-[var(--lab-muted)]`
 }

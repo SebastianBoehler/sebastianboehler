@@ -102,8 +102,8 @@ export default function ModularityBridgeVisual() {
 
 function ComparisonTable({ lens }: { lens: Lens }) {
   return (
-    <div role="table" aria-label="Brain, dense LLM, and mixture-of-experts modularity comparison" className="border-t border-[rgb(var(--lab-rule))]">
-      <div role="row" className="hidden grid-cols-[minmax(9rem,0.8fr)_repeat(3,minmax(0,1fr))] gap-5 border-b border-[rgb(var(--lab-rule))] py-3 text-xs font-semibold uppercase tracking-[0.04em] text-[rgb(var(--lab-muted))] md:grid">
+    <div role="table" aria-label="Brain, dense LLM, and mixture-of-experts modularity comparison" className="border-t border-[var(--lab-rule)]">
+      <div role="row" className="hidden grid-cols-[minmax(9rem,0.8fr)_repeat(3,minmax(0,1fr))] gap-5 border-b border-[var(--lab-rule)] py-3 text-xs font-semibold uppercase tracking-[0.04em] text-[var(--lab-muted)] md:grid">
         <span role="columnheader">Question</span>
         <span role="columnheader">Brain</span>
         <span role="columnheader">Dense LLM</span>
@@ -117,10 +117,10 @@ function ComparisonTable({ lens }: { lens: Lens }) {
           <div
             key={row.label}
             role="row"
-            className="grid gap-4 border-b border-[rgb(var(--lab-rule))] py-5 md:grid-cols-[minmax(9rem,0.8fr)_repeat(3,minmax(0,1fr))] md:gap-5"
-            style={active ? { backgroundColor: "rgb(var(--lab-accent) / 0.06)" } : undefined}
+            className="grid gap-4 border-b border-[var(--lab-rule)] py-5 md:grid-cols-[minmax(9rem,0.8fr)_repeat(3,minmax(0,1fr))] md:gap-5"
+            style={active ? { backgroundColor: "color-mix(in oklch, var(--lab-accent) 6%, transparent)" } : undefined}
           >
-            <strong role="rowheader" className="text-sm text-[rgb(var(--lab-ink))]">
+            <strong role="rowheader" className="text-sm text-[var(--lab-ink)]">
               {row.label}
             </strong>
             <ComparisonCell label="Brain">{row.brain}</ComparisonCell>
@@ -135,8 +135,8 @@ function ComparisonTable({ lens }: { lens: Lens }) {
 
 function ComparisonCell({ label, children }: { label: string; children: string }) {
   return (
-    <span role="cell" className="text-sm leading-6 text-[rgb(var(--lab-muted))]">
-      <span className="mb-1 block text-xs font-semibold uppercase tracking-[0.04em] text-[rgb(var(--lab-ink))] md:hidden">
+    <span role="cell" className="text-sm leading-6 text-[var(--lab-muted)]">
+      <span className="mb-1 block text-xs font-semibold uppercase tracking-[0.04em] text-[var(--lab-ink)] md:hidden">
         {label}
       </span>
       {children}
@@ -146,26 +146,26 @@ function ComparisonCell({ label, children }: { label: string; children: string }
 
 function DenseEvidence() {
   return (
-    <section aria-labelledby="dense-evidence-heading" className="border-t border-[rgb(var(--lab-rule))] pt-6">
+    <section aria-labelledby="dense-evidence-heading" className="border-t border-[var(--lab-rule)] pt-6">
       <p className="lab-kicker">Measured in the dense-model study</p>
-      <h3 id="dense-evidence-heading" className="mt-2 text-lg font-semibold text-[rgb(var(--lab-ink))]">
+      <h3 id="dense-evidence-heading" className="mt-2 text-lg font-semibold text-[var(--lab-ink)]">
         Attribution overlap and causal ablation point in the same direction
       </h3>
-      <p className="mt-2 max-w-3xl text-sm leading-6 text-[rgb(var(--lab-muted))]">
+      <p className="mt-2 max-w-3xl text-sm leading-6 text-[var(--lab-muted)]">
         These values describe task-relevant unit populations in the dense models studied. They do not measure brain networks or MoE experts.
       </p>
 
-      <dl className="mt-5 grid border-t border-[rgb(var(--lab-rule))] md:grid-cols-2">
-        <div className="border-b border-[rgb(var(--lab-rule))] py-5 md:pr-6">
-          <dt className="text-sm font-semibold text-[rgb(var(--lab-ink))]">Top-attributed unit overlap</dt>
-          <dd className="mt-2 text-sm leading-6 text-[rgb(var(--lab-muted))]">
-            Same-domain tasks shared <strong className="text-[rgb(var(--lab-ink))]">12.9%</strong>, compared with <strong className="text-[rgb(var(--lab-ink))]">3.0%</strong> across domains.
+      <dl className="mt-5 grid border-t border-[var(--lab-rule)] md:grid-cols-2">
+        <div className="border-b border-[var(--lab-rule)] py-5 md:pr-6">
+          <dt className="text-sm font-semibold text-[var(--lab-ink)]">Top-attributed unit overlap</dt>
+          <dd className="mt-2 text-sm leading-6 text-[var(--lab-muted)]">
+            Same-domain tasks shared <strong className="text-[var(--lab-ink)]">12.9%</strong>, compared with <strong className="text-[var(--lab-ink)]">3.0%</strong> across domains.
           </dd>
         </div>
-        <div className="border-b border-[rgb(var(--lab-rule))] py-5 md:border-l md:pl-6">
-          <dt className="text-sm font-semibold text-[rgb(var(--lab-ink))]">Performance loss after ablation</dt>
-          <dd className="mt-2 text-sm leading-6 text-[rgb(var(--lab-muted))]">
-            Within-domain ablation reduced performance by <strong className="text-[rgb(var(--lab-ink))]">25.9%</strong>, compared with <strong className="text-[rgb(var(--lab-ink))]">2.5%</strong> for cross-domain units.
+        <div className="border-b border-[var(--lab-rule)] py-5 md:border-l md:pl-6">
+          <dt className="text-sm font-semibold text-[var(--lab-ink)]">Performance loss after ablation</dt>
+          <dd className="mt-2 text-sm leading-6 text-[var(--lab-muted)]">
+            Within-domain ablation reduced performance by <strong className="text-[var(--lab-ink)]">25.9%</strong>, compared with <strong className="text-[var(--lab-ink)]">2.5%</strong> for cross-domain units.
           </dd>
         </div>
       </dl>

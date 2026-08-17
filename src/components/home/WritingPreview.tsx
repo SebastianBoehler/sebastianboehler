@@ -36,7 +36,10 @@ export function WritingPreview({ posts }: { posts: BlogPostMeta[] }) {
             </time>
             <div className="max-w-3xl space-y-2">
               <h3 className="text-xl font-semibold tracking-[-0.02em] sm:text-2xl">
-                <Link href={`/blog/${post.slug}`} className="underline-offset-4 hover:text-[var(--accent)] hover:underline">
+                <Link
+                  href={`/blog/${post.slug}`}
+                  className="inline-flex min-h-11 items-center underline-offset-4 hover:text-[var(--accent)] hover:underline"
+                >
                   {post.title}
                 </Link>
               </h3>

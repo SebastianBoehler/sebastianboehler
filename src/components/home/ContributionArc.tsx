@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react"
+import { profile } from "@/content/profile"
 import type { ContributionArcState, ContributionYear } from "@/lib/github-types"
 
 const CELLS_PER_YEAR = 53 * 7
@@ -54,7 +55,7 @@ export function ContributionArc({ state }: { state: ContributionArcState }) {
           Contribution arc
         </h2>
         <p className="max-w-md text-base leading-7 text-[var(--muted)]">
-          A quiet record of sustained public building from 2017 onward.
+          {profile.contributionArc}
         </p>
       </div>
 

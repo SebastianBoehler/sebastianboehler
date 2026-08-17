@@ -10,12 +10,9 @@ export function About() {
             About
           </h2>
           <div className="space-y-4 text-base leading-7 text-[var(--muted)] sm:text-lg sm:leading-8">
-            <p>
-              I moved from self-taught builder and backend engineer to research engineer and founder.
-            </p>
-            <p>
-              Today I work through Sunderlabs and HB Capital while studying computer science at Tübingen.
-            </p>
+            {profile.about.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
           </div>
         </div>
 

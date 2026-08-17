@@ -1,5 +1,8 @@
 import { expect, test } from "bun:test"
 import { join } from "node:path"
+import { createElement } from "react"
+import { renderToStaticMarkup } from "react-dom/server"
+import { WritingPreview } from "../src/components/home/WritingPreview"
 
 const root = join(import.meta.dir, "..")
 
@@ -43,4 +46,20 @@ test("keeps concept-lab controls at least 44px in both axes", async () => {
 
   expect(conceptLabStyles).toMatch(/\.concept-lab button\s*{[^}]*min-width: 44px[^}]*min-height: 44px/)
   expect(conceptLabStyles).not.toContain("min-height: 2.5rem")
+})
+
+test("keeps recent essay title links at least 44px high", () => {
+  const markup = renderToStaticMarkup(createElement(WritingPreview, {
+    posts: [{
+      slug: "target-test",
+      title: "Measured essay target",
+      description: "A representative one-line desktop essay description.",
+      date: "2026-08-17",
+      tags: [],
+    }],
+  }))
+
+  expect(markup).toMatch(
+    /<a(?=[^>]*href="\/blog\/target-test")(?=[^>]*class="[^"]*\bmin-h-11\b[^"]*")[^>]*>/,
+  )
 })

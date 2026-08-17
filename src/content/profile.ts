@@ -10,6 +10,11 @@ export const profile = {
     "I'm Sebastian Boehler, a research engineer and founder working across high-speed simulation, trading infrastructure, autonomous systems, and source-grounded learning.",
   proof:
     "IEEE-published research · Founder at Sunderlabs · Co-founder and CTO at HB Capital · M.Sc. Computer Science at Tübingen",
+  about: [
+    "I moved from self-taught builder and backend engineer to research engineer and founder.",
+    "Today I work through Sunderlabs and HB Capital while studying computer science at Tübingen.",
+  ],
+  contributionArc: "A quiet record of sustained public building from 2017 onward.",
   email: "contact@sebastian-boehler.com",
   primaryAction: {
     label: "Discuss a collaboration",

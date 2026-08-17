@@ -3,6 +3,7 @@ import { join } from "node:path"
 import { createElement, createRef } from "react"
 import { renderToStaticMarkup } from "react-dom/server"
 import * as ThemeProviderModule from "../src/components/ThemeProvider"
+import { Hero } from "../src/components/home/Hero"
 import { WritingPreview } from "../src/components/home/WritingPreview"
 import { SelectedWork } from "../src/components/home/SelectedWork"
 import * as SiteHeaderModule from "../src/components/site/SiteHeader"
@@ -237,4 +238,12 @@ test("keeps recent essay title links at least 44px high", () => {
   expect(markup).toMatch(
     /<a(?=[^>]*href="\/blog\/target-test")(?=[^>]*class="[^"]*\bmin-h-11\b[^"]*")[^>]*>/,
   )
+})
+
+test("gives the hero thesis a wide editorial measure without forced breaks", () => {
+  const markup = renderToStaticMarkup(createElement(Hero))
+
+  expect(markup).toContain("I build AI systems from the environment up.")
+  expect(markup).not.toContain("<br")
+  expect(markup).toMatch(/^<section[^>]*><h1[^>]*>/)
 })

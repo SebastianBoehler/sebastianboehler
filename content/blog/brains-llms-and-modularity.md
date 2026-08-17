@@ -250,6 +250,14 @@ with less collateral damage elsewhere.
 That does not require a brain. It is a generic pressure on any large adaptive
 system trained across heterogeneous tasks.
 
+A [new minimal-model study](https://arxiv.org/abs/2607.14000) adds a second axis:
+a neuronal network can be silent while finite-lived synapses still carry a
+hidden state. The number of fresh excitatory neurons that state can recruit
+strongly predicts whether activity returns. This is not a mechanism ordinary
+transformers share—their weights do not change transiently during inference—but
+it sharpens the design question: modularity asks *where* computation happens;
+memory asks *what persists between moments*.
+
 ## Step 9: the careful takeaway
 
 The wrong takeaway is:
@@ -287,3 +295,4 @@ large system organizes the work.
 - [Functional neuroanatomy of intuitive physical inference](https://www.pnas.org/doi/10.1073/pnas.1610344113)
 - [People thinking about thinking people](https://web.mit.edu/bcs/nklab/media/pdfs/SaxeKanwisherNeuroImage03.pdf)
 - [Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer](https://arxiv.org/abs/1701.06538)
+- [Activity Regeneration from Silent States in Neuronal Networks with Transient Synaptic Memory](https://arxiv.org/abs/2607.14000)

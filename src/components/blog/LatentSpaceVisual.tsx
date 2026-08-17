@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import LatentLandscapePlot from "@/components/blog/LatentLandscapePlot"
 import { ConceptLab } from "@/components/blog/visuals/ConceptLab"
 import {
   Annotation,
@@ -59,6 +60,7 @@ export default function LatentSpaceVisual() {
       caption="A teaching model of representation space. The labels describe qualitative compatibility, not coordinates or telemetry from a particular LLM."
     >
       <div className="space-y-6" aria-live="polite">
+        <LatentLandscapePlot frameId={frameId} stage={step as 0 | 1 | 2 | 3} />
         <TokenStrip
           label="Prompt under inspection"
           tokens={frame.tokens.map((text) => ({

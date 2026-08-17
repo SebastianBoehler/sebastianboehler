@@ -10,22 +10,53 @@ type ThemeContextType = {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
+type ThemeRoot = {
+  classList: Pick<DOMTokenList, "contains" | "toggle">
+  style: Pick<CSSStyleDeclaration, "colorScheme">
+}
+
+type StorageAccess = () => Pick<Storage, "getItem" | "setItem">
+
+const getBrowserStorage: StorageAccess = () => window.localStorage
+
+function applyTheme(root: ThemeRoot, theme: Theme) {
+  root.classList.toggle("dark", theme === "dark")
+  root.style.colorScheme = theme
+}
+
+export function initializeDocumentTheme(
+  root: ThemeRoot,
+  prefersDark: boolean,
+  getStorage: StorageAccess = getBrowserStorage,
+) {
+  let savedTheme: string | null = null
+  try {
+    savedTheme = getStorage().getItem("theme")
+  } catch {}
+
+  const theme: Theme = savedTheme === "dark" || (savedTheme !== "light" && prefersDark) ? "dark" : "light"
+  applyTheme(root, theme)
+}
+
+export function toggleDocumentTheme(
+  root: ThemeRoot,
+  getStorage: StorageAccess = getBrowserStorage,
+) {
+  const theme: Theme = root.classList.contains("dark") ? "light" : "dark"
+  try {
+    getStorage().setItem("theme", theme)
+  } catch {}
+
+  applyTheme(root, theme)
+}
+
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme")
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
-    const initialTheme: Theme = savedTheme === "dark" || (savedTheme !== "light" && prefersDark) ? "dark" : "light"
-
-    document.documentElement.classList.toggle("dark", initialTheme === "dark")
-    document.documentElement.style.colorScheme = initialTheme
+    initializeDocumentTheme(document.documentElement, prefersDark)
   }, [])
 
-  const toggleTheme = () => {
-    const newTheme: Theme = document.documentElement.classList.contains("dark") ? "light" : "dark"
-    localStorage.setItem("theme", newTheme)
-    document.documentElement.classList.toggle("dark", newTheme === "dark")
-    document.documentElement.style.colorScheme = newTheme
-  }
+  const toggleTheme = () => toggleDocumentTheme(document.documentElement)
 
   return (
     <ThemeContext.Provider value={{ toggleTheme }}>

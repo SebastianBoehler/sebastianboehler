@@ -4,7 +4,12 @@ export function SelectedWork({ items }: { items: readonly WorkItem[] }) {
   return (
     <section id="work" aria-labelledby="selected-work-heading" className="space-y-10">
       <div className="max-w-2xl space-y-3">
-        <h2 id="selected-work-heading" className="text-4xl font-semibold tracking-[-0.035em] sm:text-5xl">
+        <h2
+          id="selected-work-heading"
+          tabIndex={-1}
+          data-anchor-focus="true"
+          className="text-4xl font-semibold tracking-[-0.035em] sm:text-5xl"
+        >
           Selected work
         </h2>
         <p className="text-base leading-7 text-[var(--muted)] sm:text-lg">

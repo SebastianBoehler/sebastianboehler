@@ -1,8 +1,11 @@
 import { expect, test } from "bun:test"
 import { join } from "node:path"
-import { createElement } from "react"
+import { createElement, createRef } from "react"
 import { renderToStaticMarkup } from "react-dom/server"
+import * as ThemeProviderModule from "../src/components/ThemeProvider"
 import { WritingPreview } from "../src/components/home/WritingPreview"
+import { SelectedWork } from "../src/components/home/SelectedWork"
+import * as SiteHeaderModule from "../src/components/site/SiteHeader"
 
 const root = join(import.meta.dir, "..")
 
@@ -92,14 +95,119 @@ test("keeps dark secondary and primary-control text above the APCA QA floor", as
   expect(Math.abs(apca(onAccent, accent))).toBeGreaterThanOrEqual(75)
 })
 
-test("closes the mobile menu on selection or Escape and restores focus", async () => {
+test("activates the rendered mobile Work link, closes the menu, and focuses its destination", () => {
+  const MobileNavigation = Reflect.get(SiteHeaderModule, "MobileNavigation")
+  const MobileMenuButton = Reflect.get(SiteHeaderModule, "MobileMenuButton")
+  const handleMobileLinkSelection = Reflect.get(SiteHeaderModule, "handleMobileLinkSelection")
+
+  expect(typeof MobileNavigation).toBe("function")
+  expect(typeof MobileMenuButton).toBe("function")
+  expect(typeof handleMobileLinkSelection).toBe("function")
+  if (!MobileNavigation || !MobileMenuButton || !handleMobileLinkSelection) return
+
+  const navigation = renderToStaticMarkup(createElement(MobileNavigation, { onSelect: () => {} }))
+  const workHref = navigation.match(/<a[^>]*href="([^"]+)"[^>]*>Work<\/a>/)?.[1]
+  const destination = renderToStaticMarkup(createElement(SelectedWork, { items: [] }))
+  let isMenuOpen = true
+  let prevented = false
+  let activeElement: object | null = null
+  const target = {
+    focus: () => { activeElement = target },
+  }
+  const anchor = {
+    querySelector: () => target,
+    scrollIntoView: () => {},
+  }
+  const location = {
+    href: "http://localhost:3000/",
+    pathname: "/",
+    search: "",
+    hash: "",
+  }
+  const browser = {
+    location,
+    document: { getElementById: (id: string) => id === "work" ? anchor : null },
+    requestAnimationFrame: (callback: FrameRequestCallback) => {
+      callback(0)
+      return 1
+    },
+  }
+
+  expect(workHref).toBe("/#work")
+  expect(destination).toMatch(
+    /<h2(?=[^>]*data-anchor-focus="true")(?=[^>]*tabindex="-1")[^>]*>/,
+  )
+
+  handleMobileLinkSelection({
+    currentTarget: { href: new URL(workHref!, location.href).href },
+    preventDefault: () => { prevented = true },
+  }, () => { isMenuOpen = false }, browser as unknown as Parameters<
+    typeof SiteHeaderModule.handleMobileLinkSelection
+  >[2])
+
+  const closedButton = renderToStaticMarkup(createElement(MobileMenuButton, {
+    isOpen: isMenuOpen,
+    onToggle: () => {},
+    buttonRef: createRef<HTMLButtonElement>(),
+  }))
+
+  expect(location.hash).toBe("#work")
+  expect(closedButton).toContain('aria-expanded="false"')
+  expect(activeElement === target).toBe(true)
+  expect(prevented).toBe(true)
+})
+
+test("Escape closes the mobile menu and restores focus to its button", async () => {
   const header = await source("src/components/site/SiteHeader.tsx")
 
   expect(header).toContain('event.key === "Escape"')
   expect(header).toContain("menuButtonRef.current?.focus()")
-  expect(header).toContain(
-    '<nav id="mobile-navigation" className="site-header__mobile-nav" aria-label="Mobile navigation" onClick={closeMenu}>',
-  )
+})
+
+function themeRoot(initialDark: boolean) {
+  let isDark = initialDark
+  const root = {
+    classList: {
+      contains: (token: string) => token === "dark" && isDark,
+      toggle: (token: string, force?: boolean) => {
+        if (token === "dark") isDark = force ?? !isDark
+        return isDark
+      },
+    },
+    style: { colorScheme: initialDark ? "dark" : "light" },
+  }
+
+  return { root, isDark: () => isDark }
+}
+
+test("applies the system theme when localStorage reads throw", () => {
+  const initializeDocumentTheme = Reflect.get(ThemeProviderModule, "initializeDocumentTheme")
+  const { root, isDark } = themeRoot(false)
+
+  expect(typeof initializeDocumentTheme).toBe("function")
+  if (!initializeDocumentTheme) return
+
+  initializeDocumentTheme(root, true, () => {
+    throw new DOMException("Storage unavailable", "SecurityError")
+  })
+
+  expect(isDark()).toBe(true)
+  expect(root.style.colorScheme).toBe("dark")
+})
+
+test("toggles the document theme when localStorage writes throw", () => {
+  const toggleDocumentTheme = Reflect.get(ThemeProviderModule, "toggleDocumentTheme")
+  const { root, isDark } = themeRoot(true)
+
+  expect(typeof toggleDocumentTheme).toBe("function")
+  if (!toggleDocumentTheme) return
+
+  toggleDocumentTheme(root, () => {
+    throw new DOMException("Storage unavailable", "SecurityError")
+  })
+
+  expect(isDark()).toBe(false)
+  expect(root.style.colorScheme).toBe("light")
 })
 
 test("keeps compact footer links at least 44px wide", async () => {

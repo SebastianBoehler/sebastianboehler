@@ -41,6 +41,65 @@ test("announces a singular contribution grammatically", () => {
   expect(markup).not.toContain("1 contributions")
 })
 
+test("renders a leap-year week 53 cell inside the contribution chart", () => {
+  const markup = renderToStaticMarkup(createElement(ContributionArc, {
+    state: {
+      status: "ready",
+      years: [{
+        year: 2028,
+        total: 1,
+        cells: [{ date: "2028-12-31", week: 53, day: 0, level: 4 }],
+      }],
+    },
+  }))
+
+  expect(markup).toContain('data-contribution-columns="54"')
+  expect(markup).toMatch(/viewBox="0 0 215 27"[^>]*>[\s\S]*M212 0h3v3h-3Z/)
+})
+
+test("keeps a decade of contribution charts below one hundred decorative nodes", () => {
+  const cells = Array.from({ length: 53 * 7 }, (_, index) => ({
+    date: `fixture-${index}`,
+    week: Math.floor(index / 7),
+    day: index % 7,
+    level: index % 5,
+  }))
+  const markup = renderToStaticMarkup(createElement(ContributionArc, {
+    state: {
+      status: "ready",
+      years: Array.from({ length: 10 }, (_, index) => ({
+        year: 2017 + index,
+        total: 371,
+        cells,
+      })),
+    },
+  }))
+  const decorativeNodes = markup.match(/<(?:path|rect|span)\b/g) ?? []
+
+  expect(decorativeNodes.length).toBeLessThan(100)
+  expect(markup.length).toBeLessThan(100_000)
+})
+
+test("keeps contribution levels in the accent family across themes", () => {
+  const markup = renderToStaticMarkup(createElement(ContributionArc, {
+    state: {
+      status: "ready",
+      years: [{
+        year: 2026,
+        total: 2,
+        cells: [
+          { date: "2026-01-01", week: 0, day: 0, level: 1 },
+          { date: "2026-01-02", week: 0, day: 1, level: 4 },
+        ],
+      }],
+    },
+  }))
+
+  expect(markup).toContain('fill="var(--accent)" fill-opacity="0.45"')
+  expect(markup).toContain('fill="var(--accent)" fill-opacity="0.9"')
+  expect(markup).not.toContain("color-mix")
+})
+
 test("keeps approved homepage qualifiers in authored profile content", () => {
   const about = Reflect.get(profile, "about") as readonly string[] | undefined
   const contributionArc = Reflect.get(profile, "contributionArc") as string | undefined

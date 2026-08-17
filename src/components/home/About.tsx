@@ -6,7 +6,12 @@ export function About() {
     <section id="about" aria-labelledby="about-heading" className="grid gap-12 lg:grid-cols-12 lg:gap-16">
       <div className="space-y-8 lg:col-span-5">
         <div className="space-y-5">
-          <h2 id="about-heading" className="text-4xl font-semibold tracking-[-0.035em] sm:text-5xl">
+          <h2
+            id="about-heading"
+            tabIndex={-1}
+            data-anchor-focus="true"
+            className="text-4xl font-semibold tracking-[-0.035em] sm:text-5xl"
+          >
             About
           </h2>
           <div className="space-y-4 text-base leading-7 text-[var(--muted)] sm:text-lg sm:leading-8">

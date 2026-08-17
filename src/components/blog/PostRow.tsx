@@ -26,7 +26,6 @@ export function PostRow({ post }: { post: BlogPostMeta }) {
           <p className="text-base leading-7 text-[var(--muted)] sm:text-lg sm:leading-8">
             {post.description}
           </p>
-          <p className="font-mono text-xs leading-6 text-[var(--muted)]">{post.tags.join(" · ")}</p>
         </div>
       </Link>
     </article>

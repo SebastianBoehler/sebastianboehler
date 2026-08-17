@@ -1,4 +1,7 @@
 import { expect, test } from "bun:test"
+import { createElement } from "react"
+import { renderToStaticMarkup } from "react-dom/server"
+import { PostRow } from "@/components/blog/PostRow"
 import { isVisualId } from "@/components/blog/PostVisual"
 import { getBlogPost, getBlogPosts } from "@/lib/blog"
 
@@ -50,4 +53,13 @@ test("uses complete lab colors without RGB channel wrappers", async () => {
     const source = await Bun.file(`src/components/blog/${file}`).text()
     expect(source).not.toMatch(/rgb\(var\(--lab-/)
   }
+})
+
+test("keeps archive rows to date, title, and description", async () => {
+  const [post] = await getBlogPosts()
+  const markup = renderToStaticMarkup(createElement(PostRow, { post }))
+
+  expect(markup).toContain(post.title)
+  expect(markup).toContain(post.description)
+  expect(markup).not.toContain(post.tags.join(" · "))
 })

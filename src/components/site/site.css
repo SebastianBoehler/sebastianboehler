@@ -130,6 +130,27 @@
   border-color: var(--muted);
 }
 
+.theme-toggle__to-dark,
+.theme-toggle__to-light {
+  place-items: center;
+}
+
+.theme-toggle__to-dark {
+  display: inline-grid;
+}
+
+.theme-toggle__to-light {
+  display: none;
+}
+
+.dark .theme-toggle__to-dark {
+  display: none;
+}
+
+.dark .theme-toggle__to-light {
+  display: inline-grid;
+}
+
 .site-header__mobile-nav {
   position: absolute;
   top: 100%;

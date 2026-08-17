@@ -4,22 +4,23 @@ import { Moon, Sun } from "lucide-react"
 import { useTheme } from "@/components/ThemeProvider"
 
 export function ThemeToggle() {
-  const { theme, toggleTheme } = useTheme()
-  const nextTheme = theme === "light" ? "dark" : "light"
+  const { toggleTheme } = useTheme()
 
   return (
     <button
       type="button"
       className="theme-toggle"
       onClick={toggleTheme}
-      aria-label={`Switch to ${nextTheme} theme`}
-      title={`Switch to ${nextTheme} theme`}
+      title="Toggle color theme"
     >
-      {theme === "light" ? (
+      <span className="theme-toggle__to-dark">
         <Moon aria-hidden="true" size={19} strokeWidth={1.8} />
-      ) : (
+        <span className="sr-only">Switch to dark theme</span>
+      </span>
+      <span className="theme-toggle__to-light">
         <Sun aria-hidden="true" size={19} strokeWidth={1.8} />
-      )}
+        <span className="sr-only">Switch to light theme</span>
+      </span>
     </button>
   )
 }

@@ -247,3 +247,25 @@ test("gives the hero thesis a wide editorial measure without forced breaks", () 
   expect(markup).not.toContain("<br")
   expect(markup).toMatch(/^<section[^>]*><h1[^>]*>/)
 })
+
+test("leads every selected-work entry with the real project name", () => {
+  const markup = renderToStaticMarkup(createElement(SelectedWork, {
+    items: [{
+      id: "flightrl",
+      name: "Research Program",
+      title: "A precise project thesis.",
+      summary: "A concise technical summary.",
+      evidence: "A verified evidence source.",
+      boundary: "A clear deployment boundary.",
+      links: [{ label: "Read the work", href: "https://example.com" }],
+    }],
+  }))
+
+  expect(markup).toMatch(/<h3[^>]*>Research Program<\/h3>/)
+  expect(markup).not.toMatch(/<p[^>]*>Research Program<\/p>/)
+  expect(markup.indexOf("Research Program")).toBeLessThan(markup.indexOf("A precise project thesis."))
+  expect(markup.indexOf("A precise project thesis.")).toBeLessThan(markup.indexOf("A concise technical summary."))
+  expect(markup).toContain("A verified evidence source.")
+  expect(markup).toContain("A clear deployment boundary.")
+  expect(markup).toMatch(/<a[^>]*class="[^"]*\bmin-h-11\b[^"]*"[^>]*>Read the work<\/a>/)
+})

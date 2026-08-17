@@ -17,27 +17,26 @@ export function SelectedWork({ items }: { items: readonly WorkItem[] }) {
         </p>
       </div>
 
-      <div className="border-t border-[var(--line)]">
+      <div className="divide-y divide-[var(--line)]">
         {items.map((item) => (
           <article
             key={item.id}
-            className="grid gap-7 border-b border-[var(--line)] py-10 lg:grid-cols-12 lg:gap-12 lg:py-12"
+            className="py-12 first:pt-0 last:pb-0 sm:py-14 sm:first:pt-0 sm:last:pb-0"
           >
-            <div className="lg:col-span-3">
-              <p className="text-sm font-semibold leading-6 text-[var(--accent)]">{item.name}</p>
-            </div>
-
-            <div className="space-y-7 lg:col-span-9">
-              <div className="space-y-3">
-                <h3 className="max-w-3xl text-2xl font-semibold leading-tight tracking-[-0.025em] sm:text-3xl">
-                  {item.title}
+            <div className="max-w-3xl space-y-8">
+              <div className="space-y-4">
+                <h3 className="text-3xl font-semibold leading-tight tracking-[-0.03em] sm:text-4xl">
+                  {item.name}
                 </h3>
+                <p className="text-xl font-medium leading-8 tracking-[-0.015em] sm:text-2xl sm:leading-9">
+                  {item.title}
+                </p>
                 <p className="max-w-3xl text-base leading-7 text-[var(--muted)] sm:text-lg sm:leading-8">
                   {item.summary}
                 </p>
               </div>
 
-              <dl className="grid gap-5 text-sm leading-6 sm:grid-cols-2">
+              <dl className="grid gap-6 text-base leading-7 lg:grid-cols-2 lg:gap-10">
                 <div className="space-y-1">
                   <dt className="font-semibold text-[var(--text)]">Evidence</dt>
                   <dd className="text-[var(--muted)]">{item.evidence}</dd>

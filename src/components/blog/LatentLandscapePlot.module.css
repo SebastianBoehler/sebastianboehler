@@ -15,19 +15,19 @@
 
 .badge,
 .hint,
-.replay {
+.replay,
+.cameraControls {
   position: absolute;
   z-index: 1;
   color: var(--lab-muted);
 }
 
 .badge,
-.replay {
-  border: 1px solid color-mix(in oklch, var(--lab-rule) 78%, transparent);
+.replay,
+.cameraControls {
+  border: 1px solid var(--lab-rule);
   border-radius: 0.2rem;
-  background: color-mix(in oklch, var(--lab-paper) 90%, transparent);
-  box-shadow: 0 2px 10px color-mix(in oklch, var(--lab-ink) 10%, transparent);
-  backdrop-filter: blur(5px);
+  background: var(--lab-paper);
 }
 
 .badge {
@@ -47,7 +47,8 @@
   display: inline-flex;
   gap: 0.4rem;
   align-items: center;
-  padding: 0.45rem 0.65rem;
+  min-height: 44px;
+  padding: 0.45rem 0.7rem;
   color: var(--lab-ink);
   font-size: 0.75rem;
   font-weight: 650;
@@ -56,15 +57,62 @@
 
 .replay:hover {
   border-color: var(--lab-muted);
-  background: var(--lab-paper);
 }
 
 .hint {
-  bottom: 1.25rem;
+  bottom: 4.55rem;
   left: 1rem;
   pointer-events: none;
   font-size: 0.7rem;
   font-weight: 550;
+}
+
+.cameraControls {
+  bottom: 1rem;
+  left: 1rem;
+  display: flex;
+  overflow: hidden;
+}
+
+.cameraButton {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 0;
+  border-right: 1px solid var(--lab-rule);
+  background: var(--lab-paper);
+  color: var(--lab-ink);
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.cameraButton:last-child {
+  border-right: 0;
+}
+
+.cameraButton:hover:not(:disabled),
+.cameraButton:focus-visible {
+  background: var(--lab-paper);
+  color: var(--lab-accent);
+}
+
+.cameraButton:focus-visible,
+.replay:focus-visible {
+  position: relative;
+  z-index: 2;
+  outline: 2px solid var(--lab-accent);
+  outline-offset: -3px;
+}
+
+.cameraButton:disabled {
+  color: var(--lab-muted);
+  cursor: wait;
+}
+
+.cameraButton svg,
+.replay svg {
+  width: 1rem;
+  height: 1rem;
 }
 
 .failure {
@@ -89,5 +137,39 @@
 @media (min-width: 1024px) {
   .root {
     height: 570px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cameraButton,
+  .replay {
+    transition: none;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .badge,
+  .replay,
+  .cameraControls,
+  .cameraButton {
+    background: var(--lab-paper);
+  }
+}
+
+@media (forced-colors: active) {
+  .root,
+  .badge,
+  .replay,
+  .cameraControls,
+  .cameraButton,
+  .failure {
+    border-color: ButtonText;
+    background: Canvas;
+    color: CanvasText;
+  }
+
+  .cameraButton:focus-visible,
+  .replay:focus-visible {
+    outline-color: Highlight;
   }
 }

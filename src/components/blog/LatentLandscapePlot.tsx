@@ -1,16 +1,12 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
-import { RotateCcw } from "lucide-react"
+import { useId, type ReactNode } from "react"
+import { Focus, RefreshCcw, RotateCcw, RotateCw } from "lucide-react"
 import styles from "@/components/blog/LatentLandscapePlot.module.css"
-import {
-  createLandscapeFigure,
-  landscapeTrace,
-  routeTraceUpdate,
-  type LandscapeStage,
-} from "@/components/blog/latentLandscapeModel"
-import { readLandscapeTheme } from "@/components/blog/latentLandscapeTheme"
+import { canReplayLandscape } from "@/components/blog/latentLandscapeInteraction"
+import type { LandscapeStage } from "@/components/blog/latentLandscapeModel"
 import type { PromptFrameId } from "@/components/blog/latentSpaceData"
+import { useLatentLandscapePlot } from "@/components/blog/useLatentLandscapePlot"
 
 interface LatentLandscapePlotProps {
   frameId: PromptFrameId
@@ -18,127 +14,90 @@ interface LatentLandscapePlotProps {
 }
 
 export default function LatentLandscapePlot({ frameId, stage }: LatentLandscapePlotProps) {
-  const plotRef = useRef<HTMLDivElement>(null)
-  const [failed, setFailed] = useState(false)
-  const [replayKey, setReplayKey] = useState(0)
-  const [themeRevision, setThemeRevision] = useState(0)
-
-  useEffect(() => {
-    const observer = new MutationObserver(() => setThemeRevision((value) => value + 1))
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] })
-    return () => observer.disconnect()
-  }, [])
-
-  useEffect(() => {
-    let disposed = false
-    let animationFrame = 0
-    let resizeObserver: ResizeObserver | undefined
-    let plotly: typeof import("plotly.js-dist-min").default | undefined
-    const plotNode = plotRef.current
-
-    async function render() {
-      try {
-        const Plotly = (await import("plotly.js-dist-min")).default
-        plotly = Plotly
-        if (disposed || !plotNode) {
-          return
-        }
-
-        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        const animate = stage > 0 && !reduceMotion
-        const initialProgress = stage === 0 || animate ? 0 : 1
-        const theme = readLandscapeTheme(plotNode)
-        const figure = createLandscapeFigure(frameId, stage, initialProgress, theme)
-        Plotly.purge(plotNode)
-        await Plotly.newPlot(plotNode, figure.data, figure.layout, {
-          displayModeBar: false,
-          responsive: true,
-          scrollZoom: false,
-        })
-        if (disposed) {
-          Plotly.purge(plotNode)
-          return
-        }
-        setFailed(false)
-
-        resizeObserver = new ResizeObserver(() => {
-          if (plotNode) {
-            Plotly.Plots.resize(plotNode)
-          }
-        })
-        resizeObserver.observe(plotNode)
-
-        if (animate) {
-          const startedAt = performance.now()
-          let lastPaint = 0
-          const duration = 4_200
-
-          const draw = (now: number) => {
-            if (disposed) {
-              return
-            }
-            const elapsed = now - startedAt
-            if (now - lastPaint >= 32 || elapsed >= duration) {
-              const progress = Math.min(elapsed / duration, 1)
-              const eased = 0.5 - Math.cos(Math.PI * progress) / 2
-              const update = routeTraceUpdate(frameId, eased)
-              Plotly.restyle(plotNode, update.line, [landscapeTrace.outline, landscapeTrace.path])
-              Plotly.restyle(plotNode, update.head, [landscapeTrace.head])
-              lastPaint = now
-            }
-            if (elapsed < duration) {
-              animationFrame = requestAnimationFrame(draw)
-            }
-          }
-
-          animationFrame = requestAnimationFrame(draw)
-        }
-      } catch (error) {
-        if (!disposed) {
-          console.error("Unable to render the latent landscape", error)
-          setFailed(true)
-        }
-      }
-    }
-
-    render()
-
-    return () => {
-      disposed = true
-      cancelAnimationFrame(animationFrame)
-      resizeObserver?.disconnect()
-      if (plotNode && plotly) {
-        plotly.purge(plotNode)
-      }
-    }
-  }, [frameId, replayKey, stage, themeRevision])
+  const instructionsId = useId()
+  const landscape = useLatentLandscapePlot(frameId, stage)
+  const replayVisible = landscape.reduceMotion !== null
+    && canReplayLandscape(stage, landscape.reduceMotion)
 
   return (
-    <div className={styles.root}>
+    <div
+      role="group"
+      aria-label="Interactive representation landscape"
+      aria-describedby={instructionsId}
+      className={styles.root}
+    >
       <div
-        ref={plotRef}
+        ref={landscape.plotRef}
         role="img"
-        aria-label="Interactive 3D representation landscape with an animated contextual-state trajectory"
-        aria-hidden={failed || undefined}
+        aria-label="3D representation landscape with a contextual-state trajectory"
+        aria-describedby={instructionsId}
+        aria-hidden={landscape.failed || undefined}
         className={styles.plot}
       />
-      {failed ? (
+      <p id={instructionsId} className="sr-only">
+        Use the view controls or drag the landscape to rotate it.
+      </p>
+      {landscape.failed ? (
         <div role="alert" className={styles.failure}>3D landscape failed to load.</div>
       ) : (
         <>
           <div className={styles.badge}>Fixed representation map</div>
-          <button
-            type="button"
-            onClick={() => setReplayKey((value) => value + 1)}
-            aria-label="Replay contextual-state path animation"
-            className={styles.replay}
-          >
-            <RotateCcw aria-hidden="true" className="h-3.5 w-3.5" />
-            Replay path
-          </button>
-          <span aria-hidden="true" className={styles.hint}>Drag to rotate</span>
+          <div role="group" aria-label="Landscape view controls" className={styles.cameraControls}>
+            <CameraButton
+              label="Rotate landscape left"
+              disabled={!landscape.interactive}
+              onClick={landscape.rotateLeft}
+            ><RotateCcw aria-hidden="true" /></CameraButton>
+            <CameraButton
+              label="Rotate landscape right"
+              disabled={!landscape.interactive}
+              onClick={landscape.rotateRight}
+            ><RotateCw aria-hidden="true" /></CameraButton>
+            <CameraButton
+              label="Reset landscape view"
+              disabled={!landscape.interactive}
+              onClick={landscape.resetView}
+            ><Focus aria-hidden="true" /></CameraButton>
+          </div>
+          {replayVisible && (
+            <button
+              type="button"
+              onClick={landscape.replay}
+              aria-label="Replay contextual-state path animation"
+              className={styles.replay}
+            >
+              <RefreshCcw aria-hidden="true" />
+              Replay path
+            </button>
+          )}
+          <span aria-hidden="true" className={styles.hint}>Drag or use view controls</span>
         </>
       )}
     </div>
+  )
+}
+
+function CameraButton({
+  children,
+  disabled,
+  label,
+  onClick,
+}: {
+  children: ReactNode
+  disabled: boolean
+  label: string
+  onClick: () => void
+}) {
+  return (
+    <button
+      type="button"
+      title={label}
+      aria-label={label}
+      disabled={disabled}
+      onClick={onClick}
+      className={styles.cameraButton}
+    >
+      {children}
+    </button>
   )
 }

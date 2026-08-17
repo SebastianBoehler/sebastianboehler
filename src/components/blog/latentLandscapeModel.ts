@@ -9,6 +9,17 @@ import {
   type Point,
 } from "@/components/blog/latentLandscapeGeometry"
 import type { LandscapeTheme } from "@/components/blog/latentLandscapeTheme"
+import {
+  resetLandscapeCamera,
+  type LandscapeCamera,
+} from "@/components/blog/latentLandscapeInteraction"
+
+export {
+  canReplayLandscape,
+  planLandscapeRender,
+  resetLandscapeCamera,
+  rotateLandscapeCamera,
+} from "@/components/blog/latentLandscapeInteraction"
 
 export type LandscapeStage = 0 | 1 | 2 | 3
 
@@ -70,6 +81,7 @@ export function createLandscapeFigure(
   stage: LandscapeStage,
   progress: number,
   theme: LandscapeTheme,
+  camera: LandscapeCamera = resetLandscapeCamera(),
 ) {
   const xs = range(-3.25, 3.25, 58)
   const ys = range(-2.75, 2.75, 50)
@@ -157,6 +169,7 @@ export function createLandscapeFigure(
       },
     ],
     layout: {
+      uirevision: "latent-landscape-view",
       margin: { l: 0, r: 0, t: 0, b: 0 },
       paper_bgcolor: theme.paper,
       plot_bgcolor: theme.paper,
@@ -164,11 +177,7 @@ export function createLandscapeFigure(
         aspectmode: "manual",
         aspectratio: { x: 1.48, y: 1.08, z: 0.66 },
         bgcolor: theme.paper,
-        camera: {
-          center: { x: 0, y: 0.03, z: -0.08 },
-          eye: { x: 1.48, y: -1.62, z: 1.08 },
-          projection: { type: "perspective" },
-        },
+        camera,
         xaxis: groundAxis(),
         yaxis: groundAxis(),
         zaxis: { ...groundAxis(), range: [-2.2, 1.45], showbackground: true, backgroundcolor: theme.paper },

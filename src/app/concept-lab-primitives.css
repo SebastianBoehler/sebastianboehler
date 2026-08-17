@@ -1,14 +1,14 @@
 .lab-segmented {
   display: inline-flex;
   overflow: hidden;
-  border: 1px solid rgb(var(--lab-rule));
+  border: 1px solid var(--lab-rule);
   border-radius: 0.25rem;
 }
 
 .lab-segmented button {
   padding: 0.45rem 0.8rem;
-  border-right: 1px solid rgb(var(--lab-rule));
-  color: rgb(var(--lab-muted));
+  border-right: 1px solid var(--lab-rule);
+  color: var(--lab-muted);
   font-size: 0.8rem;
 }
 
@@ -17,8 +17,8 @@
 }
 
 .lab-segmented button[aria-pressed="true"] {
-  background: rgb(var(--lab-ink));
-  color: rgb(var(--lab-paper));
+  background: var(--lab-ink);
+  color: var(--lab-paper);
 }
 
 .lab-token-group + .lab-token-group {
@@ -35,26 +35,22 @@
 .lab-token-strip > span {
   min-width: 2.35rem;
   padding: 0.55rem 0.65rem;
-  border: 1px solid rgb(var(--lab-rule));
+  border: 1px solid var(--lab-rule);
   border-radius: 0.2rem;
-  background: rgb(255 255 255 / 0.42);
+  background: color-mix(in oklch, var(--surface) 70%, var(--canvas));
   font-size: 0.85rem;
   font-weight: 600;
   text-align: center;
 }
 
-.dark .lab-token-strip > span {
-  background: rgb(255 255 255 / 0.025);
-}
-
 .lab-token-strip > span[data-tone="intervention"] {
-  border-color: rgb(var(--lab-intervention) / 0.7);
-  color: rgb(var(--lab-intervention));
+  border-color: color-mix(in oklch, var(--lab-intervention) 70%, transparent);
+  color: var(--lab-intervention);
 }
 
 .lab-token-strip > span[data-tone="accent"] {
-  border-color: rgb(var(--lab-accent) / 0.65);
-  color: rgb(var(--lab-accent));
+  border-color: color-mix(in oklch, var(--lab-accent) 65%, transparent);
+  color: var(--lab-accent);
 }
 
 .lab-qualitative {
@@ -63,7 +59,7 @@
 
 .lab-qualitative > div {
   margin-top: 0.7rem;
-  border-top: 1px solid rgb(var(--lab-rule));
+  border-top: 1px solid var(--lab-rule);
 }
 
 .lab-qualitative-row {
@@ -72,12 +68,12 @@
   gap: 0.75rem;
   align-items: center;
   min-height: 2.65rem;
-  border-bottom: 1px solid rgb(var(--lab-rule));
+  border-bottom: 1px solid var(--lab-rule);
   font-size: 0.82rem;
 }
 
 .lab-qualitative-row[data-selected="true"] {
-  color: rgb(var(--lab-accent));
+  color: var(--lab-accent);
 }
 
 .lab-qualitative-label {
@@ -88,7 +84,7 @@
   display: flex;
   gap: 0.5rem;
   align-items: center;
-  color: rgb(var(--lab-muted));
+  color: var(--lab-muted);
 }
 
 .lab-fit > span {
@@ -96,12 +92,12 @@
   width: var(--fit-width, 45%);
   max-width: 5.5rem;
   height: 1px;
-  background: rgb(var(--lab-muted) / 0.45);
+  background: color-mix(in oklch, var(--lab-muted) 45%, transparent);
 }
 
 .lab-fit[data-fit="strong"] {
   --fit-width: 90%;
-  color: rgb(var(--lab-accent));
+  color: var(--lab-accent);
 }
 
 .lab-fit[data-fit="plausible"] {
@@ -114,25 +110,25 @@
 }
 
 .lab-row-note {
-  color: rgb(var(--lab-muted));
+  color: var(--lab-muted);
   line-height: 1.35;
 }
 
 .lab-annotation {
-  border-left: 2px solid rgb(var(--lab-rule));
+  border-left: 2px solid var(--lab-rule);
   padding-left: 0.9rem;
 }
 
 .lab-annotation[data-tone="intervention"] {
-  border-left-color: rgb(var(--lab-intervention));
+  border-left-color: var(--lab-intervention);
 }
 
 .lab-annotation[data-tone="accent"] {
-  border-left-color: rgb(var(--lab-accent));
+  border-left-color: var(--lab-accent);
 }
 
 .lab-comparison {
-  border-top: 1px solid rgb(var(--lab-rule));
+  border-top: 1px solid var(--lab-rule);
 }
 
 .lab-comparison-header,
@@ -141,11 +137,11 @@
   grid-template-columns: minmax(8rem, 0.85fr) repeat(2, minmax(0, 1fr));
   gap: 1rem;
   padding: 0.8rem 0;
-  border-bottom: 1px solid rgb(var(--lab-rule));
+  border-bottom: 1px solid var(--lab-rule);
 }
 
 .lab-comparison-header {
-  color: rgb(var(--lab-muted));
+  color: var(--lab-muted);
   font-size: 0.7rem;
   font-weight: 650;
   letter-spacing: 0.04em;
@@ -158,18 +154,18 @@
 }
 
 .lab-comparison-row > span {
-  color: rgb(var(--lab-muted));
+  color: var(--lab-muted);
 }
 
 .lab-stage {
-  border: 1px solid rgb(var(--lab-rule));
+  border: 1px solid var(--lab-rule);
   border-radius: 0.2rem;
-  background: rgb(255 255 255 / 0.35);
+  background: color-mix(in oklch, var(--surface) 70%, var(--canvas));
   padding: 1rem;
 }
 
 .lab-insight {
-  border-left: 2px solid rgb(var(--lab-accent));
+  border-left: 2px solid var(--lab-accent);
   padding-left: 1rem;
 }
 
@@ -207,12 +203,12 @@
   .lab-insight-rail {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-    border-top: 1px solid rgb(var(--lab-rule));
+    border-top: 1px solid var(--lab-rule);
     border-left: 0;
   }
 
   .lab-insight-rail section {
-    border-right: 1px solid rgb(var(--lab-rule));
+    border-right: 1px solid var(--lab-rule);
   }
 
   .lab-canvas {

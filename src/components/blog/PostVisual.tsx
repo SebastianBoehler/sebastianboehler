@@ -34,7 +34,7 @@ export default function PostVisual({ visual }: { visual?: string }) {
     return (
       <aside
         role="alert"
-        className="my-12 border-y border-red-200 py-5 text-sm leading-6 text-red-700 dark:border-red-900 dark:text-red-300"
+        className="my-12 border-y border-[var(--line)] py-5 text-sm font-medium leading-6 text-[var(--text)]"
       >
         This article visualization could not be loaded because its identifier is invalid.
       </aside>
@@ -45,6 +45,6 @@ export default function PostVisual({ visual }: { visual?: string }) {
   return <Visual />
 }
 
-function isVisualId(value: string): value is VisualId {
-  return value in VISUALS
+export function isVisualId(value: string): value is VisualId {
+  return Object.prototype.hasOwnProperty.call(VISUALS, value)
 }

@@ -9,7 +9,7 @@ type Block =
 
 export default function MarkdownContent({ content }: { content: string }) {
   return (
-    <div className="space-y-6 text-gray-700 dark:text-gray-300">
+    <div className="mt-12 space-y-7 text-base leading-8 text-[var(--muted)] sm:text-lg sm:leading-9">
       {parseBlocks(content).map((block, index) => renderBlock(block, index))}
     </div>
   )
@@ -22,7 +22,7 @@ function renderBlock(block: Block, index: number) {
     return (
       <Tag
         key={`${block.text}-${index}`}
-        className="pt-4 text-2xl font-semibold tracking-normal text-gray-950 dark:text-white"
+        className={`${block.level === 2 ? "pt-8 text-3xl sm:text-4xl" : "pt-5 text-2xl sm:text-3xl"} font-semibold leading-tight tracking-[-0.03em] text-[var(--text)]`}
       >
         {block.text}
       </Tag>
@@ -31,7 +31,7 @@ function renderBlock(block: Block, index: number) {
 
   if (block.type === "list") {
     return (
-      <ul key={`list-${index}`} className="list-disc space-y-2 pl-5 text-base leading-8">
+      <ul key={`list-${index}`} className="list-disc space-y-3 pl-6 marker:text-[var(--accent)]">
         {block.items.map((item) => (
           <li key={item}>{renderInline(item)}</li>
         ))}
@@ -44,7 +44,7 @@ function renderBlock(block: Block, index: number) {
   }
 
   return (
-    <p key={`${block.text}-${index}`} className="text-base leading-8">
+    <p key={`${block.text}-${index}`}>
       {renderInline(block.text)}
     </p>
   )
@@ -127,7 +127,7 @@ function renderInline(text: string) {
   return segments.map((segment, index) => {
     if (segment.startsWith("**") && segment.endsWith("**")) {
       return (
-        <strong key={`${segment}-${index}`} className="font-semibold text-gray-950 dark:text-white">
+        <strong key={`${segment}-${index}`} className="font-semibold text-[var(--text)]">
           {segment.slice(2, -2)}
         </strong>
       )
@@ -140,7 +140,7 @@ function renderInline(text: string) {
         <a
           key={`${segment}-${index}`}
           href={link[2]}
-          className="font-medium text-gray-950 underline decoration-gray-300 underline-offset-4 hover:decoration-gray-950 dark:text-white dark:decoration-gray-700 dark:hover:decoration-white"
+          className="font-medium text-[var(--text)] underline decoration-[var(--accent)] underline-offset-4 hover:text-[var(--accent)]"
           target="_blank"
           rel="noreferrer"
         >

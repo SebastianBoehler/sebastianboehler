@@ -1,0 +1,21 @@
+.loss-landscape { margin: 0 0 75px; }
+.landscape-stage { position: relative; background: #e9e9de; border: 1px solid var(--rule); overflow: hidden; }
+.dark .landscape-stage { background: #292e28; }
+.landscape-stage canvas { display: block; width: 100%; aspect-ratio: 1000 / 520; }
+.landscape-label, .landscape-bottom { position: absolute; left: 26px; right: 26px; display: flex; align-items: center; justify-content: space-between; gap: 16px; color: var(--quiet); font: 10px/1.6 var(--font-mono); }
+.landscape-label { top: 22px; pointer-events: none; }
+.landscape-bottom { bottom: 16px; }
+.landscape-bottom > div { display: flex; gap: 5px; }
+.landscape-bottom button { display: grid; place-items: center; width: 44px; height: 44px; color: var(--ink); border: 1px solid transparent; border-radius: 50%; }
+.landscape-bottom button:hover { border-color: var(--rule); background: var(--paper); }
+.landscape-bottom button:focus-visible { outline: 2px solid var(--detail); outline-offset: 2px; }
+.loss-landscape figcaption { display: flex; justify-content: space-between; gap: 16px; margin-top: 15px; font: 10px/1.6 var(--font-mono); color: var(--quiet); }
+.landscape-stage > p { padding: 100px 30px; }
+@media (max-width: 760px) {
+  .loss-landscape { margin-bottom: 50px; }
+  .landscape-stage { padding: 40px 0 55px; }
+  .landscape-label, .landscape-bottom { left: 15px; right: 15px; font-size: 8px; }
+  .landscape-label { top: 16px; }
+  .landscape-bottom { bottom: 9px; }
+  .loss-landscape figcaption { flex-direction: column; gap: 5px; }
+}

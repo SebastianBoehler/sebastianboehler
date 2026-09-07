@@ -101,13 +101,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="describedby" href="/llms.txt" type="text/plain" />
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>
         <a className="skip-link" href="#main-content">
           Skip to content
         </a>
-        <p className="sr-only">This site provides a llms.txt file at /llms.txt for AI chatbots and parsers.</p>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}

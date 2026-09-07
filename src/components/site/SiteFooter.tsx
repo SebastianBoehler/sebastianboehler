@@ -12,6 +12,7 @@ export function SiteFooter() {
             </a>
           ))}
           <a href={`mailto:${profile.email}`}>Email</a>
+          <a href="/llms.txt">llms.txt</a>
           <a href="https://www.sunderlabs.com/imprint" target="_blank" rel="noreferrer">
             Imprint
           </a>

@@ -2,7 +2,7 @@
 
 Computer science graduate student at the University of Tübingen building research software, agent tooling, and infrastructure for AI-assisted engineering. Based in Germany. Shipping public work through [Sunderlabs](https://sunderlabs.com) and [sebastian-boehler.com](https://sebastian-boehler.com).
 
-Public GitHub snapshot as of Aug 22, 2026: 108 public repos, 35 followers, active on GitHub since Apr 19, 2017.
+Public GitHub snapshot as of Sep 22, 2026: 113 public repos, 38 followers, active on GitHub since Apr 19, 2017.
 
 ## Research
 
@@ -16,12 +16,12 @@ Public GitHub snapshot as of Aug 22, 2026: 108 public repos, 35 followers, activ
 
 ## Selected public work
 
-- **[polymarket-cpp-client](https://github.com/SebastianBoehler/polymarket-cpp-client)** (C++, updated Aug 19, 2026) - Lightweight C++ client for Polymarket APIs with REST and WebSocket support, designed for trading and market data access.
+- **[polymarket-cpp-client](https://github.com/SebastianBoehler/polymarket-cpp-client)** (C++, updated Aug 25, 2026) - Lightweight C++ client for Polymarket APIs with REST and WebSocket support, designed for trading and market data access.
 - **[orpheus-podcast](https://github.com/SebastianBoehler/orpheus-podcast)** (Python, updated Aug 3, 2026) - Framework for podcast creation with search grounded llms for script generation and open source tts libraries
 - **[solana-dapp-learning](https://github.com/SebastianBoehler/solana-dapp-learning)** (TypeScript, updated Apr 8, 2025) - Creating my first DAPP on solana with Next.JS
 - **[bybit_market_maker_cpp](https://github.com/SebastianBoehler/bybit_market_maker_cpp)** (C++, updated Aug 1, 2026) - C++ market-making example for Bybit linear perpetuals: laddered quotes with inventory skew, TP/optional SL, exposure guard, and fee/funding-aware PnL via private websockets.
 - **[domain-check-mcp](https://github.com/SebastianBoehler/domain-check-mcp)** (JavaScript, updated Aug 7, 2025) - A Model Context Protocol (MCP) server for checking domain availability using IONOS endpoints
-- **[binance-cpp-client](https://github.com/SebastianBoehler/binance-cpp-client)** (C++, updated Aug 18, 2026) - C++20 Binance Spot REST/WebSocket client, part of a C++ crypto exchange client suite
+- **[sec-data-fetcher](https://github.com/SebastianBoehler/sec-data-fetcher)** (Rust, updated Sep 19, 2026) - SEC EDGAR filings and financial-data toolkit in Rust: async client, native CLI, company facts, XML and HTML tables.
 
 ## Contribution history
 

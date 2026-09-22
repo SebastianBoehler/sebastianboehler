@@ -63,6 +63,7 @@ body:has(.portfolio-direction) { background: #f4f1e9; }
 .project-main > p:last-child { font-size: 13px; max-width: 370px; color: var(--quiet); }
 .project-summary { padding-top: 29px; font-size: 13px; max-width: 290px; color: var(--quiet); justify-self: end; }
 .direction-notes { margin-top: 85px; }
+.direction-contributions { --line: var(--rule); --muted: var(--quiet); --accent: var(--detail); margin-top: 85px; border-top: 1px solid var(--ink); padding-top: 28px; }
 .note-row { display: grid; grid-template-columns: 105px 1fr 16px; gap: 24px; align-items: baseline; border-bottom: 1px solid var(--rule); padding: 24px 0; }
 .note-row time { font-size: 10px; color: var(--quiet); }
 .note-row h3 { font-size: 16px; line-height: 1.5; font-weight: 400; }

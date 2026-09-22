@@ -1,9 +1,11 @@
 import Link from "next/link"
 import { ThemeToggle } from "@/components/site/ThemeToggle"
 import { LossLandscape } from "@/components/home/landscape/LossLandscape"
+import { ContributionArc } from "@/components/home/ContributionArc"
 import { profile } from "@/content/profile"
 import { selectedWork } from "@/content/work"
 import type { BlogPostMeta } from "@/lib/blog"
+import type { ContributionArcState } from "@/lib/github-types"
 
 type Direction = "fieldnotes" | "index" | "after-hours"
 
@@ -15,9 +17,10 @@ const options = [
 
 const categories = ["Autonomous systems", "Markets & infrastructure", "Language models", "Learning systems"]
 
-export function PortfolioDirection({ direction, posts, preview = true }: {
+export function PortfolioDirection({ direction, posts, contributions, preview = true }: {
   direction: Direction
   posts: BlogPostMeta[]
+  contributions?: ContributionArcState
   preview?: boolean
 }) {
   return (
@@ -69,6 +72,8 @@ export function PortfolioDirection({ direction, posts, preview = true }: {
               <div className="section-heading"><h2>Notes & observations</h2><Link href="/blog">All writing ↗</Link></div>
               {posts.map((post) => <Link className="note-row" href={`/blog/${post.slug}`} key={post.slug}><time dateTime={post.date}>{new Intl.DateTimeFormat("en", { month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(`${post.date}T00:00:00Z`))}</time><h3>{post.title}</h3><span aria-hidden="true">↗</span></Link>)}
             </section>
+
+            {contributions && <div className="direction-contributions"><ContributionArc state={contributions} /></div>}
 
             <section id="about" className="direction-about" aria-labelledby="about-title"><h2 id="about-title">A little context.</h2><div><p>{profile.about.join(" ")}</p><a className="text-link" href={profile.cv.href}>View my CV ↗</a></div></section>
           </div>

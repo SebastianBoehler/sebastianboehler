@@ -1,0 +1,1696 @@
+{
+  "model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "device": "cpu",
+  "torch": "2.10.0",
+  "note": "Raw text prompts (no chat template) for the next-token examples; chat template for the generation.",
+  "next_token": {
+    "drive": {
+      "vocab_size": 151936,
+      "top64": [
+        {
+          "token": " car",
+          "logit": 16.845
+        },
+        {
+          "token": " usual",
+          "logit": 14.015
+        },
+        {
+          "token": " old",
+          "logit": 13.8
+        },
+        {
+          "token": " ",
+          "logit": 13.575
+        },
+        {
+          "token": " new",
+          "logit": 13.087
+        },
+        {
+          "token": " own",
+          "logit": 12.68
+        },
+        {
+          "token": " truck",
+          "logit": 12.557
+        },
+        {
+          "token": " van",
+          "logit": 12.502
+        },
+        {
+          "token": " normal",
+          "logit": 12.27
+        },
+        {
+          "token": " small",
+          "logit": 11.852
+        },
+        {
+          "token": " regular",
+          "logit": 11.652
+        },
+        {
+          "token": " city",
+          "logit": 11.543
+        },
+        {
+          "token": " Ford",
+          "logit": 11.49
+        },
+        {
+          "token": " dad",
+          "logit": 11.483
+        },
+        {
+          "token": " automobile",
+          "logit": 11.428
+        },
+        {
+          "token": " traditional",
+          "logit": 11.357
+        },
+        {
+          "token": " father",
+          "logit": 11.322
+        },
+        {
+          "token": " vehicle",
+          "logit": 11.312
+        },
+        {
+          "token": " Toyota",
+          "logit": 11.309
+        },
+        {
+          "token": " original",
+          "logit": 11.295
+        },
+        {
+          "token": " standard",
+          "logit": 11.236
+        },
+        {
+          "token": " Volvo",
+          "logit": 11.202
+        },
+        {
+          "token": " pickup",
+          "logit": 11.168
+        },
+        {
+          "token": " morning",
+          "logit": 11.114
+        },
+        {
+          "token": " town",
+          "logit": 10.69
+        },
+        {
+          "token": " Honda",
+          "logit": 10.663
+        },
+        {
+          "token": " electric",
+          "logit": 10.613
+        },
+        {
+          "token": " little",
+          "logit": 10.6
+        },
+        {
+          "token": " bicycle",
+          "logit": 10.538
+        },
+        {
+          "token": " local",
+          "logit": 10.528
+        },
+        {
+          "token": " typical",
+          "logit": 10.521
+        },
+        {
+          "token": " min",
+          "logit": 10.464
+        },
+        {
+          "token": " family",
+          "logit": 10.457
+        },
+        {
+          "token": " neighborhood",
+          "logit": 10.445
+        },
+        {
+          "token": " toy",
+          "logit": 10.396
+        },
+        {
+          "token": " favorite",
+          "logit": 10.318
+        },
+        {
+          "token": " personal",
+          "logit": 10.311
+        },
+        {
+          "token": " daily",
+          "logit": 10.275
+        },
+        {
+          "token": " sedan",
+          "logit": 10.24
+        },
+        {
+          "token": " compact",
+          "logit": 10.212
+        },
+        {
+          "token": " Mustang",
+          "logit": 10.196
+        },
+        {
+          "token": " Volkswagen",
+          "logit": 10.171
+        },
+        {
+          "token": " conventional",
+          "logit": 10.164
+        },
+        {
+          "token": " mom",
+          "logit": 10.087
+        },
+        {
+          "token": " friend",
+          "logit": 10.039
+        },
+        {
+          "token": " BMW",
+          "logit": 10.01
+        },
+        {
+          "token": " first",
+          "logit": 9.988
+        },
+        {
+          "token": " parents",
+          "logit": 9.983
+        },
+        {
+          "token": " bus",
+          "logit": 9.955
+        },
+        {
+          "token": " two",
+          "logit": 9.93
+        },
+        {
+          "token": " spare",
+          "logit": 9.929
+        },
+        {
+          "token": " taxi",
+          "logit": 9.916
+        },
+        {
+          "token": " motor",
+          "logit": 9.903
+        },
+        {
+          "token": " hurry",
+          "logit": 9.857
+        },
+        {
+          "token": " lim",
+          "logit": 9.85
+        },
+        {
+          "token": " time",
+          "logit": 9.781
+        },
+        {
+          "token": " wheelchair",
+          "logit": 9.776
+        },
+        {
+          "token": " cars",
+          "logit": 9.7
+        },
+        {
+          "token": " mother",
+          "logit": 9.629
+        },
+        {
+          "token": " Fiat",
+          "logit": 9.624
+        },
+        {
+          "token": " bike",
+          "logit": 9.578
+        },
+        {
+          "token": " diesel",
+          "logit": 9.533
+        },
+        {
+          "token": " auto",
+          "logit": 9.532
+        },
+        {
+          "token": " school",
+          "logit": 9.53
+        }
+      ],
+      "tail": {
+        "bin_start": -16.0,
+        "bin_width": 0.1,
+        "counts": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          1,
+          1,
+          2,
+          7,
+          1,
+          2,
+          2,
+          6,
+          3,
+          1,
+          5,
+          2,
+          3,
+          14,
+          6,
+          10,
+          9,
+          9,
+          12,
+          17,
+          13,
+          15,
+          18,
+          20,
+          18,
+          21,
+          27,
+          34,
+          27,
+          41,
+          32,
+          48,
+          55,
+          60,
+          53,
+          65,
+          63,
+          79,
+          105,
+          82,
+          103,
+          118,
+          130,
+          129,
+          148,
+          170,
+          175,
+          173,
+          209,
+          203,
+          228,
+          277,
+          280,
+          268,
+          313,
+          326,
+          360,
+          385,
+          418,
+          450,
+          473,
+          546,
+          560,
+          586,
+          632,
+          593,
+          716,
+          748,
+          766,
+          854,
+          926,
+          932,
+          1018,
+          954,
+          1125,
+          1107,
+          1188,
+          1263,
+          1305,
+          1336,
+          1429,
+          1493,
+          1512,
+          1617,
+          1781,
+          1720,
+          1793,
+          1861,
+          1930,
+          1942,
+          2132,
+          2080,
+          2261,
+          2408,
+          2576,
+          4792,
+          2308,
+          2270,
+          2181,
+          2270,
+          2121,
+          2188,
+          2221,
+          2084,
+          2034,
+          2090,
+          2015,
+          2041,
+          2077,
+          2026,
+          2021,
+          2009,
+          2015,
+          1954,
+          1872,
+          1937,
+          1810,
+          1825,
+          1788,
+          1761,
+          1689,
+          1589,
+          1544,
+          1497,
+          1537,
+          1516,
+          1453,
+          1341,
+          1298,
+          1331,
+          1221,
+          1301,
+          1233,
+          1181,
+          1098,
+          1092,
+          1090,
+          991,
+          990,
+          960,
+          930,
+          916,
+          829,
+          788,
+          771,
+          694,
+          711,
+          695,
+          635,
+          614,
+          652,
+          593,
+          571,
+          558,
+          506,
+          473,
+          455,
+          482,
+          443,
+          409,
+          399,
+          358,
+          339,
+          339,
+          334,
+          315,
+          288,
+          266,
+          253,
+          245,
+          228,
+          217,
+          257,
+          195,
+          181,
+          198,
+          189,
+          151,
+          152,
+          146,
+          144,
+          123,
+          101,
+          116,
+          112,
+          100,
+          95,
+          96,
+          90,
+          88,
+          90,
+          77,
+          71,
+          69,
+          73,
+          55,
+          72,
+          42,
+          44,
+          47,
+          36,
+          59,
+          43,
+          38,
+          31,
+          32,
+          26,
+          44,
+          31,
+          29,
+          23,
+          28,
+          25,
+          13,
+          18,
+          18,
+          20,
+          17,
+          7,
+          17,
+          15,
+          12,
+          12,
+          16,
+          15,
+          7,
+          9,
+          13,
+          6,
+          6,
+          9,
+          4,
+          5,
+          5,
+          6,
+          4,
+          3,
+          5
+        ]
+      },
+      "prompt": "I drove to work in my",
+      "top": [
+        {
+          "token": " car",
+          "logit": 16.845,
+          "prob": 0.70709
+        },
+        {
+          "token": " usual",
+          "logit": 14.015,
+          "prob": 0.04175
+        },
+        {
+          "token": " old",
+          "logit": 13.8,
+          "prob": 0.03366
+        },
+        {
+          "token": " ",
+          "logit": 13.575,
+          "prob": 0.02689
+        },
+        {
+          "token": " new",
+          "logit": 13.087,
+          "prob": 0.0165
+        },
+        {
+          "token": " own",
+          "logit": 12.68,
+          "prob": 0.01098
+        },
+        {
+          "token": " truck",
+          "logit": 12.557,
+          "prob": 0.00971
+        },
+        {
+          "token": " van",
+          "logit": 12.502,
+          "prob": 0.00919
+        }
+      ],
+      "candidates": [
+        {
+          "word": "car",
+          "first_token": " car",
+          "n_tokens": 1,
+          "logit": 16.845,
+          "prob": 0.70709
+        },
+        {
+          "word": "truck",
+          "first_token": " truck",
+          "n_tokens": 1,
+          "logit": 12.557,
+          "prob": 0.00971
+        },
+        {
+          "word": "vehicle",
+          "first_token": " vehicle",
+          "n_tokens": 1,
+          "logit": 11.312,
+          "prob": 0.0028
+        },
+        {
+          "word": "motorbike",
+          "first_token": " motor",
+          "n_tokens": 2,
+          "logit": 9.903,
+          "prob": 0.00068
+        },
+        {
+          "word": "bicycle",
+          "first_token": " bicycle",
+          "n_tokens": 1,
+          "logit": 10.538,
+          "prob": 0.00129
+        },
+        {
+          "word": "bike",
+          "first_token": " bike",
+          "n_tokens": 1,
+          "logit": 9.578,
+          "prob": 0.00049
+        },
+        {
+          "word": "horse",
+          "first_token": " horse",
+          "n_tokens": 1,
+          "logit": 6.962,
+          "prob": 4e-05
+        },
+        {
+          "word": "scooter",
+          "first_token": " scooter",
+          "n_tokens": 1,
+          "logit": 8.576,
+          "prob": 0.00018
+        }
+      ]
+    },
+    "ride": {
+      "vocab_size": 151936,
+      "top64": [
+        {
+          "token": " bicycle",
+          "logit": 17.01
+        },
+        {
+          "token": " bike",
+          "logit": 16.622
+        },
+        {
+          "token": " way",
+          "logit": 15.331
+        },
+        {
+          "token": " own",
+          "logit": 13.72
+        },
+        {
+          "token": " motorcycle",
+          "logit": 13.6
+        },
+        {
+          "token": " ",
+          "logit": 13.433
+        },
+        {
+          "token": " scooter",
+          "logit": 13.293
+        },
+        {
+          "token": " first",
+          "logit": 13.183
+        },
+        {
+          "token": " day",
+          "logit": 13.097
+        },
+        {
+          "token": " bicycles",
+          "logit": 12.905
+        },
+        {
+          "token": " morning",
+          "logit": 12.837
+        },
+        {
+          "token": " skateboard",
+          "logit": 12.493
+        },
+        {
+          "token": " bus",
+          "logit": 12.348
+        },
+        {
+          "token": " daily",
+          "logit": 12.333
+        },
+        {
+          "token": " bikes",
+          "logit": 12.121
+        },
+        {
+          "token": " vacation",
+          "logit": 12.01
+        },
+        {
+          "token": " horse",
+          "logit": 11.945
+        },
+        {
+          "token": " car",
+          "logit": 11.933
+        },
+        {
+          "token": " usual",
+          "logit": 11.932
+        },
+        {
+          "token": " birthday",
+          "logit": 11.928
+        },
+        {
+          "token": " regular",
+          "logit": 11.878
+        },
+        {
+          "token": " last",
+          "logit": 11.852
+        },
+        {
+          "token": " school",
+          "logit": 11.807
+        },
+        {
+          "token": " lunch",
+          "logit": 11.55
+        },
+        {
+          "token": " trip",
+          "logit": 11.435
+        },
+        {
+          "token": " biking",
+          "logit": 11.244
+        },
+        {
+          "token": " normal",
+          "logit": 11.225
+        },
+        {
+          "token": " days",
+          "logit": 11.172
+        },
+        {
+          "token": " route",
+          "logit": 11.145
+        },
+        {
+          "token": " new",
+          "logit": 11.118
+        },
+        {
+          "token": " back",
+          "logit": 11.032
+        },
+        {
+          "token": " second",
+          "logit": 10.928
+        },
+        {
+          "token": " Sunday",
+          "logit": 10.921
+        },
+        {
+          "token": " Monday",
+          "logit": 10.846
+        },
+        {
+          "token": " train",
+          "logit": 10.814
+        },
+        {
+          "token": " city",
+          "logit": 10.809
+        },
+        {
+          "token": " father",
+          "logit": 10.733
+        },
+        {
+          "token": " treadmill",
+          "logit": 10.732
+        },
+        {
+          "token": " weekend",
+          "logit": 10.722
+        },
+        {
+          "token": " motor",
+          "logit": 10.72
+        },
+        {
+          "token": " commute",
+          "logit": 10.691
+        },
+        {
+          "token": " flat",
+          "logit": 10.629
+        },
+        {
+          "token": " favorite",
+          "logit": 10.62
+        },
+        {
+          "token": " tractor",
+          "logit": 10.573
+        },
+        {
+          "token": " journey",
+          "logit": 10.509
+        },
+        {
+          "token": " computer",
+          "logit": 10.456
+        },
+        {
+          "token": " two",
+          "logit": 10.409
+        },
+        {
+          "token": " friend",
+          "logit": 10.309
+        },
+        {
+          "token": " weekly",
+          "logit": 10.276
+        },
+        {
+          "token": " Tuesday",
+          "logit": 10.266
+        },
+        {
+          "token": " Saturday",
+          "logit": 10.262
+        },
+        {
+          "token": " personal",
+          "logit": 10.26
+        },
+        {
+          "token": " boat",
+          "logit": 10.249
+        },
+        {
+          "token": " left",
+          "logit": 10.222
+        },
+        {
+          "token": " monthly",
+          "logit": 10.202
+        },
+        {
+          "token": " business",
+          "logit": 10.137
+        },
+        {
+          "token": " side",
+          "logit": 10.119
+        },
+        {
+          "token": " cycle",
+          "logit": 10.102
+        },
+        {
+          "token": " m",
+          "logit": 10.063
+        },
+        {
+          "token": " ride",
+          "logit": 10.002
+        },
+        {
+          "token": " phone",
+          "logit": 9.994
+        },
+        {
+          "token": " rainy",
+          "logit": 9.977
+        },
+        {
+          "token": " cycling",
+          "logit": 9.977
+        },
+        {
+          "token": " old",
+          "logit": 9.927
+        }
+      ],
+      "tail": {
+        "bin_start": -17.7,
+        "bin_width": 0.1,
+        "counts": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          2,
+          0,
+          2,
+          1,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          4,
+          4,
+          4,
+          11,
+          9,
+          7,
+          7,
+          20,
+          11,
+          15,
+          11,
+          13,
+          23,
+          20,
+          27,
+          28,
+          29,
+          30,
+          31,
+          41,
+          43,
+          42,
+          60,
+          54,
+          81,
+          75,
+          63,
+          78,
+          93,
+          98,
+          112,
+          117,
+          115,
+          130,
+          145,
+          154,
+          154,
+          199,
+          210,
+          219,
+          224,
+          247,
+          294,
+          318,
+          353,
+          366,
+          424,
+          435,
+          429,
+          466,
+          478,
+          542,
+          517,
+          566,
+          630,
+          682,
+          726,
+          771,
+          843,
+          818,
+          875,
+          930,
+          1036,
+          1045,
+          1039,
+          1155,
+          1182,
+          1307,
+          1384,
+          1364,
+          1398,
+          1503,
+          1529,
+          1600,
+          1718,
+          1753,
+          1776,
+          1943,
+          1863,
+          1959,
+          1932,
+          2034,
+          2091,
+          2142,
+          2184,
+          2296,
+          2368,
+          2601,
+          5001,
+          2296,
+          2305,
+          2261,
+          2104,
+          2135,
+          2058,
+          2224,
+          2002,
+          2071,
+          2059,
+          1966,
+          1953,
+          1915,
+          1925,
+          1883,
+          1823,
+          1805,
+          1822,
+          1772,
+          1735,
+          1780,
+          1636,
+          1573,
+          1588,
+          1523,
+          1450,
+          1473,
+          1398,
+          1392,
+          1326,
+          1324,
+          1269,
+          1203,
+          1195,
+          1160,
+          1092,
+          1020,
+          1027,
+          971,
+          947,
+          923,
+          903,
+          818,
+          874,
+          781,
+          716,
+          774,
+          728,
+          677,
+          691,
+          614,
+          561,
+          578,
+          565,
+          560,
+          571,
+          498,
+          478,
+          455,
+          456,
+          418,
+          397,
+          353,
+          364,
+          342,
+          304,
+          337,
+          254,
+          304,
+          268,
+          255,
+          223,
+          221,
+          244,
+          224,
+          193,
+          191,
+          180,
+          161,
+          172,
+          165,
+          169,
+          153,
+          144,
+          134,
+          99,
+          130,
+          102,
+          102,
+          111,
+          94,
+          93,
+          82,
+          82,
+          86,
+          79,
+          73,
+          63,
+          55,
+          64,
+          65,
+          59,
+          52,
+          46,
+          43,
+          54,
+          39,
+          40,
+          35,
+          32,
+          34,
+          27,
+          33,
+          21,
+          18,
+          30,
+          24,
+          21,
+          24,
+          22,
+          13,
+          13,
+          14,
+          21,
+          15,
+          16,
+          15,
+          11,
+          9,
+          18,
+          13,
+          17,
+          8,
+          4,
+          10,
+          10,
+          3,
+          4,
+          7,
+          1,
+          5,
+          4,
+          1
+        ]
+      },
+      "prompt": "I rode to work on my",
+      "top": [
+        {
+          "token": " bicycle",
+          "logit": 17.01,
+          "prob": 0.43201
+        },
+        {
+          "token": " bike",
+          "logit": 16.622,
+          "prob": 0.2931
+        },
+        {
+          "token": " way",
+          "logit": 15.331,
+          "prob": 0.08053
+        },
+        {
+          "token": " own",
+          "logit": 13.72,
+          "prob": 0.01609
+        },
+        {
+          "token": " motorcycle",
+          "logit": 13.6,
+          "prob": 0.01426
+        },
+        {
+          "token": " ",
+          "logit": 13.433,
+          "prob": 0.01208
+        },
+        {
+          "token": " scooter",
+          "logit": 13.293,
+          "prob": 0.01049
+        },
+        {
+          "token": " first",
+          "logit": 13.183,
+          "prob": 0.00941
+        }
+      ],
+      "candidates": [
+        {
+          "word": "car",
+          "first_token": " car",
+          "n_tokens": 1,
+          "logit": 11.933,
+          "prob": 0.00269
+        },
+        {
+          "word": "truck",
+          "first_token": " truck",
+          "n_tokens": 1,
+          "logit": 8.967,
+          "prob": 0.00014
+        },
+        {
+          "word": "vehicle",
+          "first_token": " vehicle",
+          "n_tokens": 1,
+          "logit": 7.609,
+          "prob": 4e-05
+        },
+        {
+          "word": "motorbike",
+          "first_token": " motor",
+          "n_tokens": 2,
+          "logit": 10.72,
+          "prob": 0.0008
+        },
+        {
+          "word": "bicycle",
+          "first_token": " bicycle",
+          "n_tokens": 1,
+          "logit": 17.01,
+          "prob": 0.43201
+        },
+        {
+          "word": "bike",
+          "first_token": " bike",
+          "n_tokens": 1,
+          "logit": 16.622,
+          "prob": 0.2931
+        },
+        {
+          "word": "horse",
+          "first_token": " horse",
+          "n_tokens": 1,
+          "logit": 11.945,
+          "prob": 0.00273
+        },
+        {
+          "word": "scooter",
+          "first_token": " scooter",
+          "n_tokens": 1,
+          "logit": 13.293,
+          "prob": 0.01049
+        }
+      ]
+    }
+  },
+  "generation": {
+    "prompt": "Explain latent space to a beginner.",
+    "decoding": "greedy (argmax) in fp32",
+    "n_tokens": 240,
+    "text_preview": "Latent space is a mathematical concept that is often used in the field of machine learning and artificial intelligence. It is a high-dimensional space that is used to represent the input data in a way that is easier to work with and analyze",
+    "top2_gap": [
+      1.0719,
+      10.9945,
+      2.8286,
+      0.877,
+      3.5298,
+      0.6491,
+      2.3837,
+      0.1239,
+      0.1216,
+      0.4504,
+      3.261,
+      3.3692,
+      0.6175,
+      1.101,
+      11.5738,
+      1.1666,
+      9.7548,
+      1.0293,
+      0.165,
+      6.0216,
+      1.4901,
+      1.9061,
+      0.2773,
+      2.346,
+      0.1095,
+      5.0507,
+      3.2118,
+      1.1164,
+      0.6103,
+      2.1817,
+      4.0387,
+      2.1311,
+      0.4676,
+      0.1894,
+      2.314,
+      1.081,
+      2.825,
+      0.5964,
+      8.9043,
+      0.1125,
+      1.0556,
+      2.1729,
+      0.0794,
+      11.3615,
+      1.0643,
+      1.6462,
+      0.0665,
+      0.2153,
+      1.0187,
+      8.7518,
+      12.0514,
+      0.3174,
+      5.0805,
+      3.3525,
+      3.2061,
+      1.6054,
+      1.9988,
+      0.6531,
+      0.0417,
+      0.5905,
+      2.1494,
+      0.1112,
+      1.5609,
+      0.4928,
+      0.002,
+      0.372,
+      2.4272,
+      3.5432,
+      1.1384,
+      3.4061,
+      0.0304,
+      0.1725,
+      1.1496,
+      0.0114,
+      1.1267,
+      0.2189,
+      0.6251,
+      1.0921,
+      4.2196,
+      3.7596,
+      0.5137,
+      0.3125,
+      0.1041,
+      0.3357,
+      9.244,
+      2.5778,
+      3.6711,
+      3.3333,
+      3.9338,
+      5.1333,
+      7.7958,
+      0.3139,
+      0.1041,
+      2.325,
+      0.9893,
+      4.0561,
+      1.255,
+      6.4554,
+      6.7393,
+      1.9777,
+      1.4463,
+      2.2836,
+      1.1492,
+      3.9515,
+      0.7674,
+      3.8379,
+      4.1294,
+      3.3209,
+      0.9993,
+      8.9579,
+      2.1104,
+      2.5869,
+      3.7784,
+      2.46,
+      0.1642,
+      0.6448,
+      2.2671,
+      0.591,
+      1.3016,
+      14.5575,
+      1.7265,
+      1.4468,
+      0.3399,
+      0.1825,
+      0.5597,
+      1.7046,
+      0.0102,
+      1.3959,
+      2.6334,
+      1.3898,
+      1.3933,
+      6.2498,
+      1.1919,
+      4.9858,
+      0.9102,
+      11.6843,
+      1.5452,
+      3.8133,
+      3.2831,
+      9.947,
+      11.9589,
+      2.2528,
+      1.7859,
+      0.7242,
+      1.9693,
+      2.2356,
+      11.3683,
+      4.5615,
+      0.6561,
+      1.1982,
+      1.2627,
+      2.5289,
+      0.5699,
+      2.3061,
+      15.464,
+      1.5985,
+      11.0538,
+      10.1357,
+      4.1238,
+      3.8571,
+      0.8475,
+      3.7575,
+      4.2384,
+      7.252,
+      6.1505,
+      0.1803,
+      1.0005,
+      0.0657,
+      1.012,
+      3.7081,
+      1.4256,
+      6.2254,
+      0.688,
+      1.3691,
+      1.8615,
+      0.7483,
+      2.5272,
+      3.7622,
+      5.9225,
+      4.9797,
+      4.3106,
+      0.2898,
+      0.9879,
+      2.5692,
+      1.8757,
+      0.6386,
+      1.4148,
+      1.2572,
+      18.2547,
+      3.1445,
+      4.4036,
+      1.6138,
+      15.6824,
+      1.522,
+      1.1659,
+      1.4982,
+      2.5549,
+      5.854,
+      1.3286,
+      9.2296,
+      6.6765,
+      7.0964,
+      7.1637,
+      0.5804,
+      6.0498,
+      1.7507,
+      0.4426,
+      3.7187,
+      10.9047,
+      6.7348,
+      8.6993,
+      8.0703,
+      6.5587,
+      2.8027,
+      2.4112,
+      2.0287,
+      2.5233,
+      2.7289,
+      2.09,
+      5.8243,
+      1.263,
+      1.6541,
+      4.5471,
+      1.7551,
+      8.0755,
+      6.6105,
+      0.6954,
+      3.5101,
+      2.8047,
+      7.7447,
+      3.6162,
+      14.1723,
+      2.0153,
+      8.5296,
+      3.0659,
+      1.9974,
+      1.8738,
+      1.7074,
+      5.4017,
+      6.8834
+    ],
+    "near_ties": [
+      {
+        "step": 8,
+        "gap": 0.1239,
+        "leader": " that",
+        "runner_up": " used",
+        "context": "ent space is a mathematical concept"
+      },
+      {
+        "step": 9,
+        "gap": 0.1216,
+        "leader": " is",
+        "runner_up": " describes",
+        "context": " space is a mathematical concept that"
+      },
+      {
+        "step": 19,
+        "gap": 0.165,
+        "leader": " artificial",
+        "runner_up": " deep",
+        "context": " the field of machine learning and"
+      },
+      {
+        "step": 25,
+        "gap": 0.1095,
+        "leader": " high",
+        "runner_up": " space",
+        "context": " artificial intelligence. It is a"
+      },
+      {
+        "step": 34,
+        "gap": 0.1894,
+        "leader": " input",
+        "runner_up": " data",
+        "context": " that is used to represent the"
+      },
+      {
+        "step": 40,
+        "gap": 0.1125,
+        "leader": " is",
+        "runner_up": " can",
+        "context": " input data in a way that"
+      },
+      {
+        "step": 43,
+        "gap": 0.0794,
+        "leader": " work",
+        "runner_up": " visualize",
+        "context": " a way that is easier to"
+      },
+      {
+        "step": 47,
+        "gap": 0.0665,
+        "leader": ".",
+        "runner_up": ".\n\n",
+        "context": " easier to work with and analyze"
+      },
+      {
+        "step": 48,
+        "gap": 0.2153,
+        "leader": " In",
+        "runner_up": " The",
+        "context": " to work with and analyze."
+      },
+      {
+        "step": 59,
+        "gap": 0.0417,
+        "leader": " data",
+        "runner_up": " the",
+        "context": " space is a way of representing"
+      },
+      {
+        "step": 62,
+        "gap": 0.1112,
+        "leader": " not",
+        "runner_up": " more",
+        "context": " way of representing data that is"
+      },
+      {
+        "step": 65,
+        "gap": 0.002,
+        "leader": " to",
+        "runner_up": " or",
+        "context": " data that is not directly visible"
+      },
+      {
+        "step": 71,
+        "gap": 0.0304,
+        "leader": " rather",
+        "runner_up": " that",
+        "context": " to the human eye, but"
+      },
+      {
+        "step": 72,
+        "gap": 0.1725,
+        "leader": " is",
+        "runner_up": " that",
+        "context": " the human eye, but rather"
+      },
+      {
+        "step": 74,
+        "gap": 0.0114,
+        "leader": " or",
+        "runner_up": " in",
+        "context": " eye, but rather is hidden"
+      },
+      {
+        "step": 76,
+        "gap": 0.2189,
+        "leader": " in",
+        "runner_up": " into",
+        "context": " but rather is hidden or compressed"
+      },
+      {
+        "step": 83,
+        "gap": 0.1041,
+        "leader": " main",
+        "runner_up": " idea",
+        "context": " a high-dimensional space.\nThe"
+      },
+      {
+        "step": 93,
+        "gap": 0.1041,
+        "leader": " help",
+        "runner_up": " make",
+        "context": " latent space is that it can"
+      },
+      {
+        "step": 115,
+        "gap": 0.1642,
+        "leader": " is",
+        "runner_up": " can",
+        "context": " work with and analyze. This"
+      },
+      {
+        "step": 124,
+        "gap": 0.1825,
+        "leader": " have",
+        "runner_up": " contain",
+        "context": " when dealing with large datasets that"
+      },
+      {
+        "step": 127,
+        "gap": 0.0102,
+        "leader": ",",
+        "runner_up": " or",
+        "context": " large datasets that have many features"
+      },
+      {
+        "step": 166,
+        "gap": 0.1803,
+        "leader": " find",
+        "runner_up": " discover",
+        "context": ", where the goal is to"
+      },
+      {
+        "step": 168,
+        "gap": 0.0657,
+        "leader": " and",
+        "runner_up": " or",
+        "context": " the goal is to find patterns"
+      }
+    ]
+  },
+  "perturbation": {
+    "bf16_vs_fp32_top8_logit_std": 0.0706,
+    "bf16_vs_fp32_top8_logit_p99_abs": 0.1908,
+    "bf16_vs_fp32_top2_gap_std": 0.0763,
+    "bf16_batch1_vs_batch7_max_abs": 0.0,
+    "bf16_batch1_vs_batch7_identical": true,
+    "mean_logit_magnitude": 3.632
+  }
+}

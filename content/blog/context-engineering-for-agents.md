@@ -20,7 +20,11 @@ flow around the model.
 ## Step 1: the context window is a budget
 
 A model can only attend to the tokens inside its context window. Bigger windows
-help, but they do not remove the problem. If you load every policy, every tool
+help, but they do not remove the problem: accuracy on retrieval-style tasks
+drops when the relevant passage sits in the middle of a long context ("Lost in
+the Middle"), and a 2025 evaluation of 18 models found performance degrading as
+input grows even on simple tasks (Chroma's "Context Rot" report). Anthropic
+describes this as a finite attention budget. If you load every policy, every tool
 manual, every memory, every style rule, and every file at the start, three
 things go wrong:
 
@@ -85,6 +89,11 @@ That gives the agent two advantages. First, the initial context stays small.
 Second, the loaded context becomes more relevant. When the task is "debug this
 React page," the React and browser-testing instructions should dominate. The PDF
 skill should not be sitting in the prompt just because it exists.
+
+This pattern is usually called progressive disclosure. In Anthropic's Agent
+Skills, only a skill's name and description are always loaded; the full
+instructions load when the skill is triggered, and bundled files or scripts only
+on demand.
 
 In latent-space terms, skills steer the model. In harness terms, skills are a
 retrieval system for operational instructions.
@@ -206,6 +215,7 @@ A good agent context system has layers:
 - **Retrieval policy**: when to load each source.
 - **Working context**: the small set of facts active for this task.
 - **Feedback loop**: tool outputs and user corrections added back in.
+- **Notes and isolation**: write progress to a file outside the window, and give sub-tasks to sub-agents that work in their own context and return only a short summary.
 - **Compaction**: summary when the context gets too large.
 
 This is why skills should not all be pasted into the first prompt. The first
@@ -236,6 +246,10 @@ Good agents are not only smarter models. They are better context loops.
 
 ## Sources behind the model
 
+- [Effective context engineering for AI agents (Anthropic)](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)
+- [Equipping agents for the real world with Agent Skills (Anthropic)](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills)
+- [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
+- [Context Rot: How Increasing Input Tokens Impacts LLM Performance (Chroma)](https://www.trychroma.com/research/context-rot)
 - [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629)
 - [Toolformer: Language Models Can Teach Themselves to Use Tools](https://arxiv.org/abs/2302.04761)
 - [Voyager: An Open-Ended Embodied Agent with Large Language Models](https://arxiv.org/abs/2305.16291)

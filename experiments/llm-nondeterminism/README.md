@@ -41,6 +41,29 @@ Results are written to `experiments/llm-nondeterminism/runs/`, which is ignored
 by git. The summary prints the unique-output count and the first word position
 where the observed runs diverge.
 
+## Measured numbers used by the figures
+
+`measure_logits.py` produces every number that the article's interactive figures
+label as "measured". It loads `Qwen/Qwen2.5-0.5B-Instruct` with PyTorch and
+records:
+
+- the next-token logits for "I drove to work in my" and "I rode to work on my"
+  (top 64 explicitly, plus a histogram of the other ~152k logits so the site can
+  recompute softmax at any temperature),
+- the gap between the top two logits at every step of a 240-token greedy answer,
+  and the closest calls with the two competing tokens,
+- how large the logit perturbation from reduced precision is (bf16 vs fp32) and
+  whether batch size 1 vs 7 changes bf16 results on the device used.
+
+```bash
+python3 experiments/llm-nondeterminism/measure_logits.py
+```
+
+It writes `src/components/blog/data/measuredLogits.json`, which is checked in so
+the site does not need a model at build time. Perturbation sizes are device
+dependent (this was measured on CPU); read them as an order of magnitude, not as
+a property of any provider.
+
 ## Prompt duplication
 
 Run the controlled duplication artifact when you want to reason about "sending

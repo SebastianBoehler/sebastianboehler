@@ -47,17 +47,25 @@ is expensive. Stochastic gradient descent uses a small mini-batch instead. The
 mini-batch direction is cheaper and usually points roughly downhill, but it is
 also noisy. The model lurches, not glides.
 
-That noise is not only a mistake. Early in training, the average downhill pull
-often dominates, so the model improves quickly. Later, when it reaches a flat
-or shallow region, the shaking can help it explore nearby parameter settings
-instead of freezing at the first acceptable point.
+That noise is not only a mistake. Early in training the average downhill pull is
+large compared with the noise, so the model improves quickly. Later, once the
+average pull has shrunk near a minimum, the noise dominates the updates and the
+parameters jitter around the bottom instead of settling. Whether that jitter is
+useful is a separate, empirical question: in deep networks it is argued to bias
+training toward flatter minima that generalize better, but in a simple convex
+problem it only sets a floor above the minimum, as the figure below shows.
 
 [[visual:training-dynamics]]
 
-This is where the physics language becomes more than decoration. The gradient
-acts like drift or gravity. Mini-batch noise acts like heat. Learning rate,
-batch size, momentum, and weight decay change the effective temperature,
-damping, and pull of the system.
+This is where the physics language becomes more than decoration. The gradient acts like drift or gravity. Mini-batch noise acts like heat, with a
+temperature that scales roughly like the learning rate divided by the batch
+size: halve the batch and you need to halve the learning rate to keep the same
+noise level. Decaying the learning rate lowers the temperature, which is why
+practical schedules end with a small rate. Momentum acts roughly like a larger
+effective learning rate, so it raises the noise rather than damping it. The
+analogy has limits: SGD noise is not isotropic thermal noise. Its shape is set
+by how the per-example gradients disagree, so it is stretched or squeezed along
+different directions of the loss.
 
 ## Step 3: a state is the system right now
 
@@ -126,6 +134,13 @@ weights and literally rolling downhill into a new minimum. The weights are
 fixed. But the analogy is still helpful if "low energy" means "more likely or
 more compatible with the current context."
 
+There is one place where the energy language is exact. A language model's
+softmax is a Boltzmann distribution: p(token) ∝ exp(−E / T), with energy E equal
+to the negative score (logit) and T the sampling temperature. Lowering T
+concentrates probability on the lowest-energy token and raising T spreads it
+out; [Prompt Trajectories in Latent Space](/blog/latent-space) shows this with
+real scores.
+
 That is why initial context matters. A prompt can place the model near one
 answer family instead of another. A skill, system prompt, example, or long
 conversation can narrow the likely region even more.
@@ -135,8 +150,8 @@ conversation can narrow the likely region even more.
 The most direct way to combine physics and ML is to add a constraint. The model
 still learns from data, but it is penalized when it violates a known rule.
 
-For example, imagine fitting a curve through noisy sensor readings. A data-only
-model may chase every noisy wiggle. A physics-guided model can be told, "fit the
+For example, imagine fitting a curve through noisy sensor readings. A data-only model may chase every noisy wiggle, and says nothing reliable
+between or beyond the sensors. A physics-guided model can be told, "fit the
 data, but also stay close to the differential equation, conservation law, or
 simulator behavior we expect."
 
@@ -148,9 +163,15 @@ often written as partial differential equations. The loss is no longer only
 "match the observed data." It can also include "do not violate this equation at
 these points in space and time."
 
-That does not make the method magic. If the equation is wrong, incomplete, or
-too expensive to enforce, the model can still fail. But it changes the game: the
-model is no longer free to fit any pattern that happens to match the data.
+That does not make the method magic. The law enters as a soft penalty, not a
+guarantee, so the fit is pulled toward solutions of the equation rather than
+forced onto them. If the equation is wrong, incomplete, or too expensive to
+enforce, the model can still fail, and a wrong law with a heavy weight can
+override good data. Real physics-informed networks are also often hard to
+optimize because the data and equation terms compete. But it changes the game:
+the model is no longer free to fit any pattern that happens to match the data,
+and the help is largest where there are no sensors, because the law still
+constrains the shape there.
 
 ## Step 7: conservation laws reduce drift
 
@@ -162,9 +183,14 @@ pendulum may look right for a short time and then slowly invent or destroy
 energy. That kind of drift is a warning sign: the model learned a pattern, but
 not the structure behind the pattern.
 
-Hamiltonian neural networks attack this by building inspiration from
-Hamiltonian mechanics into the model. The goal is to learn dynamics that respect
-conservation laws instead of merely matching the next few examples.
+Hamiltonian neural networks attack this by building Hamiltonian mechanics into
+the model. The network learns a single energy-like function H(q, p) and derives
+the motion from it, so H itself is conserved along the learned flow by
+construction. That is slightly weaker than conserving the true energy: the
+conserved quantity is the learned H, which is close to the true energy only if
+it was learned well, and numerical integration can still add drift. The goal is
+dynamics that respect a conservation law instead of merely matching the next few
+examples.
 
 The broader lesson is simple: if a quantity should be conserved, encode that
 fact somehow. Put it in the architecture, the loss, the data generation process,
@@ -203,7 +229,8 @@ and let the law or simulator keep the model from making physically absurd moves.
 
 ## Step 10: physics in reinforcement learning
 
-Reinforcement learning is where the physics connection becomes very concrete.
+Reinforcement learning is a good place to see physics as an environment rather
+than as a penalty.
 An agent chooses actions, the environment responds, and the agent slowly learns
 which actions lead to reward.
 
@@ -212,10 +239,14 @@ actions are available, what happens after each action, and which shortcuts are
 allowed. Physics changes that environment. It does not necessarily change the
 goal. It changes the routes that are feasible on the way to the goal.
 
-If the environment is physical, an unconstrained agent can waste enormous time
-trying actions that could never work in the real world. A robot cannot ignore
-gravity. A drone cannot teleport sideways. A character controller cannot bend a
-knee backward without consequences.
+In a physics simulator the physics is simply the environment: a simulated robot
+cannot ignore gravity, so actions that could never work just fail. What
+physics-informed reinforcement learning adds is knowledge handed to the learner.
+That can be a known dynamics model for planning, a reward shaped by energy or
+stability, limits on the action space such as torque limits and safe sets,
+reference motions such as the demonstrations in DeepMimic, or an architecture
+with built-in structure. The aim is sample efficiency and safety, and a smaller
+gap between the simulation and the real machine.
 
 Physics can enter the RL loop through the simulator, the reward, the action
 space, or the model architecture. The goal is not to remove learning. The goal
@@ -269,6 +300,7 @@ and what laws should it respect?
 - [Physics-informed machine learning](https://www.nature.com/articles/s42254-021-00314-5)
 - [Physics Informed Deep Learning (Part I)](https://arxiv.org/abs/1711.10561)
 - [Stochastic Gradient Descent as Approximate Bayesian Inference](https://arxiv.org/abs/1704.04289)
+- [A Bayesian Perspective on Generalization and Stochastic Gradient Descent](https://arxiv.org/abs/1710.06451)
 - [On the Generalization Benefit of Noise in Stochastic Gradient Descent](https://proceedings.mlr.press/v119/smith20a/smith20a.pdf)
 - [Neural Ordinary Differential Equations](https://arxiv.org/abs/1806.07366)
 - [Hamiltonian Neural Networks](https://arxiv.org/abs/1906.01563)

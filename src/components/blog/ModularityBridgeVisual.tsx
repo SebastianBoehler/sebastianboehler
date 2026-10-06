@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { ConceptLab } from "@/components/blog/visuals/ConceptLab"
+import { BarRows } from "@/components/blog/visuals/chart/BarRows"
 import { Annotation, SegmentedChoice } from "@/components/blog/visuals/VisualPrimitives"
 
 type Lens = "structure" | "evidence" | "limits"
@@ -149,26 +150,64 @@ function DenseEvidence() {
     <section aria-labelledby="dense-evidence-heading" className="border-t border-[var(--lab-rule)] pt-6">
       <p className="lab-kicker">Measured in the dense-model study</p>
       <h3 id="dense-evidence-heading" className="mt-2 text-lg font-semibold text-[var(--lab-ink)]">
-        Attribution overlap and causal ablation point in the same direction
+        Overlap, causal ablation, and the controls point the same way
       </h3>
       <p className="mt-2 max-w-3xl text-sm leading-6 text-[var(--lab-muted)]">
-        These values describe task-relevant unit populations in the dense models studied. They do not measure brain networks or MoE experts.
+        Values are averages over six dense instruction-tuned models (24B to 123B parameters). They describe MLP-neuron populations in those models. They do not measure brain networks or MoE experts.
       </p>
 
-      <dl className="mt-5 grid border-t border-[var(--lab-rule)] md:grid-cols-2">
-        <div className="border-b border-[var(--lab-rule)] py-5 md:pr-6">
-          <dt className="text-sm font-semibold text-[var(--lab-ink)]">Top-attributed unit overlap</dt>
-          <dd className="mt-2 text-sm leading-6 text-[var(--lab-muted)]">
-            Same-domain tasks shared <strong className="text-[var(--lab-ink)]">12.9%</strong>, compared with <strong className="text-[var(--lab-ink)]">3.0%</strong> across domains.
-          </dd>
+      <div className="mt-6 grid gap-x-10 gap-y-8 md:grid-cols-2">
+        <div>
+          <p className="lab-kicker">Shared top neurons (Jaccard overlap)</p>
+          <BarRows
+            label="Jaccard overlap of top attributed neurons, within versus across domains"
+            max={20}
+            unit="%"
+            labelWidth="6.5rem"
+            rows={[
+              { label: "Same domain", value: 12.9, display: "12.9%", series: 1 },
+              { label: "Different domain", value: 3.0, display: "3.0%", series: "ink" },
+            ]}
+          />
+          <p className="mt-2 text-xs leading-5 text-[var(--lab-muted)]">
+            Intersection over union of each task’s top 0.1% positively attributed neurons. Per model: 11.1–14.2% within, 2.3–3.5% across.
+          </p>
         </div>
-        <div className="border-b border-[var(--lab-rule)] py-5 md:border-l md:pl-6">
-          <dt className="text-sm font-semibold text-[var(--lab-ink)]">Performance loss after ablation</dt>
-          <dd className="mt-2 text-sm leading-6 text-[var(--lab-muted)]">
-            Within-domain ablation reduced performance by <strong className="text-[var(--lab-ink)]">25.9%</strong>, compared with <strong className="text-[var(--lab-ink)]">2.5%</strong> for cross-domain units.
-          </dd>
+        <div>
+          <p className="lab-kicker">Accuracy lost after ablation (points)</p>
+          <BarRows
+            label="Accuracy lost in percentage points after ablating a task's top neurons, within versus across domains"
+            max={30}
+            labelWidth="6.5rem"
+            rows={[
+              { label: "Same domain", value: 25.9, display: "25.9 pts", series: 1 },
+              { label: "Different domain", value: 2.5, display: "2.5 pts", series: "ink" },
+            ]}
+          />
+          <p className="mt-2 text-xs leading-5 text-[var(--lab-muted)]">
+            Absolute drop in both-correct accuracy (chance 25%). Each neuron’s activation is replaced by its value on the alternative input. Per model the ratio is 6.1–12.3×.
+          </p>
         </div>
-      </dl>
+        <div className="md:col-span-2">
+          <p className="lab-kicker">Does it just track word similarity? Agreement with the four domains (ARI)</p>
+          <BarRows
+            label="Adjusted Rand index of the four-domain clustering, neuron overlap versus text-similarity baselines"
+            max={1}
+            labelWidth="11rem"
+            rows={[
+              { label: "Neuron overlap", value: 0.78, display: "0.78", series: 1 },
+              { label: "SBERT sentence embeddings", value: 0.39, display: "0.39", series: "ink" },
+              { label: "GloVe", value: 0.36, display: "0.36", series: "ink" },
+              { label: "TF-IDF", value: 0.12, display: "0.12", series: "ink" },
+              { label: "Qwen input-token embeddings", value: 0.04, display: "0.04", series: "ink" },
+            ]}
+          />
+        </div>
+      </div>
+
+      <p className="mt-6 max-w-3xl text-xs leading-5 text-[var(--lab-muted)]">
+        Preprint by Han, Andreas, Fedorenko and de Varda (MIT, 2026); not peer reviewed at the time of writing. Not shown: the ablation effect for the social domain is not statistically significant (p = 0.074 and 0.146 in the two tests reported), and the threshold-robustness check was run on one model.
+      </p>
     </section>
   )
 }

@@ -63,7 +63,9 @@ receptors, cell types, and local history.
 
 ## Step 3: myelin is not the weight, but it matters
 
-The "material that grows around connections" is myelin.
+Myelin is the "material that grows around connections" in the loose sense: it
+wraps axons, the long output fibres of neurons, not the synapses where cells
+meet.
 
 Myelin is an insulating sheath around many axons. It helps signals travel faster
 and more reliably. It also helps coordinate timing across circuits. Recent
@@ -75,8 +77,11 @@ This is where the analogy needs care.
 
 If synaptic plasticity is like changing the strength of a connection, myelin is
 more like improving the quality of a communication channel. It can make a used
-route faster, more reliable, and better timed. It does not by itself decide what
-the answer should be.
+route faster, more reliable, and better timed. It does not by itself decide what the answer should be, but timing is not
+neutral. Whether two inputs arrive close enough together to push a downstream
+neuron over threshold can depend on conduction delays alone, with every synaptic
+strength unchanged; the figure above has a myelin tab that shows exactly this.
+Faster is not simply better either: what matters is the relative arrival time.
 
 For machine learning, the closest analogy is not "increase this weight." It is
 more like changing routing efficiency, latency, stability, or bandwidth in a
@@ -94,15 +99,30 @@ output to a target, computes gradients, and updates each weight according to how
 it contributed to the error.
 
 The brain does not seem to run ordinary backpropagation exactly as implemented
-in deep learning libraries. But the brain still has to solve some version of
+in deep learning libraries. The obstacles are well known. Backpropagation sends
+error back through the same connections used going forward, with symmetric
+weights (the weight transport problem); it needs signed, precisely scaled error
+signals at every layer; and in the brain, feedback changes neural activity as
+well as synapses. Alternatives such as feedback alignment and target propagation
+relax these requirements, but none has matched backpropagation at scale. But the brain still has to solve some version of
 credit assignment. If an action leads to reward, pain, surprise, or correction,
 which synapses should change?
 
 Neuroscience points to a mixture of local and global signals. Local activity
 matters because a synapse can only directly "know" nearby events. Global
 signals, including neuromodulators such as dopamine, can broadcast information
-about reward, salience, or error. Timing matters too: the system has to connect
-what happened earlier with what happened later.
+about reward, salience, or error. Timing matters too: the system has to connect what happened earlier with what
+happened later.
+
+A common model of how that works is a three-factor rule. Activity at a synapse
+leaves a temporary eligibility trace that decays over hundreds of milliseconds
+to a few seconds. A global neuromodulatory signal such as dopamine that arrives
+while the trace is still alive converts it into a lasting weight change. The
+reward tells every synapse that something good happened, and only the eligible
+ones change; the credit-signal tab of the figure above lets you move the reward
+and watch which synapses pick it up. Note that this credits recency, not
+causation, and it is far less informative than the per-weight gradient that
+backpropagation computes.
 
 This is why reinforcement learning feels brain-like. In RL, an agent tries
 actions, receives reward, and changes future behavior. Dopamine reward
@@ -118,7 +138,8 @@ Neuroscience influences machine learning in concrete ways:
 - Neuromodulated learning: use global reward or context signals to gate updates.
 - Replay and consolidation: revisit experience to stabilize learning.
 - Predictive coding: learn by reducing prediction error across levels.
-- Attention and recurrence: use feedback, not just one forward pass.
+- Recurrence and feedback connections: let later activity influence earlier processing, not just one forward pass.
+- Attention: select which inputs matter. Transformer self-attention borrows the word, but within one pass it is a feedforward weighting, not neural feedback.
 
 These ideas are not all equally mature. Backpropagation remains the workhorse of
 modern deep learning because it is efficient and scales. Many biologically
@@ -188,6 +209,8 @@ That is the bridge worth keeping.
 - [Myelin plasticity and nervous system function](https://www.annualreviews.org/eprint/MTiTvMWWPAJv9SIZBCyZ/full/10.1146/annurev-neuro-080317-061853)
 - [Motor learning requires myelination to reduce asynchrony and spontaneity in neural activity](https://pmc.ncbi.nlm.nih.gov/articles/PMC6899965/)
 - [Understanding dopamine and reinforcement learning](https://www.pnas.org/doi/10.1073/pnas.1014269108)
+- [Solving the Distal Reward Problem through Linkage of STDP and Dopamine Signaling](https://doi.org/10.1093/cercor/bhl152)
+- [Neuromodulated Spike-Timing-Dependent Plasticity, and Theory of Three-Factor Learning Rules](https://doi.org/10.3389/fncir.2015.00085)
 - [Backpropagation and the brain](https://pubmed.ncbi.nlm.nih.gov/32303713/)
 - [The combination of Hebbian and predictive plasticity learns invariant object representations](https://www.nature.com/articles/s41593-023-01460-y)
 - [Brain-inspired learning in artificial neural networks: a review](https://pubs.aip.org/aip/aml/article/2/2/021501/3291446/Brain-inspired-learning-in-artificial-neural)

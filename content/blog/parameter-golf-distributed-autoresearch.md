@@ -20,8 +20,8 @@ process.
 ## The benchmark was small enough to be sharp
 
 OpenAI's [Parameter Golf](https://github.com/openai/parameter-golf) challenge
-asked participants to train the best language model that fits inside a 16 MB
-artifact and trains in under ten minutes on 8xH100 GPUs. The official score was
+asked participants to train the best language model that fits inside a 16 MB artifact (model weights plus training code) and trains in
+under ten minutes on 8xH100 GPUs for leaderboard records. The official score was
 bits-per-byte on a FineWeb validation set, so lower was better and tokenizers
 could be compared fairly.
 
@@ -31,8 +31,8 @@ an objective metric.
 
 OpenAI's postmortem says the competition drew more than 1,000 participants and
 more than 2,000 submissions. It also says coding agents became part of the
-competition itself: they lowered the cost of experimentation, sped up
-participation, and forced OpenAI to think about review, attribution, and scoring
+competition itself: they lowered the cost of experimentation, made it easier for more people to
+participate, and forced OpenAI to think about review, attribution, and scoring
 in a world where many submissions are machine-assisted.
 
 This is the important part. Once the benchmark is verifiable, research starts to
@@ -52,6 +52,10 @@ state machine.
 
 ## The PR graph is the research commons
 
+The figure below plots every accepted record by date. Many different contributors moved the frontier, and Aiden's seven are interleaved with theirs rather than standing alone.
+
+[[visual:parameter-golf-frontier]]
+
 In a normal private lab, failed experiments disappear into notebooks, Slack
 threads, and training logs. In Parameter Golf, the useful part of the search was
 made public through pull requests and accepted record folders.
@@ -61,8 +65,8 @@ also by combining three partial ideas cleanly. A small optimizer change can
 become a dependency for the next record. A quantization trick can propagate
 across submissions. A bug fix can rescue an otherwise invalid direction.
 
-OpenAI explicitly highlighted this pattern: many strong submissions were small
-changes to existing top scorers, and useful ideas spread quickly. That can
+OpenAI explicitly highlighted this pattern: many submissions were small changes to existing top scorers, and strong ideas
+spread quickly. That can
 create noise, especially when invalid directions are copied, but it also makes
 the frontier move faster.
 
@@ -79,7 +83,9 @@ for 22 days and became the competition's most influential contributor by public
 signals: seven merged leaderboard records, 435 citations of its PRs from other
 contributors, and a higher acceptance rate than the community average.
 
-The public repository supports the leaderboard-record part of that claim. The
+The public repository supports the leaderboard-record part of that claim, with
+one caveat: it only lists the handle, and that the handle is Aiden is Weco's
+statement. The
 official record table contains seven accepted `dexhunter` or `Dex Hunter`
 records, moving from Full GPTQ and XSA on March 29 to later CaseOps and
 SmearGate/LoRA-TTT refinements in April.
@@ -120,7 +126,8 @@ it searches over code changes.
 The [AIDE paper](https://arxiv.org/html/2502.13138v1) frames trial-and-error as
 a tree search in the space of possible solutions. Each script version is a node.
 The agent can draft a new solution, debug a broken one, refine a working one,
-and use benchmark feedback to decide which branches deserve more compute.
+and a simple search policy driven by benchmark feedback decides what to do next:
+draft new solutions, debug broken ones, or improve the best working one.
 
 That sounds obvious once stated, but it is a real shift. Classical AutoML asks:
 which configuration in this search space is best? A code-search agent asks:
@@ -200,7 +207,7 @@ commons.
 
 - [OpenAI: What Parameter Golf taught us](https://openai.com/index/what-parameter-golf-taught-us/)
 - [OpenAI Parameter Golf repository](https://github.com/openai/parameter-golf)
-- [Parameter Golf leaderboard documentation](https://openai-parameter-golf.mintlify.app/leaderboard)
+
 - [Weco: Aiden in OpenAI Parameter Golf](https://www.weco.ai/blog/parameter-golf-aiden)
 - [AIDE ML repository](https://github.com/WecoAI/aideml)
 - [AIDE paper](https://arxiv.org/html/2502.13138v1)

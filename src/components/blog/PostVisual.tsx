@@ -1,5 +1,6 @@
 import type { ComponentType } from "react"
 import AutoresearchLoopVisual from "@/components/blog/AutoresearchLoopVisual"
+import BoostingPlaygroundVisual from "@/components/blog/BoostingPlaygroundVisual"
 import ContextEngineeringVisual from "@/components/blog/ContextEngineeringVisual"
 import ConversationDriftVisual from "@/components/blog/ConversationDriftVisual"
 import LatentSpaceVisual from "@/components/blog/LatentSpaceVisual"
@@ -8,12 +9,15 @@ import ModelSelectionMapVisual from "@/components/blog/ModelSelectionMapVisual"
 import ModularityBridgeVisual from "@/components/blog/ModularityBridgeVisual"
 import NeuroInspiredVisual from "@/components/blog/NeuroInspiredVisual"
 import NondeterminismBoundaryVisual from "@/components/blog/NondeterminismBoundaryVisual"
+import ParameterGolfFrontierVisual from "@/components/blog/ParameterGolfFrontierVisual"
 import PhysicsInformedVisual from "@/components/blog/PhysicsInformedVisual"
 import PromptDistributionVisual from "@/components/blog/PromptDistributionVisual"
+import TestingEffectVisual from "@/components/blog/TestingEffectVisual"
 import TrainingDynamicsVisual from "@/components/blog/TrainingDynamicsVisual"
 
 const VISUALS = {
   "autoresearch-loop": AutoresearchLoopVisual,
+  "boosting-playground": BoostingPlaygroundVisual,
   "context-engineering": ContextEngineeringVisual,
   "conversation-drift": ConversationDriftVisual,
   "latent-space": LatentSpaceVisual,
@@ -22,8 +26,10 @@ const VISUALS = {
   "modularity-bridge": ModularityBridgeVisual,
   "neuro-inspired-learning": NeuroInspiredVisual,
   "nondeterminism-boundary": NondeterminismBoundaryVisual,
+  "parameter-golf-frontier": ParameterGolfFrontierVisual,
   "physics-informed": PhysicsInformedVisual,
   "prompt-distribution": PromptDistributionVisual,
+  "testing-effect": TestingEffectVisual,
   "training-dynamics": TrainingDynamicsVisual,
 } satisfies Record<string, ComponentType>
 

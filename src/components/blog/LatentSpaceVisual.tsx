@@ -57,7 +57,7 @@ export default function LatentSpaceVisual() {
           tone: "accent",
         },
       ]}
-      caption="A teaching model of representation space. The labels describe qualitative compatibility, not coordinates or telemetry from a particular LLM."
+      caption="A teaching model of representation space. The labels describe qualitative compatibility, not coordinates or telemetry from a particular LLM. Height is illustrative: valleys mark regions of state from which one family of continuations is likely. It is not a loss, and nothing rolls downhill while the model answers."
     >
       <div className="space-y-6" aria-live="polite">
         <LatentLandscapePlot frameId={frameId} stage={step as 0 | 1 | 2 | 3} />

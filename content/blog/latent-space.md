@@ -62,8 +62,11 @@ specific LLM.
 
 ## Step 3: a prompt becomes a path and a point
 
-A prompt starts as a sequence. Each token is processed in order, and each token
-changes the contextual state a little. "Explain latent space" starts in one
+A prompt starts as a sequence. In a decoder-only transformer all prompt tokens are actually processed in one
+parallel pass, and each position is only allowed to look at earlier ones, so "in
+order" is a way of reading the prompt rather than the schedule of the
+computation. Reading it left to right still helps: each added token changes what
+the state at the final position can be. "Explain latent space" starts in one
 region. Adding "to a beginner" pushes the state toward simple language and
 examples. Adding "geometrically" pulls it toward derivation. Adding "as a
 metaphor" pulls it toward imagery.
@@ -80,10 +83,17 @@ state**. The trajectory is the sequence of internal updates caused by the
 tokens. The endpoint is the current context state from which the model predicts
 the next token.
 
-This is not a measured physical path through one fixed map. It is a mental
-model for how each extra token changes the model's next guess. The exact "point"
-also depends on which layer and which token position you inspect, so there is
-not one universal prompt coordinate that all models expose.
+This is not a measured physical path through one fixed map. It is a mental model
+for how each extra token changes the model's next guess. The exact "point" also
+depends on which layer and which token position you inspect, so there is not one
+universal prompt coordinate that all models expose.
+
+The word "trajectory" also hides three different paths. Inside one forward pass,
+a position's hidden state is updated layer by layer; that layer-wise path is the
+one interpretability researchers can actually trace. Across a prompt, the state
+at the final position changes as you append words, which is the path this post
+draws. Across generation, each sampled token extends the context and starts a
+new forward pass. Keep them apart when reading the figures.
 
 The trajectory is not locked inside the first cluster forever. Context usually
 anchors the model near a region, but a strong instruction can move the
@@ -132,8 +142,10 @@ So if the context contains an article about cars, planes, and ships, then the
 question you append matters a lot. A question like "Why do wings generate lift?"
 can make the current token states draw more from the plane-related parts. A
 question like "Why does a hull displace water?" can draw more from the
-ship-related parts. The full context is available, but the model does not use
-all of it equally for every next-token decision.
+ship-related parts. The full context is available, but the model does not use all of it equally for
+every next-token decision. Information only flows forward in a decoder-only
+model: the article's tokens never see the question that follows, so it is the
+question's positions that do the re-weighting.
 
 This is why "where the whole input lies in latent space" is still too simple.
 The model is not only asking:
@@ -225,7 +237,10 @@ So the visual should be read like this:
 
 The model's final next-token probabilities are produced by a learned projection
 and softmax, not by simply choosing the geometrically nearest word on a 2D map.
-The map is useful because it shows neighborhoods of related meaning. It is
+Geometry still matters, but it is a different geometry: a token's score is the
+dot product of the final hidden state with that token's output vector, so what
+counts is alignment with an output direction, not distance to a neighboring
+word. The map is useful because it shows neighborhoods of related meaning. It is
 misleading only if we pretend distance alone is the probability rule.
 
 One more step makes this clearer. After the prompt has been processed, the
@@ -265,10 +280,11 @@ If the settings are fixed, the weights are fixed, and the computer repeats the
 same calculation exactly, this landscape of possibilities is the fixed part.
 The model is not confused. It has assigned scores to the possible next tokens.
 
-The notebook below changes only the verb and preposition in one sentence. Move
-through the five stages to see how that small wording change alters the useful
-context cues, the qualitative candidate ordering, the selected token, and then
-the context used for every later token.
+The notebook below changes only the verb and preposition in one sentence. Its
+scores are real: they come from a small open model (Qwen2.5-0.5B-Instruct) run
+on both prompts. Move through the five stages to see the wording change shift
+the scores, the probabilities over the whole vocabulary, and the token that gets
+appended. At the probability stage you can also turn the temperature.
 
 [[visual:prompt-distribution]]
 
@@ -335,8 +351,10 @@ built one token at a time.
 
 Temperature and related settings control how adventurous this sampling is. Lower
 temperature concentrates probability on already likely tokens. Higher
-temperature spreads probability mass across more alternatives. In the visual,
-move the sampling-spread slider and watch the repeated runs widen or tighten.
+temperature spreads probability mass across more alternatives. In the next-token figure above, move the temperature slider and watch
+probability leave the top token and spread into the long tail. In the measured
+example, raising the temperature from 1 to 2 drops "car" from 71% to 3.5% and
+puts about 92% of the probability on tokens outside the ten words shown.
 
 ## Step 9: repeated runs form a cloud
 
@@ -362,8 +380,8 @@ runs drift into different examples, styles, or reasoning paths.
 
 - **Sampling variance**: the decoder intentionally chooses among plausible next
   tokens.
-- **Numerical variance**: parallel floating point operations can produce tiny
-  differences, especially when operation order changes.
+- **Numerical variance**: floating point addition is not associative, so summing
+  the same numbers in a different order changes the last bits of the result.
 - **Serving variance**: batching, kernels, hardware, model versions, and backend
   configuration can change whether repeated calls are exactly reproducible.
 
@@ -378,9 +396,18 @@ computation. Thinking Machines Lab argues that the central culprit is often
 dynamic batching. Your request may be processed alone in one run and beside
 other requests in another run. If the kernels are not **batch invariant**, the
 same request can receive slightly different numerical results when the batch
-shape changes. This is not just "the model decided randomly." It is an
-implementation-level perturbation: floating point arithmetic, reduction order,
-kernel shape, and server load affect the logits by a tiny amount.
+shape changes. This is not just "the model decided randomly." It is an implementation-level
+perturbation: floating point arithmetic, reduction order, kernel shape, and
+server load affect the logits by a tiny amount.
+
+Their argument is not the popular one that parallel threads race each other and
+add numbers in a random order. For a fixed batch the forward pass is
+deterministic; what changes between calls is the batch a request lands in, and
+with it the order in which the sums are done. In their test, 1,000 completions
+of one prompt at temperature 0 from Qwen3-235B contained 80 unique texts. They
+were identical for the first 102 tokens and split at token 103 (992 continued
+"Queens, New York", 8 "New York City"). With batch-invariant kernels, all 1,000
+were identical.
 
 Those differences are usually tiny. Most of the time they do not matter. But if
 two next-token choices are almost tied, a tiny logit difference can flip which
@@ -389,9 +416,13 @@ new token is added back into the context, so the next prediction is now made
 from a slightly different state. A tiny branch can become a visibly different
 answer.
 
-The boundary test below holds the small perturbation constant and changes only
-the margin between the leading candidates. That isolates why the same numerical
-noise is invisible in one case and branch-producing in the other.
+The boundary test below uses real scores from the same small model. In one
+measured answer of 240 greedy tokens, 8 steps had a gap under 0.1 between the
+top two logits, while running the same tokens in bf16 instead of fp32 moved the
+leading logits by about 0.07. The figure first isolates one decision (gap and
+noise sliders), then asks how many such decisions a whole answer contains. It is
+a worst case: it assumes fresh independent noise at every step, while real
+servers repeat the same few batch configurations, so real outputs cluster more.
 
 [[visual:nondeterminism-boundary]]
 
@@ -428,8 +459,10 @@ often the text is identical. If it differs, find the first token or word where
 the runs diverge. That first divergence is the boundary you are looking for.
 
 The repo includes a small code artifact for that style of test in
-`experiments/llm-nondeterminism`. The Python script generates the boundary
-effect plots locally. The API collector records repeated completions as JSONL
+`experiments/llm-nondeterminism`. The Python script generates the boundary effect plots locally, and a second
+script, `measure_logits.py`, produces the real numbers behind the figures above:
+next-token scores, the gap between the top two scores at every step of a greedy
+answer, and the size of bf16 noise. The API collector records repeated completions as JSONL
 and prints a compact summary. If repeated temperature-zero runs still produce
 multiple unique outputs, that is evidence of serving-level variation. Higher
 temperature runs mostly measure intentional sampling.
@@ -544,4 +577,4 @@ answers the model is likely to produce.
 - [SwiReasoning: Switch-Thinking in Latent and Explicit for Pareto-Superior Reasoning LLMs](https://arxiv.org/abs/2510.05069)
 - [Defeating Nondeterminism in LLM Inference](https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/)
 - [Introducing Background Temperature to Characterise Hidden Randomness in Large Language Models](https://arxiv.org/abs/2604.22411)
-- [The Impact of Non-determinism on Reproducibility in Deep Learning](https://arxiv.org/abs/2207.09955)
+

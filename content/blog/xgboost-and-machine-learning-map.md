@@ -15,7 +15,8 @@ question:
 
 **What kind of pattern should the model be allowed to learn?**
 
-A linear model says the pattern is mostly additive and smooth. A decision tree
+A linear model says the pattern is mostly additive: each feature pushes the
+prediction along a straight line, and the pushes add up. A decision tree
 says the pattern can be split into rules. A random forest says many noisy trees
 can vote. Gradient boosting says each new tree should fix the mistakes left by
 the previous trees. XGBoost is a fast, regularized, production-strength version
@@ -124,7 +125,16 @@ The final model is an additive ensemble:
 - first tree gives a rough answer,
 - second tree adjusts the rough answer,
 - third tree adjusts the remaining error,
-- many later trees make smaller corrections.
+- many later trees make smaller corrections, if the learning rate is small.
+
+Where does the word "gradient" come from? For squared error, the residual y −
+F(x) is exactly the negative gradient of the loss with respect to the current
+prediction, so "fit the residuals" and "step along the negative gradient" are
+the same move. For other losses, such as log loss for classification, each new
+tree is fit to the negative gradient (a "pseudo-residual") rather than to a
+literal difference. In a bias-variance sense boosting is also the mirror image
+of a random forest: a forest averages deep, noisy trees to cut variance, while
+boosting adds shallow trees one at a time to cut bias.
 
 This is why boosted trees can be very accurate on tabular data. They discover
 thresholds, interactions, missing-value patterns, and nonlinear effects while
@@ -133,6 +143,8 @@ focusing each stage on what the current model still gets wrong.
 The risk is overfitting. If you keep adding trees, make them too deep, or let
 each tree contribute too much, the model can chase noise. Good boosting is
 controlled boosting.
+
+[[visual:boosting-playground]]
 
 ## XGBoost: boosted trees engineered seriously
 
@@ -143,8 +155,16 @@ parallelism, and careful systems design.
 
 The original XGBoost paper by Tianqi Chen and Carlos Guestrin describes it as a
 scalable tree boosting system. The official documentation describes XGBoost as
-an optimized distributed gradient boosting library. Those two words matter:
-**optimized** and **distributed**.
+an optimized distributed gradient boosting library. Those two words matter: **optimized** and **distributed**.
+
+What separates XGBoost from plain gradient boosting is mostly the objective and
+the engineering. It uses both the gradient and the curvature (second derivative)
+of the loss to score splits and set leaf values, it penalizes the number of
+leaves and the size of the leaf weights, and it learns a default direction at
+each split for missing values. Its systems contributions, a weighted quantile
+sketch for approximate splits and a cache-aware column-block layout, are what
+made it fast. Shrinkage and column subsampling, by contrast, were borrowed from
+earlier boosting and random-forest work.
 
 From a modeling perspective, XGBoost is useful because it lets you control the
 complexity of the ensemble:
@@ -174,13 +194,26 @@ thresholds, missingness, ratios, and local interactions.
 
 Boosted trees are well matched to that shape. They do not need smooth numeric
 relationships. They can split on thresholds. They can ignore irrelevant
-features. They can use different features in different branches. They often
-work well without the huge data appetite of deep networks.
+features. They can use different features in different branches. They often work well without the huge data appetite of deep networks.
+
+Grinsztajn, Oyallon and Varoquaux (2022) tested this on 45 medium-sized datasets
+(up to about 10,000 training samples) and gave three reasons: neural networks
+are biased toward overly smooth functions, they are hurt more by uninformative
+features, and tabular data is not rotation invariant, which is something an MLP
+implicitly assumes.
 
 This is not a law. Neural networks can work on tables, especially with lots of
-data or learned embeddings. But for ordinary structured prediction, XGBoost,
-LightGBM, CatBoost, random forests, and regularized linear models are usually
-the first models worth comparing.
+data or learned embeddings. But for ordinary structured prediction, XGBoost, LightGBM, CatBoost, random
+forests, and regularized linear models are usually the first models worth
+comparing.
+
+This is also a claim with an expiry date. Since 2025, pretrained tabular
+foundation models such as TabPFN v2 (Nature, January 2025) and TabICL have been
+reported to match or beat tuned gradient-boosted trees on small and medium
+datasets without per-dataset training. The TabArena benchmark describes
+foundation models as dominant on small data and boosted trees as still strong
+contenders, particularly on cost and latency and on large tables. So treat
+XGBoost as the baseline to beat, not as the model that is guaranteed to win.
 
 ## How to choose in practice
 
@@ -237,8 +270,11 @@ from those inputs, but it is not itself a vision or language foundation model.
 
 It can also be awkward when extrapolation is essential. Trees split the observed
 feature space into regions. They are good at interpolation inside patterns they
-have seen. They are not naturally good at saying, "the trend should continue
-linearly far outside the training range."
+have seen. They are not naturally good at saying, "the trend should continue linearly far outside the training range." A tree
+predicts a constant in every region, so outside the data it just repeats the
+value of its outermost leaf; the playground above shows this as flat lines past
+the shaded edges. Whether that is worse than a linear model's straight line
+depends on whether the real trend is actually linear.
 
 And like any flexible model, XGBoost can overfit. A high validation score can
 still hide leakage, bad splits, target contamination, or a train-test mismatch.
@@ -247,7 +283,7 @@ still hide leakage, bad splits, target contamination, or a train-test mismatch.
 
 Here is the compact map:
 
-- Linear models learn smooth additive effects.
+- Linear models learn one straight-line effect per feature and add them up.
 - Single trees learn readable rules but overfit easily.
 - Random forests average many noisy trees to get robust nonlinear predictions.
 - Gradient boosting builds trees sequentially so each one fixes remaining
@@ -270,6 +306,9 @@ assumptions of the model to the shape of the data.
 
 - [XGBoost: A Scalable Tree Boosting System](https://arxiv.org/abs/1603.02754)
 - [XGBoost documentation](https://xgboost.readthedocs.io/)
+- [Why do tree-based models still outperform deep learning on typical tabular data?](https://arxiv.org/abs/2207.08815)
+- [Accurate predictions on small data with a tabular foundation model](https://pmc.ncbi.nlm.nih.gov/articles/PMC11711098/)
+- [TabArena: A Living Benchmark for Machine Learning on Tabular Data](https://arxiv.org/abs/2506.16791)
 - [Introduction to Boosted Trees](https://xgboost.readthedocs.io/en/stable/tutorials/model.html)
 - [scikit-learn supervised learning guide](https://scikit-learn.org/stable/supervised_learning.html)
 - [scikit-learn estimator selection guide](https://scikit-learn.org/stable/machine_learning_map.html)

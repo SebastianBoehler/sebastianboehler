@@ -89,7 +89,11 @@ choice. In simple terms, a unit matters when two things are true:
 - Its activation changes between the original and alternative input.
 - Changing that activation would affect the model's preference for the correct continuation.
 
-For each task, they keep the top 0.1% positively attributed units. Then they
+For each task, they keep the top 0.1% positively attributed units. A "unit" here
+is a neuron in the hidden layer of a transformer MLP block, across all layers;
+attention heads are not included. Each model is only scored on items it gets
+right in both versions of a minimal pair, so the number of usable tasks per
+model ranges from 35 to 46. Then they
 ask: do tasks in the same cognitive domain reuse the same units more than tasks
 from different domains?
 
@@ -102,8 +106,8 @@ Qwen2.5-72B, and Mistral-Large-123B.
 The core result is clean.
 
 Tasks in the same domain share much more of their top-attributed units than
-tasks from different domains. The paper reports 12.9% within-domain overlap
-versus 3.0% cross-domain overlap. The task overlap structure also clusters into
+tasks from different domains. The paper reports 12.9% within-domain overlap versus 3.0% cross-domain overlap,
+measured as intersection over union (Jaccard) of each task's top units. The task overlap structure also clusters into
 the four neuroscience-inspired domains with an adjusted Rand index of 0.78.
 
 The pattern is not just visible after averaging models together. The authors
@@ -117,7 +121,9 @@ another layer. It is more subtle: different domains can coexist in the same
 depth range while using different subpopulations.
 
 That is closer to functional specialization than to a simple layer-by-layer
-pipeline.
+pipeline, with one qualification: the paper also finds language-related units
+earlier in the stack, which it reads as a partial hierarchy of parsing first and
+reasoning later.
 
 ## Step 5: why ablation matters
 
@@ -125,20 +131,23 @@ Overlap alone is not enough. Maybe the same units light up for superficial
 reasons. Maybe the attribution method is finding a correlate, not a cause.
 
 So the paper performs ablations. For every source-task and target-task pair,
-the authors identify the source task's top units, then perturb those units while
-the model performs the target task.
+the authors identify the source task's top units, then replace those units' activations with the values they take on the
+alternative input (counterfactual activation patching) while the model performs
+the target task.
 
 If the system is modular, ablating language-relevant units should hurt other
 language tasks more than physical or social tasks. Ablating formal-reasoning
 units should hurt formal tasks more than language tasks. And so on.
 
-That is what they find. Within-domain ablations reduce accuracy by 25.9% on
-average, while cross-domain ablations reduce it by only 2.5%. The causal effect
+That is what they find. Within-domain ablations reduce accuracy by 25.9 percentage points on average,
+while cross-domain ablations reduce it by only 2.5 points. The causal effect
 is about ten times larger within domain than across domains.
 
 This is the strongest part of the paper. It moves the story from "these tasks
 activate overlapping units" to "these units are selectively important for
-behavior."
+behavior." One caveat the paper reports: for the social domain the ablation
+effect is not statistically significant in the tests it gives (p = 0.074 and
+0.146).
 
 [[visual:modularity-bridge]]
 
@@ -151,21 +160,23 @@ mention objects and materials. Social tasks mention people and feelings. Maybe
 the result is just semantic similarity.
 
 The paper addresses this with semantic controls: TF-IDF, GloVe, SBERT, and
-Qwen input-token embeddings. These baselines do not recover the same four-domain
-structure as well as the neuron-overlap matrix, and the same-domain effect
+Qwen input-token embeddings. These baselines do not recover the same four-domain structure as well as the
+neuron-overlap matrix (adjusted Rand index 0.78 against 0.04 to 0.39 for the
+text baselines), and the same-domain effect
 survives regression controls.
 
 The second objection is that the pipeline might create modularity even in a
 model that cannot solve the tasks. The authors run a control on GPT-2-small.
 GPT-2 performs language tasks reasonably but fails the reasoning domains. The
-modularity signal mostly collapses outside language. That suggests the result
-depends on task competence, not just prompt format.
+modularity signal mostly collapses outside language. That suggests the result depends on task competence, not just prompt format,
+although GPT-2-small is also a 124M-parameter model, so size and competence are
+confounded.
 
 The third objection is threshold choice. The paper repeats overlap analyses
 across top 0.05%, 0.1%, 1%, and 5% unit sets. The modularity effect weakens as
 the selected set gets broader, which is what you would expect if the sharpest
-domain-specific signal lives in the most important units, but it remains
-significant across thresholds.
+domain-specific signal lives in the most important units, but it remains significant across thresholds (the within-to-cross ratio falls
+from about 5.4 to 1.4).
 
 None of this makes the paper immune to criticism. It is still a preprint. The
 tasks are proxies. The mapping from a task to a human brain network is sometimes
@@ -238,7 +249,8 @@ into one undifferentiated soup.
 It needs interaction, but it also needs separation.
 
 That gives a first-principles reason for modularity: separable internal codes
-reduce interference. They let the system represent different kinds of
+reduce interference. The paper itself offers this as a hypothesis rather than
+something it tests. They let the system represent different kinds of
 information at the same time without every computation overwriting every other
 computation.
 
@@ -250,13 +262,23 @@ with less collateral damage elsewhere.
 That does not require a brain. It is a generic pressure on any large adaptive
 system trained across heterogeneous tasks.
 
+Two caveats pull the other way, and both are my own reading, not the paper's.
+The pressure toward separation competes with superposition: networks often pack
+more features than they have neurons by overlapping them, so a single neuron is
+frequently polysemantic and "units" are a lossy view of what a model represents.
+That is a reason to read neuron-level overlap as a coarse measure. And LLMs
+learn from text written by people, so some of the domain structure may be
+inherited from the corpus rather than discovered from scratch.
+
 A [new minimal-model study](https://arxiv.org/abs/2607.14000) adds a second axis:
 a neuronal network can be silent while finite-lived synapses still carry a
 hidden state. The number of fresh excitatory neurons that state can recruit
-strongly predicts whether activity returns. This is not a mechanism ordinary
-transformers share—their weights do not change transiently during inference—but
-it sharpens the design question: modularity asks *where* computation happens;
-memory asks *what persists between moments*.
+strongly predicts whether activity returns. Transformer weights do not change transiently during inference, so this is not a
+mechanism they share directly. A transformer's key-value cache is a loosely
+analogous kind of silent state, carried between tokens without producing output,
+but that comparison is my own and the paper does not make it. It sharpens the
+design question: modularity asks *where* computation happens; memory asks *what
+persists between moments*.
 
 ## Step 9: the careful takeaway
 

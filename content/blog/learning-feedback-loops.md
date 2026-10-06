@@ -16,9 +16,12 @@ You try to produce an answer. You compare it with reality. You notice the gap.
 You adjust the model in your head. Then you return later, before the memory has
 fully disappeared, and try again.
 
-That loop is the bridge between study technique and neuroplasticity. The brain
-does not rewire because information passed in front of your eyes. It adapts
-when activity, error, attention, and repetition tell it that a pattern matters.
+That loop is where study technique meets neuroplasticity, with one caution. The
+behavioral evidence for retrieval, feedback, and spacing is strong. The step
+from there to specific synaptic changes is an interpretation, not something
+those experiments measured. What the brain adapts to is plausibly shaped by
+activity, error, attention, and repetition, not by information merely passing in
+front of your eyes.
 
 ## Step 1: learning begins with a prediction
 
@@ -35,6 +38,8 @@ test-enhanced learning, Roediger and Karpicke found that testing was not only a
 way to measure memory. On delayed tests, prior retrieval produced better
 retention than repeated studying, even when students felt more confident after
 restudying.
+
+[[visual:testing-effect]]
 
 The uncomfortable part is the useful part. Retrieval creates effort. Effort
 reveals the structure of what you know and what you do not know.
@@ -87,7 +92,11 @@ It asks:
 This style works because it keeps ownership inside the learner. The learner is
 not just receiving a finished explanation. They are debugging their own model.
 That builds metacognition: the ability to notice what you know, what you are
-guessing, and where your reasoning is fragile.
+guessing, and where your reasoning is fragile. The evidence here is thinner than
+for retrieval practice. The closest well-tested relatives are self-explanation
+and elaborative interrogation, which Dunlosky and colleagues rate as moderately
+useful, so treat Socratic questioning as a promising way to deliver feedback
+rather than a proven method on its own.
 
 The practical rule is simple: when stuck, ask the next question that reduces the
 search space. Do not ask for the whole solution immediately. Ask for the next
@@ -118,8 +127,11 @@ Training studies also show that adult brains can change with practice. For
 example, the classic juggling study by Draganski and colleagues found
 experience-dependent structural changes in visual-motion related brain regions
 after adults learned to juggle. That does not mean every study session produces
-a visible MRI change. It means adult learning is compatible with measurable
-brain adaptation.
+a visible MRI change. It means adult learning is compatible with measurable brain adaptation. Treat
+that evidence with care: the changes were small and transient, receding once
+practice stopped, and critics argue that design and statistical artifacts may
+explain many reported training-related structural effects (Thomas and Baker,
+2013).
 
 ## Step 5: spacing gives the loop time
 
@@ -132,9 +144,13 @@ forgetting, then retrieve again. The next retrieval has to rebuild the path
 instead of copying the previous moment.
 
 This is why good studying often feels slower than bad studying. Rereading is
-smooth. Retrieval is bumpy. Spaced retrieval is even bumpier. But the bump is
-the signal. It tells the brain that this pattern must be recoverable, not merely
-recognizable.
+smooth. Retrieval is bumpy. Spaced retrieval is even bumpier. But the bump is the signal. It tells the brain that this pattern must be
+recoverable, not merely recognizable.
+
+There is no single best gap. In a study of more than 1,350 people, Cepeda and
+colleagues found that the optimal gap grew with how long the material had to be
+remembered but shrank as a share of that interval: roughly 20 to 40% of the test
+delay at one week, falling to 5 to 10% at one year.
 
 ## Step 6: the loop for a real study session
 
@@ -194,8 +210,14 @@ Better use:
 - "After I fix it, ask a transfer question."
 
 That turns the model into a Socratic feedback loop. You retrieve, it compares,
-you repair, then it pushes transfer. The value is not that AI explains more
-words faster. The value is that it can keep the loop tight.
+you repair, then it pushes transfer. The value is not that AI explains more words faster. The value is that it can
+keep the loop tight.
+
+There is early evidence that the difference matters. In a field experiment with
+about 1,000 high-school maths students, those who practiced with a plain GPT-4
+interface solved 48% more practice problems but scored 17% worse on a later exam
+without it, while a version prompted to give hints rather than answers removed
+that harm (Bastani and colleagues, PNAS 2025).
 
 ## Step 8: what to remember
 
@@ -219,5 +241,7 @@ actually works.
 - [Test-enhanced learning: taking memory tests improves long-term retention](https://doi.org/10.1111/j.1467-9280.2006.01693.x)
 - [Improving Students' Learning With Effective Learning Techniques](https://doi.org/10.1177/1529100612453266)
 - [The Power of Feedback](https://doi.org/10.3102/003465430298487)
+- [Spacing Effects in Learning: A Temporal Ridgeline of Optimal Retention](https://doi.org/10.1111/j.1467-9280.2008.02209.x)
+- [Generative AI without guardrails can harm learning: Evidence from high school mathematics](https://doi.org/10.1073/pnas.2422633122)
 - [Neuroplasticity - NCBI Bookshelf](https://www.ncbi.nlm.nih.gov/books/NBK557811/)
 - [Neuroplasticity: changes in grey matter induced by training](https://doi.org/10.1038/427311a)

@@ -1,27 +1,34 @@
 # Sebastian Boehler
 
-Computer science graduate student at the University of Tübingen building research software, agent tooling, and infrastructure for AI-assisted engineering. Based in Germany. Shipping public work through [Sunderlabs](https://sunderlabs.com) and [sebastian-boehler.com](https://sebastian-boehler.com).
+Research engineer & founder. I build AI systems and the environments they learn in — simulation, agents, and markets.
 
-Public GitHub snapshot as of Sep 22, 2026: 113 public repos, 38 followers, active on GitHub since Apr 19, 2017.
+M.Sc. Computer Science @ [University of Tübingen](https://uni-tuebingen.de) · based in Germany · [sebastian-boehler.com](https://sebastian-boehler.com) · [Sunderlabs](https://sunderlabs.com)
+
+## Now
+
+- **Learn2Design 2026** — NeurIPS competition track; collaborating toward a paper with physics co-authors after beating the shared baseline *(in progress)*.
+- **Agenthon 2026** — multi-track work (coding, forecasting, simulation, explainability) + public [forecast provenance audit](https://github.com/SebastianBoehler/agenthon-forecast-provenance-audit).
+- **[Sunderlabs](https://sunderlabs.com) / FlightRL** — compact policies trained in high-throughput sims before hardware.
+- **[HB Capital](https://hb-capital.app)** — market structure tooling, backtesting, and RL environments.
 
 ## Research
 
-- **[QLoRA Fine-Tuning for Next User Turn Prediction and Multi-Step Dialogue Rollouts](https://doi.org/10.1109/ICETSIS68266.2026.11549360)** - IEEE proceedings article, 2026 ASU International Conference in Emerging Technologies for Sustainability and Intelligent Systems (ICETSIS), Manama, Bahrain, pp. 1548-1555. DOI: [10.1109/ICETSIS68266.2026.11549360](https://doi.org/10.1109/ICETSIS68266.2026.11549360).
-
-## Current focus
-
-- **Research software:** evaluating LLM fine-tuning, next-turn prediction, dialogue rollouts, and autonomous experiment loops.
-- **Agent tooling:** building fast Go CLIs for AI-assisted development workflows, dependency diagnostics, and deterministic file editing.
-- **University tooling:** building practical interfaces around Alma, ILIAS, study workflows, and public data products.
+- **[QLoRA Fine-Tuning for Next User Turn Prediction and Multi-Step Dialogue Rollouts](https://doi.org/10.1109/ICETSIS68266.2026.11549360)** — IEEE ICETSIS 2026, pp. 1548–1555. DOI: [10.1109/ICETSIS68266.2026.11549360](https://doi.org/10.1109/ICETSIS68266.2026.11549360).
 
 ## Selected public work
 
-- **[polymarket-cpp-client](https://github.com/SebastianBoehler/polymarket-cpp-client)** (C++, updated Aug 25, 2026) - Lightweight C++ client for Polymarket APIs with REST and WebSocket support, designed for trading and market data access.
-- **[orpheus-podcast](https://github.com/SebastianBoehler/orpheus-podcast)** (Python, updated Aug 3, 2026) - Framework for podcast creation with search grounded llms for script generation and open source tts libraries
-- **[solana-dapp-learning](https://github.com/SebastianBoehler/solana-dapp-learning)** (TypeScript, updated Apr 8, 2025) - Creating my first DAPP on solana with Next.JS
-- **[bybit_market_maker_cpp](https://github.com/SebastianBoehler/bybit_market_maker_cpp)** (C++, updated Aug 1, 2026) - C++ market-making example for Bybit linear perpetuals: laddered quotes with inventory skew, TP/optional SL, exposure guard, and fee/funding-aware PnL via private websockets.
-- **[domain-check-mcp](https://github.com/SebastianBoehler/domain-check-mcp)** (JavaScript, updated Aug 7, 2025) - A Model Context Protocol (MCP) server for checking domain availability using IONOS endpoints
-- **[sec-data-fetcher](https://github.com/SebastianBoehler/sec-data-fetcher)** (Rust, updated Sep 19, 2026) - SEC EDGAR filings and financial-data toolkit in Rust: async client, native CLI, company facts, XML and HTML tables.
+| Repo | What it is |
+|---|---|
+| [polymarket-cpp-client](https://github.com/SebastianBoehler/polymarket-cpp-client) | C++ Polymarket REST + WebSocket client for trading & market data |
+| [agent-cli-utils](https://github.com/SebastianBoehler/agent-cli-utils) | Fast Go CLIs for agent workflows (drop-in replacements for slow Python tools) |
+| [lecture-pilot](https://github.com/SebastianBoehler/lecture-pilot) | Text-first lecture tutor with a typed workspace & provider-agnostic harness |
+| [agenthon-forecast-provenance-audit](https://github.com/SebastianBoehler/agenthon-forecast-provenance-audit) | Source-traced audits of financial labels and grading failures |
+| [solana-dapp-learning](https://github.com/SebastianBoehler/solana-dapp-learning) | Solana dapps with Next.js, Anchor, and Pyth |
+| [sec-data-fetcher](https://github.com/SebastianBoehler/sec-data-fetcher) | Rust SEC EDGAR / financial-data toolkit |
+
+## Background
+
+Backend at **[LI.FI](https://li.fi/)** (on-chain data connectors) · co-founder **[HB Capital](https://hb-capital.app)** · founder **[Sunderlabs](https://sunderlabs.com)** · previously **[Remotly](https://www.remotly.io/)** and freelance [Boehler IT Solutions](https://www.linkedin.com/company/boehler-it-solutions).
 
 ## Contribution history
 
@@ -31,12 +38,9 @@ Public GitHub snapshot as of Sep 22, 2026: 113 public repos, 38 followers, activ
   <img alt="Stacked GitHub contribution history" src="./assets/github-contributions-all-years-light.svg">
 </picture>
 
-All years from 2017-2026 are shown in one stacked calendar so the full activity arc is visible at a glance.
-
 ## Links
 
 - [Portfolio](https://sebastian-boehler.com)
-- [GitHub](https://github.com/SebastianBoehler)
 - [Hugging Face](https://huggingface.co/sebastianboehler)
 - [LinkedIn](https://www.linkedin.com/in/sebastian-boehler/)
 - [X](https://x.com/sebastianboehle)

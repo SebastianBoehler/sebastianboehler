@@ -1,11 +1,4 @@
-import { CURRENT_FOCUS_ITEMS, DATE_FORMATTER, USERNAME } from "./github-profile-config.mjs"
-
-const PUBLICATION_TITLE =
-  "QLoRA Fine-Tuning for Next User Turn Prediction and Multi-Step Dialogue Rollouts"
-const PUBLICATION_DOI = "10.1109/ICETSIS68266.2026.11549360"
-const PUBLICATION_URL = `https://doi.org/${PUBLICATION_DOI}`
-const PUBLICATION_DETAILS =
-  "IEEE proceedings article, 2026 ASU International Conference in Emerging Technologies for Sustainability and Intelligent Systems (ICETSIS), Manama, Bahrain, pp. 1548-1555"
+import { USERNAME } from "./github-profile-config.mjs"
 
 export function renderContributionSvg(years, theme = "dark") {
   const descendingYears = [...years].sort((a, b) => b.year - a.year)
@@ -74,32 +67,40 @@ export function renderContributionSvg(years, theme = "dark") {
 `
 }
 
-export function buildReadme({ profile, recent, contributions }) {
-  const generatedOn = DATE_FORMATTER.format(new Date())
-  const contributionRange = `${contributions[0].year}-${contributions.at(-1).year}`
-  const focus = CURRENT_FOCUS_ITEMS.map(
-    (item) => `- **${item.label}:** ${item.description}.`
-  ).join("\n")
-  const repos = recent
-    .map((repo) => `- **[${repo.name}](${repo.url})** (${repo.language}, updated ${formatDate(repo.updatedAt)}) - ${repo.summary}`)
-    .join("\n")
-  return `# ${profile.name}
+// Profile prose is hand-maintained. sync-github-profile.mjs still refreshes the contribution SVGs,
+// then rewrites README.md through this function so the prose stays in place.
+export function buildReadme() {
+  return `# Sebastian Boehler
 
-Computer science graduate student at the University of Tübingen building research software, agent tooling, and infrastructure for AI-assisted engineering. Based in ${profile.location}. Shipping public work through [${profile.company}](https://sunderlabs.com) and [sebastian-boehler.com](${profile.blog}).
+Research engineer & founder. I build AI systems and the environments they learn in — simulation, agents, and markets.
 
-Public GitHub snapshot as of ${generatedOn}: ${profile.public_repos} public repos, ${profile.followers} followers, active on GitHub since ${formatDate(profile.created_at)}.
+M.Sc. Computer Science @ [University of Tübingen](https://uni-tuebingen.de) · based in Germany · [sebastian-boehler.com](https://sebastian-boehler.com) · [Sunderlabs](https://sunderlabs.com)
+
+## Now
+
+- **Learn2Design 2026** — NeurIPS competition track; collaborating toward a paper with physics co-authors after beating the shared baseline *(in progress)*.
+- **Agenthon 2026** — multi-track work (coding, forecasting, simulation, explainability) + public [forecast provenance audit](https://github.com/SebastianBoehler/agenthon-forecast-provenance-audit).
+- **[Sunderlabs](https://sunderlabs.com) / FlightRL** — compact policies trained in high-throughput sims before hardware.
+- **[HB Capital](https://hb-capital.app)** — market structure tooling, backtesting, and RL environments.
 
 ## Research
 
-- **[${PUBLICATION_TITLE}](${PUBLICATION_URL})** - ${PUBLICATION_DETAILS}. DOI: [${PUBLICATION_DOI}](${PUBLICATION_URL}).
-
-## Current focus
-
-${focus}
+- **[QLoRA Fine-Tuning for Next User Turn Prediction and Multi-Step Dialogue Rollouts](https://doi.org/10.1109/ICETSIS68266.2026.11549360)** — IEEE ICETSIS 2026, pp. 1548–1555. DOI: [10.1109/ICETSIS68266.2026.11549360](https://doi.org/10.1109/ICETSIS68266.2026.11549360).
 
 ## Selected public work
 
-${repos}
+| Repo | What it is |
+|---|---|
+| [polymarket-cpp-client](https://github.com/SebastianBoehler/polymarket-cpp-client) | C++ Polymarket REST + WebSocket client for trading & market data |
+| [agent-cli-utils](https://github.com/SebastianBoehler/agent-cli-utils) | Fast Go CLIs for agent workflows (drop-in replacements for slow Python tools) |
+| [lecture-pilot](https://github.com/SebastianBoehler/lecture-pilot) | Text-first lecture tutor with a typed workspace & provider-agnostic harness |
+| [agenthon-forecast-provenance-audit](https://github.com/SebastianBoehler/agenthon-forecast-provenance-audit) | Source-traced audits of financial labels and grading failures |
+| [solana-dapp-learning](https://github.com/SebastianBoehler/solana-dapp-learning) | Solana dapps with Next.js, Anchor, and Pyth |
+| [sec-data-fetcher](https://github.com/SebastianBoehler/sec-data-fetcher) | Rust SEC EDGAR / financial-data toolkit |
+
+## Background
+
+Backend at **[LI.FI](https://li.fi/)** (on-chain data connectors) · co-founder **[HB Capital](https://hb-capital.app)** · founder **[Sunderlabs](https://sunderlabs.com)** · previously **[Remotly](https://www.remotly.io/)** and freelance [Boehler IT Solutions](https://www.linkedin.com/company/boehler-it-solutions).
 
 ## Contribution history
 
@@ -109,18 +110,11 @@ ${repos}
   <img alt="Stacked GitHub contribution history" src="./assets/github-contributions-all-years-light.svg">
 </picture>
 
-All years from ${contributionRange} are shown in one stacked calendar so the full activity arc is visible at a glance.
-
 ## Links
 
-- [Portfolio](${profile.blog})
-- [GitHub](https://github.com/${USERNAME})
+- [Portfolio](https://sebastian-boehler.com)
 - [Hugging Face](https://huggingface.co/sebastianboehler)
 - [LinkedIn](https://www.linkedin.com/in/sebastian-boehler/)
-- [X](https://x.com/${profile.twitter_username})
+- [X](https://x.com/sebastianboehle)
 `
-}
-
-function formatDate(value) {
-  return DATE_FORMATTER.format(new Date(value))
 }

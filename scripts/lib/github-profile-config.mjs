@@ -25,28 +25,3 @@ export const SUMMARY_OVERRIDES = {
   "tue-cli":
     "Interactive terminal tooling for Tübingen university workflows with menu-driven navigation and colorized output.",
 }
-
-export const CURRENT_FOCUS_ITEMS = [
-  {
-    label: "Research software",
-    description:
-      "evaluating LLM fine-tuning, next-turn prediction, dialogue rollouts, and autonomous experiment loops",
-  },
-  {
-    label: "Agent tooling",
-    description:
-      "building fast Go CLIs for AI-assisted development workflows, dependency diagnostics, and deterministic file editing",
-  },
-  {
-    label: "University tooling",
-    description:
-      "building practical interfaces around Alma, ILIAS, study workflows, and public data products",
-  },
-]
-
-export const DATE_FORMATTER = new Intl.DateTimeFormat("en-US", {
-  month: "short",
-  day: "numeric",
-  year: "numeric",
-  timeZone: "UTC",
-})

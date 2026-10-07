@@ -38,6 +38,14 @@ Backend at **[LI.FI](https://li.fi/)** (on-chain data connectors) · co-founder 
   <img alt="Stacked GitHub contribution history" src="./assets/github-contributions-all-years-light.svg">
 </picture>
 
+Monthly lines added and deleted, with commit frequency across public repositories.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/github-loc-history-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/github-loc-history-light.svg">
+  <img alt="Monthly lines added and deleted, with commit frequency" src="./assets/github-loc-history-light.svg">
+</picture>
+
 ## Links
 
 - [Portfolio](https://sebastian-boehler.com)

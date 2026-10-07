@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="760" height="478" viewBox="0 0 760 478" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Lines added, deleted, and commits for SebastianBoehler</title>
+  <desc id="desc">Monthly additions and deletions as a diverging histogram, with commit frequency as a line, from 2019-04 to 2026-10.</desc>
+  <style>text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }</style>
+  <rect x="16" y="8" width="728" height="462" rx="8" fill="#ffffff" stroke="#d8dee4"/>
+  <text x="32" y="36" fill="#1f2328" font-size="16" font-weight="600">Lines added, deleted, and commits</text>
+  <text x="32" y="56" fill="#57606a" font-size="12">+1.7M net lines since 2019 · 3,300 commits · through October 2026</text>
+  <text x="60" y="82" fill="#57606a" font-size="10" text-anchor="end">381k</text>
+  <text x="60" y="159" fill="#57606a" font-size="10" text-anchor="end">0</text>
+  <text x="60" y="234" fill="#57606a" font-size="10" text-anchor="end">−381k</text>
+  <line x1="68" y1="156" x2="732" y2="156" stroke="#d8dee4"/>
+  <rect data-series="additions" x="69.09" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>April 2019: 154 added, 142 deleted, 34 commits</title></rect>
+  <rect data-series="deletions" x="69.09" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>April 2019: 154 added, 142 deleted, 34 commits</title></rect>
+  <rect data-series="additions" x="163.95" y="153.97" width="5.11" height="2.03" rx="1" fill="#1f883d"><title>May 2020: 10,173 added, 4,117 deleted, 5 commits</title></rect>
+  <rect data-series="deletions" x="163.95" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>May 2020: 10,173 added, 4,117 deleted, 5 commits</title></rect>
+  <rect data-series="additions" x="171.25" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>June 2020: 716 added, 238 deleted, 19 commits</title></rect>
+  <rect data-series="deletions" x="171.25" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>June 2020: 716 added, 238 deleted, 19 commits</title></rect>
+  <rect data-series="additions" x="178.55" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>July 2020: 28 added, 21 deleted, 4 commits</title></rect>
+  <rect data-series="deletions" x="178.55" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>July 2020: 28 added, 21 deleted, 4 commits</title></rect>
+  <rect data-series="additions" x="193.14" y="146.43" width="5.11" height="9.57" rx="1" fill="#1f883d"><title>September 2020: 47,914 added, 1 deleted, 3 commits</title></rect>
+  <rect data-series="deletions" x="193.14" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>September 2020: 47,914 added, 1 deleted, 3 commits</title></rect>
+  <rect data-series="additions" x="200.44" y="154.93" width="5.11" height="1.07" rx="1" fill="#1f883d"><title>October 2020: 5,358 added, 577 deleted, 28 commits</title></rect>
+  <rect data-series="deletions" x="200.44" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>October 2020: 5,358 added, 577 deleted, 28 commits</title></rect>
+  <rect data-series="additions" x="207.73" y="146.46" width="5.11" height="9.54" rx="1" fill="#1f883d"><title>November 2020: 47,780 added, 18 deleted, 6 commits</title></rect>
+  <rect data-series="deletions" x="207.73" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>November 2020: 47,780 added, 18 deleted, 6 commits</title></rect>
+  <rect data-series="additions" x="215.03" y="147.08" width="5.11" height="8.92" rx="1" fill="#1f883d"><title>December 2020: 44,689 added, 47,328 deleted, 2 commits</title></rect>
+  <rect data-series="deletions" x="215.03" y="156.00" width="5.11" height="9.45" rx="1" fill="#cf222e"><title>December 2020: 44,689 added, 47,328 deleted, 2 commits</title></rect>
+  <rect data-series="additions" x="222.33" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>January 2021: 3,107 added, 643 deleted, 4 commits</title></rect>
+  <rect data-series="deletions" x="222.33" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>January 2021: 3,107 added, 643 deleted, 4 commits</title></rect>
+  <rect data-series="additions" x="229.62" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>February 2021: 4,075 added, 598 deleted, 6 commits</title></rect>
+  <rect data-series="deletions" x="229.62" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>February 2021: 4,075 added, 598 deleted, 6 commits</title></rect>
+  <rect data-series="additions" x="236.92" y="153.54" width="5.11" height="2.46" rx="1" fill="#1f883d"><title>March 2021: 12,327 added, 9,501 deleted, 15 commits</title></rect>
+  <rect data-series="deletions" x="236.92" y="156.00" width="5.11" height="1.90" rx="1" fill="#cf222e"><title>March 2021: 12,327 added, 9,501 deleted, 15 commits</title></rect>
+  <rect data-series="additions" x="244.22" y="145.63" width="5.11" height="10.37" rx="1" fill="#1f883d"><title>April 2021: 51,918 added, 48,075 deleted, 30 commits</title></rect>
+  <rect data-series="deletions" x="244.22" y="156.00" width="5.11" height="9.60" rx="1" fill="#cf222e"><title>April 2021: 51,918 added, 48,075 deleted, 30 commits</title></rect>
+  <rect data-series="additions" x="251.51" y="146.85" width="5.11" height="9.15" rx="1" fill="#1f883d"><title>May 2021: 45,810 added, 524 deleted, 4 commits</title></rect>
+  <rect data-series="deletions" x="251.51" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>May 2021: 45,810 added, 524 deleted, 4 commits</title></rect>
+  <rect data-series="additions" x="258.81" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>June 2021: 886 added, 5,180 deleted, 3 commits</title></rect>
+  <rect data-series="deletions" x="258.81" y="156.00" width="5.11" height="1.03" rx="1" fill="#cf222e"><title>June 2021: 886 added, 5,180 deleted, 3 commits</title></rect>
+  <rect data-series="additions" x="266.11" y="154.59" width="5.11" height="1.41" rx="1" fill="#1f883d"><title>July 2021: 7,080 added, 5,771 deleted, 17 commits</title></rect>
+  <rect data-series="deletions" x="266.11" y="156.00" width="5.11" height="1.15" rx="1" fill="#cf222e"><title>July 2021: 7,080 added, 5,771 deleted, 17 commits</title></rect>
+  <rect data-series="additions" x="273.40" y="154.52" width="5.11" height="1.48" rx="1" fill="#1f883d"><title>August 2021: 7,411 added, 1,450 deleted, 25 commits</title></rect>
+  <rect data-series="deletions" x="273.40" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>August 2021: 7,411 added, 1,450 deleted, 25 commits</title></rect>
+  <rect data-series="additions" x="280.70" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>September 2021: 311 added, 61 deleted, 4 commits</title></rect>
+  <rect data-series="deletions" x="280.70" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>September 2021: 311 added, 61 deleted, 4 commits</title></rect>
+  <rect data-series="additions" x="288.00" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>October 2021: 1,004 added, 151 deleted, 7 commits</title></rect>
+  <rect data-series="deletions" x="288.00" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>October 2021: 1,004 added, 151 deleted, 7 commits</title></rect>
+  <rect data-series="additions" x="309.89" y="154.93" width="5.11" height="1.07" rx="1" fill="#1f883d"><title>January 2022: 5,335 added, 1,747 deleted, 2 commits</title></rect>
+  <rect data-series="deletions" x="309.89" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>January 2022: 5,335 added, 1,747 deleted, 2 commits</title></rect>
+  <rect data-series="additions" x="317.18" y="147.45" width="5.11" height="8.55" rx="1" fill="#1f883d"><title>February 2022: 42,800 added, 32 deleted, 7 commits</title></rect>
+  <rect data-series="deletions" x="317.18" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>February 2022: 42,800 added, 32 deleted, 7 commits</title></rect>
+  <rect data-series="additions" x="324.48" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>March 2022: 9 added, 9 deleted, 3 commits</title></rect>
+  <rect data-series="deletions" x="324.48" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>March 2022: 9 added, 9 deleted, 3 commits</title></rect>
+  <rect data-series="additions" x="339.07" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>May 2022: 1,475 added, 343 deleted, 10 commits</title></rect>
+  <rect data-series="deletions" x="339.07" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>May 2022: 1,475 added, 343 deleted, 10 commits</title></rect>
+  <rect data-series="additions" x="353.67" y="154.99" width="5.11" height="1.01" rx="1" fill="#1f883d"><title>July 2022: 5,080 added, 170 deleted, 5 commits</title></rect>
+  <rect data-series="deletions" x="353.67" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>July 2022: 5,080 added, 170 deleted, 5 commits</title></rect>
+  <rect data-series="additions" x="360.96" y="154.58" width="5.11" height="1.42" rx="1" fill="#1f883d"><title>August 2022: 7,121 added, 1,736 deleted, 52 commits</title></rect>
+  <rect data-series="deletions" x="360.96" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>August 2022: 7,121 added, 1,736 deleted, 52 commits</title></rect>
+  <rect data-series="additions" x="368.26" y="154.67" width="5.11" height="1.33" rx="1" fill="#1f883d"><title>September 2022: 6,653 added, 4,010 deleted, 49 commits</title></rect>
+  <rect data-series="deletions" x="368.26" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>September 2022: 6,653 added, 4,010 deleted, 49 commits</title></rect>
+  <rect data-series="additions" x="375.56" y="154.59" width="5.11" height="1.41" rx="1" fill="#1f883d"><title>October 2022: 7,037 added, 5,763 deleted, 38 commits</title></rect>
+  <rect data-series="deletions" x="375.56" y="156.00" width="5.11" height="1.15" rx="1" fill="#cf222e"><title>October 2022: 7,037 added, 5,763 deleted, 38 commits</title></rect>
+  <rect data-series="additions" x="390.15" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>December 2022: 2,094 added, 1,953 deleted, 1 commits</title></rect>
+  <rect data-series="deletions" x="390.15" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>December 2022: 2,094 added, 1,953 deleted, 1 commits</title></rect>
+  <rect data-series="additions" x="397.45" y="154.59" width="5.11" height="1.41" rx="1" fill="#1f883d"><title>January 2023: 7,064 added, 3,292 deleted, 13 commits</title></rect>
+  <rect data-series="deletions" x="397.45" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>January 2023: 7,064 added, 3,292 deleted, 13 commits</title></rect>
+  <rect data-series="additions" x="404.74" y="148.94" width="5.11" height="7.06" rx="1" fill="#1f883d"><title>February 2023: 35,352 added, 10,182 deleted, 24 commits</title></rect>
+  <rect data-series="deletions" x="404.74" y="156.00" width="5.11" height="2.03" rx="1" fill="#cf222e"><title>February 2023: 35,352 added, 10,182 deleted, 24 commits</title></rect>
+  <rect data-series="additions" x="412.04" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>March 2023: 497 added, 273 deleted, 5 commits</title></rect>
+  <rect data-series="deletions" x="412.04" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>March 2023: 497 added, 273 deleted, 5 commits</title></rect>
+  <rect data-series="additions" x="419.34" y="152.57" width="5.11" height="3.43" rx="1" fill="#1f883d"><title>April 2023: 17,177 added, 11,763 deleted, 11 commits</title></rect>
+  <rect data-series="deletions" x="419.34" y="156.00" width="5.11" height="2.35" rx="1" fill="#cf222e"><title>April 2023: 17,177 added, 11,763 deleted, 11 commits</title></rect>
+  <rect data-series="additions" x="426.63" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>May 2023: 264 added, 202 deleted, 1 commits</title></rect>
+  <rect data-series="deletions" x="426.63" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>May 2023: 264 added, 202 deleted, 1 commits</title></rect>
+  <rect data-series="additions" x="433.93" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>June 2023: 103 added, 223 deleted, 1 commits</title></rect>
+  <rect data-series="deletions" x="433.93" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>June 2023: 103 added, 223 deleted, 1 commits</title></rect>
+  <rect data-series="additions" x="441.23" y="152.87" width="5.11" height="3.13" rx="1" fill="#1f883d"><title>July 2023: 15,687 added, 14,503 deleted, 2 commits</title></rect>
+  <rect data-series="deletions" x="441.23" y="156.00" width="5.11" height="2.90" rx="1" fill="#cf222e"><title>July 2023: 15,687 added, 14,503 deleted, 2 commits</title></rect>
+  <rect data-series="additions" x="448.52" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>August 2023: 2,196 added, 377 deleted, 1 commits</title></rect>
+  <rect data-series="deletions" x="448.52" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>August 2023: 2,196 added, 377 deleted, 1 commits</title></rect>
+  <rect data-series="additions" x="455.82" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>September 2023: 372 added, 1,211 deleted, 1 commits</title></rect>
+  <rect data-series="deletions" x="455.82" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>September 2023: 372 added, 1,211 deleted, 1 commits</title></rect>
+  <rect data-series="additions" x="463.12" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>October 2023: 611 added, 36 deleted, 15 commits</title></rect>
+  <rect data-series="deletions" x="463.12" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>October 2023: 611 added, 36 deleted, 15 commits</title></rect>
+  <rect data-series="additions" x="470.41" y="153.80" width="5.11" height="2.20" rx="1" fill="#1f883d"><title>November 2023: 11,039 added, 58 deleted, 1 commits</title></rect>
+  <rect data-series="deletions" x="470.41" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>November 2023: 11,039 added, 58 deleted, 1 commits</title></rect>
+  <rect data-series="additions" x="477.71" y="147.60" width="5.11" height="8.40" rx="1" fill="#1f883d"><title>December 2023: 42,088 added, 1,738 deleted, 35 commits</title></rect>
+  <rect data-series="deletions" x="477.71" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>December 2023: 42,088 added, 1,738 deleted, 35 commits</title></rect>
+  <rect data-series="additions" x="485.01" y="153.67" width="5.11" height="2.33" rx="1" fill="#1f883d"><title>January 2024: 11,671 added, 469 deleted, 27 commits</title></rect>
+  <rect data-series="deletions" x="485.01" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>January 2024: 11,671 added, 469 deleted, 27 commits</title></rect>
+  <rect data-series="additions" x="492.30" y="153.30" width="5.11" height="2.70" rx="1" fill="#1f883d"><title>February 2024: 13,526 added, 34,136 deleted, 59 commits</title></rect>
+  <rect data-series="deletions" x="492.30" y="156.00" width="5.11" height="6.82" rx="1" fill="#cf222e"><title>February 2024: 13,526 added, 34,136 deleted, 59 commits</title></rect>
+  <rect data-series="additions" x="499.60" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>March 2024: 3,537 added, 1,624 deleted, 67 commits</title></rect>
+  <rect data-series="deletions" x="499.60" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>March 2024: 3,537 added, 1,624 deleted, 67 commits</title></rect>
+  <rect data-series="additions" x="506.90" y="154.96" width="5.11" height="1.04" rx="1" fill="#1f883d"><title>April 2024: 5,188 added, 1,220 deleted, 69 commits</title></rect>
+  <rect data-series="deletions" x="506.90" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>April 2024: 5,188 added, 1,220 deleted, 69 commits</title></rect>
+  <rect data-series="additions" x="514.19" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>May 2024: 1,820 added, 552 deleted, 28 commits</title></rect>
+  <rect data-series="deletions" x="514.19" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>May 2024: 1,820 added, 552 deleted, 28 commits</title></rect>
+  <rect data-series="additions" x="521.49" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>June 2024: 3,138 added, 2,659 deleted, 9 commits</title></rect>
+  <rect data-series="deletions" x="521.49" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>June 2024: 3,138 added, 2,659 deleted, 9 commits</title></rect>
+  <rect data-series="additions" x="528.79" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>July 2024: 4,547 added, 2,613 deleted, 39 commits</title></rect>
+  <rect data-series="deletions" x="528.79" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>July 2024: 4,547 added, 2,613 deleted, 39 commits</title></rect>
+  <rect data-series="additions" x="536.08" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>August 2024: 928 added, 1,164 deleted, 13 commits</title></rect>
+  <rect data-series="deletions" x="536.08" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>August 2024: 928 added, 1,164 deleted, 13 commits</title></rect>
+  <rect data-series="additions" x="543.38" y="154.36" width="5.11" height="1.64" rx="1" fill="#1f883d"><title>September 2024: 8,207 added, 1,580 deleted, 58 commits</title></rect>
+  <rect data-series="deletions" x="543.38" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>September 2024: 8,207 added, 1,580 deleted, 58 commits</title></rect>
+  <rect data-series="additions" x="550.68" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>October 2024: 1,612 added, 25 deleted, 3 commits</title></rect>
+  <rect data-series="deletions" x="550.68" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>October 2024: 1,612 added, 25 deleted, 3 commits</title></rect>
+  <rect data-series="additions" x="557.97" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>November 2024: 645 added, 231 deleted, 4 commits</title></rect>
+  <rect data-series="deletions" x="557.97" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>November 2024: 645 added, 231 deleted, 4 commits</title></rect>
+  <rect data-series="additions" x="565.27" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>December 2024: 556 added, 11 deleted, 2 commits</title></rect>
+  <rect data-series="deletions" x="565.27" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>December 2024: 556 added, 11 deleted, 2 commits</title></rect>
+  <rect data-series="additions" x="572.57" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>January 2025: 2,723 added, 234 deleted, 6 commits</title></rect>
+  <rect data-series="deletions" x="572.57" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>January 2025: 2,723 added, 234 deleted, 6 commits</title></rect>
+  <rect data-series="additions" x="579.86" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>February 2025: 2,256 added, 2 deleted, 3 commits</title></rect>
+  <rect data-series="deletions" x="579.86" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>February 2025: 2,256 added, 2 deleted, 3 commits</title></rect>
+  <rect data-series="additions" x="587.16" y="152.33" width="5.11" height="3.67" rx="1" fill="#1f883d"><title>March 2025: 18,392 added, 923 deleted, 42 commits</title></rect>
+  <rect data-series="deletions" x="587.16" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>March 2025: 18,392 added, 923 deleted, 42 commits</title></rect>
+  <rect data-series="additions" x="594.46" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>April 2025: 2,612 added, 1,059 deleted, 22 commits</title></rect>
+  <rect data-series="deletions" x="594.46" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>April 2025: 2,612 added, 1,059 deleted, 22 commits</title></rect>
+  <rect data-series="additions" x="601.75" y="154.72" width="5.11" height="1.28" rx="1" fill="#1f883d"><title>May 2025: 6,435 added, 7,250 deleted, 24 commits</title></rect>
+  <rect data-series="deletions" x="601.75" y="156.00" width="5.11" height="1.45" rx="1" fill="#cf222e"><title>May 2025: 6,435 added, 7,250 deleted, 24 commits</title></rect>
+  <rect data-series="additions" x="609.05" y="153.80" width="5.11" height="2.20" rx="1" fill="#1f883d"><title>June 2025: 11,014 added, 6,613 deleted, 56 commits</title></rect>
+  <rect data-series="deletions" x="609.05" y="156.00" width="5.11" height="1.32" rx="1" fill="#cf222e"><title>June 2025: 11,014 added, 6,613 deleted, 56 commits</title></rect>
+  <rect data-series="additions" x="616.35" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>July 2025: 2,010 added, 222 deleted, 18 commits</title></rect>
+  <rect data-series="deletions" x="616.35" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>July 2025: 2,010 added, 222 deleted, 18 commits</title></rect>
+  <rect data-series="additions" x="623.64" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>August 2025: 2,104 added, 524 deleted, 12 commits</title></rect>
+  <rect data-series="deletions" x="623.64" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>August 2025: 2,104 added, 524 deleted, 12 commits</title></rect>
+  <rect data-series="additions" x="630.94" y="150.73" width="5.11" height="5.27" rx="1" fill="#1f883d"><title>September 2025: 26,375 added, 13,502 deleted, 35 commits</title></rect>
+  <rect data-series="deletions" x="630.94" y="156.00" width="5.11" height="2.70" rx="1" fill="#cf222e"><title>September 2025: 26,375 added, 13,502 deleted, 35 commits</title></rect>
+  <rect data-series="additions" x="638.24" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>October 2025: 4,740 added, 29 deleted, 2 commits</title></rect>
+  <rect data-series="deletions" x="638.24" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>October 2025: 4,740 added, 29 deleted, 2 commits</title></rect>
+  <rect data-series="additions" x="645.53" y="147.58" width="5.11" height="8.42" rx="1" fill="#1f883d"><title>November 2025: 42,151 added, 37,570 deleted, 36 commits</title></rect>
+  <rect data-series="deletions" x="645.53" y="156.00" width="5.11" height="7.50" rx="1" fill="#cf222e"><title>November 2025: 42,151 added, 37,570 deleted, 36 commits</title></rect>
+  <rect data-series="additions" x="652.83" y="144.63" width="5.11" height="11.37" rx="1" fill="#1f883d"><title>December 2025: 56,948 added, 29,623 deleted, 55 commits</title></rect>
+  <rect data-series="deletions" x="652.83" y="156.00" width="5.11" height="5.92" rx="1" fill="#cf222e"><title>December 2025: 56,948 added, 29,623 deleted, 55 commits</title></rect>
+  <rect data-series="additions" x="660.13" y="127.03" width="5.11" height="28.97" rx="1" fill="#1f883d"><title>January 2026: 145,076 added, 51,300 deleted, 72 commits</title></rect>
+  <rect data-series="deletions" x="660.13" y="156.00" width="5.11" height="10.24" rx="1" fill="#cf222e"><title>January 2026: 145,076 added, 51,300 deleted, 72 commits</title></rect>
+  <rect data-series="additions" x="667.42" y="155.00" width="5.11" height="1.00" rx="1" fill="#1f883d"><title>February 2026: 3,983 added, 638 deleted, 18 commits</title></rect>
+  <rect data-series="deletions" x="667.42" y="156.00" width="5.11" height="1.00" rx="1" fill="#cf222e"><title>February 2026: 3,983 added, 638 deleted, 18 commits</title></rect>
+  <rect data-series="additions" x="674.72" y="98.86" width="5.11" height="57.14" rx="1" fill="#1f883d"><title>March 2026: 286,183 added, 38,880 deleted, 116 commits</title></rect>
+  <rect data-series="deletions" x="674.72" y="156.00" width="5.11" height="7.76" rx="1" fill="#cf222e"><title>March 2026: 286,183 added, 38,880 deleted, 116 commits</title></rect>
+  <rect data-series="additions" x="682.02" y="151.61" width="5.11" height="4.39" rx="1" fill="#1f883d"><title>April 2026: 21,998 added, 6,297 deleted, 44 commits</title></rect>
+  <rect data-series="deletions" x="682.02" y="156.00" width="5.11" height="1.26" rx="1" fill="#cf222e"><title>April 2026: 21,998 added, 6,297 deleted, 44 commits</title></rect>
+  <rect data-series="additions" x="689.31" y="105.69" width="5.11" height="50.31" rx="1" fill="#1f883d"><title>May 2026: 251,956 added, 7,839 deleted, 117 commits</title></rect>
+  <rect data-series="deletions" x="689.31" y="156.00" width="5.11" height="1.57" rx="1" fill="#cf222e"><title>May 2026: 251,956 added, 7,839 deleted, 117 commits</title></rect>
+  <rect data-series="additions" x="696.61" y="135.10" width="5.11" height="20.90" rx="1" fill="#1f883d"><title>June 2026: 104,646 added, 30,079 deleted, 310 commits</title></rect>
+  <rect data-series="deletions" x="696.61" y="156.00" width="5.11" height="6.01" rx="1" fill="#cf222e"><title>June 2026: 104,646 added, 30,079 deleted, 310 commits</title></rect>
+  <rect data-series="additions" x="703.91" y="116.08" width="5.11" height="39.92" rx="1" fill="#1f883d"><title>July 2026: 199,911 added, 37,342 deleted, 375 commits</title></rect>
+  <rect data-series="deletions" x="703.91" y="156.00" width="5.11" height="7.46" rx="1" fill="#cf222e"><title>July 2026: 199,911 added, 37,342 deleted, 375 commits</title></rect>
+  <rect data-series="additions" x="711.20" y="80.00" width="5.11" height="76.00" rx="1" fill="#1f883d"><title>August 2026: 380,613 added, 60,299 deleted, 928 commits</title></rect>
+  <rect data-series="deletions" x="711.20" y="156.00" width="5.11" height="12.04" rx="1" fill="#cf222e"><title>August 2026: 380,613 added, 60,299 deleted, 928 commits</title></rect>
+  <rect data-series="additions" x="718.50" y="122.12" width="5.11" height="33.88" rx="1" fill="#1f883d"><title>September 2026: 169,681 added, 22,527 deleted, 119 commits</title></rect>
+  <rect data-series="deletions" x="718.50" y="156.00" width="5.11" height="4.50" rx="1" fill="#cf222e"><title>September 2026: 169,681 added, 22,527 deleted, 119 commits</title></rect>
+  <rect data-series="additions" x="725.80" y="152.15" width="5.11" height="3.85" rx="1" fill="#1f883d"><title>October 2026: 19,275 added, 29,482 deleted, 19 commits</title></rect>
+  <rect data-series="deletions" x="725.80" y="156.00" width="5.11" height="5.89" rx="1" fill="#cf222e"><title>October 2026: 19,275 added, 29,482 deleted, 19 commits</title></rect>
+  <text x="71.65" y="252" fill="#57606a" font-size="10" text-anchor="middle">2019</text>
+  <text x="137.32" y="252" fill="#57606a" font-size="10" text-anchor="middle">2020</text>
+  <text x="224.88" y="252" fill="#57606a" font-size="10" text-anchor="middle">2021</text>
+  <text x="312.44" y="252" fill="#57606a" font-size="10" text-anchor="middle">2022</text>
+  <text x="400.00" y="252" fill="#57606a" font-size="10" text-anchor="middle">2023</text>
+  <text x="487.56" y="252" fill="#57606a" font-size="10" text-anchor="middle">2024</text>
+  <text x="575.12" y="252" fill="#57606a" font-size="10" text-anchor="middle">2025</text>
+  <text x="662.68" y="252" fill="#57606a" font-size="10" text-anchor="middle">2026</text>
+  <text x="32" y="280" fill="#57606a" font-size="11">Commits per month</text>
+  <text x="732" y="280" fill="#57606a" font-size="11" text-anchor="end">928 max</text>
+  <line x1="68" y1="380" x2="732" y2="380" stroke="#d8dee4"/>
+  <polygon points="71.65,380 71.65,376.78 78.95,380.00 86.24,380.00 93.54,380.00 100.84,380.00 108.13,380.00 115.43,380.00 122.73,380.00 130.02,380.00 137.32,380.00 144.62,380.00 151.91,380.00 159.21,380.00 166.51,379.53 173.80,378.20 181.10,379.62 188.40,380.00 195.69,379.72 202.99,377.34 210.29,379.43 217.58,379.81 224.88,379.62 232.18,379.43 239.47,378.58 246.77,377.16 254.07,379.62 261.36,379.72 268.66,378.39 275.96,377.63 283.25,379.62 290.55,379.34 297.85,380.00 305.14,380.00 312.44,379.81 319.74,379.34 327.03,379.72 334.33,380.00 341.63,379.05 348.92,380.00 356.22,379.53 363.52,375.07 370.81,375.35 378.11,376.40 385.41,380.00 392.70,379.91 400.00,378.77 407.30,377.72 414.59,379.53 421.89,378.96 429.19,379.91 436.48,379.91 443.78,379.81 451.08,379.91 458.37,379.91 465.67,378.58 472.97,379.91 480.26,376.68 487.56,377.44 494.86,374.41 502.15,373.65 509.45,373.46 516.75,377.34 524.04,379.15 531.34,376.30 538.64,378.77 545.93,374.50 553.23,379.72 560.53,379.62 567.82,379.81 575.12,379.43 582.42,379.72 589.71,376.02 597.01,377.91 604.31,377.72 611.60,374.69 618.90,378.29 626.20,378.86 633.49,376.68 640.79,379.81 648.09,376.59 655.38,374.78 662.68,373.17 669.98,378.29 677.27,369.00 684.57,375.83 691.87,368.91 699.16,350.60 706.46,344.44 713.76,292.00 721.05,368.72 728.35,378.20 728.35,380" fill="#0969da" fill-opacity="0.14"/>
+  <polyline points="71.65,376.78 78.95,380.00 86.24,380.00 93.54,380.00 100.84,380.00 108.13,380.00 115.43,380.00 122.73,380.00 130.02,380.00 137.32,380.00 144.62,380.00 151.91,380.00 159.21,380.00 166.51,379.53 173.80,378.20 181.10,379.62 188.40,380.00 195.69,379.72 202.99,377.34 210.29,379.43 217.58,379.81 224.88,379.62 232.18,379.43 239.47,378.58 246.77,377.16 254.07,379.62 261.36,379.72 268.66,378.39 275.96,377.63 283.25,379.62 290.55,379.34 297.85,380.00 305.14,380.00 312.44,379.81 319.74,379.34 327.03,379.72 334.33,380.00 341.63,379.05 348.92,380.00 356.22,379.53 363.52,375.07 370.81,375.35 378.11,376.40 385.41,380.00 392.70,379.91 400.00,378.77 407.30,377.72 414.59,379.53 421.89,378.96 429.19,379.91 436.48,379.91 443.78,379.81 451.08,379.91 458.37,379.91 465.67,378.58 472.97,379.91 480.26,376.68 487.56,377.44 494.86,374.41 502.15,373.65 509.45,373.46 516.75,377.34 524.04,379.15 531.34,376.30 538.64,378.77 545.93,374.50 553.23,379.72 560.53,379.62 567.82,379.81 575.12,379.43 582.42,379.72 589.71,376.02 597.01,377.91 604.31,377.72 611.60,374.69 618.90,378.29 626.20,378.86 633.49,376.68 640.79,379.81 648.09,376.59 655.38,374.78 662.68,373.17 669.98,378.29 677.27,369.00 684.57,375.83 691.87,368.91 699.16,350.60 706.46,344.44 713.76,292.00 721.05,368.72 728.35,378.20" fill="none" stroke="#0969da" stroke-width="1.75" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="713.76" cy="292.00" r="2.75" fill="#0969da"/>
+  <rect x="32" y="399" width="10" height="10" rx="1" fill="#1f883d"/>
+  <text x="46" y="408" fill="#57606a" font-size="11">Additions</text>
+  <rect x="118" y="399" width="10" height="10" rx="1" fill="#cf222e"/>
+  <text x="132" y="408" fill="#57606a" font-size="11">Deletions</text>
+  <line x1="204" y1="404" x2="222" y2="404" stroke="#0969da" stroke-width="2"/>
+  <text x="228" y="408" fill="#57606a" font-size="11">Commits</text>
+  <text x="32" y="430" fill="#57606a" font-size="11">76 public repositories, authored by SebastianBoehler.</text>
+  <text x="32" y="445" fill="#57606a" font-size="11">Excludes a Feb 2026 remotion scaffold import (1,040,748 lines) so the monthly scale stays readable.</text>
+</svg>

@@ -12,7 +12,8 @@
     "lint": "next lint",
     "test": "bun test",
     "sync:github-profile": "node scripts/sync-github-profile.mjs",
-    "sync:github-throughput": "node scripts/generate-github-throughput-svg.mjs"
+    "sync:github-throughput": "node scripts/generate-github-throughput-svg.mjs",
+    "sync:github-loc-history": "node scripts/generate-github-loc-history-svg.mjs"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.12",

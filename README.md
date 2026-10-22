@@ -10,7 +10,7 @@ M.Sc. Computer Science @ [University of Tübingen](https://uni-tuebingen.de) · 
 - **Agenthon 2026** — multi-track work (coding, forecasting, simulation, explainability).
 - **[Fusion Equilibrium Challenge](https://fusion-equilibrium-challenge.sophelio.io/)** — reconstructing tokamak plasma equilibria from non-magnetic diagnostics.
 - **[Neural Interfaces 2026](https://neural-interfaces26.github.io/)** — EEG/EMG Foundation Challenge, Track 2: decoding cognitive tasks from EEG across sessions and participants.
-- **[Sunderlabs](https://sunderlabs.com) / FlightRL** — compact policies trained in high-throughput sims before hardware.
+- **[Sunderlabs](https://sunderlabs.com)**
 - **[HB Capital](https://hb-capital.app)** — market structure tooling, backtesting, and RL environments.
 
 ## Research

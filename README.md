@@ -7,7 +7,7 @@ M.Sc. Computer Science @ [University of Tübingen](https://uni-tuebingen.de) · 
 ## Now
 
 - **Learn2Design 2026** — NeurIPS competition track; collaborating toward a paper with physics co-authors after beating the shared baseline *(in progress)*.
-- **Agenthon 2026** — multi-track work (coding, forecasting, simulation, explainability) + public [forecast provenance audit](https://github.com/SebastianBoehler/agenthon-forecast-provenance-audit).
+- **Agenthon 2026** — multi-track work (coding, forecasting, simulation, explainability).
 - **[Sunderlabs](https://sunderlabs.com) / FlightRL** — compact policies trained in high-throughput sims before hardware.
 - **[HB Capital](https://hb-capital.app)** — market structure tooling, backtesting, and RL environments.
 
@@ -22,7 +22,6 @@ M.Sc. Computer Science @ [University of Tübingen](https://uni-tuebingen.de) · 
 | [polymarket-cpp-client](https://github.com/SebastianBoehler/polymarket-cpp-client) | C++ Polymarket REST + WebSocket client for trading & market data |
 | [agent-cli-utils](https://github.com/SebastianBoehler/agent-cli-utils) | Fast Go CLIs for agent workflows (drop-in replacements for slow Python tools) |
 | [lecture-pilot](https://github.com/SebastianBoehler/lecture-pilot) | Text-first lecture tutor with a typed workspace & provider-agnostic harness |
-| [agenthon-forecast-provenance-audit](https://github.com/SebastianBoehler/agenthon-forecast-provenance-audit) | Source-traced audits of financial labels and grading failures |
 | [solana-dapp-learning](https://github.com/SebastianBoehler/solana-dapp-learning) | Solana dapps with Next.js, Anchor, and Pyth |
 | [sec-data-fetcher](https://github.com/SebastianBoehler/sec-data-fetcher) | Rust SEC EDGAR / financial-data toolkit |
 

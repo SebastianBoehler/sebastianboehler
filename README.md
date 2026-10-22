@@ -6,24 +6,16 @@ M.Sc. Computer Science @ [University of Tübingen](https://uni-tuebingen.de) · 
 
 ## Now
 
-- **Learn2Design 2026** — NeurIPS competition track; collaborating toward a paper with physics co-authors after beating the shared baseline *(in progress)*.
+- **[Learn2Design 2026](https://www.learn2design2026.com/)** — NeurIPS competition track; collaborating toward a paper with physics co-authors after beating the shared baseline *(in progress)*. Also built `differometor-fast`, an optimized solver backend for differentiable gravitational-wave detector simulation.
 - **Agenthon 2026** — multi-track work (coding, forecasting, simulation, explainability).
+- **[Fusion Equilibrium Challenge](https://fusion-equilibrium-challenge.sophelio.io/)** — reconstructing tokamak plasma equilibria from non-magnetic diagnostics.
+- **[Neural Interfaces 2026](https://neural-interfaces26.github.io/)** — EEG/EMG Foundation Challenge, Track 2: decoding cognitive tasks from EEG across sessions and participants.
 - **[Sunderlabs](https://sunderlabs.com) / FlightRL** — compact policies trained in high-throughput sims before hardware.
 - **[HB Capital](https://hb-capital.app)** — market structure tooling, backtesting, and RL environments.
 
 ## Research
 
 - **[QLoRA Fine-Tuning for Next User Turn Prediction and Multi-Step Dialogue Rollouts](https://doi.org/10.1109/ICETSIS68266.2026.11549360)** — IEEE ICETSIS 2026, pp. 1548–1555. DOI: [10.1109/ICETSIS68266.2026.11549360](https://doi.org/10.1109/ICETSIS68266.2026.11549360).
-
-## Selected public work
-
-| Repo | What it is |
-|---|---|
-| [polymarket-cpp-client](https://github.com/SebastianBoehler/polymarket-cpp-client) | C++ Polymarket REST + WebSocket client for trading & market data |
-| [agent-cli-utils](https://github.com/SebastianBoehler/agent-cli-utils) | Fast Go CLIs for agent workflows (drop-in replacements for slow Python tools) |
-| [lecture-pilot](https://github.com/SebastianBoehler/lecture-pilot) | Text-first lecture tutor with a typed workspace & provider-agnostic harness |
-| [solana-dapp-learning](https://github.com/SebastianBoehler/solana-dapp-learning) | Solana dapps with Next.js, Anchor, and Pyth |
-| [sec-data-fetcher](https://github.com/SebastianBoehler/sec-data-fetcher) | Rust SEC EDGAR / financial-data toolkit |
 
 ## Background
 

@@ -15,7 +15,7 @@ const options = [
   { id: "after-hours", name: "After hours", number: "03" },
 ] as const
 
-const categories = ["Autonomous systems", "Markets & infrastructure", "Language models", "Learning systems"]
+const categories = ["Scientific machine learning", "Autonomous systems", "Markets & infrastructure", "Language models", "Learning systems"]
 
 export function PortfolioDirection({ direction, posts, contributions, preview = true }: {
   direction: Direction
@@ -58,7 +58,7 @@ export function PortfolioDirection({ direction, posts, contributions, preview = 
             {direction === "after-hours" && <LossLandscape />}
 
             <section id="work" className="direction-work">
-              <div className="section-heading"><h2>Selected work</h2><span>01 — 04</span></div>
+              <div className="section-heading"><h2>Selected work</h2><span>01 — {String(selectedWork.length).padStart(2, "0")}</span></div>
               <div className="work-list">{selectedWork.map((work, i) => (
                 <article className="direction-project" key={work.id}>
                   <span className="project-number">0{i + 1}</span>

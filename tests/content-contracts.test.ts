@@ -13,7 +13,7 @@ test("publishes the approved positioning and verified dates", () => {
 })
 
 test("keeps execution and deployment boundaries explicit", () => {
-  expect(selectedWork).toHaveLength(4)
+  expect(selectedWork).toHaveLength(5)
   expect(selectedWork.find((item) => item.id === "flightrl")?.boundary).toContain("not live-control authority")
   expect(selectedWork.find((item) => item.id === "hb-capital")?.boundary).toContain("no trading authority")
 })

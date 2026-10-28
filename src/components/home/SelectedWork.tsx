@@ -13,7 +13,7 @@ export function SelectedWork({ items }: { items: readonly WorkItem[] }) {
           Selected work
         </h2>
         <p className="text-base leading-7 text-[var(--muted)] sm:text-lg">
-          Four systems, each presented with the evidence it has earned and the boundary it has not crossed.
+          Selected research and engineering projects.
         </p>
       </div>
 

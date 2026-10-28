@@ -6,7 +6,7 @@ M.Sc. Computer Science @ [University of Tübingen](https://uni-tuebingen.de) · 
 
 ## Now
 
-- **[Learn2Design 2026](https://www.learn2design2026.com/)** — NeurIPS competition track; collaborating toward a paper with physics co-authors after beating the shared baseline *(in progress)*. Also built `differometor-fast`, an optimized solver backend for differentiable gravitational-wave detector simulation.
+- **[Learn2Design 2026](https://www.learn2design2026.com/)** — 13th of 110 participants on the [official Round 4 leaderboard](https://github.com/artificial-scientist-lab/Learn2Design-2026/blob/main/competition_data/round4/leaderboard.csv); JAX-based optimization for gravitational-wave detector design. Technical report in preparation. Also built `differometor-fast`, an optimized solver backend for differentiable gravitational-wave detector simulation.
 - **Agenthon 2026** — multi-track work (coding, forecasting, simulation, explainability).
 - **[Fusion Equilibrium Challenge](https://fusion-equilibrium-challenge.sophelio.io/)** — reconstructing tokamak plasma equilibria from non-magnetic diagnostics.
 - **[Neural Interfaces 2026](https://neural-interfaces26.github.io/)** — EEG/EMG Foundation Challenge, Track 2: decoding cognitive tasks from EEG across sessions and participants.
@@ -39,6 +39,7 @@ Monthly lines added and deleted, with commit frequency across public repositorie
 
 ## Links
 
+- [CV (PDF)](public/sebastian_boehler_cv.pdf)
 - [Portfolio](https://sebastian-boehler.com)
 - [Hugging Face](https://huggingface.co/sebastianboehler)
 - [LinkedIn](https://www.linkedin.com/in/sebastian-boehler/)

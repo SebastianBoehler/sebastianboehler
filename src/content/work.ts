@@ -1,5 +1,5 @@
 export type WorkItem = {
-  id: "flightrl" | "hb-capital" | "dialogue-research" | "lecture-pilot"
+  id: "learn2design" | "flightrl" | "hb-capital" | "dialogue-research" | "lecture-pilot"
   name: string
   title: string
   summary: string
@@ -9,6 +9,18 @@ export type WorkItem = {
 }
 
 export const selectedWork: readonly WorkItem[] = [
+  {
+    id: "learn2design",
+    name: "Learn2Design 2026 / NeurIPS",
+    title: "13th of 110 participants on the official NeurIPS Learn2Design Round 4 leaderboard.",
+    summary: "JAX-based optimization of detector parameters with a differentiable physics simulator; development of the differometor-fast simulator backend.",
+    evidence: "13th of 110 participants on the official Round 4 leaderboard (s_boehler).",
+    boundary: "Technical report in preparation for organizer review.",
+    links: [
+      { label: "Official leaderboard", href: "https://github.com/artificial-scientist-lab/Learn2Design-2026/blob/main/competition_data/round4/leaderboard.csv" },
+      { label: "Competition repository", href: "https://github.com/artificial-scientist-lab/Learn2Design-2026" },
+    ],
+  },
   {
     id: "flightrl",
     name: "Sunderlabs / FlightRL",

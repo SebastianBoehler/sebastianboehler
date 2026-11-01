@@ -70,24 +70,24 @@ export function renderContributionSvg(years, theme = "dark") {
 // Profile prose is hand-maintained. sync-github-profile.mjs still refreshes the contribution SVGs,
 // then rewrites README.md through this function so the prose stays in place.
 export function buildReadme() {
-  return `# Sebastian Boehler
+  return `# Sebastian Böhler
 
-Research engineer & founder. I build AI systems and the environments they learn in — simulation, agents, and markets.
+M.Sc. Computer Science student at the [University of Tübingen](https://uni-tuebingen.de) and founder of [Sunderlabs](https://sunderlabs.com). I work on optimization and simulation for scientific problems, learned control for small robots, and speech models.
 
-M.Sc. Computer Science @ [University of Tübingen](https://uni-tuebingen.de) · based in Germany · [sebastian-boehler.com](https://sebastian-boehler.com) · [Sunderlabs](https://sunderlabs.com)
+[sebastian-boehler.com](https://sebastian-boehler.com) · [CV (PDF)](public/sebastian_boehler_cv.pdf) · at NeurIPS 2026 in Sydney, 11–12 December
 
 ## Now
 
-- **[Learn2Design 2026](https://www.learn2design2026.com/)** — 13th of 110 participants on the [official Round 4 leaderboard](https://github.com/artificial-scientist-lab/Learn2Design-2026/blob/main/competition_data/round4/leaderboard.csv); JAX-based optimization for gravitational-wave detector design. Technical report in preparation. Also built \`differometor-fast\`, an optimized solver backend for differentiable gravitational-wave detector simulation.
-- **Agenthon 2026** — multi-track work (coding, forecasting, simulation, explainability).
-- **[Fusion Equilibrium Challenge](https://fusion-equilibrium-challenge.sophelio.io/)** — reconstructing tokamak plasma equilibria from non-magnetic diagnostics.
-- **[Neural Interfaces 2026](https://neural-interfaces26.github.io/)** — EEG/EMG Foundation Challenge, Track 2: decoding cognitive tasks from EEG across sessions and participants.
-- **[Sunderlabs](https://sunderlabs.com)**
-- **[HB Capital](https://hb-capital.app)** — market structure tooling, backtesting, and RL environments.
+- **[Fusion Equilibrium Challenge](https://fusion-equilibrium-challenge.sophelio.io/)** (NeurIPS 2026 competition) — final results: 16th of 46 on zero-shot transfer to MAST, 19th of 58 on DIII-D. For MAST I solved the free-boundary Grad–Shafranov equation for each shot on CPU, without machine learning. [Code and write-up](https://github.com/SebastianBoehler/fusion-equilibrium-challenge).
+- **[Learn2Design 2026](https://www.learn2design2026.com/)** (NeurIPS 2026 competition) — 13th of 110 on the [official final-round leaderboard](https://github.com/artificial-scientist-lab/Learn2Design-2026/blob/main/competition_data/round4/leaderboard.csv). Gravitational-wave detector design in JAX; built \`differometor-fast\`, a faster simulator backend. Technical report submitted; winners are announced on 11 December. A follow-up paper is in progress.
+- **[EEG/EMG Foundation Challenge 2026](https://neural-interfaces26.github.io/)**, Track 2 (NeurIPS 2026 Brain & Body Workshop) — decoding cognitive tasks from EEG across sessions and participants. The sealed final phase runs 5–21 November.
+- **[Sunderlabs](https://sunderlabs.com)** — learned flight control for the Crazyflie nano-quadcopter (simulation so far), and a German full-duplex voice agent on a EuroHPC AI Factory compute award.
+- **Research Assistant** at the Hector Research Institute of Education Sciences and Psychology, Tübingen.
 
 ## Research
 
 - **[QLoRA Fine-Tuning for Next User Turn Prediction and Multi-Step Dialogue Rollouts](https://doi.org/10.1109/ICETSIS68266.2026.11549360)** — IEEE ICETSIS 2026, pp. 1548–1555. DOI: [10.1109/ICETSIS68266.2026.11549360](https://doi.org/10.1109/ICETSIS68266.2026.11549360).
+- **EuroHPC AI Factory compute** — two awards of 5,000 GPU-hours each on Leonardo (CINECA): the German voice agent, and follow-up research on Learn2Design.
 
 ## Background
 

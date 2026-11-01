@@ -14,6 +14,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1,
     },
     {
+      url: absoluteUrl("/neurips"),
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
       url: absoluteUrl("/blog"),
       lastModified: posts[0]?.date ? new Date(posts[0].date) : now,
       changeFrequency: "weekly",

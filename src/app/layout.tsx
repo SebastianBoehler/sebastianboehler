@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next"
+import { Source_Serif_4 } from "next/font/google"
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import "./globals.css"
@@ -12,9 +13,16 @@ import { SiteHeader } from "@/components/site/SiteHeader"
 import { profile } from "@/content/profile"
 import { site } from "@/lib/site"
 
-const title = "Sebastian Boehler | Research Engineer & Founder"
+const serif = Source_Serif_4({
+  subsets: ["latin"],
+  weight: ["600"],
+  display: "swap",
+  variable: "--font-source-serif",
+})
+
+const title = "Sebastian Böhler"
 const description =
-  "Research engineer and founder building evidence-led systems across simulation, markets, autonomous systems, and source-grounded learning."
+  "M.Sc. Computer Science student at the University of Tübingen and founder of Sunderlabs. NeurIPS 2026 competitions: fusion equilibria, gravitational-wave detector design, EEG decoding."
 
 const themeScript = `(() => {
   try {
@@ -33,13 +41,13 @@ export const metadata: Metadata = {
   },
   description,
   keywords: [
-    "Research Engineer",
-    "Machine Learning",
-    "Research Software",
-    "Reinforcement Learning",
-    "Autonomous Systems",
-    "University of Tübingen",
+    "Sebastian Böhler",
     "Sebastian Boehler",
+    "Machine Learning",
+    "Scientific Machine Learning",
+    "NeurIPS 2026",
+    "University of Tübingen",
+    "Sunderlabs",
   ],
   authors: [{ name: site.author, url: site.url }],
   creator: site.author,
@@ -59,10 +67,10 @@ export const metadata: Metadata = {
     siteName: site.name,
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title,
     description,
-    creator: "@sebastianboehler",
+    creator: "@sebastianboehle",
   },
 }
 
@@ -86,21 +94,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       {
         "@type": "Person",
         "@id": `${site.url}/#person`,
-        name: site.author,
+        name: profile.name,
+        alternateName: site.author,
         url: site.url,
         email: profile.email,
         sameAs: profile.socialLinks.map((link) => link.href),
-        jobTitle: "Research Engineer and Founder",
+        jobTitle: "Founder, Sunderlabs",
         affiliation: {
           "@type": "CollegeOrUniversity",
           name: "University of Tübingen",
         },
+        worksFor: { "@type": "Organization", name: "Sunderlabs", url: "https://sunderlabs.com" },
       },
     ],
   }
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={serif.variable} suppressHydrationWarning>
       <head>
         <link rel="describedby" href="/llms.txt" type="text/plain" />
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />

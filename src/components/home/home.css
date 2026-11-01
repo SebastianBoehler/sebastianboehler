@@ -1,0 +1,113 @@
+/* Homepage and /neurips: one reading column, section labels on the left from tablet width up. */
+.home {
+  width: min(100% - 2rem, 75rem);
+  margin-inline: auto;
+  padding-block: 2.5rem 1rem;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.home p { margin: 0 0 0.85rem; max-width: 40rem; }
+.home p:last-child { margin-bottom: 0; }
+.home ol, .home ul { list-style: none; margin: 0; padding: 0; }
+
+.home a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-color: color-mix(in oklch, var(--accent) 40%, transparent);
+}
+.home a:hover { text-decoration-color: currentColor; }
+
+.home h1,
+.home h2,
+.home h3,
+.home-section__title,
+.entry__title {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.home-intro { padding-bottom: 2.25rem; }
+.home-intro h1 { font-size: 2.25rem; line-height: 1.15; font-weight: 600; }
+.home .home-intro__role { color: var(--muted); font-size: 0.95rem; margin: 0.35rem 0 1.25rem; }
+.home .home-intro__note {
+  margin-top: 1.25rem;
+  padding-left: 0.85rem;
+  border-left: 2px solid var(--accent);
+  color: var(--text);
+}
+.home .profile-links { display: flex; flex-wrap: wrap; gap: 0 1.1rem; margin-top: 1rem; }
+.profile-links a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 500; }
+
+.home-section {
+  padding-block: 2rem;
+  border-top: 1px solid var(--line);
+}
+.home .home-section__title { font-size: 1.35rem; margin-bottom: 1.25rem; }
+.home-section__title:focus { outline: none; }
+.home-section__body { max-width: 48rem; }
+.home .home-subheading {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 2rem 0 0.75rem;
+}
+.home .home-subheading--first { margin-top: 0; }
+
+.entry-list > .entry + .entry { margin-top: 1.75rem; padding-top: 1.75rem; border-top: 1px dashed var(--line); }
+.entry-list--compact > .entry + .entry { margin-top: 1rem; padding-top: 1rem; }
+.entry__title { font-size: 1.2rem; line-height: 1.3; }
+.entry__title--small { font-size: 1.05rem; line-height: 1.4; }
+.home .entry__meta { color: var(--muted); font-size: 0.9rem; margin: 0.15rem 0 0.35rem; }
+.home .entry__result { font-weight: 600; font-variant-numeric: tabular-nums; margin-bottom: 0.5rem; }
+.entry__status { color: var(--muted); }
+
+.entry-links { display: flex; flex-wrap: wrap; gap: 0 1.1rem; }
+.entry-links a { display: inline-flex; align-items: center; min-height: 44px; font-size: 0.95rem; }
+
+.entry__figure { margin: 1rem 0 0; }
+.entry__figure img {
+  display: block;
+  width: 100%;
+  max-width: 22rem;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: #fff;
+}
+.entry__figure figcaption,
+.entry__video figcaption { margin-top: 0.5rem; color: var(--muted); font-size: 0.85rem; line-height: 1.5; max-width: 22rem; }
+.entry__video { margin: 1rem 0 0.5rem; }
+.entry__video video { display: block; width: 100%; max-width: 36rem; border-radius: 2px; background: #000; }
+
+.writing-list li { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0 1rem; padding-block: 0.15rem; }
+.writing-list a { display: inline-flex; align-items: center; min-height: 44px; }
+.writing-list time, .timeline time { color: var(--muted); font-size: 0.85rem; white-space: nowrap; }
+
+.timeline li { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0.1rem 1rem; padding-block: 0.45rem; border-bottom: 1px solid var(--line); }
+.timeline li:last-child { border-bottom: 0; }
+.timeline strong { font-weight: 600; }
+
+@media (min-width: 52rem) {
+  .home { padding-top: 4.5rem; font-size: 1.0625rem; }
+  .home-intro { padding-bottom: 3.5rem; padding-left: 13rem; }
+  .home-intro h1 { font-size: 2.75rem; }
+  .home-section {
+    display: grid;
+    grid-template-columns: 11rem minmax(0, 1fr);
+    column-gap: 2rem;
+    padding-block: 2.75rem;
+  }
+  .home .home-section__title { font-size: 1.2rem; line-height: 1.4; margin: 0; }
+  .entry--figure { display: grid; grid-template-columns: minmax(0, 1fr) 15rem; column-gap: 2rem; align-items: start; }
+  .entry--figure .entry__figure { margin-top: 0.25rem; }
+}
+
+.home .home-eyebrow { color: var(--muted); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.5rem; }

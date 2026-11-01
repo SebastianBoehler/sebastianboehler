@@ -4,42 +4,40 @@ export type TimelineItem = {
   period: string
 }
 
+export type ProfileLink = {
+  label: string
+  href: string
+}
+
 export const profile = {
-  hero: "I build AI systems from the environment up.",
-  lede:
-    "I'm Sebastian Boehler, a research engineer and founder working across high-speed simulation, trading infrastructure, autonomous systems, and source-grounded learning.",
-  proof:
-    "IEEE-published research · Founder at Sunderlabs · Co-founder and CTO at HB Capital · M.Sc. Computer Science at Tübingen",
-  about: [
-    "I moved from self-taught builder and backend engineer to research engineer and founder.",
-    "Today I work through Sunderlabs and HB Capital while studying computer science at Tübingen.",
+  name: "Sebastian Böhler",
+  role: "M.Sc. Computer Science, University of Tübingen · Founder, Sunderlabs",
+  intro: [
+    "I'm a master's student in computer science at the University of Tübingen and the founder of Sunderlabs. I work on optimization and simulation for scientific problems, learned control for small robots, and speech models.",
+    "In 2026 I took part in three NeurIPS competitions: fusion plasma equilibria, gravitational-wave detector design, and EEG decoding.",
   ],
-  contributionArc: "A quiet record of sustained public building from 2017 onward.",
+  neurips: "I'll be at NeurIPS 2026 in Sydney on 11 and 12 December.",
+  openTo: "I'm interested in research internships and roles, including quantitative research.",
   email: "contact@sebastian-boehler.com",
-  primaryAction: {
-    label: "Discuss a collaboration",
-    href: "mailto:contact@sebastian-boehler.com",
-  },
-  secondaryAction: { label: "Explore selected work", href: "#work" },
-  cv: { label: "View CV", href: "/sebastian_boehler_cv.pdf" },
+  cv: { label: "CV (PDF)", href: "/sebastian_boehler_cv.pdf" },
   socialLinks: [
     { label: "GitHub", href: "https://github.com/SebastianBoehler" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/sebastian-boehler/" },
-  ],
+    { label: "Hugging Face", href: "https://huggingface.co/sebastianboehler" },
+  ] as readonly ProfileLink[],
 } as const
 
-export const timeline: readonly TimelineItem[] = [
-  { organization: "Sunderlabs", role: "Founder & AI Engineer", period: "May 2025–present" },
-  { organization: "HB Capital", role: "Co-founder & CTO", period: "Jul 2023–present" },
-  { organization: "University of Tübingen", role: "M.Sc. Computer Science", period: "Oct 2025–present" },
-  { organization: "IU International University", role: "B.Sc. Computer Science", period: "Nov 2024–Nov 2025" },
+// Dates follow the CV (public/sebastian_boehler_cv.pdf).
+export const experience: readonly TimelineItem[] = [
+  { organization: "Hector Research Institute of Education Sciences and Psychology, Tübingen", role: "Research Assistant", period: "Sep 2026–present" },
+  { organization: "Sunderlabs", role: "Founder", period: "May 2025–present" },
+  { organization: "HB Capital", role: "Co-founder", period: "Jul 2023–present" },
   { organization: "LI.FI", role: "Backend Developer", period: "Jul 2022–Jul 2023" },
-  { organization: "Boehler IT Solutions", role: "Founder & Developer", period: "Jan 2020–Jul 2023" },
-  { organization: "remotly", role: "Backend Developer", period: "Dec 2020–May 2021" },
+  { organization: "Remotly", role: "Full-Stack Developer", period: "Dec 2020–May 2021" },
+  { organization: "Boehler IT Solutions", role: "Freelance Full-Stack Developer", period: "Jan 2020–Jul 2022" },
 ]
 
-export const methods = [
-  "High-throughput simulation and staged deployment gates",
-  "Research infrastructure with explicit evidence boundaries",
-  "Source-grounded learning systems and typed tutor capabilities",
-] as const
+export const education: readonly TimelineItem[] = [
+  { organization: "University of Tübingen", role: "M.Sc. Computer Science", period: "Oct 2025–present" },
+  { organization: "IU International University of Applied Sciences", role: "B.Sc. Computer Science", period: "Oct 2024–Dec 2025" },
+]

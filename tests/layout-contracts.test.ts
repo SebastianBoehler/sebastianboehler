@@ -96,7 +96,7 @@ test("keeps dark secondary and primary-control text above the APCA QA floor", as
   expect(Math.abs(apca(onAccent, accent))).toBeGreaterThanOrEqual(75)
 })
 
-test("activates the rendered mobile Work link, closes the menu, and focuses its destination", () => {
+test("activates the rendered mobile Projects link, closes the menu, and focuses its destination", () => {
   const MobileNavigation = Reflect.get(SiteHeaderModule, "MobileNavigation")
   const MobileMenuButton = Reflect.get(SiteHeaderModule, "MobileMenuButton")
   const handleMobileLinkSelection = Reflect.get(SiteHeaderModule, "handleMobileLinkSelection")
@@ -107,7 +107,7 @@ test("activates the rendered mobile Work link, closes the menu, and focuses its 
   if (!MobileNavigation || !MobileMenuButton || !handleMobileLinkSelection) return
 
   const navigation = renderToStaticMarkup(createElement(MobileNavigation, { onSelect: () => {} }))
-  const workHref = navigation.match(/<a[^>]*href="([^"]+)"[^>]*>Work<\/a>/)?.[1]
+  const workHref = navigation.match(/<a[^>]*href="([^"]+)"[^>]*>Projects<\/a>/)?.[1]
   const destination = renderToStaticMarkup(createElement(SelectedWork, { items: [] }))
   let isMenuOpen = true
   let prevented = false
@@ -127,14 +127,14 @@ test("activates the rendered mobile Work link, closes the menu, and focuses its 
   }
   const browser = {
     location,
-    document: { getElementById: (id: string) => id === "work" ? anchor : null },
+    document: { getElementById: (id: string) => id === "projects" ? anchor : null },
     requestAnimationFrame: (callback: FrameRequestCallback) => {
       callback(0)
       return 1
     },
   }
 
-  expect(workHref).toBe("/#work")
+  expect(workHref).toBe("/#projects")
   expect(destination).toMatch(
     /<h2(?=[^>]*data-anchor-focus="true")(?=[^>]*tabindex="-1")[^>]*>/,
   )
@@ -152,7 +152,7 @@ test("activates the rendered mobile Work link, closes the menu, and focuses its 
     buttonRef: createRef<HTMLButtonElement>(),
   }))
 
-  expect(location.hash).toBe("#work")
+  expect(location.hash).toBe("#projects")
   expect(closedButton).toContain('aria-expanded="false"')
   expect(activeElement === target).toBe(true)
   expect(prevented).toBe(true)
@@ -224,7 +224,7 @@ test("keeps concept-lab controls at least 44px in both axes", async () => {
   expect(conceptLabStyles).not.toContain("min-height: 2.5rem")
 })
 
-test("keeps recent essay title links at least 44px high", () => {
+test("keeps recent essay title links at least 44px high", async () => {
   const markup = renderToStaticMarkup(createElement(WritingPreview, {
     posts: [{
       slug: "target-test",
@@ -234,38 +234,39 @@ test("keeps recent essay title links at least 44px high", () => {
       tags: [],
     }],
   }))
+  const homeStyles = await source("src/components/home/home.css")
 
-  expect(markup).toMatch(
-    /<a(?=[^>]*href="\/blog\/target-test")(?=[^>]*class="[^"]*\bmin-h-11\b[^"]*")[^>]*>/,
-  )
+  expect(markup).toMatch(/<ul class="writing-list"><li><a href="\/blog\/target-test">/)
+  expect(homeStyles).toMatch(/\.writing-list a\s*{[^}]*min-height: 44px/)
 })
 
-test("gives the hero thesis a wide editorial measure without forced breaks", () => {
+test("opens the homepage with the name as the only h1 and no forced breaks", () => {
   const markup = renderToStaticMarkup(createElement(Hero))
 
-  expect(markup).toContain("I build AI systems from the environment up.")
+  expect(markup).toMatch(/^<section[^>]*><h1[^>]*>Sebastian Böhler<\/h1>/)
   expect(markup).not.toContain("<br")
-  expect(markup).toMatch(/^<section[^>]*><h1[^>]*>/)
+  expect(markup).toContain('href="/sebastian_boehler_cv.pdf"')
+  expect(markup).toContain("mailto:contact@sebastian-boehler.com")
 })
 
-test("leads every selected-work entry with the real project name", () => {
-  const markup = renderToStaticMarkup(createElement(SelectedWork, {
-    items: [{
-      id: "flightrl",
-      name: "Research Program",
-      title: "A precise project thesis.",
-      summary: "A concise technical summary.",
-      evidence: "A verified evidence source.",
-      boundary: "A clear deployment boundary.",
-      links: [{ label: "Read the work", href: "https://example.com" }],
-    }],
+test("leads every project entry with the real project name and renders a video only when one exists", () => {
+  const item = {
+    id: "flight" as const,
+    name: "Research Program",
+    context: "Sunderlabs",
+    summary: "A concise technical summary.",
+    status: "Simulation so far.",
+    links: [{ label: "Read the work", href: "https://example.com" }],
+  }
+  const markup = renderToStaticMarkup(createElement(SelectedWork, { items: [item] }))
+  const withVideo = renderToStaticMarkup(createElement(SelectedWork, {
+    items: [{ ...item, video: { src: "/flight.mp4", poster: "/flight.jpg", caption: "First flight." } }],
   }))
 
   expect(markup).toMatch(/<h3[^>]*>Research Program<\/h3>/)
-  expect(markup).not.toMatch(/<p[^>]*>Research Program<\/p>/)
-  expect(markup.indexOf("Research Program")).toBeLessThan(markup.indexOf("A precise project thesis."))
-  expect(markup.indexOf("A precise project thesis.")).toBeLessThan(markup.indexOf("A concise technical summary."))
-  expect(markup).toContain("A verified evidence source.")
-  expect(markup).toContain("A clear deployment boundary.")
-  expect(markup).toMatch(/<a[^>]*class="[^"]*\bmin-h-11\b[^"]*"[^>]*>Read the work<\/a>/)
+  expect(markup.indexOf("Research Program")).toBeLessThan(markup.indexOf("A concise technical summary."))
+  expect(markup).toContain("Simulation so far.")
+  expect(markup).not.toContain("<video")
+  expect(withVideo).toContain('<video src="/flight.mp4"')
+  expect(markup).toMatch(/<a href="https:\/\/example.com"[^>]*>Read the work<\/a>/)
 })

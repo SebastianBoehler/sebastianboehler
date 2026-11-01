@@ -2,140 +2,66 @@ import { expect, test } from "bun:test"
 import { createElement } from "react"
 import { renderToStaticMarkup } from "react-dom/server"
 import { About } from "../src/components/home/About"
-import { ContributionArc } from "../src/components/home/ContributionArc"
-import { profile, timeline } from "../src/content/profile"
-import { selectedWork } from "../src/content/work"
+import { Research } from "../src/components/home/Research"
+import { education, experience, profile } from "../src/content/profile"
+import { competitions, projects, publications } from "../src/content/work"
 
-test("publishes the approved positioning and verified dates", () => {
-  expect(profile.hero).toBe("I build AI systems from the environment up.")
-  expect(profile.primaryAction.label).toBe("Discuss a collaboration")
-  expect(timeline.find((item) => item.organization === "LI.FI")?.period).toBe("Jul 2022–Jul 2023")
-})
-
-test("keeps execution and deployment boundaries explicit", () => {
-  expect(selectedWork).toHaveLength(5)
-  expect(selectedWork.find((item) => item.id === "flightrl")?.boundary).toContain("not live-control authority")
-  expect(selectedWork.find((item) => item.id === "hb-capital")?.boundary).toContain("no trading authority")
-})
-
-test("keeps every selected work claim attached to evidence, a boundary, and a valid link", () => {
-  for (const item of selectedWork) {
-    expect(item.evidence.trim().length).toBeGreaterThan(0)
-    expect(item.boundary.trim().length).toBeGreaterThan(0)
-    expect(item.links.some((link) => {
-      try {
-        return new URL(link.href).protocol === "https:"
-      } catch {
-        return false
-      }
-    })).toBe(true)
-  }
-})
-
-test("announces a singular contribution grammatically", () => {
-  const markup = renderToStaticMarkup(createElement(ContributionArc, {
-    state: { status: "ready", years: [{ year: 2018, total: 1, cells: [] }] },
-  }))
-
-  expect(markup).toContain("1 contribution")
-  expect(markup).not.toContain("1 contributions")
-})
-
-test("renders a leap-year week 53 cell inside the contribution chart", () => {
-  const markup = renderToStaticMarkup(createElement(ContributionArc, {
-    state: {
-      status: "ready",
-      years: [{
-        year: 2028,
-        total: 1,
-        cells: [{ date: "2028-12-31", week: 53, day: 0, level: 4 }],
-      }],
-    },
-  }))
-
-  expect(markup).toContain('data-contribution-columns="54"')
-  expect(markup).toMatch(/viewBox="0 0 215 27"[^>]*>[\s\S]*M212 0h3v3h-3Z/)
-})
-
-test("keeps a decade of contribution charts below one hundred decorative nodes", () => {
-  const cells = Array.from({ length: 53 * 7 }, (_, index) => ({
-    date: `fixture-${index}`,
-    week: Math.floor(index / 7),
-    day: index % 7,
-    level: index % 5,
-  }))
-  const markup = renderToStaticMarkup(createElement(ContributionArc, {
-    state: {
-      status: "ready",
-      years: Array.from({ length: 10 }, (_, index) => ({
-        year: 2017 + index,
-        total: 371,
-        cells,
-      })),
-    },
-  }))
-  const decorativeNodes = markup.match(/<(?:path|rect|span)\b/g) ?? []
-
-  expect(decorativeNodes.length).toBeLessThan(100)
-  expect(markup.length).toBeLessThan(100_000)
-})
-
-test("keeps contribution levels in the accent family across themes", () => {
-  const markup = renderToStaticMarkup(createElement(ContributionArc, {
-    state: {
-      status: "ready",
-      years: [{
-        year: 2026,
-        total: 2,
-        cells: [
-          { date: "2026-01-01", week: 0, day: 0, level: 1 },
-          { date: "2026-01-02", week: 0, day: 1, level: 4 },
-        ],
-      }],
-    },
-  }))
-
-  expect(markup).toContain('fill="var(--accent)" fill-opacity="0.45"')
-  expect(markup).toContain('fill="var(--accent)" fill-opacity="0.9"')
-  expect(markup).not.toContain("color-mix")
-})
-
-test("keeps approved homepage qualifiers in authored profile content", () => {
-  const about = Reflect.get(profile, "about") as readonly string[] | undefined
-  const contributionArc = Reflect.get(profile, "contributionArc") as string | undefined
-
-  expect(about?.[0]).toBe(
-    "I moved from self-taught builder and backend engineer to research engineer and founder.",
-  )
-  expect(contributionArc).toBe("A quiet record of sustained public building from 2017 onward.")
-})
-
-test("renders About from the authored profile narrative", () => {
-  const original = Reflect.get(profile, "about")
-
+function isHttps(href: string) {
   try {
-    Reflect.set(profile, "about", ["Authored About probe."])
-    const markup = renderToStaticMarkup(createElement(About))
+    return new URL(href).protocol === "https:"
+  } catch {
+    return false
+  }
+}
 
-    expect(markup).toContain("Authored About probe.")
-  } finally {
-    if (original === undefined) Reflect.deleteProperty(profile, "about")
-    else Reflect.set(profile, "about", original)
+test("keeps verified competition results", () => {
+  const byId = Object.fromEntries(competitions.map((item) => [item.id, item]))
+
+  expect(byId.fusion.result).toContain("16th of 46")
+  expect(byId.fusion.result).toContain("19th of 58")
+  expect(byId.learn2design.result).toContain("13th of 110")
+  // The EEG/EMG final runs until 21 November; the site gives status only, no ranking.
+  expect(byId.eeg.result).not.toMatch(/\d+(st|nd|rd|th) of/)
+})
+
+test("keeps experience dates aligned with the CV", () => {
+  expect(experience.find((item) => item.organization === "LI.FI")?.period).toBe("Jul 2022–Jul 2023")
+  expect(experience[0].role).toBe("Research Assistant")
+  expect(education.find((item) => item.role.startsWith("B.Sc."))?.period).toBe("Oct 2024–Dec 2025")
+})
+
+test("drops finished or stale entries", () => {
+  const text = JSON.stringify({ profile, competitions, projects, publications })
+
+  expect(text).not.toContain("Agenthon")
+  expect(text).not.toContain("in preparation")
+  expect(text).not.toContain("FlightRL")
+})
+
+test("gives every entry at least one https link", () => {
+  for (const item of [...competitions, ...projects, ...publications]) {
+    expect(item.links.some((link) => isHttps(link.href))).toBe(true)
   }
 })
 
-test("renders the contribution framing from authored profile content", () => {
-  const original = Reflect.get(profile, "contributionArc")
-
-  try {
-    Reflect.set(profile, "contributionArc", "Authored contribution probe.")
-    const markup = renderToStaticMarkup(createElement(ContributionArc, {
-      state: { status: "unavailable", message: "Unavailable." },
-    }))
-
-    expect(markup).toContain("Authored contribution probe.")
-  } finally {
-    if (original === undefined) Reflect.deleteProperty(profile, "contributionArc")
-    else Reflect.set(profile, "contributionArc", original)
+test("ships every research figure it references", async () => {
+  for (const item of competitions) {
+    if (item.figure) expect(await Bun.file(`public${item.figure.src}`).exists()).toBeTrue()
   }
+})
+
+test("renders the competitions with results and figure captions", () => {
+  const markup = renderToStaticMarkup(createElement(Research))
+
+  for (const item of competitions) {
+    expect(markup).toContain(item.name.replace("&", "&amp;"))
+    expect(markup).toContain(item.result)
+  }
+  expect(markup).toContain("<figcaption>")
+})
+
+test("renders experience and education from the authored timeline", () => {
+  const markup = renderToStaticMarkup(createElement(About))
+
+  for (const item of [...experience, ...education]) expect(markup).toContain(item.period)
 })

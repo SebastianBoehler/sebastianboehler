@@ -1,11 +1,23 @@
-import { PortfolioDirection } from "@/components/directions/PortfolioDirection"
+import { About } from "@/components/home/About"
+import { Contact } from "@/components/home/Contact"
+import { Hero } from "@/components/home/Hero"
+import { Research } from "@/components/home/Research"
+import { SelectedWork } from "@/components/home/SelectedWork"
+import { WritingPreview } from "@/components/home/WritingPreview"
+import "@/components/home/home.css"
+import { projects } from "@/content/work"
 import { getBlogPosts } from "@/lib/blog"
-import { getContributionArc } from "@/lib/github-contributions"
-import "@/components/directions/directions.css"
-
-export const revalidate = 3600
 
 export default async function Home() {
-  const [posts, contributions] = await Promise.all([getBlogPosts(), getContributionArc()])
-  return <PortfolioDirection direction="after-hours" posts={posts.slice(0, 3)} contributions={contributions} preview={false} />
+  const posts = await getBlogPosts()
+  return (
+    <div className="home">
+      <Hero />
+      <Research />
+      <SelectedWork items={projects} />
+      <WritingPreview posts={posts.slice(0, 3)} />
+      <About />
+      <Contact />
+    </div>
+  )
 }

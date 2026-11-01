@@ -1,10 +1,10 @@
 export const siteUrl = "https://www.sebastian-boehler.com"
 
 export const site = {
-  name: "Sebastian Boehler",
-  title: "Sebastian Boehler | Machine Learning & Research Software",
+  name: "Sebastian Böhler",
+  title: "Sebastian Böhler",
   description:
-    "Computer science graduate student at the University of Tübingen focused on machine learning, research software, dialogue systems, and AI-assisted engineering.",
+    "M.Sc. Computer Science student at the University of Tübingen and founder of Sunderlabs.",
   url: siteUrl,
   author: "Sebastian Boehler",
   email: "contact@sebastian-boehler.com",

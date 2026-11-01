@@ -5,14 +5,19 @@ import { Menu, X } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 import type { MouseEventHandler, RefObject } from "react"
 import { profile } from "@/content/profile"
-import { ActionLink } from "./ActionLink"
 import { ThemeToggle } from "./ThemeToggle"
 
 const navigation = [
-  { label: "Work", href: "/#work" },
+  { label: "Research", href: "/#research" },
+  { label: "Projects", href: "/#projects" },
   { label: "Writing", href: "/blog" },
-  { label: "About", href: "/#about" },
+  { label: "CV", href: profile.cv.href },
 ] as const
+
+// Static files such as the CV PDF bypass the client router.
+function NavLink({ href, ...props }: { href: string; className: string; onClick?: MouseEventHandler<HTMLAnchorElement>; children: string }) {
+  return href.endsWith(".pdf") ? <a href={href} {...props} /> : <Link href={href} {...props} />
+}
 
 type HashNavigationBrowser = {
   location: Pick<Location, "hash" | "href">
@@ -85,13 +90,13 @@ export function MobileNavigation({ onSelect }: { onSelect: MouseEventHandler<HTM
   return (
     <nav id="mobile-navigation" className="site-header__mobile-nav" aria-label="Mobile navigation">
       {navigation.map((item) => (
-        <Link key={item.label} className="site-header__mobile-link" href={item.href} onClick={onSelect}>
+        <NavLink key={item.label} className="site-header__mobile-link" href={item.href} onClick={onSelect}>
           {item.label}
-        </Link>
+        </NavLink>
       ))}
-      <ActionLink href={`mailto:${profile.email}`} variant="primary" onClick={onSelect}>
-        Discuss a collaboration
-      </ActionLink>
+      <a className="site-header__mobile-link" href={`mailto:${profile.email}`} onClick={onSelect}>
+        Email
+      </a>
     </nav>
   )
 }
@@ -123,19 +128,16 @@ export function SiteHeader() {
     <header className="site-header">
       <div className="site-header__inner">
         <Link className="site-header__brand" href="/">
-          Sebastian Boehler
+          {profile.name}
         </Link>
 
         <div className="site-header__controls">
           <nav className="site-header__desktop-nav" aria-label="Primary navigation">
             {navigation.map((item) => (
-              <Link key={item.label} className="site-header__nav-link" href={item.href}>
+              <NavLink key={item.label} className="site-header__nav-link" href={item.href}>
                 {item.label}
-              </Link>
+              </NavLink>
             ))}
-            <ActionLink href={`mailto:${profile.email}`} variant="primary">
-              Discuss a collaboration
-            </ActionLink>
           </nav>
 
           <ThemeToggle />

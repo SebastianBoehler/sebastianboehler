@@ -68,6 +68,7 @@
 .home .entry__meta { color: var(--muted); font-size: 0.9rem; margin: 0.15rem 0 0.35rem; }
 .home .entry__result { font-weight: 600; font-variant-numeric: tabular-nums; margin-bottom: 0.5rem; }
 .entry__status { color: var(--muted); }
+.entry__result-rest { font-weight: 400; color: var(--muted); }
 
 .entry-links { display: flex; flex-wrap: wrap; gap: 0 1.1rem; }
 .entry-links a { display: inline-flex; align-items: center; min-height: 44px; font-size: 0.95rem; }

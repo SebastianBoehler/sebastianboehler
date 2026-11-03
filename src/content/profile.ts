@@ -14,7 +14,7 @@ export const profile = {
   role: "M.Sc. Computer Science, University of Tübingen · Founder, Sunderlabs",
   intro: [
     "I'm a master's student in computer science at the University of Tübingen and the founder of Sunderlabs. I work on optimization and simulation for scientific problems, learned control for small robots, and speech models.",
-    "In 2026 I took part in three NeurIPS competitions: fusion plasma equilibria, gravitational-wave detector design, and EEG decoding.",
+    "In 2026 I took part in four NeurIPS competitions: quant-finance agents, fusion plasma equilibria, gravitational-wave detector design, and EEG decoding.",
   ],
   neurips: "I'll be at NeurIPS 2026 in Sydney on 11 and 12 December.",
   openTo: "I'm interested in research internships and roles, including quantitative research.",

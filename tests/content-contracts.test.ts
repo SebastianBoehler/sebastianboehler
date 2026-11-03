@@ -20,6 +20,8 @@ test("keeps verified competition results", () => {
   expect(byId.fusion.result).toContain("16th of 46")
   expect(byId.fusion.result).toContain("19th of 58")
   expect(byId.learn2design.result).toContain("13th of 110")
+  expect(byId.agenthon.result).toStartWith("2nd of 63, Explainability track")
+  expect(competitions[0].id).toBe("agenthon")
   // The EEG/EMG final runs until 21 November; the site gives status only, no ranking.
   expect(byId.eeg.result).not.toMatch(/\d+(st|nd|rd|th) of/)
 })
@@ -32,8 +34,9 @@ test("keeps experience dates aligned with the CV", () => {
 
 test("drops finished or stale entries", () => {
   const text = JSON.stringify({ profile, competitions, projects, publications })
+  // No prize amounts until the award payment is verified.
+  expect(text).not.toMatch(/prize|\$\s?\d/i)
 
-  expect(text).not.toContain("Agenthon")
   expect(text).not.toContain("in preparation")
   expect(text).not.toContain("FlightRL")
 })
@@ -55,8 +58,9 @@ test("renders the competitions with results and figure captions", () => {
 
   for (const item of competitions) {
     expect(markup).toContain(item.name.replace("&", "&amp;"))
-    expect(markup).toContain(item.result)
+    for (const placing of item.result.split(" · ")) expect(markup).toContain(placing)
   }
+  expect(markup).toContain('<p class="entry__result">2nd of 63, Explainability track<span class="entry__result-rest">')
   expect(markup).toContain("<figcaption>")
 })
 

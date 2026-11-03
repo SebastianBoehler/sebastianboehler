@@ -22,3 +22,14 @@ export function LinkList({ links }: { links: readonly { label: string; href: str
     </ul>
   )
 }
+
+/** The first placing is the headline; further placings follow in regular weight. */
+export function ResultLine({ result }: { result: string }) {
+  const [lead, ...rest] = result.split(" · ")
+  return (
+    <p className="entry__result">
+      {lead}
+      {rest.length > 0 && <span className="entry__result-rest"> · {rest.join(" · ")}</span>}
+    </p>
+  )
+}

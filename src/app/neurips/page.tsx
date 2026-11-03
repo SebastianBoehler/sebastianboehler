@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { ProfileLinks } from "@/components/home/Hero"
+import { ResultLine } from "@/components/home/Section"
 import "@/components/home/home.css"
 import { profile } from "@/content/profile"
 import { competitions, projects } from "@/content/work"
@@ -33,7 +34,7 @@ export default function NeuripsPage() {
           {competitions.map((item) => (
             <li key={item.id} className="entry">
               <h3 className="entry__title">{item.name}</h3>
-              <p className="entry__result">{item.result}</p>
+              <ResultLine result={item.result} />
               <p>{item.short} <a href={item.links[0].href} target="_blank" rel="noreferrer">{item.links[0].label}</a></p>
             </li>
           ))}

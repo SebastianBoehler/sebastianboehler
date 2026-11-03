@@ -9,7 +9,7 @@ export type Figure = {
 }
 
 export type Competition = {
-  id: "fusion" | "learn2design" | "eeg"
+  id: "agenthon" | "fusion" | "learn2design" | "eeg"
   name: string
   venue: string
   /** Official placing, or the current status while a competition is still running. */
@@ -40,6 +40,16 @@ export type Project = {
 }
 
 export const competitions: readonly Competition[] = [
+  {
+    id: "agenthon",
+    name: "Agenthon 2026",
+    venue: "Quant-finance agent competition, Stony Brook University · workshop at NeurIPS 2026",
+    result: "2nd of 63, Explainability track · 6th of 87 Forecasting · 6th of 55 Simulation · 17th of 61 Coding",
+    short: "Quant-finance agents in four tracks, with my team Proof of Alpha.",
+    summary:
+      "Four tracks that test whether AI agents produce finance outputs that hold up under automated evaluation: coding, forecasting, simulation and explainability. In the explainability track, the agent predicts a label, value or ordering from a table and text evidence, and has to ground its reasons in exact quotes from that evidence. I took part with my team, Proof of Alpha.",
+    links: [{ label: "Final leaderboard", href: "https://www.agenthon.net/#leaderboard" }],
+  },
   {
     id: "fusion",
     name: "Fusion Equilibrium Challenge",

@@ -1,6 +1,6 @@
 import Image from "next/image"
 import { competitions, grants, publications } from "@/content/work"
-import { LinkList, Section } from "./Section"
+import { LinkList, ResultLine, Section } from "./Section"
 
 export function Research() {
   return (
@@ -11,7 +11,7 @@ export function Research() {
             <div className="entry__text">
               <h3 className="entry__title">{item.name}</h3>
               <p className="entry__meta">{item.venue}</p>
-              <p className="entry__result">{item.result}</p>
+              <ResultLine result={item.result} />
               <p>{item.summary}</p>
               <LinkList links={item.links} />
             </div>

@@ -25,6 +25,12 @@ M.Sc. Computer Science student at the [University of Tübingen](https://uni-tueb
 
 Backend at **[LI.FI](https://li.fi/)** (on-chain data connectors) · co-founder **[HB Capital](https://hb-capital.app)** · founder **[Sunderlabs](https://sunderlabs.com)** · previously **[Remotly](https://www.remotly.io/)** and freelance [Boehler IT Solutions](https://www.linkedin.com/company/boehler-it-solutions).
 
+## Agent skills
+
+[Reusable agent skills](skills/README.md), maintained from research and engineering work.
+[Scientific discovery](skills/scientific-discovery/SKILL.md) helps map alternative methods, challenge
+early assumptions, run controlled experiments and refresh context without losing the evidence trail.
+
 ## Contribution history
 
 <picture>

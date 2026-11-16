@@ -1,0 +1,4 @@
+interface:
+  display_name: "Scientific Discovery"
+  short_description: "Explore broadly and test research ideas rigorously"
+  default_prompt: "Use $scientific-discovery to map the solution space, challenge assumptions, and run evidence-driven research."

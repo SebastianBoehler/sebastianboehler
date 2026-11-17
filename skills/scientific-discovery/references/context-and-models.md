@@ -14,6 +14,11 @@ Give an independent proposer the minimum factual problem packet consistent with 
 - Where the factual evidence and current best validated artifact can be checked.
 - Assigned scope, permitted side effects, required artifact, stopping condition and verification check.
 
+Write the actual worker brief in clear, unambiguous language. Name the actor, specific task, inputs,
+allowed files and actions, exclusions, success check and required return. Use one name per concept and
+separate facts from assumptions. Tell the worker to stay within that assignment, report blockers or
+conflicting instructions, and leave unrequested work to the coordinator. Do not infer missing authority.
+
 Distinguish two useful passes:
 
 1. **Problem-first:** map alternatives from the facts before inspecting the incumbent's rationale.
@@ -62,6 +67,9 @@ running jobs, overwrite pinned artifacts or discard mandatory audit records.
 Use when an independent proposal, critique, derivation or implementation can change a decision.
 Discover models/providers actually available in the current environment and existing authorization.
 Respect explicit user model preferences; verify names, versions, access and costs rather than guessing.
+For bounded implementation or verification work, consider an available coding-focused or smaller model
+when it can perform the task reliably. Follow runtime rules for model selection and delegation; do not
+assume a particular model is available or that a smaller model makes review unnecessary.
 
 - Give proposers equivalent factual briefs and comparable budgets; collect proposals before sharing others' answers.
 - Assign useful roles such as independent design, adversarial critique or numerical verification.

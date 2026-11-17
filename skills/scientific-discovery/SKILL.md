@@ -2,7 +2,7 @@
 name: scientific-discovery
 description: "Use when planning or running an open-ended experimental research campaign, auditing explored methods, or challenging a research plateau."
 metadata:
-  version: "0.3.0"
+  version: "0.3.1"
 ---
 
 # Scientific Discovery

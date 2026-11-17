@@ -3,7 +3,8 @@
 ## 2026-11-17: exploration, handoffs and data-first work
 
 **Origin:** owner requests to challenge inherited locks, carry research behavior through worker briefs,
-and measure the data and hardware before choosing an optimization. These are workflow preferences.
+use clear and bounded assignments for coding-focused or smaller workers, and measure the data and
+hardware before choosing an optimization. These are workflow preferences.
 The [planning comparison](../evals/basin-comparison-check.md) tested a candidate against version 0.2.0
 on synthetic cases; it does not establish better scientific outcomes or reliable latent-state access.
 

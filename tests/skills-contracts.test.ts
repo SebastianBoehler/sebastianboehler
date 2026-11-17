@@ -23,7 +23,7 @@ test("the catalog lists each shipped skill exactly once", () => {
 
 test("relative documentation links stay inside the standalone skills bundle", () => {
   const markdown = new Bun.Glob("**/*.md")
-  for (const path of markdown.scanSync({ cwd: skillsRoot })) {
+  for (const path of Array.from(markdown.scanSync({ cwd: skillsRoot }))) {
     const file = join(skillsRoot, path)
     for (const target of localLinks(file)) {
       const link = resolve(dirname(file), decodeURIComponent(target))

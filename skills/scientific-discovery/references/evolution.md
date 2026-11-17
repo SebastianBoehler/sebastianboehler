@@ -5,8 +5,9 @@ generic advice. Apply the current task's authorization and repository publicatio
 
 ## When to revise
 
-Consider a change after an explicit user correction, reproducible workflow failure, independent
-forward-test failure, or an observation that transfers beyond one project's numeric settings.
+When skill maintenance is requested or otherwise authorized, consider an explicit user correction,
+reproducible workflow failure, independent forward-test failure, or an observation that transfers
+beyond one project's numeric settings. Ordinary research does not automatically edit this skill.
 A single surprising score is evidence about an experiment, not automatically about this skill.
 
 1. Record the observation in `references/evidence.md`: date, source, expected/observed behavior,
@@ -24,8 +25,8 @@ A single surprising score is evidence about an experiment, not automatically abo
 6. Inspect the resulting decisions/artifacts, including what the agent actually read or did.
    Record skipped checks and failures. Run a control without the skill when practical; one pass
    without a control does not prove causal improvement or cross-model reliability.
-7. Commit a focused revision with a conventional message. Keep a reversible diff and the evaluation
-   record; publish only within the repository's existing authorization. Mention meaningful changes.
+7. Keep a reversible diff and the evaluation record. Commit or publish only when authorized by the
+   user or applicable project workflow. Mention meaningful changes.
 
 The skill itself must not grant permission to change user goals, erase evidence, expose private work,
 spend on providers or publish artifacts. Do not add a new approval gate for already authorized edits.

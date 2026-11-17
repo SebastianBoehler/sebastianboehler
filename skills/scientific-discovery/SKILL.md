@@ -1,8 +1,8 @@
 ---
 name: scientific-discovery
-description: "Conduct sustained scientific research, novel method design, and experimental optimization without locking into an early incumbent. Use for solution-space reviews, broad experiment campaigns, unexplained failures, or fresh-context and cross-model research."
+description: "Use when planning or running an open-ended experimental research campaign, auditing explored methods, or challenging a research plateau."
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
 ---
 
 # Scientific Discovery
@@ -20,9 +20,13 @@ architectures, objectives, stages, solvers and dependency choices are not automa
 Record the user's outcome, decision deadline, resource budget and success measure. Continue
 authorized work with explicit reasonable assumptions; ask only for consequential missing input.
 
-Describe the measurement and data-generating process from first principles. Identify artifacts,
-confounds, independent sampling units, evaluation-time information, uncertainty and runtime limits.
+Inspect the data and describe how it is generated and measured before selecting methods. Identify
+units, labels, missingness, artifacts, confounds, available inference information, leakage risks,
+evaluation splits, uncertainty and resource limits. Compare meaningful baselines and candidate
+mechanisms against the problem and evidence. Do not infer a suitable model from data type alone.
 Keep the strongest validated candidate reproducible, without making its design the search boundary.
+For a result that others should reproduce, use the proportional
+[reproducibility record](references/reproducibility.md).
 
 ## Map methods before expanding the run list
 
@@ -92,10 +96,9 @@ Read [context and model routing](references/context-and-models.md) when using th
 
 ## Interpret outcomes and continue
 
-Check active code paths, no-op options, cache keys, model classes, data leakage and baseline parity.
-An expected gain that becomes negative calls for competing explanations and discriminating tests:
-information lost, calibration, target mismatch, optimization, broken implementation or interactions.
-Try a sign reversal only when the mechanism makes sense; verify it against static and neutral controls.
+Check active code paths, no-op options, cache keys, data leakage and baseline parity when relevant.
+An unexpected result calls for competing explanations and discriminating tests, including broken
+implementation, information loss, objective mismatch, optimization and interactions.
 
 Separate numerical correctness, training objective, held-out accuracy, full-system gain, throughput
 and external/leaderboard results. Report intervals using appropriate independent units. Account for
@@ -109,9 +112,8 @@ End a review with what changed in understanding, unresolved alternatives, and th
 
 ## Improve this skill from use
 
-The owner intends this to evolve. Apply the [evolution protocol](references/evolution.md) after
-an explicit correction, reproducible failure, or useful cross-project observation. Prefer a narrow,
-reversible rule change plus a behavioral case over accumulating universal restrictions.
-Record evidence and counterexamples, validate the changed skill, and keep private project facts out
-of public resources. This skill adds no permission for new spending, external disclosure or publication.
-The [evidence notes](references/evidence.md) distinguish sources, user reports and design choices.
+When skill maintenance is authorized, use the [evolution protocol](references/evolution.md).
+Research observations can inform a later change; they do not by themselves authorize skill edits or
+commits. The [evidence notes](references/evidence.md) preserve the sources and limits: Bespoke Labs'
+analysis, Fork-and-Flush, Scaling Discovery Requires Forgetting, AIDE and AIDE². They motivate checks
+against narrow search and inherited assumptions without proving this particular workflow works.

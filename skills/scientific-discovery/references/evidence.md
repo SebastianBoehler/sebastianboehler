@@ -1,5 +1,12 @@
 # Evidence and learning notes
 
+## 2026-11-17: data-first and proportional records
+
+**Origin:** owner preference for understanding data before model choice, traceable sources, and lean
+reproducibility records. These are workflow requirements, not experimental evidence of improved scores.
+The skill now points to a proportional record and treats maintenance as a separately authorized task.
+The existing studies and limits below remain the basis for the narrow-exploration guidance.
+
 ## 2026-11-16: initial sources
 
 - [How models explore ideas, Bespoke Labs, 10 November 2026](https://bespokelabs.ai/blog/how-models-explore-ideas):

@@ -1,5 +1,13 @@
 # Evidence and learning notes
 
+## 2026-11-17: lean core and references on demand
+
+**Origin:** owner request to shorten the suite while preserving purpose and adapting to the task.
+Version 0.4.0 condenses the research core and specialist references. The review checks preservation
+of constraints, method coverage, valid comparisons, context limits, and evidence handling. Structural
+validation and an author review are not independent behavioral tests; previous evaluation records
+remain historical and do not establish that this revision improves scientific outcomes.
+
 ## 2026-11-17: exploration, handoffs and data-first work
 
 **Origin:** owner requests to challenge inherited locks, carry research behavior through worker briefs,

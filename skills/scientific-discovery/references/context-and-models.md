@@ -1,92 +1,41 @@
-# Fresh contexts and model/provider routing
+# Fresh contexts and model routing
 
-Use when accumulated narrative, correlated proposals or a plateau may be limiting discovery.
-The mechanism is to change the information conditioning proposals, not simply to add workers.
+Use when inherited assumptions may be limiting proposals or when an independent review can change
+a decision. A new worker or provider alone does not establish independence.
 
-## Separate proposal generation from evidence control
+## Construct the brief
 
-Keep a coordinator responsible for requirements, canonical results, provenance, active jobs and fair comparison.
-Give an independent proposer the minimum factual problem packet consistent with project instructions:
+Keep a coordinator responsible for requirements, canonical evidence, active jobs, and fair comparison.
+Give each authorized worker a factual packet: objective/metric, data and available information, hard
+constraints, permitted tools/actions, budget, owned scope, relevant artifacts, success check, stop
+condition, and required return. Name applicable skill rules when the worker needs them.
 
-- Outcome, metric, actual hard bounds and the user's priorities.
-- What the data are, how they are generated, available supervision, and evaluation-time information.
-- Authorized tools/providers, time/compute/cost budget and permitted side effects.
-- Where the factual evidence and current best validated artifact can be checked.
-- Assigned scope, permitted side effects, required artifact, stopping condition and verification check.
+For a **problem-first** proposal, derive alternatives before supplying the incumbent's rationale.
+For an **artifact-informed** pass, inspect the validated candidate and actual past tests before
+execution. Avoid seeding a preferred alternative into a supposedly independent brief; disclose seeds
+and accessible history. Preserve binding requirements and known correctness problems in both passes.
 
-Write the actual worker brief in clear, unambiguous language. Name the actor, specific task, inputs,
-allowed files and actions, exclusions, success check and required return. Use one name per concept and
-separate facts from assumptions. Tell the worker to stay within that assignment, report blockers or
-conflicting instructions, and leave unrequested work to the coordinator. Do not infer missing authority.
+Trace design choices marked “locked” to their actual authority and scope. Replace stale conclusions
+in the working brief with current facts, while retaining the full record with the coordinator.
+Inspect the brief itself for inherited restrictions; claiming history was withheld does not remove
+hints still in its wording.
 
-Distinguish two useful passes:
+Use the runtime's supported fresh-context mode explicitly, respecting delegation and model-selection
+rules. Record actual identity, brief revision, context mode, retained artifacts, and accessible history.
+If isolation is unavailable, describe a same-context critique rather than claiming a fresh reset.
+Protect active jobs, pinned source, ownership, and required audit records when rotating workers.
 
-1. **Problem-first:** map alternatives from the facts before inspecting the incumbent's rationale.
-2. **Artifact-informed:** inspect the best validated artifact, relevant actual past tests and practical constraints.
+## Choose and compare models
 
-The first can surface excluded possibilities; the second avoids invalid or duplicate experiments.
-Do not hide mandatory restrictions or known correctness problems for the sake of independence.
-Do not feed historical labels such as “closed” as universal facts without their tested context.
-Inspect the actual first-pass brief for incumbent assumptions that accidentally remain in task
-wording or requested controls. Keep the evaluation contract intact; a hypothetical exception does
-not override an untouched holdout, explicit user decision or other binding requirement.
-Do not seed a particular alternative or the incumbent-versus-alternative framing in a problem-first
-brief intended to elicit independent directions. If a direction is supplied, label that proposal
-seeded. A statement that history was withheld does not remove hints present in the brief itself.
-For a broad reset, re-derive the search from the task and revisit even decisions marked “locked.”
-Trace a lock to its actual authority and scope. Challenge inherited design choices; retain binding
-requirements and do not silently reverse explicit user decisions. The coordinator keeps the full
-record and checks proposals against it before authorizing execution.
-Replace stale narrative in the working brief with the current goal, hard bounds and verified facts.
-Review scratchpad decisions and next actions for staleness; preserve useful evidence and provenance
-in the canonical record. Clean temporary files only after checking ownership, active jobs and the
-project's retention and deletion rules.
+Discover available models/providers and existing authorization. Respect user preferences and verify
+access, versions, and costs. A coding-focused or smaller model may suit bounded work, but model choice
+does not remove verification. Invocation grants no new spending or private-data disclosure permission.
 
-When a runtime supports fresh workers without inherited chat, select that behavior explicitly.
-In Codex collaboration tools this is `fork_turns="none"`, supplied with a self-contained task.
-Respect environment rules about delegation and model overrides. Other clients need their actual
-supported equivalent; don't invent a provider API or claim to have reset the current conversation.
+Give independent proposers comparable facts and budgets; collect proposals before sharing others'
+answers. Compare mechanisms, assumptions, and testable predictions rather than majority votes.
+A single provider can supply useful fresh contexts; several providers can share the same blind spot.
+Continue with available tools and disclose unavailable alternatives.
 
-Record worker identity/context mode, brief revision, retained artifacts and accessible history.
-A clean chat with the full workspace is a different intervention from excluding search-history files.
-If true isolation is unavailable, label the review as a same-context critique rather than a reset.
-
-## Rotate at useful boundaries
-
-Use a bounded exploration round and a concrete deliverable, with timing chosen for the task.
-At round end, retain validated candidates and useful factual findings; compare with common controls.
-Let fresh workers challenge earlier architecture/parameterization choices. Avoid forcing every new
-method to be an incremental modification of the incumbent or selecting on a single noisy score.
-
-Keep historical evidence outside the proposer's default brief, not deleted. Git history and the
-project evidence archive remain available to the coordinator. Never reset the filesystem used by
-running jobs, overwrite pinned artifacts or discard mandatory audit records.
-
-## Cross-model and cross-provider use
-
-Use when an independent proposal, critique, derivation or implementation can change a decision.
-Discover models/providers actually available in the current environment and existing authorization.
-Respect explicit user model preferences; verify names, versions, access and costs rather than guessing.
-For bounded implementation or verification work, consider an available coding-focused or smaller model
-when it can perform the task reliably. Follow runtime rules for model selection and delegation; do not
-assume a particular model is available or that a smaller model makes review unnecessary.
-
-- Give proposers equivalent factual briefs and comparable budgets; collect proposals before sharing others' answers.
-- Assign useful roles such as independent design, adversarial critique or numerical verification.
-- Compare mechanisms, assumptions and testable predictions rather than taking a majority vote.
-- Record the model/provider actually used, context mode, budget and artifacts. Mark unknown identity honestly.
-- Share only data permitted for that provider. Skill invocation does not authorize new subscriptions,
-  charges or disclosure of private datasets, credentials or unpublished artifacts.
-
-Different providers can still share the same blind spot. One provider with genuinely independent
-contexts can be useful. Neither setup proves novelty; use the coverage audit and common experiments.
-When another provider is unavailable, continue useful work with available tools and state that limit.
-
-## Minimal return from a proposer
-
-Return method families and excluded assumptions; the most consequential uncertainty per family;
-one decisive, budgeted test per promising alternative; and what could refute its rationale.
-Keep confident predictions, feasibility checks and measured results distinct. The coordinator checks
-actual past code and evidence before registering or executing the next experiments. For a completed
-worker run, inspect its source, active code path, evaluator, controls, artifact identity, resource use
-and result limits before accepting its conclusions. Record failed checks and follow-up decisions.
+Request concrete methods, consequential uncertainties, decisive budgeted tests, and refutations.
+Before accepting a worker result, inspect its actual source, active path, evaluator, controls, artifact
+identity, resource use, and limits. Preserve failures and decide follow-ups from evidence.

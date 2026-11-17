@@ -21,7 +21,8 @@ For ambiguous engineering or research work, start with intent clarification. Car
 constraints, and checks into engineering or scientific discovery. Use test-first checks for behavior
 changes and baseline traces for optimization. When evidence stalls or contradicts the approach,
 return to the governing rules and verified data. Test an alternative that changes the assumption
-behind the current approach. Bring decisions about the goal or constraints back to the user.
+behind the current approach. Check favored explanations against the evidence, including the agent's
+earlier conclusions. Bring decisions about the goal or constraints back to the user.
 
 Apply shared work coordination when contributors need ownership and a common record. The integration
 owner checks their combined result. Use citation verification and human writing for claims and prose.
@@ -32,7 +33,7 @@ and [release validation](evals/results.md).
 
 ## Local installation
 
-Use the [tagged release](https://github.com/SebastianBoehler/sebastianboehler/releases/tag/skills-v1.0.0)
+Use the [tagged release](https://github.com/SebastianBoehler/sebastianboehler/releases/tag/skills-v1.0.1)
 to install a fixed revision. Extract the skills archive into a directory you plan to keep. From the
 extracted directory or a repository checkout, link each desired skill into a supported client's global
 skill directory. Check any existing installation before replacing it.

@@ -28,7 +28,7 @@ Backend at **[LI.FI](https://li.fi/)** (on-chain data connectors) · co-founder 
 ## Agent skills
 
 The [agent skills suite](skills/README.md) covers scope clarification, evidence-driven engineering,
-controlled research, and agent coordination. See the [v1.0.0 release](https://github.com/SebastianBoehler/sebastianboehler/releases/tag/skills-v1.0.0).
+controlled research, and agent coordination. See the [v1.0.1 release](https://github.com/SebastianBoehler/sebastianboehler/releases/tag/skills-v1.0.1).
 
 ## Contribution history
 

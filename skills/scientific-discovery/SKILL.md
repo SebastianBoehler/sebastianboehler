@@ -2,7 +2,7 @@
 name: scientific-discovery
 description: "Use when planning or running an open-ended experimental research campaign, auditing explored methods, or challenging a research plateau."
 metadata:
-  version: "0.2.0"
+  version: "0.3.0"
 ---
 
 # Scientific Discovery
@@ -24,6 +24,8 @@ Inspect the data and describe how it is generated and measured before selecting 
 units, labels, missingness, artifacts, confounds, available inference information, leakage risks,
 evaluation splits, uncertainty and resource limits. Compare meaningful baselines and candidate
 mechanisms against the problem and evidence. Do not infer a suitable model from data type alone.
+Measure or inspect the actual problem before selecting a remedy. If the data, source or measurements
+are unavailable, state the uncertainty and plan the smallest useful inspection or instrumented test.
 Keep the strongest validated candidate reproducible, without making its design the search boundary.
 For a result that others should reproduce, use the proportional
 [reproducibility record](references/reproducibility.md).
@@ -50,6 +52,9 @@ establishes exhaustive coverage. Inspect old code paths and controls before trea
 changed it, and an artifact/test supporting the claim.** If only proposals exist, say so.
 A fresh context that silently retains the original restriction does not establish broader exploration.
 Use the [coverage audit](references/coverage-audit.md) at a plateau, major review or apparent breakthrough.
+Compare proposed alternatives by what they change in data, representation, objective or inference.
+Require a concrete artifact and discriminating test; a new label or an agent's claim about its own
+latent space does not demonstrate a new method or a change in internal model state.
 
 ## Run a portfolio with meaningful alternatives
 
@@ -80,7 +85,11 @@ have narrower meaning. An inferior weak decoder does not close its entire archit
 ## Refresh reasoning without erasing evidence
 
 At an agreed interval, a plateau, repeated near-identical proposals or a phase boundary, reassess
-the map and inherited choices. For a requested wall-clock research block, record real start/end
+the map and inherited choices. For a substantial reset, reconstruct the problem from the objective,
+data and actual contract; challenge previous decisions and purported locks broadly. Trace each lock
+to a user decision, official requirement, physical limit or historical design choice. Propose tests
+of changeable choices; preserve true constraints and do not silently reverse explicit user decisions.
+For a requested wall-clock research block, record real start/end
 and substantive work; idle time and unrelated implementation do not satisfy the duration.
 
 Use genuinely fresh contexts for independent proposals when delegation is available and authorized.
@@ -89,6 +98,12 @@ debate and its conclusions. Preserve required project instructions. A two-pass r
 from the problem first, then inspect the incumbent and historical evidence before execution.
 Keep canonical evidence, failures and audit records with the coordinator; never delete them to imitate
 forgetting. Preserve active jobs and source ownership when rotating workers.
+Give each worker the real task, required constraints, permitted actions, scope, budget, evidence access,
+expected artifacts and verification criteria. Name the applicable skill or include the relevant rules
+in the brief when the worker cannot access it. For problem-first proposals, withhold stale conclusions,
+not known correctness problems. Before accepting a result or authorizing a follow-up, the coordinator
+checks the worker's actual source, active code path, evaluator, controls, evidence and limits; a worker's
+assurance alone is not verification.
 
 Report what information was retained/withheld and whether a reset actually occurred. Compaction,
 a new role label, or a handover containing every old conclusion is not a demonstrated reset.
@@ -104,6 +119,8 @@ Separate numerical correctness, training objective, held-out accuracy, full-syst
 and external/leaderboard results. Report intervals using appropriate independent units. Account for
 repeated selection and dependent seeds/orders; small uncertain gains remain uncertain, not closed.
 For speed, compare matched work and quality, warm paired runs, hardware/threads, memory and transfers.
+Profile the real end-to-end bottleneck before optimizing compute-heavy paths. Verify outputs against
+the reference and measure the complete claimed gain; see [performance investigations](references/performance.md).
 
 Read complete valid experimental blocks as they land and queue justified follow-ups without waiting
 for unrelated work. Keep independent lanes from depending on one shared fragile smoke. Source-lock

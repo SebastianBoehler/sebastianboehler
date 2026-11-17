@@ -1,5 +1,17 @@
 # Evidence and learning notes
 
+## 2026-11-17: exploration, handoffs and data-first work
+
+**Origin:** owner requests to challenge inherited locks, carry research behavior through worker briefs,
+and measure the data and hardware before choosing an optimization. These are workflow preferences.
+The [planning comparison](../evals/basin-comparison-check.md) tested a candidate against version 0.2.0
+on synthetic cases; it does not establish better scientific outcomes or reliable latent-state access.
+
+[Verbalized Sampling](https://proceedings.mlr.press/v306/zhang26hy.html) studies a prompting strategy
+for response diversity on several generation tasks. It motivates a possible future comparison, not a
+claim that verbalized probabilities are calibrated or that the method improves research campaigns.
+It was not the intervention tested in the planning comparison and is not required by this skill.
+
 ## 2026-11-17: data-first and proportional records
 
 **Origin:** owner preference for understanding data before model choice, traceable sources, and lean

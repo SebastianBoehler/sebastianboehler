@@ -12,6 +12,7 @@ Give an independent proposer the minimum factual problem packet consistent with 
 - What the data are, how they are generated, available supervision, and evaluation-time information.
 - Authorized tools/providers, time/compute/cost budget and permitted side effects.
 - Where the factual evidence and current best validated artifact can be checked.
+- Assigned scope, permitted side effects, required artifact, stopping condition and verification check.
 
 Distinguish two useful passes:
 
@@ -21,6 +22,20 @@ Distinguish two useful passes:
 The first can surface excluded possibilities; the second avoids invalid or duplicate experiments.
 Do not hide mandatory restrictions or known correctness problems for the sake of independence.
 Do not feed historical labels such as “closed” as universal facts without their tested context.
+Inspect the actual first-pass brief for incumbent assumptions that accidentally remain in task
+wording or requested controls. Keep the evaluation contract intact; a hypothetical exception does
+not override an untouched holdout, explicit user decision or other binding requirement.
+Do not seed a particular alternative or the incumbent-versus-alternative framing in a problem-first
+brief intended to elicit independent directions. If a direction is supplied, label that proposal
+seeded. A statement that history was withheld does not remove hints present in the brief itself.
+For a broad reset, re-derive the search from the task and revisit even decisions marked “locked.”
+Trace a lock to its actual authority and scope. Challenge inherited design choices; retain binding
+requirements and do not silently reverse explicit user decisions. The coordinator keeps the full
+record and checks proposals against it before authorizing execution.
+Replace stale narrative in the working brief with the current goal, hard bounds and verified facts.
+Review scratchpad decisions and next actions for staleness; preserve useful evidence and provenance
+in the canonical record. Clean temporary files only after checking ownership, active jobs and the
+project's retention and deletion rules.
 
 When a runtime supports fresh workers without inherited chat, select that behavior explicitly.
 In Codex collaboration tools this is `fork_turns="none"`, supplied with a self-contained task.
@@ -64,4 +79,6 @@ When another provider is unavailable, continue useful work with available tools 
 Return method families and excluded assumptions; the most consequential uncertainty per family;
 one decisive, budgeted test per promising alternative; and what could refute its rationale.
 Keep confident predictions, feasibility checks and measured results distinct. The coordinator checks
-actual past code and evidence before registering or executing the next experiments.
+actual past code and evidence before registering or executing the next experiments. For a completed
+worker run, inspect its source, active code path, evaluator, controls, artifact identity, resource use
+and result limits before accepting its conclusions. Record failed checks and follow-up decisions.

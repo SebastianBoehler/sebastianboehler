@@ -2,7 +2,7 @@
 name: scientific-discovery
 description: Use for open-ended experimental research, reviewing explored methods, or investigating a research plateau. Scale the process to the study.
 metadata:
-  version: "0.4.0"
+  version: "0.5.0"
 ---
 
 # Scientific discovery
@@ -13,10 +13,11 @@ Adapt to feedback and budget while preserving evidence and the user's actual con
 
 ## Understand and explore
 
-Inspect the specification, data generation and measurement, available information, evaluation, and
-current results before choosing a method. Check relevant units, labels, artifacts, confounds, leakage,
-splits, and uncertainty. If access is limited, state what is unknown and seek the smallest useful check.
-Distinguish hard requirements from inherited representation, architecture, objective, or solver choices.
+Inspect the governing rules, data, evaluator, and verified baseline before choosing a method. Propose
+the metric, target or decision rule, resource budget, and stop condition from those sources and the
+user's goal. Distinguish binding requirements, agreed choices, and inherited assumptions. Challenge
+assumptions with evidence and involve the user when an experiment would change the agreed objective,
+budget, or external commitment. Continue valid work within the current scope.
 
 Track meaningful alternatives by mechanism, assumptions changed, actual tests/artifacts, limits, and
 next decisive test. Run counts, renamed variants, and extra agents do not establish breadth. Before
@@ -37,21 +38,27 @@ For each consequential experiment, identify the mechanism, scope, controls, expe
 uncertainty where meaningful, resource budget, refutation, and next decision. Use [experiment cards](references/experiment-cards.md)
 for complex comparisons and a [reproducibility record](references/reproducibility.md) for consequential results.
 
-Verify the evaluator, active code path, artifact identity, and matched controls as relevant. Test a whole
-alternative coherently; a component claim needs the integration that actually consumes it. Keep build
-success, numerical correctness, training loss, held-out performance, system gain, runtime, and official
-scores distinct. Use uncertainty based on independent units and account for repeated selection.
+Verify the evaluator, active code path, artifact identity, and matched controls. For repeated search,
+keep the scoring protocol fixed and reserve an independent check for promotion where available.
+Record evaluator changes and establish a fresh baseline before comparing under a new protocol.
+Test a whole alternative coherently. A component claim needs the integration that consumes it.
+Keep training loss, held-out performance, system gain, runtime, and official scores distinct. Use
+uncertainty based on independent units and account for repeated selection.
 Investigate surprising outcomes with competing explanations and tests that distinguish them.
 For speed claims, use [performance guidance](references/performance.md) to compare matched work and quality.
 
 ## Reassess and continue
 
-At a plateau, phase boundary, or requested reset, reconstruct the problem from current facts and
-challenge inherited choices. Trace purported locks to their authority; preserve binding requirements
-and explicit user decisions. Fresh proposals need an actually fresh context when available and
-authorized. Keep canonical evidence, known correctness issues, source snapshots, and active jobs safe;
-report what context changed. See [context and model routing](references/context-and-models.md) when using
-workers, fresh contexts, or multiple models. Extra providers do not by themselves establish independence.
+When evidence stalls, contradicts the current mechanism, or supports a requested reset, reconstruct
+the problem from the governing requirements and verified data. Check the evaluator, inputs, and active
+path before searching further. Use the [coverage audit](references/coverage-audit.md) to identify the
+assumption keeping work in one family and pick a small test of a different mechanism. Move within
+the agreed scope when evidence warrants it. Bring changes to the goal or binding constraints to the
+person who can decide them.
+
+If the incumbent is still anchoring proposals, use a problem-first brief. Use a genuinely fresh
+context when available and authorized. Keep canonical evidence, known correctness issues, source
+snapshots, and active jobs safe. See [context and model routing](references/context-and-models.md).
 
 Inspect completed experimental evidence as it arrives and release justified follow-ups without waiting
 on unrelated work. Validate new entry points and pin source for running jobs. Report what changed in

@@ -7,6 +7,13 @@ Trace inherited choices to their source: binding requirement, physical limit, re
 design decision. Recheck the justification against current data and tools. Include data generation,
 measurement, supervision, representation, objective, inference, optimization, and systems where relevant.
 
+At a stall, identify what the data actually rules out and the bottleneck that remains. Reconstruct
+what solutions the requirements allow from the problem and available information. Compare the best
+next refinement with an alternative that changes a material assumption. For example, work backward
+from the required output, test a different representation, or isolate a suspected measurement limit.
+Choose a cheap distinguishing check with an expected result, refutation, and resource cap. Let its
+result decide whether to switch, continue, or stop.
+
 Classify methods by what changes in behavior and available information:
 
 | Example | Evidence at this scope |

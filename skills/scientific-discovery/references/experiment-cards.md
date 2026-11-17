@@ -7,9 +7,11 @@ system), data/splits and allowed inference information, source/configuration, ma
 expected outcome and uncertainty where meaningful, refutation, next decision, and resource budget.
 Check relevant exclusion rules, reset behavior, active options/gradients, and evaluator provenance.
 
-Set comparison rules before seeing scores and explain later changes. Choose controls that distinguish
-the mechanism from added compute, capacity, calibration, or a changed objective. A whole replacement
-may require coordinated changes; a component claim needs the system wiring that uses it.
+Set comparison rules before seeing scores. For iterative search, record the verified baseline and
+improvement threshold or decision rule, fixed evaluator and data, time or compute including retries,
+and stop condition. Keep search results distinct from promotion evidence. Where an independent check
+is available, reserve it for promotion and keep candidate edits away from it. Choose controls that
+distinguish the mechanism from added compute, capacity, calibration, or a changed objective.
 
 **After the result:** record what ran, passed controls, metric/uncertainty, independent sampling units,
 selection history, cost, artifact pointers, and limits. Preserve official scores. Distinguish numerical

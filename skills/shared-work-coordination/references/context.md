@@ -5,8 +5,10 @@ Separate instructions from source material; identify source/version, access limi
 Preserve required user/project instructions, canonical evidence, active jobs, and known correctness issues.
 
 Include objective, relevant facts and artifacts, scope/permissions, success check, expected return,
-stop condition, and unresolved questions. For independent proposals, disclose withheld conclusions
-and remaining access; a new chat with full history is not independent of that history.
+stop condition, dependencies, and unresolved questions. Name the source revision and who owns each
+follow-up. The return should include the artifact revision or location, observed checks and results,
+open questions, and any deviation. For independent proposals, disclose withheld conclusions and
+remaining access. A session with full history inherits the previous context.
 
 Prompt order has no universal optimum. If it matters, consult current provider guidance and test
 representative tasks. Delimiters clarify structure but do not change instruction priority or make

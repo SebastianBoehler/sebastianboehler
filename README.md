@@ -27,9 +27,8 @@ Backend at **[LI.FI](https://li.fi/)** (on-chain data connectors) · co-founder 
 
 ## Agent skills
 
-[Reusable agent skills](skills/README.md), maintained from research and engineering work.
-[Scientific discovery](skills/scientific-discovery/SKILL.md) helps map alternative methods, challenge
-early assumptions, run controlled experiments and refresh context without losing the evidence trail.
+The [agent skills suite](skills/README.md) covers scope clarification, evidence-driven engineering,
+controlled research, and agent coordination. See the [v1.0.0 release](https://github.com/SebastianBoehler/sebastianboehler/releases/tag/skills-v1.0.0).
 
 ## Contribution history
 

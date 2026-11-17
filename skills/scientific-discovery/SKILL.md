@@ -1,6 +1,6 @@
 ---
 name: scientific-discovery
-description: Use for open-ended experimental research, reviewing explored methods, or investigating a research plateau. Scale the process to the study.
+description: Use for open-ended experimental research, bounded autoresearch, reviewing explored methods, or investigating a research plateau.
 metadata:
   version: "0.5.0"
 ---

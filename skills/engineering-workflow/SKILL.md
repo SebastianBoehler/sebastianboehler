@@ -1,6 +1,6 @@
 ---
 name: engineering-workflow
-description: Use for software implementation, debugging, refactoring, reviews, and technical design. Scale the approach and verification to the task.
+description: Use for software implementation, debugging, refactoring, profiling and performance optimization, reviews, and technical design.
 ---
 
 # Engineering workflow

@@ -2,7 +2,7 @@
 name: scientific-discovery
 description: Use for open-ended experimental research, bounded autoresearch, reviewing explored methods, or investigating a research plateau.
 metadata:
-  version: "0.5.0"
+  version: "0.5.1"
 ---
 
 # Scientific discovery
@@ -55,6 +55,10 @@ path before searching further. Use the [coverage audit](references/coverage-audi
 assumption keeping work in one family and pick a small test of a different mechanism. Move within
 the agreed scope when evidence warrants it. Bring changes to the goal or binding constraints to the
 person who can decide them.
+
+When a decision depends on a favored explanation, test the strongest plausible competing explanation
+against the same evidence. Correct your earlier conclusion when warranted. Say what result would
+change the next experiment or decision.
 
 If the incumbent is still anchoring proposals, use a problem-first brief. Use a genuinely fresh
 context when available and authorized. Keep canonical evidence, known correctness issues, source

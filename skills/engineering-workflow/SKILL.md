@@ -29,8 +29,9 @@ conventions and existing authorization, preserve others' work, and adapt to the 
   the check, and check nearby behavior. For a behavior-preserving refactor, capture a passing baseline.
   If a test-first check is impractical, record the reason and use the best available evidence.
 - **Reconsider when evidence stalls or contradicts the approach.** Return to the current objective,
-  governing constraints, and last verified state. Identify the assumption behind the current approach.
-  Probe a different cause, abstraction, or design with a check that can distinguish the alternatives.
+  governing constraints, and last verified state. Identify which assumption the approach relies on,
+  including your own earlier assumptions. Look for the strongest relevant counterevidence. Correct
+  any conclusion it overturns, then test a different cause, abstraction, or design when warranted.
 - **Verify the result against the current plan.** Review each consequential requirement against
   actual output, test results, or another appropriate check. Record what ran and what remains
   unverified. Broaden checks for relevant risk or project requirements. Report code, verified

@@ -2,6 +2,8 @@
 
 Reusable research and engineering workflows maintained from actual use. Each skill follows the
 portable `SKILL.md` format. The repository is the canonical source; global installations can link here.
+Load the relevant skills and only the references needed for the task. Scale their practices to the
+work; they do not form a mandatory sequence or add plan-approval gates.
 Apply user feedback and explicit preferences as the task progresses, within the task's constraints.
 Treat a context-specific choice as specific to that context unless the user makes it a lasting preference.
 Suggest durable skill updates when feedback reveals a recurring improvement.
@@ -16,10 +18,9 @@ Suggest durable skill updates when feedback reveals a recurring improvement.
 | [shared-work-coordination](shared-work-coordination/SKILL.md) | Coordinate contributors, handoffs and scratchpads across sessions and machines. |
 | [hackathon-spec-driver](hackathon-spec-driver/SKILL.md) | Research event requirements and drive a focused, verifiable hackathon demo. |
 
-The scientific-discovery skill includes model/provider routing, a proportional reproducibility record,
-and behavioral evaluation cases. It does not require multiple providers or authorize new API spending.
-Its sources, including research on narrow exploration and fresh contexts, and validation limits are
-recorded [with the skill](scientific-discovery/references/evidence.md).
+Research guidance includes optional model routing, reproducibility records, and behavioral cases.
+Its [evidence notes](scientific-discovery/references/evidence.md) record sources and validation limits;
+skill invocation does not authorize provider spending or prove better outcomes.
 
 ## Local installation
 

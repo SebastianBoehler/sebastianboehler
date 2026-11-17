@@ -1,54 +1,31 @@
 ---
 name: human-writing
-description: Draft, rewrite, or review human-facing prose with natural rhythm and an appropriate voice. Use for messages, emails, essays, articles, and scientific writing when the user wants writing or editing, especially if the text sounds formulaic, overly formal, or machine-generated.
+description: Use to draft, rewrite, or review messages, emails, essays, articles, and scientific prose with natural rhythm and a voice suited to the writer and reader.
 ---
 
 # Write for people
 
-Make the text sound like a person addressing this reader for this purpose. Preserve the author's
-meaning and voice. Follow the user's requested tone, language, format, and subject-specific rules.
+Use the request, supplied text, and authorized writing samples to understand the speaker, audience,
+language, purpose, and stakes. Preserve meaning and voice; apply feedback to the next revision.
 
-## Work out the voice
+- Let sentence length and structure follow the idea. Combine short and longer sentences naturally;
+  avoid mechanical alternation, repeated openings, and forced word counts.
+- Put the main point in the main clause. Untangle stacked qualifications and frequent asides, keeping
+  a necessary qualification beside the claim it limits.
+- Prefer relaxed, direct language for everyday writing. Use contractions or colloquialisms when they
+  fit; adjust formality to the recipient and genre. In German, use idiomatic phrasing and suitable
+  *du* or *Sie*. Preserve precise technical terms and explain them when the reader needs it.
+- Keep nuance and emotional tone. Avoid ceremonial filler, ornate synonyms, forced slang, invented
+  experiences, and deliberate mistakes. Check the whole text for flow and fidelity to the speaker.
 
-1. Identify the audience, relationship, purpose, language, and stakes from the request and context.
-   For a rewrite, use the supplied text and any authorized writing samples as the main voice evidence.
-   Do not imitate a specific person without relevant examples or invent personal experience.
-2. Choose a register that fits. For everyday messages, prefer a relaxed, direct voice and natural
-   colloquial language. For professional correspondence, keep the relationship in mind. For academic,
-   legal, safety-critical, or other formal work, follow the conventions and required precision.
-   In German, use idiomatic German and an appropriate choice of *du* or *Sie*; do not translate English
-   casual expressions literally. When the register is unclear, use a natural neutral tone.
-3. Draft or revise for the intended reader. Preserve technical terms when they carry meaning. Explain
-   them when the audience needs it; do not turn precise terminology into vaguer language.
+For **scientific writing**, preserve claims, methods, quantities, uncertainty, and claim–citation links.
+Verify source support when requested or needed for new claims, using the available citation-verification
+workflow. Label unchecked evidence; a stylistic rewrite does not verify citations.
 
-## Give the prose a natural rhythm
+For **controlled or safety-critical writing**, follow the applicable specification, including ASD-STE100
+when required. Precision and prescribed language take precedence over stylistic variation. Claim
+compliance only after checking the relevant rules.
 
-- Let sentence length and structure follow the idea. Mix short statements with longer sentences when
-  they belong together. Do not alternate mechanically or force a specific distribution or word count.
-- Put the main point in the main clause. Untangle stacked qualifications, nested clauses, and frequent
-  parenthetical asides. Keep a qualification next to the claim it limits.
-- Use familiar words, contractions, or colloquialisms where they fit the language, speaker, and reader.
-  Avoid stiff ceremonial phrasing, stock transitions, repeated sentence openings, and ornate synonyms.
-- Keep the useful details, nuance, and emotional tone. Avoid adding false familiarity, forced slang,
-  deliberate mistakes, invented anecdotes, or a generic personality to make text seem human.
-- Read the text as a whole: check that it flows, sounds like the intended speaker, and says what they
-  mean. A little variation is useful only when it makes the writing more natural and clear.
-- Apply feedback to the next revision. Carry explicit preferences through the current task, while
-  keeping context-specific choices from becoming universal rules without the user's direction. Suggest
-  a durable skill update if feedback reveals a recurring improvement.
-
-## Respect the genre
-
-**Scientific work:** Preserve claims, methods, quantities, uncertainty, and the distinction between
-observation and inference. Do not invent citations, quotations, results, or source support. Keep existing
-citations attached to the claims they support. If asked to verify citations, or if verification is needed
-to support new claims, use the available `citation-verification` workflow and inspect primary sources.
-If a source cannot be checked, say so; do not imply that a stylistic rewrite verified its evidence.
-
-**Controlled or safety-critical writing:** Follow the applicable specification and project instructions,
-including ASD-STE100 when required. Clarity, controlled terminology, and prescribed sentence structure
-take precedence over informal wording and stylistic variation. Do not claim compliance without checking
-the applicable rules.
-
-Return the requested draft or review. For a rewrite, flag material ambiguity or any meaning that could
-not be preserved; do not add a writing critique unless requested or needed to explain a change.
+Return the requested text or review. Flag material ambiguity or meaning that could not be preserved.
+Suggest durable skill changes when feedback reveals a recurring improvement, without turning a
+context-specific preference into a universal rule.

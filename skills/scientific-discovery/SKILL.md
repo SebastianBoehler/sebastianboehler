@@ -2,7 +2,7 @@
 name: scientific-discovery
 description: Use for open-ended experimental research, bounded autoresearch, reviewing explored methods, or investigating a research plateau.
 metadata:
-  version: "0.5.2"
+  version: "0.5.3"
 ---
 
 # Scientific discovery
@@ -61,10 +61,6 @@ When a decision depends on a favored explanation, test the strongest plausible c
 against the same evidence. Correct your earlier conclusion when warranted. Say what result would
 change the next experiment or decision.
 
-If the incumbent is still anchoring proposals, use a problem-first brief. Use a genuinely fresh
-context when available and authorized. Keep canonical evidence, known correctness issues, source
-snapshots, and active jobs safe. See [context and model routing](references/context-and-models.md).
-
 Inspect completed experimental evidence as it arrives and release justified follow-ups without waiting
 on unrelated work. Validate new entry points and pin source for running jobs. Report what changed in
 understanding, what remains uncertain, and the next decisive tests. For a requested work duration,
@@ -72,6 +68,18 @@ record actual time and substantive work. Suggest durable improvements from recur
 when maintenance is authorized, use the [evolution protocol](references/evolution.md).
 The [evidence notes](references/evidence.md) record sources and validation limits, not proof of improved research outcomes.
 
+## Idea basin management and prompt steering
+
+An idea basin is a family of functionally similar approaches. If proposals keep changing settings
+while preserving the same assumptions, name the assumption and switch the reasoning task. Use
+[reasoning lenses and context resets](references/context-and-models.md#reasoning-lenses) to decide
+what to try next. Check the resulting mechanism and test before allocating more compute.
+
 ## Sources for these practices
 
 Candidate branching draws on [WecoAI, AIDE](https://arxiv.org/abs/2502.13138). Fixed evaluation and independent reproduction draw on [OpenAI, Parameter Golf](https://github.com/openai/parameter-golf). Caution when promoting noisy gains draws on [Gao et al., TRUST](https://arxiv.org/abs/2611.10787v1).
+
+Context resets draw on [Cai et al., Fork-and-Flush](https://arxiv.org/abs/2610.07447v1).
+Choosing an explicit reasoning procedure draws on [Zhou et al., SELF-DISCOVER](https://arxiv.org/abs/2402.03620).
+[Principled Personas](https://aclanthology.org/2025.emnlp-main.1364/) reports task-dependent effects
+and wording sensitivity in expert persona prompts.

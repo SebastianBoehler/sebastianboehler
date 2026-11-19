@@ -3,6 +3,26 @@
 Use when inherited assumptions may be limiting proposals or when an independent review can change
 a decision. A new worker or provider alone does not establish independence.
 
+## Reasoning lenses
+
+Choose a lens based on what is missing from the current proposal. Use the cue to specify the work
+and the evidence it should produce:
+
+- **Derive from constraints.** Identify an inherited assumption and derive an alternative that changes it.
+- **Falsify.** Name the strongest competing explanation and the cheapest check that distinguishes it.
+- **Profile.** Identify the suspected limiting stage and what measurement could disprove it.
+- **Synthesize.** Combine two compatible mechanisms and specify a control that isolates the interaction.
+
+A persona label may cue a perspective. Define the procedure and output explicitly, and judge the
+result by changed assumptions, mechanisms, or decision evidence. Same-chat reframing retains prior
+context. If proposals remain anchored, use an authorized fresh context with a problem-first brief
+and preserve the canonical evidence and active work. When evaluating wording itself, compare the
+same instructions with and without the persona label under matched budgets and check paraphrases.
+
+Prompt steering changes the model's text input. Its internal state is unobserved in ordinary chat.
+Direct activation steering, such as [Contrastive Activation Addition](https://aclanthology.org/2024.acl-long.828/),
+requires access to the model's internal activations. Claims of new capabilities require task evidence.
+
 ## Construct the brief
 
 Keep a coordinator responsible for requirements, canonical evidence, active jobs, and fair comparison.

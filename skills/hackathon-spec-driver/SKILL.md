@@ -24,6 +24,9 @@ when discovery or a compact contract would help.
 
 - Build the shortest real path from user action to visible result and keep it runnable. Separate the
   committed core from optional improvements; prioritize work that strengthens the demo.
+- Consider exposure and likely misuse while scoping the demo. Include essential safeguards for
+  secrets, user data, access, untrusted input, and failure handling where relevant. Keep safeguards
+  proportional to the demo and verify the important ones; record material risks before wider use.
 - Preserve extensibility when it is a product claim: identify the stable primitive and show a second
   case without rewriting it. Otherwise avoid building a general framework.
 - Estimate short edit/check cycles from dependencies and uncertainty. Allow for integration,

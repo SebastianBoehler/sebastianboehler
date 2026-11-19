@@ -23,6 +23,17 @@ conventions and existing authorization, preserve others' work, and adapt to the 
 - **Design for the current problem.** Prefer cohesive interfaces that hide complexity. Account for
   invariants and errors; add abstractions only when needed. Make the smallest coherent change and
   handle failures explicitly, avoiding speculative features and unrelated cleanup.
+- **Plan security and defensive behavior early.** Before choosing an approach, consider the real
+  exposure: sensitive data and secrets, trust boundaries, untrusted inputs, permissions, external
+  dependencies, and plausible failures or misuse. Select safeguards proportionate to the impact
+  and current stage. Plan validation at boundaries, least privilege, safe defaults, and explicit
+  failure handling where relevant; avoid leaking secrets or sensitive data in logs and errors.
+  Put essential safeguards and their checks in the owning work, not a generic later hardening task.
+  For a draft or MVP, keep the solution simple and record material risks deferred before wider use.
+- **Verify the safeguards that matter.** Include targeted checks for relevant invalid input,
+  unauthorized access, and failure paths alongside the normal path. Use existing language and
+  framework security guidance when it applies. Do not imply a full security audit or protection
+  against threats that were not assessed.
 - **Test first when feasible.** For a bug or behavior change, use the narrowest meaningful check
   with expectations from the user or governing contract. Run it on the original code and observe
   the relevant failure before editing the implementation. Make the smallest coherent fix, rerun

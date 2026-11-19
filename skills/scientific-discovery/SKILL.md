@@ -2,7 +2,7 @@
 name: scientific-discovery
 description: Use for open-ended experimental research, bounded autoresearch, reviewing explored methods, or investigating a research plateau.
 metadata:
-  version: "0.5.1"
+  version: "0.5.2"
 ---
 
 # Scientific discovery
@@ -36,7 +36,8 @@ Ground borrowed ideas in primary papers or official code, checking dates, method
 Separate published results, author interpretation, and the hypothesis that a mechanism transfers here.
 For each consequential experiment, identify the mechanism, scope, controls, expected outcome and
 uncertainty where meaningful, resource budget, refutation, and next decision. Use [experiment cards](references/experiment-cards.md)
-for complex comparisons and a [reproducibility record](references/reproducibility.md) for consequential results.
+for complex comparisons or before scaling a costly batch, and a
+[reproducibility record](references/reproducibility.md) for consequential results.
 
 Verify the evaluator, active code path, artifact identity, and matched controls. For repeated search,
 keep the scoring protocol fixed and reserve an independent check for promotion where available.

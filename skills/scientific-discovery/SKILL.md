@@ -70,3 +70,7 @@ understanding, what remains uncertain, and the next decisive tests. For a reques
 record actual time and substantive work. Suggest durable improvements from recurring feedback;
 when maintenance is authorized, use the [evolution protocol](references/evolution.md).
 The [evidence notes](references/evidence.md) record sources and validation limits, not proof of improved research outcomes.
+
+## Sources for these practices
+
+Candidate branching draws on [WecoAI, AIDE](https://arxiv.org/abs/2502.13138). Fixed evaluation and independent reproduction draw on [OpenAI, Parameter Golf](https://github.com/openai/parameter-golf). Caution when promoting noisy gains draws on [Gao et al., TRUST](https://arxiv.org/abs/2611.10787v1).

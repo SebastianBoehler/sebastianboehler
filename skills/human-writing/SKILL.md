@@ -29,3 +29,9 @@ compliance only after checking the relevant rules.
 Return the requested text or review. Flag material ambiguity or meaning that could not be preserved.
 Suggest durable skill changes when feedback reveals a recurring improvement, without turning a
 context-specific preference into a universal rule.
+
+## Sources for these practices
+
+Using the author's goals and samples as guidance draws on [Li et al.'s human–AI writing study](https://arxiv.org/abs/2610.37916v2)
+and [Zhang et al.'s co-writing study](https://arxiv.org/abs/2601.10236). The controlled-language
+reference is [ASD-STE100](https://www.asd-ste100.org/).

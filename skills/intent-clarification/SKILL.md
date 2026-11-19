@@ -22,3 +22,7 @@ with the person who can decide them.
 Use the existing plan for work that needs a durable record. Keep the deliverables, constraints, and
 success checks current. When the user changes direction, identify which checks or work need to change
 and tell affected contributors. Proceed within existing authorization without a separate plan approval.
+
+## Sources for these practices
+
+Focused questions follow [Dutta et al., *Ask Precisely, Assume Wisely*](https://arxiv.org/abs/2611.18905v1). Reworking an early interpretation after clarification draws on [Lin et al., *Clarification Is Not Correction*](https://arxiv.org/abs/2609.25337v1).

@@ -46,3 +46,7 @@ When judging competitiveness, assess what judges can inspect from the exact subm
 Use official criteria, disclose missing comparisons, and distinguish engineering quality from audience
 comprehension. Follow [judging notes](references/judging.md) for a substantial assessment; avoid precise
 placement claims unsupported by evidence.
+
+## Sources for these practices
+
+Verifying each binding requirement independently draws on [Vrdoljak et al., ExpertCrowd-SWE](https://arxiv.org/abs/2611.13246v1). For each event, use its official rules and judging criteria to decide what the demo must demonstrate.

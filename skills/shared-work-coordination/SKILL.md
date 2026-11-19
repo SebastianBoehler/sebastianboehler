@@ -27,3 +27,7 @@ Link artifacts rather than copying logs; keep private data and credentials out o
 
 Update the record after meaningful changes and adapt coordination to feedback. Retain or prune old
 notes according to project rules; avoid creating a parallel planning system.
+
+## Sources for these practices
+
+Checking the integrated deliverable and comparing orchestration with a single agent draw on [Jiang et al., WorkflowArena](https://arxiv.org/abs/2611.12856v1). Keeping decision evidence through handoffs draws on [Luthra et al.’s synchrotron study](https://arxiv.org/abs/2611.12933v1).

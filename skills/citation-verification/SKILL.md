@@ -22,3 +22,7 @@ Return the compact audit in the project's format, including coverage and unresol
 check does not verify the whole manuscript. Correct text or bibliography within the requested scope;
 use citation-management tools for metadata and formatting when useful. Adjust depth to the user's
 feedback while preserving the distinction between source access and verified support.
+
+## Sources for these practices
+
+Keeping cited passages attached to claims through synthesis draws on [Hirsch et al.’s deep research audit](https://arxiv.org/abs/2608.24306v1). Comparing automated coverage with reader judgment draws on [RMIT-ADM+S’s TREC RAG report](https://arxiv.org/abs/2611.16425v1).

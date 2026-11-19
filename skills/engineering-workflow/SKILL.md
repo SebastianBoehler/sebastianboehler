@@ -50,3 +50,7 @@ conventions and existing authorization, preserve others' work, and adapt to the 
 
 Use specialist workflows when needed and compatible with the user's instructions. Suggest a lasting
 skill improvement when feedback reveals a recurring issue.
+
+## Sources for these practices
+
+Checks that fail before a fix and pass after it draw on [Haratian et al., ADAPT](https://arxiv.org/abs/2611.16114v1). Choosing measurements for the suspected bottleneck draws on [Wang et al., AutoProfiler](https://arxiv.org/abs/2610.36576v1).

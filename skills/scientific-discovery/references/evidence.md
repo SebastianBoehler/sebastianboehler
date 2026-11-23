@@ -1,5 +1,14 @@
 # Evidence and learning notes
 
+## 2026-11-23: landscape scan before choosing a direction
+
+**Origin:** owner request to borrow from [ScholarCatalyst](https://arxiv.org/abs/2610.02202v1) for a
+broad view of a scientific field. The paper is a retrieval benchmark, not a landscape-mapping method.
+Its labels show that inspirations are often topically distant or uncited, and that citation context
+helps retrieval. Version 0.6.0 adds a [landscape scan](landscape-scan.md) reference: two-level questions,
+citation and cross-field search, and a map grouped by mechanism. This is a design inference from
+retrieval results; it has not been behaviorally tested here and does not establish better research outcomes.
+
 ## 2026-11-17: lean core and references on demand
 
 **Origin:** owner request to shorten the suite while preserving purpose and adapting to the task.

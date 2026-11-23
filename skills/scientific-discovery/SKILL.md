@@ -2,7 +2,7 @@
 name: scientific-discovery
 description: Use for open-ended experimental research, bounded autoresearch, reviewing explored methods, or investigating a research plateau.
 metadata:
-  version: "0.5.3"
+  version: "0.6.0"
 ---
 
 # Scientific discovery
@@ -17,7 +17,9 @@ Inspect the governing rules, data, evaluator, and verified baseline before choos
 the metric, target or decision rule, resource budget, and stop condition from those sources and the
 user's goal. Distinguish binding requirements, agreed choices, and inherited assumptions. Challenge
 assumptions with evidence and involve the user when an experiment would change the agreed objective,
-budget, or external commitment. Continue valid work within the current scope.
+budget, or external commitment. Continue valid work within the current scope. In an unfamiliar
+field, or when searches keep returning one cluster, run a [landscape scan](references/landscape-scan.md)
+that follows citations and adjacent fields rather than only the closest topical matches.
 
 Track meaningful alternatives by mechanism, assumptions changed, actual tests/artifacts, limits, and
 next decisive test. Run counts, renamed variants, and extra agents do not establish breadth. Before

@@ -9,6 +9,7 @@ that would change the outcome. It owns execution and verification within the agr
 |---|---|
 | [intent-clarification](intent-clarification/SKILL.md) | Derive requirements, ask decision-relevant questions early, and keep the current scope clear. |
 | [engineering-workflow](engineering-workflow/SKILL.md) | Diagnose from evidence, test changed behavior, and verify the result against the current plan. |
+| [idea-exploration](idea-exploration/SKILL.md) | Map distinct idea basins before converging on options worth testing. |
 | [scientific-discovery](scientific-discovery/SKILL.md) | Map meaningful alternatives, challenge inherited constraints, and run controlled experiments. |
 | [citation-verification](citation-verification/SKILL.md) | Check research claims against their cited sources and maintain a traceable bibliography. |
 | [human-writing](human-writing/SKILL.md) | Draft and edit natural prose while respecting the author's voice, evidence, and genre. |

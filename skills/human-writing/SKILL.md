@@ -7,6 +7,8 @@ description: Use to draft, rewrite, or review messages, emails, essays, articles
 
 Use the request, supplied text, and authorized writing samples to understand the speaker, audience,
 language, purpose, and stakes. Preserve meaning and voice; apply feedback to the next revision.
+Treat the user's revised draft as the strongest evidence of their intended voice. Edit from it
+rather than restoring wording they removed.
 
 - Let sentence length and structure follow the idea. Combine short and longer sentences naturally;
   avoid mechanical alternation, repeated openings, and forced word counts.
@@ -17,6 +19,30 @@ language, purpose, and stakes. Preserve meaning and voice; apply feedback to the
   *du* or *Sie*. Preserve precise technical terms and explain them when the reader needs it.
 - Keep nuance and emotional tone. Avoid ceremonial filler, ornate synonyms, forced slang, invented
   experiences, and deliberate mistakes. Check the whole text for flow and fidelity to the speaker.
+
+## Replies and personal correspondence
+
+- Write from the conversation's shared context. Do not repeat details the recipient just supplied
+  unless they resolve ambiguity, confirm an important commitment, or answer a question. If they
+  proposed a 15-minute talk, "I'd love to give a talk!" usually suffices.
+- Preserve the user's personal reason, curiosity, warmth and enthusiasm. A specific thought such as
+  hoping for a poster and being excited about a talk is more useful than a polished stock acceptance.
+  Keep an informal aside or smiley when it fits their draft and relationship; do not add one by default.
+- Include technical detail at the level the recipient needs. Keep qualifications that change how
+  results should be interpreted, but avoid reciting specifications or adding documentation pointers
+  merely because they are available. "These benchmarks ran on my Mac" can be enough hardware context
+  for an email; a reproducible benchmark report needs the exact setup.
+- Do not add repository links, attachments or publication promises without checking the user's
+  intended sharing scope. A private or embargoed project can be discussed with an authorized
+  recipient without implying its code is publicly available.
+- Make offers concrete without overpromising: name the relevant work, possible contribution and
+  question for the recipient. Preserve curiosity about useful projects instead of recasting it as
+  a formal pitch, generic networking request or request for employment.
+
+Before returning a revision, remove sentences that only echo the incoming message or narrate
+obvious context. Check that you have not reintroduced rejected wording, flattened the user's voice,
+or removed a qualification needed to keep a claim accurate. For a targeted edit, return the edited
+passage; when asked for the full message, integrate it into the latest accepted draft.
 
 For **scientific writing**, preserve claims, methods, quantities, uncertainty, and claim–citation links.
 Verify source support when requested or needed for new claims, using the available citation-verification

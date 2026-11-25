@@ -9,17 +9,17 @@ export type Figure = {
 }
 
 export type Competition = {
-  id: "agenthon" | "fusion" | "learn2design" | "eeg"
+  id: "start-hack" | "agenthon" | "fusion" | "learn2design" | "eeg"
   name: string
   venue: string
   /** Official placing, or the current status while a competition is still running. */
   result: string
-  /** One line for the /neurips page. */
-  short: string
   summary: string
   figure?: Figure
   links: readonly Link[]
 }
+
+type NeuripsCompetition = Competition & { short: string }
 
 export type Publication = {
   title: string
@@ -39,7 +39,7 @@ export type Project = {
   links: readonly Link[]
 }
 
-export const competitions: readonly Competition[] = [
+export const neuripsCompetitions: readonly NeuripsCompetition[] = [
   {
     id: "agenthon",
     name: "Agenthon 2026",
@@ -87,11 +87,31 @@ export const competitions: readonly Competition[] = [
     id: "eeg",
     name: "EEG/EMG Foundation Challenge 2026, Track 2",
     venue: "NeurIPS 2026 Brain & Body Workshop",
-    result: "Sealed final phase, 5–21 November",
+    result: "11th in the sealed final (provisional pending audit) · 84.4% cell-mean balanced accuracy",
     short: "Decoding cognitive tasks from EEG across sessions and participants.",
     summary:
-      "Decoding cognitive tasks from EEG across sessions and participants. Results follow after the final phase closes.",
-    links: [{ label: "Challenge website", href: "https://neural-interfaces26.github.io/" }],
+      "The decoder classified motor imagery, mental subtraction and word generation from four-second EEG windows. It combined an ensemble with label-free adaptation within each session and used participant-specific models when it recognized a returning participant.",
+    links: [
+      { label: "Track 2 leaderboard", href: "https://neural-interfaces26.github.io/leaderboard.html#track-2" },
+      { label: "Codabench results", href: "https://www.codabench.org/competitions/17982/#/results-tab" },
+      { label: "Write-up", href: "https://www.linkedin.com/posts/sebastian-boehler_neurips2026-eeg-bci-share-7530686033080967168-i5PS/" },
+    ],
+  },
+]
+
+export const competitions: readonly Competition[] = [
+  ...neuripsCompetitions,
+  {
+    id: "start-hack",
+    name: "QuantCo’s Claim to Fame",
+    venue: "START Hack League Munich 2026",
+    result: "1st of 12 teams in the QuantCo challenge",
+    summary:
+      "With Tim Kiebler, Leo Driesch and Mattis Krauch, I built an agent that priced simulated insurance claims against a 60-second deadline. A persistent Claude Code session submitted a first quote in a median of 13 seconds and a refined quote in 21 seconds across its 83 rounds. A separate agent reviewed settled rounds and fed back what it learned.",
+    links: [
+      { label: "Code and report", href: "https://github.com/MattisKra/START" },
+      { label: "Announcement", href: "https://www.linkedin.com/posts/sebastian-boehler_claim-to-fame-quantco-challenge-winners-ugcPost-7531138366130581504-u-ju/" },
+    ],
   },
 ]
 

@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises"
 import path from "node:path"
 import { ImageResponse } from "next/og"
 import { profile } from "@/content/profile"
-import { competitions } from "@/content/work"
+import { neuripsCompetitions } from "@/content/work"
 
 export const ogSize = { width: 1200, height: 630 }
 export const ogAlt = `${profile.name}: research and NeurIPS 2026 competitions`
@@ -29,7 +29,7 @@ export async function renderCard(eyebrow: string) {
           <div style={{ fontFamily: "Source Serif", fontSize: 60, marginTop: 10, lineHeight: 1.1, flexShrink: 0 }}>{profile.name}</div>
           <div style={{ fontSize: 21, color: muted, marginTop: 10, flexShrink: 0 }}>M.Sc. Computer Science, Tübingen · Founder, Sunderlabs</div>
           <div style={{ display: "flex", flexDirection: "column", marginTop: 22, borderTop: "1px solid #dedcd4", paddingTop: 16 }}>
-            {competitions.map((item) => (
+            {neuripsCompetitions.map((item) => (
               <div key={item.id} style={{ display: "flex", flexDirection: "column", marginBottom: 10 }}>
                 <div style={{ fontFamily: "Source Serif", fontSize: 23 }}>{item.name}</div>
                 <div style={{ fontSize: 17, color: muted, lineHeight: 1.35 }}>{item.result}</div>

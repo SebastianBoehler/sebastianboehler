@@ -4,7 +4,7 @@ import { ProfileLinks } from "@/components/home/Hero"
 import { ResultLine } from "@/components/home/Section"
 import "@/components/home/home.css"
 import { profile } from "@/content/profile"
-import { competitions, projects } from "@/content/work"
+import { neuripsCompetitions, projects } from "@/content/work"
 
 const description = "NeurIPS 2026 competitions and current work, in short."
 
@@ -31,7 +31,7 @@ export default function NeuripsPage() {
       <section className="home-section" aria-labelledby="competitions-heading">
         <h2 id="competitions-heading" className="home-section__title">Competitions</h2>
         <ol className="home-section__body entry-list">
-          {competitions.map((item) => (
+          {neuripsCompetitions.map((item) => (
             <li key={item.id} className="entry">
               <h3 className="entry__title">{item.name}</h3>
               <ResultLine result={item.result} />

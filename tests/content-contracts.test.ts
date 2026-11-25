@@ -4,7 +4,7 @@ import { renderToStaticMarkup } from "react-dom/server"
 import { About } from "../src/components/home/About"
 import { Research } from "../src/components/home/Research"
 import { education, experience, profile } from "../src/content/profile"
-import { competitions, projects, publications } from "../src/content/work"
+import { competitions, neuripsCompetitions, projects, publications } from "../src/content/work"
 
 function isHttps(href: string) {
   try {
@@ -22,8 +22,10 @@ test("keeps verified competition results", () => {
   expect(byId.learn2design.result).toContain("13th of 110")
   expect(byId.agenthon.result).toStartWith("2nd of 63, Explainability track")
   expect(competitions[0].id).toBe("agenthon")
-  // The EEG/EMG final runs until 21 November; the site gives status only, no ranking.
-  expect(byId.eeg.result).not.toMatch(/\d+(st|nd|rd|th) of/)
+  expect(byId.eeg.result).toBe("11th in the sealed final (provisional pending audit) · 84.4% cell-mean balanced accuracy")
+  expect(byId["start-hack"].result).toBe("1st of 12 teams in the QuantCo challenge")
+  expect(neuripsCompetitions).toContain(byId.eeg)
+  expect(neuripsCompetitions).not.toContain(byId["start-hack"])
 })
 
 test("keeps experience dates aligned with the CV", () => {

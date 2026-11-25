@@ -54,7 +54,7 @@ export const neuripsCompetitions: readonly NeuripsCompetition[] = [
     id: "fusion",
     name: "Fusion Equilibrium Challenge",
     venue: "NeurIPS 2026 competition",
-    result: "16th of 46 on zero-shot transfer to MAST · 19th of 58 on DIII-D",
+    result: "11th, cross-machine generalisation · 18th, DIII-D",
     short: "Tokamak plasma equilibria. For MAST, a free-boundary Grad–Shafranov solve per shot on CPU, without machine learning.",
     summary:
       "The task is to reconstruct the magnetic equilibrium of a tokamak plasma from its diagnostics. For MAST no equilibrium labels were allowed, so instead of training a model I solved the free-boundary Grad–Shafranov equation for each of the 1,205 test shots, on CPU, from measured coil currents, the passive vessel structure and Thomson-scattering temperature profiles. For DIII-D I used an ensemble of residual MLPs.",

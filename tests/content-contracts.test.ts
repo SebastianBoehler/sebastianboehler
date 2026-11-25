@@ -3,6 +3,7 @@ import { createElement } from "react"
 import { renderToStaticMarkup } from "react-dom/server"
 import { About } from "../src/components/home/About"
 import { Research } from "../src/components/home/Research"
+import { NetworkingOverview } from "../src/components/home/NetworkingOverview"
 import { education, experience, profile } from "../src/content/profile"
 import { competitions, neuripsCompetitions, projects, publications } from "../src/content/work"
 
@@ -17,8 +18,8 @@ function isHttps(href: string) {
 test("keeps verified competition results", () => {
   const byId = Object.fromEntries(competitions.map((item) => [item.id, item]))
 
-  expect(byId.fusion.result).toContain("16th of 46")
-  expect(byId.fusion.result).toContain("19th of 58")
+  expect(byId.fusion.result).toContain("11th, cross-machine generalisation")
+  expect(byId.fusion.result).toContain("18th, DIII-D")
   expect(byId.learn2design.result).toContain("13th of 110")
   expect(byId.agenthon.result).toStartWith("2nd of 63, Explainability track")
   expect(competitions[0].id).toBe("agenthon")
@@ -70,4 +71,17 @@ test("renders experience and education from the authored timeline", () => {
   const markup = renderToStaticMarkup(createElement(About))
 
   for (const item of [...experience, ...education]) expect(markup).toContain(item.period)
+})
+
+test("networking overview keeps results qualified and HB Capital in the background", () => {
+  const markup = renderToStaticMarkup(createElement(NetworkingOverview, { posts: [] }))
+
+  expect(markup.indexOf("QuantCo challenge")).toBeLessThan(markup.indexOf("Agenthon"))
+  expect(markup).toContain("provisional pending audit")
+  expect(markup).toContain("Explainability track")
+  expect(markup).toContain("Hardware policy tests next")
+  expect(markup).not.toContain("HB Capital")
+  expect(markup).toContain('href="/sebastian_boehler_cv.pdf"')
+  expect(markup).toContain("mailto:contact@sebastian-boehler.com")
+  expect(markup.match(/<h1\b/g)).toHaveLength(1)
 })

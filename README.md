@@ -1,56 +1,25 @@
 # Sebastian Böhler
 
-M.Sc. Computer Science student at the [University of Tübingen](https://uni-tuebingen.de) and founder of [Sunderlabs](https://sunderlabs.com). I work on optimization and simulation for scientific problems, learned control for small robots, and speech models.
+I’m an M.Sc. Computer Science student and research assistant at the University of Tübingen. I work on scientific optimization, simulation, and machine learning. I also run [Sunderlabs](https://sunderlabs.com), where I work on learned flight control and speech models.
 
-[sebastian-boehler.com](https://sebastian-boehler.com) · [CV (PDF)](public/sebastian_boehler_cv.pdf) · at NeurIPS 2026 in Sydney, 11–12 December
+[Website](https://sebastian-boehler.com) · [CV (PDF)](public/sebastian_boehler_cv.pdf) · [LinkedIn](https://www.linkedin.com/in/sebastian-boehler/)
 
-## Now
+## Selected research
 
-- **QuantCo’s Claim to Fame** at [START Hack League Munich 2026](https://app.hackleague.org/events/start?chapter=munich) — **1st of 12 teams** with Tim Kiebler, Leo Driesch and Mattis Krauch. We built an agent that priced simulated insurance claims under a 60-second deadline and used feedback from settled rounds to refine its approach. [Code and report](https://github.com/MattisKra/START) · [Announcement](https://www.linkedin.com/posts/sebastian-boehler_claim-to-fame-quantco-challenge-winners-ugcPost-7531138366130581504-u-ju/).
-- **[Agenthon 2026](https://www.agenthon.net/#leaderboard)** (quant-finance agent competition, Stony Brook University; workshop at NeurIPS 2026) — with team Proof of Alpha: 2nd of 63 in the Explainability track, 6th of 87 in Forecasting, 6th of 55 in Simulation, 17th of 61 in Coding.
-- **[Fusion Equilibrium Challenge](https://fusion-equilibrium-challenge.sophelio.io/)** (NeurIPS 2026 competition) — final results: 16th of 46 on zero-shot transfer to MAST, 19th of 58 on DIII-D. For MAST I solved the free-boundary Grad–Shafranov equation for each shot on CPU, without machine learning. [Code and write-up](https://github.com/SebastianBoehler/fusion-equilibrium-challenge).
-- **[Learn2Design 2026](https://www.learn2design2026.com/)** (NeurIPS 2026 competition) — 13th of 110 on the [official final-round leaderboard](https://github.com/artificial-scientist-lab/Learn2Design-2026/blob/main/competition_data/round4/leaderboard.csv). Gravitational-wave detector design in JAX; built `differometor-fast`, a faster simulator backend. Technical report submitted; winners are announced on 11 December. A follow-up paper is in progress.
+- **Learn2Design 2026** — Optimized gravitational-wave detector layouts and built a faster JAX simulator backend. **13th of 110** in the final round. A follow-up paper is in progress. [Leaderboard](https://github.com/artificial-scientist-lab/Learn2Design-2026/blob/main/competition_data/round4/leaderboard.csv)
+- **Fusion Equilibrium Challenge** — Reconstructed magnetic equilibria in MAST with a free-boundary Grad–Shafranov solver on CPU. **11th in cross-machine generalization** and **18th on DIII-D** in the organizers’ final results. [Code and write-up](https://github.com/SebastianBoehler/fusion-equilibrium-challenge) · [Results](https://fusion-equilibrium-challenge.sophelio.io/results/)
+- **EEG/EMG Foundation Challenge, Track 2** — Combined an EEG model ensemble with label-free session adaptation. **84.4% cell-mean balanced accuracy** in the sealed final, provisional pending audit. [Leaderboard](https://neural-interfaces26.github.io/leaderboard.html#track-2)
 
-  <img src="./assets/learn2design-leaderboard.png" width="520" alt="Learn2Design final scores for all 110 entrants, with Sebastian Böhler highlighted at rank 13 and a loss of −0.418.">
+<a href="./assets/learn2design-leaderboard.png"><img src="./assets/learn2design-leaderboard.png" width="520" alt="Learn2Design final-round scores for 110 entrants. My entry ranked 13th with a mean feasible loss of −0.418. Lower loss is better."></a>
 
-- **[EEG/EMG Foundation Challenge 2026](https://neural-interfaces26.github.io/leaderboard.html#track-2)**, Track 2 (NeurIPS 2026 Brain & Body Workshop) — **11th in the sealed final** (provisional pending audit), with 84.4% cell-mean balanced accuracy. The decoder combined an EEG model ensemble with label-free session adaptation and participant-specific models for returning participants. [Codabench results](https://www.codabench.org/competitions/17982/#/results-tab) · [Write-up](https://www.linkedin.com/posts/sebastian-boehler_neurips2026-eeg-bci-share-7530686033080967168-i5PS/).
-- **[Sunderlabs](https://sunderlabs.com)** — learned flight control for the Crazyflie nano-quadcopter (simulation so far), and a German full-duplex voice agent on a EuroHPC AI Factory compute award.
-- **Research Assistant** at the Hector Research Institute of Education Sciences and Psychology, Tübingen.
+*Learn2Design final round. My entry scored −0.418 mean feasible loss, where lower is better.*
 
-## Research
+## Open-source software
 
-- **[QLoRA Fine-Tuning for Next User Turn Prediction and Multi-Step Dialogue Rollouts](https://doi.org/10.1109/ICETSIS68266.2026.11549360)** — IEEE ICETSIS 2026, pp. 1548–1555. DOI: [10.1109/ICETSIS68266.2026.11549360](https://doi.org/10.1109/ICETSIS68266.2026.11549360).
-- **EuroHPC AI Factory compute** — two awards of 5,000 GPU-hours each on Leonardo (CINECA): the German voice agent, and follow-up research on Learn2Design.
+- **Prediction Market Research Lab** — Collects market snapshots from Polymarket and Kalshi and supports pricing analysis, strategy experiments, and outcome verification. [Research Lab](https://github.com/SebastianBoehler/prediction-market-research-lab)
+- **C++ market clients** — [Polymarket](https://github.com/SebastianBoehler/polymarket-cpp-client) · [Limitless](https://github.com/SebastianBoehler/limitless-cpp-client) · [Opinion.trade](https://github.com/SebastianBoehler/opinion-cpp-client)
+- **Agent skills** — Workflows for engineering, research, and coordination. [Skills](skills/README.md)
 
-## Background
+## Publication
 
-Backend at **[LI.FI](https://li.fi/)** (on-chain data connectors) · co-founder **[HB Capital](https://hb-capital.app)** · founder **[Sunderlabs](https://sunderlabs.com)** · previously **[Remotly](https://www.remotly.io/)** and freelance [Boehler IT Solutions](https://www.linkedin.com/company/boehler-it-solutions).
-
-## Agent skills
-
-The [agent skills suite](skills/README.md) covers scope clarification, evidence-driven engineering,
-controlled research, and agent coordination. See the [v1.0.1 release](https://github.com/SebastianBoehler/sebastianboehler/releases/tag/skills-v1.0.1).
-
-## Contribution history
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/github-contributions-all-years-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="./assets/github-contributions-all-years-light.svg">
-  <img alt="Stacked GitHub contribution history" src="./assets/github-contributions-all-years-light.svg">
-</picture>
-
-Monthly lines added and deleted, with commit frequency across public repositories.
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/github-loc-history-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="./assets/github-loc-history-light.svg">
-  <img alt="Monthly lines added and deleted, with commit frequency" src="./assets/github-loc-history-light.svg">
-</picture>
-
-## Links
-
-- [CV (PDF)](public/sebastian_boehler_cv.pdf)
-- [Portfolio](https://sebastian-boehler.com)
-- [Hugging Face](https://huggingface.co/sebastianboehler)
-- [LinkedIn](https://www.linkedin.com/in/sebastian-boehler/)
-- [X](https://x.com/sebastianboehle)
+**QLoRA Fine-Tuning for Next User Turn Prediction and Multi-Step Dialogue Rollouts.** IEEE ICETSIS 2026, pp. 1548–1555. [DOI](https://doi.org/10.1109/ICETSIS68266.2026.11549360)
